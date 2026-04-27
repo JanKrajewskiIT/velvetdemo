@@ -1,8 +1,25 @@
-﻿export type DemoLocale = 'en' | 'pl';
+﻿/**
+ * VelvetDemo i18n dictionary.
+ *
+ * All keys live under the `demo.*` top-level namespace to avoid collisions
+ * with VelvetUi foundation (`common`, `table`, `dir`, ...) and
+ * `@jankrajewskiit/data` (`dataGrid`, `columnManager`, `query`, `trading`).
+ *
+ * Wired into the app via `App.tsx`:
+ *
+ *   const dictionaries = defineDictionaries({
+ *     en: [uiEn, dataEn, en],
+ *     pl: [uiPl, dataPl, pl],
+ *   });
+ *
+ * The TypeScript module augmentation below extends `VelvetI18nDictionary`
+ * so every `useI18n().ts(...)` callsite gains autocomplete and compile-time
+ * checking for `demo.*` keys.
+ */
 
-export const DEMO_SUPPORTED_LOCALES: DemoLocale[] = ['en', 'pl'];
+import { defineDictionary, type TranslationOf } from '@jankrajewskiit/ui';
 
-const enMessages = {
+export const en = defineDictionary({
   'demo.sidebar.title': 'VelvetUI',
   'demo.sidebar.subtitle': 'Modern SolidJS component showcase',
   'demo.page.eyebrow': 'Component playground',
@@ -1457,11 +1474,13 @@ const enMessages = {
   'demo.text.typography.tones.secondary': 'Secondary',
   'demo.text.typography.tones.tertiary': 'Tertiary',
   'demo.text.typography.tones.title': 'Text tones',
-} as const;
+});
 
-type DemoMessageKey = keyof typeof enMessages;
+/** Shape of the demo dictionary, with widened string leaves so that
+ *  other locales can supply different translations against the same key set. */
+export type DemoDictionary = TranslationOf<typeof en>;
 
-const plMessages: Record<DemoMessageKey, string> = {
+export const pl: DemoDictionary = {
   'demo.sidebar.title': 'VelvetUI',
   'demo.sidebar.subtitle': 'Nowoczesny showcase komponentów SolidJS',
   'demo.page.eyebrow': 'Plac zabaw komponentów',
@@ -2935,13 +2954,7 @@ const plMessages: Record<DemoMessageKey, string> = {
   'demo.text.tables.simple.version': 'Wersja',
 };
 
-const dictionaries: Record<DemoLocale, Record<DemoMessageKey, string>> = {
-  en: enMessages,
-  pl: plMessages,
-};
-
-export type DemoI18nMessageKey = DemoMessageKey;
-
-export function getDemoMessages(locale: DemoLocale): Record<DemoI18nMessageKey, string> {
-  return dictionaries[locale];
+declare module '@jankrajewskiit/ui' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface VelvetI18nDictionary extends DemoDictionary {}
 }

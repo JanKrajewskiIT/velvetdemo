@@ -3,6 +3,7 @@
 VelvetUi + VelvetData component showcase application.
 
 Consumes published packages from GitHub Packages:
+
 - `@jankrajewskiit/ui`
 - `@jankrajewskiit/data`
 - `@jankrajewskiit/configs` (dev)
