@@ -26,8 +26,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@jankrajewskiit/data": "^0.2.4",
-    "@jankrajewskiit/ui": "^3.0.8",
+    "@jankrajewskiit/data": "^0.2.5",
+    "@jankrajewskiit/ui": "^3.0.10",
     "@solidjs/router": "^0.16.1",
     "lightweight-charts": "^5.2.0",
     "solid-icons": "^1.2.0",
