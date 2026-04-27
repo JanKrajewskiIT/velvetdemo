@@ -14,7 +14,7 @@ import {
   useI18n,
 } from '@jankrajewskiit/ui';
 import { useSearchParams } from '@solidjs/router';
-import { createEffect, createMemo, createSignal } from 'solid-js';
+import { createEffect, createMemo, createSignal, untrack } from 'solid-js';
 
 import DemoPageHeader from './components/DemoPageHeader';
 import DemoSectionSwitch from './components/DemoSectionSwitch';
@@ -54,7 +54,7 @@ const AppContent = () => {
 
   createEffect(() => {
     const id = activeSection();
-    const raw = searchParams.section;
+    const raw = untrack(() => searchParams.section);
     const cur = typeof raw === 'string' ? raw : Array.isArray(raw) ? raw[0] : undefined;
     if (cur !== id) {
       setSearchParams({ section: id }, { replace: true });
