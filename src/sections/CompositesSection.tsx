@@ -1,3 +1,4 @@
+﻿import type { TranslateStaticFn } from '@jankrajewskiit/ui';
 import {
   ActionRow,
   AiResultPanel,
@@ -20,6 +21,7 @@ import {
   type TransferItem,
   TransferList,
 } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import {
   IoAdd,
   IoCalendar,
@@ -38,9 +40,6 @@ import { createEffect, createMemo, createSignal, For, Show } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 import { DEMO_TRANSFER_INITIAL_SOURCE, DEMO_TRANSFER_INITIAL_TARGET } from '../fixtures/compositesFixtures';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { type DemoI18nMessageKey } from '../i18n/messages';
-import { renderRichText } from '../i18n/renderRichText';
 import type { SectionId } from '../nav/demoNavConfig';
 
 type AnalysisState = 'idle' | 'loading' | 'result' | 'error';
@@ -70,260 +69,260 @@ interface KanbanDemoItem extends KanbanItemBase {
   priority: 'low' | 'medium' | 'high';
 }
 
-const createTask = (index: number, t: (key: DemoI18nMessageKey) => string): TaskItem => ({
+const createTask = (index: number, ts: TranslateStaticFn): TaskItem => ({
   id: crypto.randomUUID(),
-  title: `${t('demo.text.composites.editableCollection.taskLabel')} ${index}`,
-  owner: t('demo.text.composites.editableCollection.defaultOwner'),
+  title: `${ts('demo.text.composites.editableCollection.taskLabel')} ${index}`,
+  owner: ts('demo.text.composites.editableCollection.defaultOwner'),
 });
 
-const createKanbanColumns = (t: (key: DemoI18nMessageKey) => string): KanbanColumn[] => [
-  { id: 'todo', label: t('demo.text.composites.kanban.column.todo') },
-  { id: 'in-progress', label: t('demo.text.composites.kanban.column.inProgress') },
-  { id: 'done', label: t('demo.text.composites.kanban.column.done') },
+const createKanbanColumns = (ts: TranslateStaticFn): KanbanColumn[] => [
+  { id: 'todo', label: ts('demo.text.composites.kanban.column.todo') },
+  { id: 'in-progress', label: ts('demo.text.composites.kanban.column.inProgress') },
+  { id: 'done', label: ts('demo.text.composites.kanban.column.done') },
 ];
 
-const createInitialKanbanItems = (t: (key: DemoI18nMessageKey) => string): KanbanDemoItem[] => [
+const createInitialKanbanItems = (ts: TranslateStaticFn): KanbanDemoItem[] => [
   {
     id: 'kanban-1',
     columnId: 'todo',
-    title: t('demo.text.composites.kanban.item.designSystemReview.title'),
-    description: t('demo.text.composites.kanban.item.designSystemReview.description'),
-    owner: t('demo.text.common.owner.anna'),
+    title: ts('demo.text.composites.kanban.item.designSystemReview.title'),
+    description: ts('demo.text.composites.kanban.item.designSystemReview.description'),
+    owner: ts('demo.text.common.owner.anna'),
     priority: 'high',
   },
   {
     id: 'kanban-2',
     columnId: 'todo',
-    title: t('demo.text.composites.kanban.item.writeMigrationNotes.title'),
-    description: t('demo.text.composites.kanban.item.writeMigrationNotes.description'),
-    owner: t('demo.text.common.owner.marek'),
+    title: ts('demo.text.composites.kanban.item.writeMigrationNotes.title'),
+    description: ts('demo.text.composites.kanban.item.writeMigrationNotes.description'),
+    owner: ts('demo.text.common.owner.marek'),
     priority: 'medium',
   },
   {
     id: 'kanban-3',
     columnId: 'in-progress',
-    title: t('demo.text.composites.kanban.item.polishInteractions.title'),
-    description: t('demo.text.composites.kanban.item.polishInteractions.description'),
-    owner: t('demo.text.common.owner.jan'),
+    title: ts('demo.text.composites.kanban.item.polishInteractions.title'),
+    description: ts('demo.text.composites.kanban.item.polishInteractions.description'),
+    owner: ts('demo.text.common.owner.jan'),
     priority: 'high',
   },
   {
     id: 'kanban-4',
     columnId: 'done',
-    title: t('demo.text.composites.kanban.item.shipReleaseNotes.title'),
-    description: t('demo.text.composites.kanban.item.shipReleaseNotes.description'),
-    owner: t('demo.text.common.owner.kasia'),
+    title: ts('demo.text.composites.kanban.item.shipReleaseNotes.title'),
+    description: ts('demo.text.composites.kanban.item.shipReleaseNotes.description'),
+    owner: ts('demo.text.common.owner.kasia'),
     priority: 'low',
   },
 ];
 
-const createSchedulerEvents = (t: (key: DemoI18nMessageKey) => string): SchedulerEvent[] => [
+const createSchedulerEvents = (ts: TranslateStaticFn): SchedulerEvent[] => [
   {
     id: 'event-1',
-    title: t('demo.text.composites.scheduler.event.designReview.title'),
+    title: ts('demo.text.composites.scheduler.event.designReview.title'),
     date: '2026-03-12',
     time: '09:30',
-    description: t('demo.text.composites.scheduler.event.designReview.description'),
+    description: ts('demo.text.composites.scheduler.event.designReview.description'),
   },
   {
     id: 'event-2',
-    title: t('demo.text.composites.scheduler.event.apiSync.title'),
+    title: ts('demo.text.composites.scheduler.event.apiSync.title'),
     date: '2026-03-12',
     time: '13:00',
-    description: t('demo.text.composites.scheduler.event.apiSync.description'),
+    description: ts('demo.text.composites.scheduler.event.apiSync.description'),
   },
   {
     id: 'event-3',
-    title: t('demo.text.composites.scheduler.event.uxWorkshopSprint.title'),
+    title: ts('demo.text.composites.scheduler.event.uxWorkshopSprint.title'),
     date: '2026-03-14',
     endDate: '2026-03-16',
     time: '11:00',
-    description: t('demo.text.composites.scheduler.event.uxWorkshopSprint.description'),
+    description: ts('demo.text.composites.scheduler.event.uxWorkshopSprint.description'),
   },
   {
     id: 'event-4',
-    title: t('demo.text.composites.scheduler.event.releasePrep.title'),
+    title: ts('demo.text.composites.scheduler.event.releasePrep.title'),
     date: '2026-03-19',
     time: '16:00',
-    description: t('demo.text.composites.scheduler.event.releasePrep.description'),
+    description: ts('demo.text.composites.scheduler.event.releasePrep.description'),
   },
 ];
 
-const createCommandItems = (t: (key: DemoI18nMessageKey) => string) => [
+const createCommandItems = (ts: TranslateStaticFn) => [
   {
     id: 'dashboard',
-    label: t('demo.text.composites.commandPalette.item.dashboard.label'),
-    description: t('demo.text.composites.commandPalette.item.dashboard.description'),
-    group: t('demo.text.composites.commandPalette.group.navigation'),
+    label: ts('demo.text.composites.commandPalette.item.dashboard.label'),
+    description: ts('demo.text.composites.commandPalette.item.dashboard.description'),
+    group: ts('demo.text.composites.commandPalette.group.navigation'),
     icon: IoHome,
     onSelect: () => {},
   },
   {
     id: 'settings',
-    label: t('demo.text.composites.commandPalette.item.settings.label'),
-    description: t('demo.text.composites.commandPalette.item.settings.description'),
-    group: t('demo.text.composites.commandPalette.group.navigation'),
+    label: ts('demo.text.composites.commandPalette.item.settings.label'),
+    description: ts('demo.text.composites.commandPalette.item.settings.description'),
+    group: ts('demo.text.composites.commandPalette.group.navigation'),
     icon: IoSettings,
     onSelect: () => {},
   },
   {
     id: 'projects',
-    label: t('demo.text.composites.commandPalette.item.projects.label'),
-    description: t('demo.text.composites.commandPalette.item.projects.description'),
-    group: t('demo.text.composites.commandPalette.group.navigation'),
+    label: ts('demo.text.composites.commandPalette.item.projects.label'),
+    description: ts('demo.text.composites.commandPalette.item.projects.description'),
+    group: ts('demo.text.composites.commandPalette.group.navigation'),
     icon: IoDocumentText,
     onSelect: () => {},
   },
   {
     id: 'inbox',
-    label: t('demo.text.composites.commandPalette.item.inbox.label'),
-    description: t('demo.text.composites.commandPalette.item.inbox.description'),
-    group: t('demo.text.composites.commandPalette.group.navigation'),
+    label: ts('demo.text.composites.commandPalette.item.inbox.label'),
+    description: ts('demo.text.composites.commandPalette.item.inbox.description'),
+    group: ts('demo.text.composites.commandPalette.group.navigation'),
     icon: IoMail,
     onSelect: () => {},
   },
   {
     id: 'create',
-    label: t('demo.text.composites.commandPalette.item.create.label'),
-    description: t('demo.text.composites.commandPalette.item.create.description'),
-    group: t('demo.text.composites.commandPalette.group.actions'),
+    label: ts('demo.text.composites.commandPalette.item.create.label'),
+    description: ts('demo.text.composites.commandPalette.item.create.description'),
+    group: ts('demo.text.composites.commandPalette.group.actions'),
     icon: IoAdd,
     onSelect: () => {},
   },
   {
     id: 'export',
-    label: t('demo.text.composites.commandPalette.item.export.label'),
-    description: t('demo.text.composites.commandPalette.item.export.description'),
-    group: t('demo.text.composites.commandPalette.group.actions'),
+    label: ts('demo.text.composites.commandPalette.item.export.label'),
+    description: ts('demo.text.composites.commandPalette.item.export.description'),
+    group: ts('demo.text.composites.commandPalette.group.actions'),
     icon: IoDownload,
     onSelect: () => {},
   },
   {
     id: 'duplicate',
-    label: t('demo.text.composites.commandPalette.item.duplicate.label'),
-    description: t('demo.text.composites.commandPalette.item.duplicate.description'),
-    group: t('demo.text.composites.commandPalette.group.actions'),
+    label: ts('demo.text.composites.commandPalette.item.duplicate.label'),
+    description: ts('demo.text.composites.commandPalette.item.duplicate.description'),
+    group: ts('demo.text.composites.commandPalette.group.actions'),
     icon: IoCopy,
     onSelect: () => {},
   },
   {
     id: 'bulk-archive',
-    label: t('demo.text.composites.commandPalette.item.bulkArchive.label'),
-    description: t('demo.text.composites.commandPalette.item.bulkArchive.description'),
-    group: t('demo.text.composites.commandPalette.group.actions'),
+    label: ts('demo.text.composites.commandPalette.item.bulkArchive.label'),
+    description: ts('demo.text.composites.commandPalette.item.bulkArchive.description'),
+    group: ts('demo.text.composites.commandPalette.group.actions'),
     icon: IoTrash,
     onSelect: () => {},
   },
   {
     id: 'theme-light',
-    label: t('demo.text.composites.commandPalette.item.themeLight.label'),
-    description: t('demo.text.composites.commandPalette.item.themeLight.description'),
-    group: t('demo.text.composites.commandPalette.group.preferences'),
+    label: ts('demo.text.composites.commandPalette.item.themeLight.label'),
+    description: ts('demo.text.composites.commandPalette.item.themeLight.description'),
+    group: ts('demo.text.composites.commandPalette.group.preferences'),
     icon: IoSettings,
     onSelect: () => {},
   },
   {
     id: 'theme-dark',
-    label: t('demo.text.composites.commandPalette.item.themeDark.label'),
-    description: t('demo.text.composites.commandPalette.item.themeDark.description'),
-    group: t('demo.text.composites.commandPalette.group.preferences'),
+    label: ts('demo.text.composites.commandPalette.item.themeDark.label'),
+    description: ts('demo.text.composites.commandPalette.item.themeDark.description'),
+    group: ts('demo.text.composites.commandPalette.group.preferences'),
     icon: IoNotifications,
     onSelect: () => {},
   },
   {
     id: 'open-shortcuts',
-    label: t('demo.text.composites.commandPalette.item.openShortcuts.label'),
-    description: t('demo.text.composites.commandPalette.item.openShortcuts.description'),
-    group: t('demo.text.composites.commandPalette.group.preferences'),
+    label: ts('demo.text.composites.commandPalette.item.openShortcuts.label'),
+    description: ts('demo.text.composites.commandPalette.item.openShortcuts.description'),
+    group: ts('demo.text.composites.commandPalette.group.preferences'),
     icon: IoSearch,
     onSelect: () => {},
   },
   {
     id: 'schedule-review',
-    label: t('demo.text.composites.commandPalette.item.scheduleReview.label'),
-    description: t('demo.text.composites.commandPalette.item.scheduleReview.description'),
-    group: t('demo.text.composites.commandPalette.group.preferences'),
+    label: ts('demo.text.composites.commandPalette.item.scheduleReview.label'),
+    description: ts('demo.text.composites.commandPalette.item.scheduleReview.description'),
+    group: ts('demo.text.composites.commandPalette.group.preferences'),
     icon: IoCalendar,
     onSelect: () => {},
   },
   {
     id: 'rename-item',
-    label: t('demo.text.composites.commandPalette.item.renameItem.label'),
-    description: t('demo.text.composites.commandPalette.item.renameItem.description'),
-    group: t('demo.text.composites.commandPalette.group.actions'),
+    label: ts('demo.text.composites.commandPalette.item.renameItem.label'),
+    description: ts('demo.text.composites.commandPalette.item.renameItem.description'),
+    group: ts('demo.text.composites.commandPalette.group.actions'),
     icon: IoPencil,
     onSelect: () => {},
   },
 ];
 
-const createAiRunScenarios = (t: (key: DemoI18nMessageKey) => string): readonly AiRunScenario[] => [
+const createAiRunScenarios = (ts: TranslateStaticFn): readonly AiRunScenario[] => [
   {
     id: 'a11y-audit',
-    label: t('demo.text.composites.ai.scenario.a11yAudit.label'),
+    label: ts('demo.text.composites.ai.scenario.a11yAudit.label'),
     state: 'result',
     score: 91,
-    scoreLabel: t('demo.text.composites.ai.scenario.a11yAudit.scoreLabel'),
-    summary: t('demo.text.composites.ai.scenario.a11yAudit.summary'),
+    scoreLabel: ts('demo.text.composites.ai.scenario.a11yAudit.scoreLabel'),
+    summary: ts('demo.text.composites.ai.scenario.a11yAudit.summary'),
     sections: [
       {
         icon: 'success',
-        title: t('demo.text.composites.ai.scenario.a11yAudit.strongAreas.title'),
+        title: ts('demo.text.composites.ai.scenario.a11yAudit.strongAreas.title'),
         items: [
-          t('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item1'),
-          t('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item2'),
-          t('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item3'),
+          ts('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item1'),
+          ts('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item2'),
+          ts('demo.text.composites.ai.scenario.a11yAudit.strongAreas.item3'),
         ],
       },
       {
         icon: 'info',
-        title: t('demo.text.composites.ai.scenario.a11yAudit.nextSteps.title'),
+        title: ts('demo.text.composites.ai.scenario.a11yAudit.nextSteps.title'),
         items: [
-          t('demo.text.composites.ai.scenario.a11yAudit.nextSteps.item1'),
-          t('demo.text.composites.ai.scenario.a11yAudit.nextSteps.item2'),
+          ts('demo.text.composites.ai.scenario.a11yAudit.nextSteps.item1'),
+          ts('demo.text.composites.ai.scenario.a11yAudit.nextSteps.item2'),
         ],
       },
     ],
   },
   {
     id: 'run-failure',
-    label: t('demo.text.composites.ai.scenario.runFailure.label'),
+    label: ts('demo.text.composites.ai.scenario.runFailure.label'),
     state: 'error',
     score: 0,
-    scoreLabel: t('demo.text.composites.ai.scenario.runFailure.scoreLabel'),
-    summary: t('demo.text.composites.ai.scenario.runFailure.summary'),
+    scoreLabel: ts('demo.text.composites.ai.scenario.runFailure.scoreLabel'),
+    summary: ts('demo.text.composites.ai.scenario.runFailure.summary'),
     sections: [
       {
         icon: 'danger',
-        title: t('demo.text.composites.ai.scenario.runFailure.failureDetails.title'),
+        title: ts('demo.text.composites.ai.scenario.runFailure.failureDetails.title'),
         items: [
-          t('demo.text.composites.ai.scenario.runFailure.failureDetails.item1'),
-          t('demo.text.composites.ai.scenario.runFailure.failureDetails.item2'),
+          ts('demo.text.composites.ai.scenario.runFailure.failureDetails.item1'),
+          ts('demo.text.composites.ai.scenario.runFailure.failureDetails.item2'),
         ],
       },
     ],
   },
   {
     id: 'interaction-review',
-    label: t('demo.text.composites.ai.scenario.interactionReview.label'),
+    label: ts('demo.text.composites.ai.scenario.interactionReview.label'),
     state: 'result',
     score: 84,
-    scoreLabel: t('demo.text.composites.ai.scenario.interactionReview.scoreLabel'),
-    summary: t('demo.text.composites.ai.scenario.interactionReview.summary'),
+    scoreLabel: ts('demo.text.composites.ai.scenario.interactionReview.scoreLabel'),
+    summary: ts('demo.text.composites.ai.scenario.interactionReview.summary'),
     sections: [
       {
         icon: 'success',
-        title: t('demo.text.composites.ai.scenario.interactionReview.progressMade.title'),
+        title: ts('demo.text.composites.ai.scenario.interactionReview.progressMade.title'),
         items: [
-          t('demo.text.composites.ai.scenario.interactionReview.progressMade.item1'),
-          t('demo.text.composites.ai.scenario.interactionReview.progressMade.item2'),
+          ts('demo.text.composites.ai.scenario.interactionReview.progressMade.item1'),
+          ts('demo.text.composites.ai.scenario.interactionReview.progressMade.item2'),
         ],
       },
       {
         icon: 'danger',
-        title: t('demo.text.composites.ai.scenario.interactionReview.followUpRequired.title'),
+        title: ts('demo.text.composites.ai.scenario.interactionReview.followUpRequired.title'),
         items: [
-          t('demo.text.composites.ai.scenario.interactionReview.followUpRequired.item1'),
-          t('demo.text.composites.ai.scenario.interactionReview.followUpRequired.item2'),
+          ts('demo.text.composites.ai.scenario.interactionReview.followUpRequired.item1'),
+          ts('demo.text.composites.ai.scenario.interactionReview.followUpRequired.item2'),
         ],
       },
     ],
@@ -332,10 +331,10 @@ const createAiRunScenarios = (t: (key: DemoI18nMessageKey) => string): readonly 
 
 const CompositesSection = (props: { sectionId: SectionId }) => {
   const sectionId = () => props.sectionId;
-  const { t } = useDemoDictionary();
-  const aiRunScenarios = createMemo(() => createAiRunScenarios(t));
-  const commandItems = createMemo(() => createCommandItems(t));
-  const kanbanColumns = createMemo(() => createKanbanColumns(t));
+  const { ts, tx } = useI18n();
+  const aiRunScenarios = createMemo(() => createAiRunScenarios(ts));
+  const commandItems = createMemo(() => createCommandItems(ts));
+  const kanbanColumns = createMemo(() => createKanbanColumns(ts));
   const [sourceItems, setSourceItems] = createSignal(DEMO_TRANSFER_INITIAL_SOURCE);
   const [targetItems, setTargetItems] = createSignal(DEMO_TRANSFER_INITIAL_TARGET);
   const [analysisState, setAnalysisState] = createSignal<AnalysisState>('idle');
@@ -354,13 +353,13 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
   createEffect(() => {
     if (tasks().length === 0) {
-      setTasks([createTask(1, t), createTask(2, t)]);
+      setTasks([createTask(1, ts), createTask(2, ts)]);
     }
     if (kanbanItems().length === 0) {
-      setKanbanItems(createInitialKanbanItems(t));
+      setKanbanItems(createInitialKanbanItems(ts));
     }
     if (schedulerEvents().length === 0) {
-      setSchedulerEvents(createSchedulerEvents(t));
+      setSchedulerEvents(createSchedulerEvents(ts));
     }
   });
 
@@ -382,26 +381,26 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
     if (!atsInput().trim()) {
       setAtsLoading(false);
-      setAtsError(t('demo.text.composites.ats.errorEmptyInput'));
+      setAtsError(ts('demo.text.composites.ats.errorEmptyInput'));
       return;
     }
 
     setAtsResult({
       overallScore: 86,
       categories: [
-        { label: t('demo.text.composites.ats.category.keywordMatch'), score: 91 },
-        { label: t('demo.text.composites.ats.category.structure'), score: 83 },
-        { label: t('demo.text.composites.ats.category.readability'), score: 78 },
+        { label: ts('demo.text.composites.ats.category.keywordMatch'), score: 91 },
+        { label: ts('demo.text.composites.ats.category.structure'), score: 83 },
+        { label: ts('demo.text.composites.ats.category.readability'), score: 78 },
       ],
       recommendations: [
         {
-          label: t('demo.text.composites.ats.reco.measurableOutcomes.label'),
-          message: t('demo.text.composites.ats.reco.measurableOutcomes.message'),
+          label: ts('demo.text.composites.ats.reco.measurableOutcomes.label'),
+          message: ts('demo.text.composites.ats.reco.measurableOutcomes.message'),
           severity: 'warning',
         },
         {
-          label: t('demo.text.composites.ats.reco.mirrorStack.label'),
-          message: t('demo.text.composites.ats.reco.mirrorStack.message'),
+          label: ts('demo.text.composites.ats.reco.mirrorStack.label'),
+          message: ts('demo.text.composites.ats.reco.mirrorStack.message'),
           severity: 'suggestion',
         },
       ],
@@ -433,13 +432,13 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         <Chip variant="subtle" size="sm" label={item.id.slice(0, 8)} />
         <IconButton
           icon={<IoTrash />}
-          label={t('demo.text.composites.editableCollection.removeTask')}
+          label={ts('demo.text.composites.editableCollection.removeTask')}
           size="sm"
           onClick={requestRemove}
         />
       </div>
       <div class="editableGrid">
-        <FormField label={t('demo.text.composites.editableCollection.title')}>
+        <FormField label={ts('demo.text.composites.editableCollection.title')}>
           {(fieldProps) => (
             <Input
               {...fieldProps}
@@ -448,7 +447,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
             />
           )}
         </FormField>
-        <FormField label={t('demo.text.composites.editableCollection.owner')}>
+        <FormField label={ts('demo.text.composites.editableCollection.owner')}>
           {(fieldProps) => (
             <Input
               {...fieldProps}
@@ -476,10 +475,10 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
           size="sm"
           label={
             item.priority === 'high'
-              ? t('demo.text.composites.kanban.priority.high')
+              ? ts('demo.text.composites.kanban.priority.high')
               : item.priority === 'medium'
-                ? t('demo.text.composites.kanban.priority.medium')
-                : t('demo.text.composites.kanban.priority.low')
+                ? ts('demo.text.composites.kanban.priority.medium')
+                : ts('demo.text.composites.kanban.priority.low')
           }
         />
       </div>
@@ -490,11 +489,11 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
     <div>
       <Show when={sectionId() === 'composites-transfer-list'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.transferList.title')}
-          subtitle={t('demo.showcase.composites.transferList.subtitle')}
+          title={ts('demo.showcase.composites.transferList.title')}
+          subtitle={ts('demo.showcase.composites.transferList.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <TransferList
                 sourceItems={sourceItems()}
                 targetItems={targetItems()}
@@ -503,21 +502,21 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
               />
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.composites.transferList.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.composites.transferList.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={sectionId() === 'composites-editable-collection'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.editableCollection.title')}
-          subtitle={t('demo.showcase.composites.editableCollection.subtitle')}
+          title={ts('demo.showcase.composites.editableCollection.title')}
+          subtitle={ts('demo.showcase.composites.editableCollection.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <EditableCollection<TaskItem>
                 items={tasks()}
                 getId={(item) => item.id}
-                onAdd={() => setTasks((current) => [...current, createTask(current.length + 1, t)])}
+                onAdd={() => setTasks((current) => [...current, createTask(current.length + 1, ts)])}
                 onRemove={(id) => setTasks((current) => current.filter((item) => item.id !== id))}
                 renderItem={renderTaskItem}
               />
@@ -528,11 +527,11 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'composites-kanban-board'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.kanbanBoard.title')}
-          subtitle={t('demo.showcase.composites.kanbanBoard.subtitle')}
+          title={ts('demo.showcase.composites.kanbanBoard.title')}
+          subtitle={ts('demo.showcase.composites.kanbanBoard.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <KanbanBoard
                 columns={kanbanColumns()}
                 items={kanbanItems()}
@@ -541,14 +540,14 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
               />
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.composites.kanban.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.composites.kanban.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={sectionId() === 'composites-command-palette'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.commandPalette.title')}
-          subtitle={t('demo.showcase.composites.commandPalette.subtitle')}
+          title={ts('demo.showcase.composites.commandPalette.title')}
+          subtitle={ts('demo.showcase.composites.commandPalette.subtitle')}
         >
           <PreviewPanel>
             <CommandPaletteTrigger items={commandItems()} />
@@ -558,11 +557,11 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'composites-ai-result'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.aiResultPanel.title')}
-          subtitle={t('demo.showcase.composites.aiResultPanel.subtitle')}
+          title={ts('demo.showcase.composites.aiResultPanel.title')}
+          subtitle={ts('demo.showcase.composites.aiResultPanel.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="actionCluster">
                 <For each={aiRunScenarios()}>
                   {(scenario) => (
@@ -585,17 +584,17 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
                 hasError={analysisState() === 'error'}
                 onRetry={runAnalysis}
                 score={selectedScenario()?.score ?? 0}
-                scoreLabel={selectedScenario()?.scoreLabel ?? t('demo.text.composites.ai.analysis')}
+                scoreLabel={selectedScenario()?.scoreLabel ?? ts('demo.text.composites.ai.analysis')}
                 summary={selectedScenario()?.summary ?? ''}
                 sections={selectedScenario()?.sections ?? []}
                 hasResult={analysisState() === 'result'}
                 idle={
                   <div class="col colGap2xs">
                     <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                      {t('demo.text.composites.ai.idlePrimary')}
+                      {ts('demo.text.composites.ai.idlePrimary')}
                     </Text>
                     <Text as="p" variant="caption" tone="muted" class="mutedText">
-                      {t('demo.text.composites.ai.idleSecondary')}
+                      {ts('demo.text.composites.ai.idleSecondary')}
                     </Text>
                   </div>
                 }
@@ -606,14 +605,14 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
                       class="aiScenarioSelect"
                       value={selectedScenarioId()}
                       onChange={(e) => setSelectedScenarioId(e.currentTarget.value)}
-                      aria-label={t('demo.text.composites.ai.selectScenario')}
+                      aria-label={ts('demo.text.composites.ai.selectScenario')}
                       options={aiRunScenarios().map((scenario) => ({ value: scenario.id, label: scenario.label }))}
                     />
                     <Button size="sm" variant="ghost" class="aiActionButton" onClick={() => setAnalysisState('idle')}>
-                      {t('demo.text.composites.ai.reset')}
+                      {ts('demo.text.composites.ai.reset')}
                     </Button>
                     <Button size="sm" class="aiActionButton aiRunButton" onClick={runAnalysis}>
-                      {t('demo.text.composites.ai.run')}
+                      {ts('demo.text.composites.ai.run')}
                     </Button>
                   </ActionRow>
                 }
@@ -622,7 +621,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
           </PreviewPanel>
         </ShowcaseSection>
 
-        <ShowcaseSection title="AtsAnalysisPanel" subtitle={t('demo.recron.showcase.atsAnalysisPanel.subtitle')}>
+        <ShowcaseSection title="AtsAnalysisPanel" subtitle={ts('demo.recron.showcase.atsAnalysisPanel.subtitle')}>
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="recronDemoWide">
@@ -634,8 +633,8 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
                   result={atsResult()}
                   loading={atsLoading()}
                   errorMessage={atsError()}
-                  inputLabel={t('demo.recron.ai.ats.inputLabel')}
-                  inputHint={t('demo.recron.ai.ats.inputHint')}
+                  inputLabel={ts('demo.recron.ai.ats.inputLabel')}
+                  inputHint={ts('demo.recron.ai.ats.inputHint')}
                 />
               </div>
             </PreviewGroup>
@@ -645,11 +644,11 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'composites-scheduler'}>
         <ShowcaseSection
-          title={t('demo.showcase.composites.scheduler.title')}
-          subtitle={t('demo.showcase.composites.scheduler.subtitle')}
+          title={ts('demo.showcase.composites.scheduler.title')}
+          subtitle={ts('demo.showcase.composites.scheduler.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Scheduler
                 events={schedulerEvents()}
                 onEventsChange={setSchedulerEvents}
@@ -658,30 +657,30 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.composites.scheduler.meta'), {
-              addEvent: (
+            {tx('demo.text.composites.scheduler.meta', {
+              addEvent: () => (
                 <CodeText as="span" class="codeInline">
-                  {t('demo.text.composites.scheduler.action.addEvent')}
+                  {ts('demo.text.composites.scheduler.action.addEvent')}
                 </CodeText>
               ),
-              move: (
+              move: () => (
                 <CodeText as="span" class="codeInline">
-                  {t('demo.text.composites.scheduler.action.move')}
+                  {ts('demo.text.composites.scheduler.action.move')}
                 </CodeText>
               ),
-              resizeEnd: (
+              resizeEnd: () => (
                 <CodeText as="span" class="codeInline">
-                  {t('demo.text.composites.scheduler.action.resizeEnd')}
+                  {ts('demo.text.composites.scheduler.action.resizeEnd')}
                 </CodeText>
               ),
-              esc: (
+              esc: () => (
                 <CodeText as="span" class="codeInline">
-                  {t('demo.text.composites.scheduler.action.esc')}
+                  {ts('demo.text.composites.scheduler.action.esc')}
                 </CodeText>
               ),
-              ctrlEnter: (
+              ctrlEnter: () => (
                 <CodeText as="span" class="codeInline">
-                  {t('demo.text.composites.scheduler.action.ctrlEnter')}
+                  {ts('demo.text.composites.scheduler.action.ctrlEnter')}
                 </CodeText>
               ),
             })}

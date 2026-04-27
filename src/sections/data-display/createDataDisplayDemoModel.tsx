@@ -1,4 +1,4 @@
-import { useTradingViewPollingFeed, useTradingViewWsFeed } from '@jankrajewskiit/data';
+﻿import { useTradingViewPollingFeed, useTradingViewWsFeed } from '@jankrajewskiit/data';
 import {
   addToast,
   type FilterBarFilter,
@@ -9,11 +9,10 @@ import {
   TimelineCardEditDialog,
   type TreeNode,
 } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import { IoDocumentText, IoFolder, IoImage } from 'solid-icons/io';
 import { type ComponentProps, createMemo, createSignal } from 'solid-js';
 
-import { useDemoDictionary } from '../../hooks/useDemoDictionary';
-import { renderRichText } from '../../i18n/renderRichText';
 import {
   asUtcTimestamp,
   comparisonAxes,
@@ -29,8 +28,8 @@ import {
 import { createDataDisplayMarkdown } from './dataDisplayMarkdown';
 
 export const createDataDisplayDemoModel = () => {
-  const { t } = useDemoDictionary();
-  const clickMeLabel = () => t('demo.text.dataDisplay.codeBlock.clickMe');
+  const { t, ts } = useI18n();
+  const clickMeLabel = () => ts('demo.text.dataDisplay.codeBlock.clickMe');
   const [selectedNode, setSelectedNode] = createSignal('');
   const [checkedTreeNodes, setCheckedTreeNodes] = createSignal<string[]>([]);
   const [lastMove, setLastMove] = createSignal('');
@@ -78,50 +77,50 @@ export const createDataDisplayDemoModel = () => {
   const galleryImages = createMemo<ImageGridItem[]>(() => [
     {
       src: 'https://picsum.photos/id/10/400/300',
-      alt: t('demo.text.dataDisplay.gallery.forestAlt'),
-      caption: t('demo.text.dataDisplay.gallery.forestCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.forestAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.forestCaption'),
     },
     {
       src: 'https://picsum.photos/id/15/400/300',
-      alt: t('demo.text.dataDisplay.gallery.mountainsAlt'),
-      caption: t('demo.text.dataDisplay.gallery.mountainsCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.mountainsAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.mountainsCaption'),
     },
     {
       src: 'https://picsum.photos/id/29/400/300',
-      alt: t('demo.text.dataDisplay.gallery.coastAlt'),
-      caption: t('demo.text.dataDisplay.gallery.coastCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.coastAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.coastCaption'),
     },
     {
       src: 'https://picsum.photos/id/37/400/300',
-      alt: t('demo.text.dataDisplay.gallery.cliffAlt'),
-      caption: t('demo.text.dataDisplay.gallery.cliffCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.cliffAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.cliffCaption'),
     },
     {
       src: 'https://picsum.photos/id/42/400/300',
-      alt: t('demo.text.dataDisplay.gallery.nightAlt'),
-      caption: t('demo.text.dataDisplay.gallery.nightCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.nightAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.nightCaption'),
     },
     {
       src: 'https://picsum.photos/id/49/400/300',
-      alt: t('demo.text.dataDisplay.gallery.bridgeAlt'),
-      caption: t('demo.text.dataDisplay.gallery.bridgeCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.bridgeAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.bridgeCaption'),
     },
   ]);
   const lightboxImages = createMemo<LightboxImage[]>(() => [
     {
       src: 'https://picsum.photos/id/10/800/600',
-      alt: t('demo.text.dataDisplay.gallery.forestAlt'),
-      caption: t('demo.text.dataDisplay.gallery.forestTrailCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.forestAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.forestTrailCaption'),
     },
     {
       src: 'https://picsum.photos/id/15/800/600',
-      alt: t('demo.text.dataDisplay.gallery.mountainsAlt'),
-      caption: t('demo.text.dataDisplay.gallery.mountainsCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.mountainsAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.mountainsCaption'),
     },
     {
       src: 'https://picsum.photos/id/29/800/600',
-      alt: t('demo.text.dataDisplay.gallery.coastAlt'),
-      caption: t('demo.text.dataDisplay.gallery.coastCaption'),
+      alt: ts('demo.text.dataDisplay.gallery.coastAlt'),
+      caption: ts('demo.text.dataDisplay.gallery.coastCaption'),
     },
   ]);
   const virtualItems = createMemo(() => {
@@ -129,13 +128,13 @@ export const createDataDisplayDemoModel = () => {
     for (let index = 0; index < 1200; index += 1) {
       items.push({
         id: `item-${index + 1}`,
-        label: t('demo.text.dataDisplay.virtualizedList.record', { index: index + 1 }),
+        label: ts('demo.text.dataDisplay.virtualizedList.record', { index: index + 1 }),
         status:
           index % 3 === 0
-            ? t('demo.text.dataDisplay.virtualizedList.status.synced')
+            ? ts('demo.text.dataDisplay.virtualizedList.status.synced')
             : index % 3 === 1
-              ? t('demo.text.dataDisplay.virtualizedList.status.queued')
-              : t('demo.text.dataDisplay.virtualizedList.status.draft'),
+              ? ts('demo.text.dataDisplay.virtualizedList.status.queued')
+              : ts('demo.text.dataDisplay.virtualizedList.status.draft'),
       });
     }
     return items;
@@ -149,43 +148,43 @@ export const createDataDisplayDemoModel = () => {
   const reviewQueueItems = createMemo(() => [
     {
       id: 'review-1',
-      label: t('demo.text.dataDisplay.virtualizedList.record', { index: 12 }),
-      owner: t('demo.text.common.owner.anna'),
+      label: ts('demo.text.dataDisplay.virtualizedList.record', { index: 12 }),
+      owner: ts('demo.text.common.owner.anna'),
       ownerValue: 'anna',
       statusValue: 'in-progress',
-      statusLabel: t('demo.text.dataDisplay.filterBar.statusInProgress'),
+      statusLabel: ts('demo.text.dataDisplay.filterBar.statusInProgress'),
       priorityValue: 'high',
-      priorityLabel: t('demo.text.dataDisplay.filterBar.priorityHigh'),
+      priorityLabel: ts('demo.text.dataDisplay.filterBar.priorityHigh'),
     },
     {
       id: 'review-2',
-      label: t('demo.text.dataDisplay.virtualizedList.record', { index: 18 }),
-      owner: t('demo.text.common.owner.marek'),
+      label: ts('demo.text.dataDisplay.virtualizedList.record', { index: 18 }),
+      owner: ts('demo.text.common.owner.marek'),
       ownerValue: 'marek',
       statusValue: 'todo',
-      statusLabel: t('demo.text.dataDisplay.filterBar.statusTodo'),
+      statusLabel: ts('demo.text.dataDisplay.filterBar.statusTodo'),
       priorityValue: 'medium',
-      priorityLabel: t('demo.text.dataDisplay.filterBar.priorityMedium'),
+      priorityLabel: ts('demo.text.dataDisplay.filterBar.priorityMedium'),
     },
     {
       id: 'review-3',
-      label: t('demo.text.dataDisplay.virtualizedList.record', { index: 24 }),
-      owner: t('demo.text.common.owner.kasia'),
+      label: ts('demo.text.dataDisplay.virtualizedList.record', { index: 24 }),
+      owner: ts('demo.text.common.owner.kasia'),
       ownerValue: 'kasia',
       statusValue: 'done',
-      statusLabel: t('demo.text.dataDisplay.filterBar.statusDone'),
+      statusLabel: ts('demo.text.dataDisplay.filterBar.statusDone'),
       priorityValue: 'low',
-      priorityLabel: t('demo.text.dataDisplay.filterBar.priorityLow'),
+      priorityLabel: ts('demo.text.dataDisplay.filterBar.priorityLow'),
     },
     {
       id: 'review-4',
-      label: t('demo.text.dataDisplay.virtualizedList.record', { index: 31 }),
-      owner: t('demo.text.common.owner.jan'),
+      label: ts('demo.text.dataDisplay.virtualizedList.record', { index: 31 }),
+      owner: ts('demo.text.common.owner.jan'),
       ownerValue: 'jan',
       statusValue: 'in-progress',
-      statusLabel: t('demo.text.dataDisplay.filterBar.statusInProgress'),
+      statusLabel: ts('demo.text.dataDisplay.filterBar.statusInProgress'),
       priorityValue: 'high',
-      priorityLabel: t('demo.text.dataDisplay.filterBar.priorityHigh'),
+      priorityLabel: ts('demo.text.dataDisplay.filterBar.priorityHigh'),
     },
   ]);
   const filteredReviewQueueItems = createMemo(() => {
@@ -214,19 +213,19 @@ export const createDataDisplayDemoModel = () => {
   const timelineCardCategoryOptions = createMemo(() => [
     {
       value: 'review',
-      label: t('demo.text.dataDisplay.timelineCard.stage.review'),
+      label: ts('demo.text.dataDisplay.timelineCard.stage.review'),
       icon: IoDocumentText,
       chipVariant: 'info' as const,
     },
     {
       value: 'implementation',
-      label: t('demo.text.dataDisplay.timelineCard.stage.implementation'),
+      label: ts('demo.text.dataDisplay.timelineCard.stage.implementation'),
       icon: IoFolder,
       chipVariant: 'warning' as const,
     },
     {
       value: 'release',
-      label: t('demo.text.dataDisplay.timelineCard.stage.release'),
+      label: ts('demo.text.dataDisplay.timelineCard.stage.release'),
       icon: IoImage,
       chipVariant: 'success' as const,
     },
@@ -235,39 +234,39 @@ export const createDataDisplayDemoModel = () => {
   const timelineCardStatusOptions = createMemo(() => [
     {
       value: 'scheduled',
-      label: t('demo.text.dataDisplay.timelineCard.status.scheduled'),
+      label: ts('demo.text.dataDisplay.timelineCard.status.scheduled'),
       chipVariant: 'info' as const,
     },
     {
       value: 'in-progress',
-      label: t('demo.text.dataDisplay.timelineCard.status.inProgress'),
+      label: ts('demo.text.dataDisplay.timelineCard.status.inProgress'),
       chipVariant: 'warning' as const,
     },
     {
       value: 'completed',
-      label: t('demo.text.dataDisplay.timelineCard.status.completed'),
+      label: ts('demo.text.dataDisplay.timelineCard.status.completed'),
       chipVariant: 'success' as const,
     },
   ]);
 
   const timelineCardLabels = createMemo(() => ({
-    category: t('demo.text.dataDisplay.timelineCard.label.category'),
-    status: t('demo.text.dataDisplay.timelineCard.label.status'),
-    dateTime: t('demo.text.dataDisplay.timelineCard.label.dateTime'),
-    duration: t('demo.text.dataDisplay.timelineCard.label.duration'),
-    location: t('demo.text.dataDisplay.timelineCard.label.location'),
-    notes: t('demo.text.dataDisplay.timelineCard.label.notes'),
-    editLabel: t('demo.text.dataDisplay.timelineCard.label.edit'),
-    deleteLabel: t('demo.text.dataDisplay.timelineCard.label.delete'),
-    editDialogLabel: t('demo.text.dataDisplay.timelineCard.label.editDialog'),
-    deleteDialogLabel: t('demo.text.dataDisplay.timelineCard.label.deleteDialog'),
-    deleteDialogMessage: t('demo.text.dataDisplay.timelineCard.label.deleteMessage'),
-    deleteConfirmLabel: t('demo.text.dataDisplay.timelineCard.label.deleteConfirm'),
-    deleteCancelLabel: t('demo.text.dataDisplay.timelineCard.label.deleteCancel'),
-    editNotesLabel: t('demo.text.dataDisplay.timelineCard.label.editNotes'),
-    saveLabel: t('demo.text.dataDisplay.timelineCard.label.save'),
-    syncedLabel: t('demo.text.dataDisplay.timelineCard.label.synced'),
-    notSetLabel: t('demo.text.dataDisplay.timelineCard.label.notSet'),
+    category: ts('demo.text.dataDisplay.timelineCard.label.category'),
+    status: ts('demo.text.dataDisplay.timelineCard.label.status'),
+    dateTime: ts('demo.text.dataDisplay.timelineCard.label.dateTime'),
+    duration: ts('demo.text.dataDisplay.timelineCard.label.duration'),
+    location: ts('demo.text.dataDisplay.timelineCard.label.location'),
+    notes: ts('demo.text.dataDisplay.timelineCard.label.notes'),
+    editLabel: ts('demo.text.dataDisplay.timelineCard.label.edit'),
+    deleteLabel: ts('demo.text.dataDisplay.timelineCard.label.delete'),
+    editDialogLabel: ts('demo.text.dataDisplay.timelineCard.label.editDialog'),
+    deleteDialogLabel: ts('demo.text.dataDisplay.timelineCard.label.deleteDialog'),
+    deleteDialogMessage: ts('demo.text.dataDisplay.timelineCard.label.deleteMessage'),
+    deleteConfirmLabel: ts('demo.text.dataDisplay.timelineCard.label.deleteConfirm'),
+    deleteCancelLabel: ts('demo.text.dataDisplay.timelineCard.label.deleteCancel'),
+    editNotesLabel: ts('demo.text.dataDisplay.timelineCard.label.editNotes'),
+    saveLabel: ts('demo.text.dataDisplay.timelineCard.label.save'),
+    syncedLabel: ts('demo.text.dataDisplay.timelineCard.label.synced'),
+    notSetLabel: ts('demo.text.dataDisplay.timelineCard.label.notSet'),
   }));
 
   const createTimelineCardSave = (
@@ -285,7 +284,7 @@ export const createDataDisplayDemoModel = () => {
 
   const handleTimelineCardDelete: NonNullable<ComponentProps<typeof TimelineCard>['onDelete']> = async () => {
     await new Promise((resolve) => setTimeout(resolve, 200));
-    addToast({ type: 'info', message: t('demo.text.dataDisplay.timelineCard.deletedToast') });
+    addToast({ type: 'info', message: ts('demo.text.dataDisplay.timelineCard.deletedToast') });
   };
 
   const runComparison = async () => {
@@ -307,7 +306,7 @@ export const createDataDisplayDemoModel = () => {
     await new Promise((resolve) => setTimeout(resolve, 250));
     setTimelineCardPlannedValue({ ...value, id: `session-new-${Date.now().toString()}` });
     setTimelineCardAddOpen(false);
-    addToast({ type: 'success', message: t('demo.text.dataDisplay.timelineCard.addedToast') });
+    addToast({ type: 'success', message: ts('demo.text.dataDisplay.timelineCard.addedToast') });
   };
 
   const timelineItems = createMemo(() => [
@@ -318,7 +317,7 @@ export const createDataDisplayDemoModel = () => {
           <Text as="span" variant="labelMd">
             v0.3.3
           </Text>{' '}
-          - {t('demo.text.dataDisplay.timeline.v033')}
+          - {ts('demo.text.dataDisplay.timeline.v033')}
         </Text>
       ),
     },
@@ -329,7 +328,7 @@ export const createDataDisplayDemoModel = () => {
           <Text as="span" variant="labelMd">
             v0.1.6
           </Text>{' '}
-          - {t('demo.text.dataDisplay.timeline.v016')}
+          - {ts('demo.text.dataDisplay.timeline.v016')}
         </Text>
       ),
     },
@@ -340,7 +339,7 @@ export const createDataDisplayDemoModel = () => {
           <Text as="span" variant="labelMd">
             v0.1.0
           </Text>{' '}
-          - {t('demo.text.dataDisplay.timeline.v010')}
+          - {ts('demo.text.dataDisplay.timeline.v010')}
         </Text>
       ),
     },
@@ -349,34 +348,34 @@ export const createDataDisplayDemoModel = () => {
   const filterDefinitions = createMemo<FilterBarFilter[]>(() => [
     {
       key: 'status',
-      label: t('demo.text.dataDisplay.filterBar.statusLabel'),
+      label: ts('demo.text.dataDisplay.filterBar.statusLabel'),
       options: [
-        { value: 'todo', label: t('demo.text.dataDisplay.filterBar.statusTodo') },
-        { value: 'in-progress', label: t('demo.text.dataDisplay.filterBar.statusInProgress') },
-        { value: 'done', label: t('demo.text.dataDisplay.filterBar.statusDone') },
+        { value: 'todo', label: ts('demo.text.dataDisplay.filterBar.statusTodo') },
+        { value: 'in-progress', label: ts('demo.text.dataDisplay.filterBar.statusInProgress') },
+        { value: 'done', label: ts('demo.text.dataDisplay.filterBar.statusDone') },
       ],
-      placeholder: t('demo.text.dataDisplay.filterBar.statusPlaceholder'),
+      placeholder: ts('demo.text.dataDisplay.filterBar.statusPlaceholder'),
     },
     {
       key: 'owner',
-      label: t('demo.text.dataDisplay.filterBar.ownerLabel'),
+      label: ts('demo.text.dataDisplay.filterBar.ownerLabel'),
       options: [
-        { value: 'anna', label: t('demo.text.dataDisplay.filterBar.ownerAnna') },
-        { value: 'marek', label: t('demo.text.dataDisplay.filterBar.ownerMarek') },
-        { value: 'jan', label: t('demo.text.dataDisplay.filterBar.ownerJan') },
-        { value: 'kasia', label: t('demo.text.dataDisplay.filterBar.ownerKasia') },
+        { value: 'anna', label: ts('demo.text.dataDisplay.filterBar.ownerAnna') },
+        { value: 'marek', label: ts('demo.text.dataDisplay.filterBar.ownerMarek') },
+        { value: 'jan', label: ts('demo.text.dataDisplay.filterBar.ownerJan') },
+        { value: 'kasia', label: ts('demo.text.dataDisplay.filterBar.ownerKasia') },
       ],
-      placeholder: t('demo.text.dataDisplay.filterBar.ownerPlaceholder'),
+      placeholder: ts('demo.text.dataDisplay.filterBar.ownerPlaceholder'),
     },
     {
       key: 'priority',
-      label: t('demo.text.dataDisplay.filterBar.priorityLabel'),
+      label: ts('demo.text.dataDisplay.filterBar.priorityLabel'),
       options: [
-        { value: 'low', label: t('demo.text.dataDisplay.filterBar.priorityLow') },
-        { value: 'medium', label: t('demo.text.dataDisplay.filterBar.priorityMedium') },
-        { value: 'high', label: t('demo.text.dataDisplay.filterBar.priorityHigh') },
+        { value: 'low', label: ts('demo.text.dataDisplay.filterBar.priorityLow') },
+        { value: 'medium', label: ts('demo.text.dataDisplay.filterBar.priorityMedium') },
+        { value: 'high', label: ts('demo.text.dataDisplay.filterBar.priorityHigh') },
       ],
-      placeholder: t('demo.text.dataDisplay.filterBar.priorityPlaceholder'),
+      placeholder: ts('demo.text.dataDisplay.filterBar.priorityPlaceholder'),
     },
   ]);
 
@@ -434,7 +433,7 @@ export const createDataDisplayDemoModel = () => {
 
   const handleTreeMove = (draggedId: string, targetId: string) => {
     setLastMove(`${draggedId} -> ${targetId}`);
-    addToast({ type: 'info', message: t('demo.text.dataDisplay.tree.movedToastMessage', { draggedId, targetId }) });
+    addToast({ type: 'info', message: ts('demo.text.dataDisplay.tree.movedToastMessage', { draggedId, targetId }) });
   };
 
   const renderVirtualItem = (item: ReturnType<typeof virtualItems>[number], index: number) => (
@@ -495,7 +494,6 @@ export const createDataDisplayDemoModel = () => {
     loadTreeChildren,
     markdown,
     pollingFeed,
-    renderRichText,
     renderVirtualItem,
     runComparison,
     selectedNode,

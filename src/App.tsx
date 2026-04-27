@@ -1,19 +1,24 @@
+﻿import { en as dataEn, pl as dataPl } from '@jankrajewskiit/data';
 import {
   addToast,
+  defineDictionaries,
+  en as uiEn,
   I18nProvider,
   LocaleSwitcher,
+  pl as uiPl,
   SidebarNav,
   type SidebarNavGroup,
   ThemeProvider,
   ThemeToggle,
   ToastProvider,
+  useI18n,
 } from '@jankrajewskiit/ui';
 import { useSearchParams } from '@solidjs/router';
 import { createEffect, createMemo, createSignal } from 'solid-js';
 
 import DemoPageHeader from './components/DemoPageHeader';
 import DemoSectionSwitch from './components/DemoSectionSwitch';
-import { useDemoDictionary } from './hooks/useDemoDictionary';
+import { en as demoEn, pl as demoPl } from './i18n/messages';
 import {
   DEMO_LAST_SECTION_STORAGE_KEY,
   DEMO_NAV_GROUP_COUNT,
@@ -29,9 +34,14 @@ import { readInitialDemoSection } from './nav/readInitialDemoSection';
 
 export type { SectionId } from './nav/demoNavConfig';
 
+const dictionaries = defineDictionaries({
+  en: [uiEn, dataEn, demoEn],
+  pl: [uiPl, dataPl, demoPl],
+});
+
 const AppContent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useDemoDictionary();
+  const { t, ts } = useI18n();
   const [activeSection, setActiveSection] = createSignal<SectionId>(readInitialDemoSection());
 
   createEffect(() => {
@@ -106,7 +116,7 @@ const AppContent = () => {
     } catch {
       // private mode
     }
-    addToast({ type: 'info', message: t('demo.page.clearRememberedSection.toast') });
+    addToast({ type: 'info', message: ts('demo.page.clearRememberedSection.toast') });
   };
 
   return (
@@ -115,8 +125,8 @@ const AppContent = () => {
         groups={navGroups()}
         activeId={activeSection()}
         onSelect={(id) => setActiveSection(id as SectionId)}
-        label={t('demo.sidebar.title')}
-        subtitle={t('demo.sidebar.subtitle')}
+        label={ts('demo.sidebar.title')}
+        subtitle={ts('demo.sidebar.subtitle')}
         actions={
           <>
             <LocaleSwitcher variant="ghost" />
@@ -128,6 +138,7 @@ const AppContent = () => {
       <main class="main">
         <DemoPageHeader
           t={t}
+          ts={ts}
           titleKey={meta().titleKey}
           descriptionKey={meta().descriptionKey}
           activeGroupLabel={activeGroupLabel()}
@@ -152,7 +163,7 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <I18nProvider storageKey="velvet-demo-library-locale">
+    <I18nProvider dictionaries={dictionaries} storageKey="velvet-demo-library-locale">
       <ThemeProvider>
         <InnerApp />
       </ThemeProvider>

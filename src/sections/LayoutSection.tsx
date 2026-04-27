@@ -1,4 +1,4 @@
-import {
+﻿import {
   Accordion,
   AccordionIcon,
   AccordionItem,
@@ -28,6 +28,7 @@ import {
   Surface,
   Text,
 } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import type { IconTypes } from 'solid-icons';
 import { FaSolidBriefcase, FaSolidWandMagicSparkles } from 'solid-icons/fa';
 import { FiBookOpen, FiFileText } from 'solid-icons/fi';
@@ -36,8 +37,6 @@ import { createMemo, createSignal, For, Show } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 import { DEMO_FLASHCARD_ITEMS, DEMO_PRACTICE_SETUP_CATEGORIES } from '../fixtures/layoutFixtures';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { renderRichText } from '../i18n/renderRichText';
 import type { SectionId } from '../nav/demoNavConfig';
 
 const fallbackQuizResults: FlashcardPracticeResult<(typeof DEMO_FLASHCARD_ITEMS)[number]>[] = DEMO_FLASHCARD_ITEMS.map(
@@ -51,31 +50,31 @@ const fallbackQuizResults: FlashcardPracticeResult<(typeof DEMO_FLASHCARD_ITEMS)
 const LayoutSection = (props: { sectionId: SectionId }) => {
   const sectionId = () => props.sectionId;
   const year = new Date().getFullYear();
-  const { t } = useDemoDictionary();
+  const { ts, tx } = useI18n();
   const featureCards = createMemo<{ icon: IconTypes; title: string; description: string; tone: FeatureCardTone }[]>(
     () => [
       {
         icon: FaSolidBriefcase,
-        title: t('demo.recron.featureCard.organizer.title'),
-        description: t('demo.recron.featureCard.organizer.description'),
+        title: ts('demo.recron.featureCard.organizer.title'),
+        description: ts('demo.recron.featureCard.organizer.description'),
         tone: 'primary',
       },
       {
         icon: FiBookOpen,
-        title: t('demo.recron.featureCard.questions.title'),
-        description: t('demo.recron.featureCard.questions.description'),
+        title: ts('demo.recron.featureCard.questions.title'),
+        description: ts('demo.recron.featureCard.questions.description'),
         tone: 'success',
       },
       {
         icon: FiFileText,
-        title: t('demo.recron.featureCard.portfolio.title'),
-        description: t('demo.recron.featureCard.portfolio.description'),
+        title: ts('demo.recron.featureCard.portfolio.title'),
+        description: ts('demo.recron.featureCard.portfolio.description'),
         tone: 'warning',
       },
       {
         icon: FaSolidWandMagicSparkles,
-        title: t('demo.recron.featureCard.ai.title'),
-        description: t('demo.recron.featureCard.ai.description'),
+        title: ts('demo.recron.featureCard.ai.title'),
+        description: ts('demo.recron.featureCard.ai.description'),
         tone: 'info',
       },
     ],
@@ -88,11 +87,11 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
   const handleQuizFinish = (results: FlashcardPracticeResult<(typeof DEMO_FLASHCARD_ITEMS)[number]>[]) => {
     setQuizResults(results);
-    addToast({ type: 'success', message: t('demo.toast.layout.quizFinished') });
+    addToast({ type: 'success', message: ts('demo.toast.layout.quizFinished') });
   };
 
   const handleQuizSummaryBack = () => {
-    addToast({ type: 'info', message: t('demo.toast.layout.quizBack') });
+    addToast({ type: 'info', message: ts('demo.toast.layout.quizBack') });
   };
 
   const handleQuizRestart = () => {
@@ -101,10 +100,10 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
   };
 
   const handlePracticeSetupStart = (value: { categoryId: string | null; count: number }) => {
-    const category = value.categoryId ?? t('demo.toast.layout.practiceAllCategories');
+    const category = value.categoryId ?? ts('demo.toast.layout.practiceAllCategories');
     addToast({
       type: 'success',
-      message: t('demo.toast.layout.practiceConfigured', { category, count: value.count }),
+      message: ts('demo.toast.layout.practiceConfigured', { category, count: value.count }),
     });
   };
 
@@ -112,13 +111,13 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
     <div>
       <Show when={sectionId() === 'surfaces-main-layout'}>
         <ShowcaseSection
-          title={t('demo.showcase.layout.mainLayout.title')}
-          subtitle={t('demo.showcase.layout.mainLayout.subtitle')}
+          title={ts('demo.showcase.layout.mainLayout.title')}
+          subtitle={ts('demo.showcase.layout.mainLayout.subtitle')}
         >
           <PreviewPanel>
             <PreviewGroup
-              title={t('demo.text.layout.mainLayout.fullShell.title')}
-              subtitle={t('demo.text.layout.mainLayout.fullShell.subtitle')}
+              title={ts('demo.text.layout.mainLayout.fullShell.title')}
+              subtitle={ts('demo.text.layout.mainLayout.fullShell.subtitle')}
             >
               <div class="layoutPreviewShell">
                 <MainLayout
@@ -126,19 +125,19 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                   footer={
                     <Footer
                       copyrightText={`(c) ${String(year)} MyApp`}
-                      privacyLabel={t('demo.text.layout.mainLayout.privacy')}
+                      privacyLabel={ts('demo.text.layout.mainLayout.privacy')}
                       privacyHref="/privacy"
-                      builtWithText={t('demo.text.layout.mainLayout.builtWithVelvetUi')}
+                      builtWithText={ts('demo.text.layout.mainLayout.builtWithVelvetUi')}
                     />
                   }
                 >
                   <div class="layoutShellContent">
                     <div class="recronHero">
                       <Heading as="h3" level={3} variant="titleLg" class="recronTitle">
-                        {t('demo.text.layout.mainLayout.dashboard')}
+                        {ts('demo.text.layout.mainLayout.dashboard')}
                       </Heading>
                       <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                        {t('demo.text.layout.mainLayout.fixedHeightContent')}
+                        {ts('demo.text.layout.mainLayout.fixedHeightContent')}
                       </Text>
                     </div>
                   </div>
@@ -147,18 +146,18 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.mainLayout.meta'), {
-              navbar: (
+            {tx('demo.text.layout.mainLayout.meta', {
+              navbar: () => (
                 <CodeText as="span" class="codeInline">
                   navbar
                 </CodeText>
               ),
-              footer: (
+              footer: () => (
                 <CodeText as="span" class="codeInline">
                   footer
                 </CodeText>
               ),
-              mainLayout: (
+              mainLayout: () => (
                 <CodeText as="span" class="codeInline">
                   MainLayout
                 </CodeText>
@@ -170,32 +169,32 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'surfaces-layouts'}>
         <ShowcaseSection
-          title={t('demo.showcase.layout.grid.title')}
-          subtitle={t('demo.showcase.layout.grid.subtitle')}
+          title={ts('demo.showcase.layout.grid.title')}
+          subtitle={ts('demo.showcase.layout.grid.subtitle')}
         >
           <PreviewPanel>
             <Grid columns={3} gap="sm">
-              <Chip variant="subtle" label={t('demo.text.layout.grid.column1')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.column2')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.column3')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.column4')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.column5')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.column1')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.column2')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.column3')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.column4')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.column5')} />
             </Grid>
             <Grid minColumnWidth="180px" gap="md">
-              <Chip variant="subtle" label={t('demo.text.layout.grid.autoFitA')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.autoFitB')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.autoFitC')} />
-              <Chip variant="subtle" label={t('demo.text.layout.grid.autoFitD')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.autoFitA')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.autoFitB')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.autoFitC')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.grid.autoFitD')} />
             </Grid>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.grid.meta'), {
-              columns: (
+            {tx('demo.text.layout.grid.meta', {
+              columns: () => (
                 <CodeText as="span" class="codeInline">
                   columns
                 </CodeText>
               ),
-              minColumnWidth: (
+              minColumnWidth: () => (
                 <CodeText as="span" class="codeInline">
                   minColumnWidth
                 </CodeText>
@@ -205,44 +204,44 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.layout.stack.title')}
-          subtitle={t('demo.showcase.layout.stack.subtitle')}
+          title={ts('demo.showcase.layout.stack.title')}
+          subtitle={ts('demo.showcase.layout.stack.subtitle')}
         >
           <PreviewPanel>
             <Stack gap="sm">
-              <Chip variant="subtle" label={t('demo.text.layout.stack.firstItem')} />
-              <Chip variant="subtle" label={t('demo.text.layout.stack.secondItem')} />
-              <Chip variant="subtle" label={t('demo.text.layout.stack.thirdItem')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.firstItem')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.secondItem')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.thirdItem')} />
             </Stack>
             <Stack direction="horizontal" gap="md" align="center" justify="between" wrap>
-              <Chip variant="subtle" label={t('demo.text.layout.stack.horizontal')} />
-              <Chip variant="subtle" label={t('demo.text.layout.stack.alignedCenter')} />
-              <Chip variant="subtle" label={t('demo.text.layout.stack.wrapEnabled')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.horizontal')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.alignedCenter')} />
+              <Chip variant="subtle" label={ts('demo.text.layout.stack.wrapEnabled')} />
             </Stack>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.stack.meta'), {
-              direction: (
+            {tx('demo.text.layout.stack.meta', {
+              direction: () => (
                 <CodeText as="span" class="codeInline">
                   direction
                 </CodeText>
               ),
-              gap: (
+              gap: () => (
                 <CodeText as="span" class="codeInline">
                   gap
                 </CodeText>
               ),
-              align: (
+              align: () => (
                 <CodeText as="span" class="codeInline">
                   align
                 </CodeText>
               ),
-              justify: (
+              justify: () => (
                 <CodeText as="span" class="codeInline">
                   justify
                 </CodeText>
               ),
-              wrap: (
+              wrap: () => (
                 <CodeText as="span" class="codeInline">
                   wrap
                 </CodeText>
@@ -252,49 +251,49 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.layout.resizablePanel.title')}
-          subtitle={t('demo.showcase.layout.resizablePanel.subtitle')}
+          title={ts('demo.showcase.layout.resizablePanel.title')}
+          subtitle={ts('demo.showcase.layout.resizablePanel.subtitle')}
         >
           <PreviewPanel>
             <PreviewGroup
-              title={t('demo.text.layout.resizable.horizontalSplit.title')}
-              subtitle={t('demo.text.layout.resizable.horizontalSplit.subtitle')}
+              title={ts('demo.text.layout.resizable.horizontalSplit.title')}
+              subtitle={ts('demo.text.layout.resizable.horizontalSplit.subtitle')}
             >
               <div class="resizableDemoShell">
                 <ResizablePanel direction="horizontal" initialSplit={40} minSize={20}>
                   <div class="resizableDemoPanel">
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.resizable.leftPanel')}
+                      {ts('demo.text.layout.resizable.leftPanel')}
                     </Text>
                     <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                      {t('demo.text.layout.resizable.dragHandle')}
+                      {ts('demo.text.layout.resizable.dragHandle')}
                     </Text>
                   </div>
                   <div class="resizableDemoPanel">
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.resizable.rightPanel')}
+                      {ts('demo.text.layout.resizable.rightPanel')}
                     </Text>
                     <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                      {t('demo.text.layout.resizable.contentAdjusts')}
+                      {ts('demo.text.layout.resizable.contentAdjusts')}
                     </Text>
                   </div>
                 </ResizablePanel>
               </div>
             </PreviewGroup>
             <PreviewGroup
-              title={t('demo.text.layout.resizable.verticalSplit.title')}
-              subtitle={t('demo.text.layout.resizable.verticalSplit.subtitle')}
+              title={ts('demo.text.layout.resizable.verticalSplit.title')}
+              subtitle={ts('demo.text.layout.resizable.verticalSplit.subtitle')}
             >
               <div class="resizableDemoShell">
                 <ResizablePanel direction="vertical" initialSplit={50} minSize={20}>
                   <div class="resizableDemoPanel">
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.resizable.topPanel')}
+                      {ts('demo.text.layout.resizable.topPanel')}
                     </Text>
                   </div>
                   <div class="resizableDemoPanel">
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.resizable.bottomPanel')}
+                      {ts('demo.text.layout.resizable.bottomPanel')}
                     </Text>
                   </div>
                 </ResizablePanel>
@@ -302,13 +301,13 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.resizable.meta'), {
-              horizontal: (
+            {tx('demo.text.layout.resizable.meta', {
+              horizontal: () => (
                 <CodeText as="span" class="codeInline">
                   horizontal
                 </CodeText>
               ),
-              vertical: (
+              vertical: () => (
                 <CodeText as="span" class="codeInline">
                   vertical
                 </CodeText>
@@ -318,24 +317,24 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.layout.divider.title')}
-          subtitle={t('demo.showcase.layout.divider.subtitle')}
+          title={ts('demo.showcase.layout.divider.title')}
+          subtitle={ts('demo.showcase.layout.divider.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.layout.divider.horizontalVariants.title')}>
+            <PreviewGroup title={ts('demo.text.layout.divider.horizontalVariants.title')}>
               <Divider />
-              <Divider label={t('demo.text.layout.divider.or')} />
+              <Divider label={ts('demo.text.layout.divider.or')} />
               <Divider variant="dashed" />
-              <Divider variant="dashed" label={t('demo.text.layout.divider.section')} />
+              <Divider variant="dashed" label={ts('demo.text.layout.divider.section')} />
             </PreviewGroup>
-            <PreviewGroup title={t('demo.text.layout.divider.verticalVariant.title')}>
+            <PreviewGroup title={ts('demo.text.layout.divider.verticalVariant.title')}>
               <div class="row dividerVerticalDemo">
                 <Text as="span" variant="bodySm">
-                  {t('demo.text.layout.divider.left')}
+                  {ts('demo.text.layout.divider.left')}
                 </Text>
                 <Divider orientation="vertical" />
                 <Text as="span" variant="bodySm">
-                  {t('demo.text.layout.divider.right')}
+                  {ts('demo.text.layout.divider.right')}
                 </Text>
               </div>
             </PreviewGroup>
@@ -345,35 +344,35 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'surfaces-cards'}>
         <ShowcaseSection
-          title={t('demo.showcase.layout.card.title')}
-          subtitle={t('demo.showcase.layout.card.subtitle')}
+          title={ts('demo.showcase.layout.card.title')}
+          subtitle={ts('demo.showcase.layout.card.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.layout.surface.baseSurface.title')}>
+            <PreviewGroup title={ts('demo.text.layout.surface.baseSurface.title')}>
               <Surface>
                 <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                  {t('demo.text.layout.surface.baseBody')}
+                  {ts('demo.text.layout.surface.baseBody')}
                 </Text>
               </Surface>
             </PreviewGroup>
-            <PreviewGroup title={t('demo.text.layout.card.baseCard.title')}>
+            <PreviewGroup title={ts('demo.text.layout.card.baseCard.title')}>
               <Card>
                 <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                  {t('demo.text.layout.card.baseBody')}
+                  {ts('demo.text.layout.card.baseBody')}
                 </Text>
               </Card>
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.surface.meta'), {
-              surface: (
+            {tx('demo.text.layout.surface.meta', {
+              surface: () => (
                 <CodeText as="span" class="codeInline">
                   Surface
                 </CodeText>
               ),
             })}{' '}
-            {renderRichText(t('demo.text.layout.card.meta'), {
-              card: (
+            {tx('demo.text.layout.card.meta', {
+              card: () => (
                 <CodeText as="span" class="codeInline">
                   Card
                 </CodeText>
@@ -383,24 +382,24 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.layout.dataCardVariants.title')}
-          subtitle={t('demo.showcase.layout.dataCardVariants.subtitle')}
+          title={ts('demo.showcase.layout.dataCardVariants.title')}
+          subtitle={ts('demo.showcase.layout.dataCardVariants.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.layout.dataCard.variants.title')}>
+            <PreviewGroup title={ts('demo.text.layout.dataCard.variants.title')}>
               <div class="gridCards">
                 <DataCard
                   variant="filled"
                   hoverable
                   header={
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.dataCard.filledHeader')}
+                      {ts('demo.text.layout.dataCard.filledHeader')}
                     </Text>
                   }
-                  footer={<Button variant="primary">{t('demo.text.layout.dataCard.continue')}</Button>}
+                  footer={<Button variant="primary">{ts('demo.text.layout.dataCard.continue')}</Button>}
                 >
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.layout.dataCard.filledBody')}
+                    {ts('demo.text.layout.dataCard.filledBody')}
                   </Text>
                 </DataCard>
                 <DataCard
@@ -408,13 +407,13 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                   hoverable
                   header={
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.dataCard.elevatedHeader')}
+                      {ts('demo.text.layout.dataCard.elevatedHeader')}
                     </Text>
                   }
-                  footer={<Button variant="primary">{t('demo.text.layout.dataCard.open')}</Button>}
+                  footer={<Button variant="primary">{ts('demo.text.layout.dataCard.open')}</Button>}
                 >
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.layout.dataCard.elevatedBody')}
+                    {ts('demo.text.layout.dataCard.elevatedBody')}
                   </Text>
                 </DataCard>
                 <DataCard
@@ -422,31 +421,31 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                   hoverable
                   header={
                     <Text as="span" variant="labelMd">
-                      {t('demo.text.layout.dataCard.outlinedHeader')}
+                      {ts('demo.text.layout.dataCard.outlinedHeader')}
                     </Text>
                   }
-                  footer={<Button variant="ghost">{t('demo.text.layout.dataCard.details')}</Button>}
+                  footer={<Button variant="ghost">{ts('demo.text.layout.dataCard.details')}</Button>}
                 >
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.layout.dataCard.outlinedBody')}
+                    {ts('demo.text.layout.dataCard.outlinedBody')}
                   </Text>
                 </DataCard>
               </div>
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.dataCard.meta'), {
-              header: (
+            {tx('demo.text.layout.dataCard.meta', {
+              header: () => (
                 <CodeText as="span" class="codeInline">
                   header
                 </CodeText>
               ),
-              footer: (
+              footer: () => (
                 <CodeText as="span" class="codeInline">
                   footer
                 </CodeText>
               ),
-              hoverable: (
+              hoverable: () => (
                 <CodeText as="span" class="codeInline">
                   hoverable
                 </CodeText>
@@ -455,7 +454,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
           </ShowcaseMeta>
         </ShowcaseSection>
 
-        <ShowcaseSection title="FeatureCard" subtitle={t('demo.recron.showcase.featureCard.subtitle')}>
+        <ShowcaseSection title="FeatureCard" subtitle={ts('demo.recron.showcase.featureCard.subtitle')}>
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="gridCards">
@@ -476,33 +475,33 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.feedback.statCard.title')}
-          subtitle={t('demo.showcase.feedback.statCard.subtitle')}
+          title={ts('demo.showcase.feedback.statCard.title')}
+          subtitle={ts('demo.showcase.feedback.statCard.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="gridCards">
                 <StatCard
                   value="1 284"
-                  label={t('demo.text.feedback.statCard.activeUsers')}
+                  label={ts('demo.text.feedback.statCard.activeUsers')}
                   icon={IoPeople}
                   colorClass="info"
                 />
                 <StatCard
                   value="98.7%"
-                  label={t('demo.text.feedback.statCard.uptime')}
+                  label={ts('demo.text.feedback.statCard.uptime')}
                   icon={IoCheckmarkCircle}
                   colorClass="success"
                 />
                 <StatCard
                   value="3"
-                  label={t('demo.text.feedback.statCard.openIssues')}
+                  label={ts('demo.text.feedback.statCard.openIssues')}
                   icon={IoAlertCircle}
                   colorClass="warning"
                 />
                 <StatCard
                   value="42"
-                  label={t('demo.text.feedback.statCard.deployments')}
+                  label={ts('demo.text.feedback.statCard.deployments')}
                   icon={IoStatsChart}
                   colorClass="error"
                 />
@@ -513,15 +512,15 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
             <CodeText as="span" class="codeInline">
               StatCard
             </CodeText>{' '}
-            {t('demo.text.feedback.statCard.meta')}
+            {ts('demo.text.feedback.statCard.meta')}
           </ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={sectionId() === 'surfaces-interactive-cards'}>
-        <ShowcaseSection title="FlipCard" subtitle={t('demo.showcase.layout.flipCard.subtitle')}>
+        <ShowcaseSection title="FlipCard" subtitle={ts('demo.showcase.layout.flipCard.subtitle')}>
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.layout.flipCard.samples.title')}>
+            <PreviewGroup title={ts('demo.text.layout.flipCard.samples.title')}>
               <div class="flipCardGrid">
                 <FlipCard
                   width="220px"
@@ -532,17 +531,17 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                         VelvetUI
                       </Heading>
                       <Text as="span" variant="bodySm" tone="muted" class="flipCardHint">
-                        {t('demo.text.layout.flipCard.clickToFlip')}
+                        {ts('demo.text.layout.flipCard.clickToFlip')}
                       </Text>
                     </div>
                   }
                   back={
                     <div class="flipCardBack">
                       <Text as="span" variant="labelMd">
-                        {t('demo.text.layout.flipCard.backStrong')}
+                        {ts('demo.text.layout.flipCard.backStrong')}
                       </Text>
                       <Text as="span" variant="bodySm" tone="muted" class="flipCardHint">
-                        {t('demo.text.layout.flipCard.backHint')}
+                        {ts('demo.text.layout.flipCard.backHint')}
                       </Text>
                     </div>
                   }
@@ -550,15 +549,15 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                 <FlipCard
                   width="220px"
                   height="140px"
-                  front={<div class="flipCardFace">{t('demo.text.layout.flipCard.uiSystem')}</div>}
-                  back={<div class="flipCardSimple">{t('demo.text.layout.flipCard.darkLight')}</div>}
+                  front={<div class="flipCardFace">{ts('demo.text.layout.flipCard.uiSystem')}</div>}
+                  back={<div class="flipCardSimple">{ts('demo.text.layout.flipCard.darkLight')}</div>}
                 />
               </div>
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.layout.flipCard.meta'), {
-              flipCard: (
+            {tx('demo.text.layout.flipCard.meta', {
+              flipCard: () => (
                 <CodeText as="span" class="codeInline">
                   FlipCard
                 </CodeText>
@@ -567,14 +566,14 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
           </ShowcaseMeta>
         </ShowcaseSection>
 
-        <ShowcaseSection title="FlashcardPracticeCard" subtitle={t('demo.recron.showcase.flashcardQuizCard.subtitle')}>
+        <ShowcaseSection title="FlashcardPracticeCard" subtitle={ts('demo.recron.showcase.flashcardQuizCard.subtitle')}>
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="recronDemoMedium">
                 <FlashcardPracticeCard
-                  front={<Text as="p">{t('demo.recron.knowledge.flashcard.card.front')}</Text>}
-                  back={<Text as="p">{t('demo.recron.knowledge.flashcard.card.back')}</Text>}
-                  badgeLabel={t('demo.recron.knowledge.flashcard.card.badgeLabel')}
+                  front={<Text as="p">{ts('demo.recron.knowledge.flashcard.card.front')}</Text>}
+                  back={<Text as="p">{ts('demo.recron.knowledge.flashcard.card.back')}</Text>}
+                  badgeLabel={ts('demo.recron.knowledge.flashcard.card.badgeLabel')}
                   flipped={quizFlipped()}
                   onFlip={setQuizFlipped}
                 />
@@ -585,7 +584,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
         <ShowcaseSection
           title="FlashcardPracticeSession"
-          subtitle={t('demo.recron.showcase.flashcardQuizSession.subtitle')}
+          subtitle={ts('demo.recron.showcase.flashcardQuizSession.subtitle')}
         >
           <PreviewPanel>
             <PreviewGroup title="Example">
@@ -596,9 +595,9 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
                   getBadgeLabel={(item) => item.category}
                   renderFront={(item) => <Text as="p">{item.question}</Text>}
                   renderBack={(item) => <Text as="p">{item.answer}</Text>}
-                  emptyMessage={t('demo.recron.knowledge.flashcard.session.emptyMessage')}
+                  emptyMessage={ts('demo.recron.knowledge.flashcard.session.emptyMessage')}
                   onQuit={() =>
-                    addToast({ type: 'info', message: t('demo.recron.knowledge.flashcard.session.quitToast') })
+                    addToast({ type: 'info', message: ts('demo.recron.knowledge.flashcard.session.quitToast') })
                   }
                   onFinish={handleQuizFinish}
                 />
@@ -609,14 +608,14 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
         <ShowcaseSection
           title="FlashcardPracticeSummary"
-          subtitle={t('demo.recron.showcase.flashcardQuizSummary.subtitle')}
+          subtitle={ts('demo.recron.showcase.flashcardQuizSummary.subtitle')}
         >
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="recronDemoMedium">
                 <FlashcardPracticeSummary
                   results={quizResults().length > 0 ? quizResults() : fallbackQuizResults}
-                  title={t('demo.recron.knowledge.flashcard.summary.title')}
+                  title={ts('demo.recron.knowledge.flashcard.summary.title')}
                   onBack={handleQuizSummaryBack}
                   onRestart={handleQuizRestart}
                 />
@@ -625,13 +624,13 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
           </PreviewPanel>
         </ShowcaseSection>
 
-        <ShowcaseSection title="PracticeSetupPanel" subtitle={t('demo.recron.showcase.quizSetupPanel.subtitle')}>
+        <ShowcaseSection title="PracticeSetupPanel" subtitle={ts('demo.recron.showcase.quizSetupPanel.subtitle')}>
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="recronDemoMedium">
                 <PracticeSetupPanel
-                  title={t('demo.recron.knowledge.quizSetup.title')}
-                  description={t('demo.recron.knowledge.quizSetup.description')}
+                  title={ts('demo.recron.knowledge.quizSetup.title')}
+                  description={ts('demo.recron.knowledge.quizSetup.description')}
                   categories={DEMO_PRACTICE_SETUP_CATEGORIES}
                   countOptions={[10, 20, 30, 50]}
                   initialCount={20}
@@ -645,25 +644,25 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'surfaces-collapsible'}>
         <ShowcaseSection
-          title={t('demo.showcase.layout.accordion.title')}
-          subtitle={t('demo.showcase.layout.accordion.subtitle')}
+          title={ts('demo.showcase.layout.accordion.title')}
+          subtitle={ts('demo.showcase.layout.accordion.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Accordion>
-                <AccordionItem label={t('demo.text.layout.accordion.whatIs')}>
+                <AccordionItem label={ts('demo.text.layout.accordion.whatIs')}>
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.layout.accordion.whatIsBody')}
+                    {ts('demo.text.layout.accordion.whatIsBody')}
                   </Text>
                 </AccordionItem>
-                <AccordionItem label={t('demo.text.layout.accordion.howInstall')}>
+                <AccordionItem label={ts('demo.text.layout.accordion.howInstall')}>
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
                     npm install @jankrajewskiit/ui
                   </Text>
                 </AccordionItem>
-                <AccordionItem label={t('demo.text.layout.accordion.disabledItem')} disabled>
+                <AccordionItem label={ts('demo.text.layout.accordion.disabledItem')} disabled>
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.layout.accordion.disabledBody')}
+                    {ts('demo.text.layout.accordion.disabledBody')}
                   </Text>
                 </AccordionItem>
               </Accordion>

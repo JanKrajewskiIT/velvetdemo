@@ -1,18 +1,16 @@
-import { addToast, type MultiSelectOption } from '@jankrajewskiit/ui';
+﻿import { addToast, type MultiSelectOption } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import { IoAddSharp, IoCalendar, IoMail, IoSearch } from 'solid-icons/io';
 import { createMemo, createSignal } from 'solid-js';
 
 import { DEMO_FRAMEWORK_OPTIONS, DEMO_INPUT_PRESET_COLORS, type DemoRoleValue } from '../../fixtures/inputsFixtures';
-import { useDemoDictionary } from '../../hooks/useDemoDictionary';
-import { renderRichText } from '../../i18n/renderRichText';
-
 const PRESET_COLORS = DEMO_INPUT_PRESET_COLORS;
 const FRAMEWORK_OPTIONS: MultiSelectOption[] = DEMO_FRAMEWORK_OPTIONS;
 
 export const createInputsDemoModel = () => {
-  const { t } = useDemoDictionary();
-  const releaseNotesTitle = () => t('demo.text.inputs.inlineEditableText.initialValue');
-  const releaseNotesHtml = () => t('demo.text.inputs.richTextEditor.sampleHtml');
+  const { t, ts } = useI18n();
+  const releaseNotesTitle = () => ts('demo.text.inputs.inlineEditableText.initialValue');
+  const releaseNotesHtml = () => ts('demo.text.inputs.richTextEditor.sampleHtml');
   const [loading, setLoading] = createSignal(false);
   const [text, setText] = createSignal('');
   const [editableTitle, setEditableTitle] = createSignal(releaseNotesTitle());
@@ -57,10 +55,10 @@ export const createInputsDemoModel = () => {
   const [importBusy, setImportBusy] = createSignal(false);
 
   const optionMenuItems = createMemo(() => [
-    { value: 'draft', label: t('demo.text.inputs.optionMenuChip.option.draft'), variant: 'subtle' as const },
-    { value: 'in-review', label: t('demo.text.inputs.optionMenuChip.option.inReview'), variant: 'info' as const },
-    { value: 'approved', label: t('demo.text.inputs.optionMenuChip.option.approved'), variant: 'success' as const },
-    { value: 'archived', label: t('demo.text.inputs.optionMenuChip.option.archived'), variant: 'warning' as const },
+    { value: 'draft', label: ts('demo.text.inputs.optionMenuChip.option.draft'), variant: 'subtle' as const },
+    { value: 'in-review', label: ts('demo.text.inputs.optionMenuChip.option.inReview'), variant: 'info' as const },
+    { value: 'approved', label: ts('demo.text.inputs.optionMenuChip.option.approved'), variant: 'success' as const },
+    { value: 'archived', label: ts('demo.text.inputs.optionMenuChip.option.archived'), variant: 'warning' as const },
   ]);
 
   const chipSelectorItems = createMemo(() => [
@@ -120,7 +118,7 @@ export const createInputsDemoModel = () => {
 
   const handleCalendarEventOpen = (url: string) => {
     setCalendarPreviewUrl(url);
-    addToast({ type: 'info', message: t('demo.toast.inputs.calendarUrlGenerated') });
+    addToast({ type: 'info', message: ts('demo.toast.inputs.calendarUrlGenerated') });
   };
 
   const closeImportDialog = () => {
@@ -133,7 +131,7 @@ export const createInputsDemoModel = () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
     setImportBusy(false);
     setImportOpen(false);
-    addToast({ type: 'success', message: t('demo.toast.inputs.importFinished') });
+    addToast({ type: 'success', message: ts('demo.toast.inputs.importFinished') });
   };
 
   const calendarEventPreview = () => ({
@@ -147,7 +145,6 @@ export const createInputsDemoModel = () => {
 
   return {
     t,
-    renderRichText,
     releaseNotesTitle,
     releaseNotesHtml,
     loading,

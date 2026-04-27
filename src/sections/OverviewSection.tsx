@@ -1,11 +1,9 @@
-import { Button, Card, CodeText, Heading, Text } from '@jankrajewskiit/ui';
+﻿import { Button, Card, CodeText, Heading, Text } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import { createMemo, For } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 import type { DemoOverviewFeaturedSection, DemoOverviewTrack } from '../demoTypes';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { renderRichText } from '../i18n/renderRichText';
-
 interface OverviewSectionProps {
   tracks: DemoOverviewTrack[];
   featuredSections: DemoOverviewFeaturedSection[];
@@ -13,27 +11,27 @@ interface OverviewSectionProps {
 }
 
 const OverviewSection = (props: OverviewSectionProps) => {
-  const { t } = useDemoDictionary();
+  const { ts, tx } = useI18n();
   const stats = createMemo(() => [
-    { label: t('demo.text.overview.stats.components'), value: '58+' },
-    { label: t('demo.text.overview.stats.categories'), value: '9' },
-    { label: t('demo.text.overview.stats.themeModes'), value: '3' },
-    { label: t('demo.text.overview.stats.hooks'), value: '3' },
-    { label: t('demo.text.overview.stats.toolingPresets'), value: '7' },
+    { label: ts('demo.text.overview.stats.components'), value: '58+' },
+    { label: ts('demo.text.overview.stats.categories'), value: '9' },
+    { label: ts('demo.text.overview.stats.themeModes'), value: '3' },
+    { label: ts('demo.text.overview.stats.hooks'), value: '3' },
+    { label: ts('demo.text.overview.stats.toolingPresets'), value: '7' },
   ]);
 
   return (
     <>
       <ShowcaseSection
-        title={t('demo.showcase.overview.whatIs.title')}
-        subtitle={t('demo.showcase.overview.whatIs.subtitle')}
+        title={ts('demo.showcase.overview.whatIs.title')}
+        subtitle={ts('demo.showcase.overview.whatIs.subtitle')}
       >
         <PreviewPanel class="overviewHeroPanel">
-          <PreviewGroup title={t('demo.text.overview.coreIdea.title')}>
+          <PreviewGroup title={ts('demo.text.overview.coreIdea.title')}>
             <div class="overviewLead">
               <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                {renderRichText(t('demo.text.overview.coreIdea.message'), {
-                  packageName: (
+                {tx('demo.text.overview.coreIdea.message', {
+                  packageName: () => (
                     <CodeText as="span" class="codeInline">
                       @jankrajewskiit/ui
                     </CodeText>
@@ -41,17 +39,17 @@ const OverviewSection = (props: OverviewSectionProps) => {
                 })}
               </Text>
               <ul class="overviewList">
-                <li>{t('demo.text.overview.highlights.itemPeers')}</li>
-                <li>{t('demo.text.overview.highlights.itemThemes')}</li>
-                <li>{t('demo.text.overview.highlights.itemStyles')}</li>
-                <li>{t('demo.text.overview.highlights.itemCategories')}</li>
+                <li>{ts('demo.text.overview.highlights.itemPeers')}</li>
+                <li>{ts('demo.text.overview.highlights.itemThemes')}</li>
+                <li>{ts('demo.text.overview.highlights.itemStyles')}</li>
+                <li>{ts('demo.text.overview.highlights.itemCategories')}</li>
               </ul>
             </div>
           </PreviewGroup>
 
           <PreviewGroup
-            title={t('demo.showcase.overview.paths.title')}
-            subtitle={t('demo.showcase.overview.paths.subtitle')}
+            title={ts('demo.showcase.overview.paths.title')}
+            subtitle={ts('demo.showcase.overview.paths.subtitle')}
           >
             <div class="overviewTrackGrid">
               <For each={props.tracks}>
@@ -67,7 +65,7 @@ const OverviewSection = (props: OverviewSectionProps) => {
                       {track.description}
                     </Text>
                     <Button type="button" variant="ghost" size="sm" onClick={() => props.onNavigate(track.id)}>
-                      {t('demo.showcase.overview.paths.action')}
+                      {ts('demo.showcase.overview.paths.action')}
                     </Button>
                   </Card>
                 )}
@@ -78,8 +76,8 @@ const OverviewSection = (props: OverviewSectionProps) => {
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.overview.featured.title')}
-        subtitle={t('demo.showcase.overview.featured.subtitle')}
+        title={ts('demo.showcase.overview.featured.title')}
+        subtitle={ts('demo.showcase.overview.featured.subtitle')}
       >
         <PreviewPanel>
           <div class="overviewFeatureGrid">
@@ -97,7 +95,7 @@ const OverviewSection = (props: OverviewSectionProps) => {
                   </Text>
                   <div class="overviewCardActions">
                     <Button type="button" variant="ghost" size="sm" onClick={() => props.onNavigate(section.id)}>
-                      {t('demo.showcase.overview.featured.action')}
+                      {ts('demo.showcase.overview.featured.action')}
                     </Button>
                   </div>
                 </Card>
@@ -108,31 +106,31 @@ const OverviewSection = (props: OverviewSectionProps) => {
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.overview.installation.title')}
-        subtitle={t('demo.showcase.overview.installation.subtitle')}
+        title={ts('demo.showcase.overview.installation.title')}
+        subtitle={ts('demo.showcase.overview.installation.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.overview.install.title')}>
+          <PreviewGroup title={ts('demo.text.overview.install.title')}>
             <CodeText as="pre" variant="block" size="md" class="installBlock">
               npm install @jankrajewskiit/ui solid-js @solidjs/router
             </CodeText>
           </PreviewGroup>
 
-          <PreviewGroup title={t('demo.text.overview.importStyles.title')}>
+          <PreviewGroup title={ts('demo.text.overview.importStyles.title')}>
             <CodeText as="pre" variant="block" size="md" class="installBlock">
               import '@jankrajewskiit/ui/styles';
             </CodeText>
           </PreviewGroup>
         </PreviewPanel>
-        <ShowcaseMeta>{t('demo.text.overview.importStyles.meta')}</ShowcaseMeta>
+        <ShowcaseMeta>{ts('demo.text.overview.importStyles.meta')}</ShowcaseMeta>
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.overview.libraryStats.title')}
-        subtitle={t('demo.showcase.overview.libraryStats.subtitle')}
+        title={ts('demo.showcase.overview.libraryStats.title')}
+        subtitle={ts('demo.showcase.overview.libraryStats.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.overview.packageShape.title')}>
+          <PreviewGroup title={ts('demo.text.overview.packageShape.title')}>
             <div class="pageStats">
               <For each={stats()}>
                 {(stat) => (

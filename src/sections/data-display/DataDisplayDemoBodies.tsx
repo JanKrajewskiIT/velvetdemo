@@ -1,3 +1,4 @@
+﻿import { TradingViewChart } from '@jankrajewskiit/data';
 import {
   ActionRow,
   Avatar,
@@ -27,7 +28,7 @@ import {
   TreeView,
   VirtualizedList,
 } from '@jankrajewskiit/ui';
-import { TradingViewChart } from '@jankrajewskiit/data';
+import { useI18n } from '@jankrajewskiit/ui';
 import { IoDocumentText, IoFolder, IoImage } from 'solid-icons/io';
 import { For, Show } from 'solid-js';
 
@@ -74,7 +75,6 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
     loadTreeChildren,
     markdown,
     pollingFeed,
-    renderRichText,
     renderVirtualItem,
     runComparison,
     selectedNode,
@@ -87,7 +87,6 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
     setMarkdown,
     setSelectedNode,
     setTimelineCardAddOpen,
-    t,
     timelineCardAddOpen,
     timelineCardCategoryOptions,
     timelineCardCompletedValue,
@@ -101,38 +100,39 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
     wsFeed,
   } = useDataDisplayDemo();
 
+  const { tx, ts } = useI18n();
   return (
     <div>
       <Show when={props.sectionId() === 'data-content'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.codeBlock.title')}
-          subtitle={t('demo.showcase.dataDisplay.codeBlock.subtitle')}
+          title={ts('demo.showcase.dataDisplay.codeBlock.title')}
+          subtitle={ts('demo.showcase.dataDisplay.codeBlock.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.dataDisplay.codeBlock.tsxSnippet.title')}>
+            <PreviewGroup title={ts('demo.text.dataDisplay.codeBlock.tsxSnippet.title')}>
               <CodeBlock code={createCodeSample(clickMeLabel())} language="tsx" />
             </PreviewGroup>
-            <PreviewGroup title={t('demo.text.dataDisplay.codeBlock.cliSnippet.title')}>
+            <PreviewGroup title={ts('demo.text.dataDisplay.codeBlock.cliSnippet.title')}>
               <CodeBlock code="npm install @jankrajewskiit/ui" language="bash" />
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.dataDisplay.codeBlock.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.dataDisplay.codeBlock.meta')}</ShowcaseMeta>
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.markdownEditDialog.title')}
-          subtitle={t('demo.showcase.dataDisplay.markdownEditDialog.subtitle')}
+          title={ts('demo.showcase.dataDisplay.markdownEditDialog.title')}
+          subtitle={ts('demo.showcase.dataDisplay.markdownEditDialog.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <ActionRow align="start">
                 <Button variant="ghost" onClick={() => setEditorOpen(true)}>
-                  {t('demo.text.dataDisplay.markdownEdit.openButton')}
+                  {ts('demo.text.dataDisplay.markdownEdit.openButton')}
                 </Button>
               </ActionRow>
               <MarkdownEditDialog
                 open={editorOpen()}
-                label={t('demo.text.dataDisplay.markdownEdit.label')}
+                label={ts('demo.text.dataDisplay.markdownEdit.label')}
                 initialValue={markdown()}
                 onSave={setMarkdown}
                 onClose={() => setEditorOpen(false)}
@@ -142,11 +142,11 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.markdownRenderer.title')}
-          subtitle={t('demo.showcase.dataDisplay.markdownRenderer.subtitle')}
+          title={ts('demo.showcase.dataDisplay.markdownRenderer.title')}
+          subtitle={ts('demo.showcase.dataDisplay.markdownRenderer.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <MarkdownRenderer content={markdown()} />
             </PreviewGroup>
           </PreviewPanel>
@@ -155,40 +155,40 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
 
       <Show when={props.sectionId() === 'data-lists'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.listAndListItem.title')}
-          subtitle={t('demo.showcase.dataDisplay.listAndListItem.subtitle')}
+          title={ts('demo.showcase.dataDisplay.listAndListItem.title')}
+          subtitle={ts('demo.showcase.dataDisplay.listAndListItem.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <List>
                 <ListItem
                   icon={<IoFolder />}
-                  secondary={t('demo.text.dataDisplay.list.threeFiles')}
-                  label={t('demo.text.dataDisplay.list.documents')}
+                  secondary={ts('demo.text.dataDisplay.list.threeFiles')}
+                  label={ts('demo.text.dataDisplay.list.documents')}
                 />
                 <ListItem
                   icon={<IoDocumentText />}
-                  secondary={t('demo.text.dataDisplay.list.updatedYesterday')}
-                  label={t('demo.text.dataDisplay.list.reportPdf')}
+                  secondary={ts('demo.text.dataDisplay.list.updatedYesterday')}
+                  label={ts('demo.text.dataDisplay.list.reportPdf')}
                 />
                 <ListItem
                   icon={<IoImage />}
-                  secondary={t('demo.text.dataDisplay.list.clickToPreview')}
+                  secondary={ts('demo.text.dataDisplay.list.clickToPreview')}
                   onClick={() => {}}
-                  label={t('demo.text.dataDisplay.list.photoPng')}
+                  label={ts('demo.text.dataDisplay.list.photoPng')}
                 />
               </List>
               <List variant="bordered">
                 <ListItem
                   icon={<IoFolder />}
-                  secondary={t('demo.text.dataDisplay.list.sharedFolder')}
-                  label={t('demo.text.dataDisplay.list.projects')}
+                  secondary={ts('demo.text.dataDisplay.list.sharedFolder')}
+                  label={ts('demo.text.dataDisplay.list.projects')}
                 />
                 <ListItem
                   icon={<IoDocumentText />}
-                  secondary={t('demo.text.dataDisplay.list.draft')}
-                  action={<Button variant="ghost">{t('demo.text.dataDisplay.list.edit')}</Button>}
-                  label={t('demo.text.dataDisplay.list.notesMd')}
+                  secondary={ts('demo.text.dataDisplay.list.draft')}
+                  action={<Button variant="ghost">{ts('demo.text.dataDisplay.list.edit')}</Button>}
+                  label={ts('demo.text.dataDisplay.list.notesMd')}
                 />
               </List>
             </PreviewGroup>
@@ -196,11 +196,11 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.virtualizedList.title')}
-          subtitle={t('demo.showcase.dataDisplay.virtualizedList.subtitle')}
+          title={ts('demo.showcase.dataDisplay.virtualizedList.title')}
+          subtitle={ts('demo.showcase.dataDisplay.virtualizedList.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <VirtualizedList
                 items={virtualItems()}
                 height={320}
@@ -210,31 +210,31 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
               />
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.dataDisplay.virtualizedList.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.dataDisplay.virtualizedList.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={props.sectionId() === 'data-filters'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.filterBar.title')}
-          subtitle={t('demo.showcase.dataDisplay.filterBar.subtitle')}
+          title={ts('demo.showcase.dataDisplay.filterBar.title')}
+          subtitle={ts('demo.showcase.dataDisplay.filterBar.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="scenarioShell">
                 <div class="scenarioHeader">
                   <div class="scenarioHeaderCopy">
                     <Text as="p" variant="overline" tone="primary">
-                      {t('demo.page.dataFilters.title')}
+                      {ts('demo.page.dataFilters.title')}
                     </Text>
                     <Heading level={3} variant="titleLg">
-                      {t('demo.page.dataFilters.description')}
+                      {ts('demo.page.dataFilters.description')}
                     </Heading>
                   </div>
                   <div class="scenarioMetricRow">
                     <div class="scenarioMetric">
                       <Text as="span" variant="overline" tone="tertiary">
-                        {t('demo.text.dataDisplay.filterBar.activeFilters')}
+                        {ts('demo.text.dataDisplay.filterBar.activeFilters')}
                       </Text>
                       <Text as="span" variant="labelLg">
                         {filtersValue().length}
@@ -242,15 +242,15 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                     </div>
                     <div class="scenarioMetric">
                       <Text as="span" variant="overline" tone="tertiary">
-                        {t('demo.text.dataDisplay.filterBar.query')}
+                        {ts('demo.text.dataDisplay.filterBar.query')}
                       </Text>
                       <Text as="span" variant="labelLg">
-                        {filtersQuery() || t('demo.text.dataDisplay.filterBar.none')}
+                        {filtersQuery() || ts('demo.text.dataDisplay.filterBar.none')}
                       </Text>
                     </div>
                     <div class="scenarioMetric">
                       <Text as="span" variant="overline" tone="tertiary">
-                        {t('demo.page.dataTables.title')}
+                        {ts('demo.page.dataTables.title')}
                       </Text>
                       <Text as="span" variant="labelLg">
                         {filteredReviewQueueItems().length}
@@ -282,58 +282,60 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
               </div>
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.dataDisplay.filterBar.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.dataDisplay.filterBar.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={props.sectionId() === 'data-timeline'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.timeline.title')}
-          subtitle={t('demo.showcase.dataDisplay.timeline.subtitle')}
+          title={ts('demo.showcase.dataDisplay.timeline.title')}
+          subtitle={ts('demo.showcase.dataDisplay.timeline.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Timeline items={timelineItems()} />
             </PreviewGroup>
           </PreviewPanel>
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.statusTimeline.title')}
-          subtitle={t('demo.showcase.dataDisplay.statusTimeline.subtitle')}
+          title={ts('demo.showcase.dataDisplay.statusTimeline.title')}
+          subtitle={ts('demo.showcase.dataDisplay.statusTimeline.subtitle')}
         >
           <PreviewPanel>
             <PreviewGroup title="Example">
               <div class="recronDemoMedium">
                 <StatusTimeline
-                  emptyMessage={t('demo.text.dataDisplay.statusTimeline.emptyMessage')}
+                  emptyMessage={ts('demo.text.dataDisplay.statusTimeline.emptyMessage')}
                   items={[
                     {
                       key: 'timeline-1',
                       statusTone: 'success',
-                      content: <Text as="p">{t('demo.text.dataDisplay.statusTimeline.item.done')}</Text>,
+                      content: <Text as="p">{ts('demo.text.dataDisplay.statusTimeline.item.done')}</Text>,
                     },
                     {
                       key: 'timeline-2',
                       statusTone: 'default',
-                      content: <Text as="p">{t('demo.text.dataDisplay.statusTimeline.item.inProgress')}</Text>,
+                      content: <Text as="p">{ts('demo.text.dataDisplay.statusTimeline.item.inProgress')}</Text>,
                     },
                     {
                       key: 'timeline-3',
                       statusTone: 'muted',
-                      content: <Text as="p">{t('demo.text.dataDisplay.statusTimeline.item.todo')}</Text>,
+                      content: <Text as="p">{ts('demo.text.dataDisplay.statusTimeline.item.todo')}</Text>,
                     },
                   ]}
-                  action={<Button size="sm" variant="ghost" label={t('demo.text.dataDisplay.statusTimeline.action')} />}
+                  action={
+                    <Button size="sm" variant="ghost" label={ts('demo.text.dataDisplay.statusTimeline.action')} />
+                  }
                 />
               </div>
             </PreviewGroup>
           </PreviewPanel>
         </ShowcaseSection>
 
-        <ShowcaseSection title="TimelineCard" subtitle={t('demo.showcase.dataDisplay.timelineCardComposite.subtitle')}>
+        <ShowcaseSection title="TimelineCard" subtitle={ts('demo.showcase.dataDisplay.timelineCardComposite.subtitle')}>
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="recronDemoMedium">
                 <TimelineCard
                   value={timelineCardValue()}
@@ -344,7 +346,7 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      label={t('demo.text.dataDisplay.timelineCard.label.calendarAction')}
+                      label={ts('demo.text.dataDisplay.timelineCard.label.calendarAction')}
                     />
                   }
                   onSave={handleTimelineCardSave}
@@ -356,14 +358,14 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.timelineCardComposite.title')}
-          subtitle={t('demo.showcase.dataDisplay.timelineCardComposite.subtitle')}
+          title={ts('demo.showcase.dataDisplay.timelineCardComposite.title')}
+          subtitle={ts('demo.showcase.dataDisplay.timelineCardComposite.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="timelineCompositeDemo">
                 <StatusTimeline
-                  emptyMessage={t('demo.text.dataDisplay.statusTimeline.emptyMessage')}
+                  emptyMessage={ts('demo.text.dataDisplay.statusTimeline.emptyMessage')}
                   items={[
                     {
                       key: 'composite-session-1',
@@ -378,7 +380,7 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                             <Button
                               size="sm"
                               variant="ghost"
-                              label={t('demo.text.dataDisplay.timelineCard.label.calendarAction')}
+                              label={ts('demo.text.dataDisplay.timelineCard.label.calendarAction')}
                             />
                           }
                           onSave={handleTimelineCardSave}
@@ -413,7 +415,7 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                             <Button
                               size="sm"
                               variant="ghost"
-                              label={t('demo.text.dataDisplay.timelineCard.label.calendarAction')}
+                              label={ts('demo.text.dataDisplay.timelineCard.label.calendarAction')}
                             />
                           }
                           onSave={handleTimelineCardCompletedSave}
@@ -426,7 +428,7 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      label={t('demo.text.dataDisplay.timelineCard.label.addAction')}
+                      label={ts('demo.text.dataDisplay.timelineCard.label.addAction')}
                       onClick={() => setTimelineCardAddOpen(true)}
                     />
                   }
@@ -445,7 +447,7 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
                   }}
                   labels={{
                     ...timelineCardLabels(),
-                    editDialogLabel: t('demo.text.dataDisplay.timelineCard.label.addDialog'),
+                    editDialogLabel: ts('demo.text.dataDisplay.timelineCard.label.addDialog'),
                   }}
                   categoryOptions={timelineCardCategoryOptions()}
                   statusOptions={timelineCardStatusOptions()}
@@ -460,11 +462,11 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
 
       <Show when={props.sectionId() === 'data-tree'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.treeView.title')}
-          subtitle={t('demo.showcase.dataDisplay.treeView.subtitle')}
+          title={ts('demo.showcase.dataDisplay.treeView.title')}
+          subtitle={ts('demo.showcase.dataDisplay.treeView.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <TreeView
                 nodes={createTreeData()}
                 defaultExpanded={['src']}
@@ -480,17 +482,17 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {t('demo.text.dataDisplay.tree.selected')}:{' '}
+            {ts('demo.text.dataDisplay.tree.selected')}:{' '}
             <CodeText as="span" class="codeInline">
-              {selectedNode() || t('demo.text.dataDisplay.tree.none')}
+              {selectedNode() || ts('demo.text.dataDisplay.tree.none')}
             </CodeText>{' '}
-            | {t('demo.text.dataDisplay.tree.checked')}:{' '}
+            | {ts('demo.text.dataDisplay.tree.checked')}:{' '}
             <CodeText as="span" class="codeInline">
               {String(checkedTreeNodes().length)}
             </CodeText>{' '}
-            | {t('demo.text.dataDisplay.tree.lastMove')}:{' '}
+            | {ts('demo.text.dataDisplay.tree.lastMove')}:{' '}
             <CodeText as="span" class="codeInline">
-              {lastMove() || t('demo.text.dataDisplay.tree.none')}
+              {lastMove() || ts('demo.text.dataDisplay.tree.none')}
             </CodeText>
           </ShowcaseMeta>
         </ShowcaseSection>
@@ -498,13 +500,13 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
 
       <Show when={props.sectionId() === 'data-media'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.avatarAndAvatarGroup.title')}
-          subtitle={t('demo.showcase.dataDisplay.avatarAndAvatarGroup.subtitle')}
+          title={ts('demo.showcase.dataDisplay.avatarAndAvatarGroup.title')}
+          subtitle={ts('demo.showcase.dataDisplay.avatarAndAvatarGroup.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="row">
-                <Avatar src="https://i.pravatar.cc/150?u=a" alt={t('demo.text.dataDisplay.avatar.userPhotoAlt')} />
+                <Avatar src="https://i.pravatar.cc/150?u=a" alt={ts('demo.text.dataDisplay.avatar.userPhotoAlt')} />
                 <Avatar name="Jan Krajewski" />
                 <Avatar />
               </div>
@@ -526,52 +528,52 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.carousel.title')}
-          subtitle={t('demo.showcase.dataDisplay.carousel.subtitle')}
+          title={ts('demo.showcase.dataDisplay.carousel.title')}
+          subtitle={ts('demo.showcase.dataDisplay.carousel.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Carousel>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.slide1')}</div>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.slide2')}</div>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.slide3')}</div>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.slide4')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.slide1')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.slide2')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.slide3')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.slide4')}</div>
               </Carousel>
             </PreviewGroup>
           </PreviewPanel>
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.carouselAutoPlayAndDots.title')}
-          subtitle={t('demo.showcase.dataDisplay.carouselAutoPlayAndDots.subtitle')}
+          title={ts('demo.showcase.dataDisplay.carouselAutoPlayAndDots.title')}
+          subtitle={ts('demo.showcase.dataDisplay.carouselAutoPlayAndDots.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Carousel autoPlay interval={4000}>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.autoSlide1')}</div>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.autoSlide2')}</div>
-                <div class="surfacePanel">{t('demo.text.dataDisplay.carousel.autoSlide3')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.autoSlide1')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.autoSlide2')}</div>
+                <div class="surfacePanel">{ts('demo.text.dataDisplay.carousel.autoSlide3')}</div>
               </Carousel>
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.dataDisplay.carousel.meta'), {
-              autoPlay: (
+            {tx('demo.text.dataDisplay.carousel.meta', {
+              autoPlay: () => (
                 <CodeText as="span" class="codeInline">
                   autoPlay
                 </CodeText>
               ),
-              interval: (
+              interval: () => (
                 <CodeText as="span" class="codeInline">
                   interval
                 </CodeText>
               ),
-              showDots: (
+              showDots: () => (
                 <CodeText as="span" class="codeInline">
                   showDots
                 </CodeText>
               ),
-              showArrows: (
+              showArrows: () => (
                 <CodeText as="span" class="codeInline">
                   showArrows
                 </CodeText>
@@ -581,25 +583,25 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.imageGrid.title')}
-          subtitle={t('demo.showcase.dataDisplay.imageGrid.subtitle')}
+          title={ts('demo.showcase.dataDisplay.imageGrid.title')}
+          subtitle={ts('demo.showcase.dataDisplay.imageGrid.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <ImageGrid images={galleryImages()} columns={3} hoverable rounded />
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.dataDisplay.imageGrid.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.dataDisplay.imageGrid.meta')}</ShowcaseMeta>
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.lightbox.title')}
-          subtitle={t('demo.showcase.dataDisplay.lightbox.subtitle')}
+          title={ts('demo.showcase.dataDisplay.lightbox.title')}
+          subtitle={ts('demo.showcase.dataDisplay.lightbox.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Button variant="ghost" onClick={() => setLightboxOpen(true)}>
-                {t('demo.text.dataDisplay.lightbox.openButton')}
+                {ts('demo.text.dataDisplay.lightbox.openButton')}
               </Button>
               <Lightbox images={lightboxImages()} open={lightboxOpen()} onClose={() => setLightboxOpen(false)} />
             </PreviewGroup>
@@ -607,55 +609,55 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.marquee.title')}
-          subtitle={t('demo.showcase.dataDisplay.marquee.subtitle')}
+          title={ts('demo.showcase.dataDisplay.marquee.title')}
+          subtitle={ts('demo.showcase.dataDisplay.marquee.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Marquee speed={20}>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagSolid')}
+                  {ts('demo.text.dataDisplay.marquee.tagSolid')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagTypeScript')}
+                  {ts('demo.text.dataDisplay.marquee.tagTypeScript')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagCssModules')}
+                  {ts('demo.text.dataDisplay.marquee.tagCssModules')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagVite')}
+                  {ts('demo.text.dataDisplay.marquee.tagVite')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagVelvetUi')}
+                  {ts('demo.text.dataDisplay.marquee.tagVelvetUi')}
                 </Text>
               </Marquee>
               <Marquee speed={25} direction="right">
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagEslint')}
+                  {ts('demo.text.dataDisplay.marquee.tagEslint')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagPrettier')}
+                  {ts('demo.text.dataDisplay.marquee.tagPrettier')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagVitest')}
+                  {ts('demo.text.dataDisplay.marquee.tagVitest')}
                 </Text>
                 <Text as="span" variant="labelMd" class="marqueeTag">
-                  {t('demo.text.dataDisplay.marquee.tagPostcss')}
+                  {ts('demo.text.dataDisplay.marquee.tagPostcss')}
                 </Text>
               </Marquee>
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.dataDisplay.marquee.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.dataDisplay.marquee.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={props.sectionId() === 'data-charts'}>
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.scoreRing.title')}
-          subtitle={t('demo.showcase.dataDisplay.scoreRing.subtitle')}
+          title={ts('demo.showcase.dataDisplay.scoreRing.title')}
+          subtitle={ts('demo.showcase.dataDisplay.scoreRing.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="row">
                 <ScoreRing score={92} />
                 <ScoreRing score={68} />
@@ -667,23 +669,23 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.radarChart.title')}
-          subtitle={t('demo.showcase.dataDisplay.radarChart.subtitle')}
+          title={ts('demo.showcase.dataDisplay.radarChart.title')}
+          subtitle={ts('demo.showcase.dataDisplay.radarChart.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <RadarChart
                 size={280}
                 axes={[
-                  { label: t('demo.text.dataDisplay.radar.performance'), key: 'perf' },
-                  { label: t('demo.text.dataDisplay.radar.accessibility'), key: 'a11y' },
-                  { label: t('demo.text.dataDisplay.radar.bestPractices'), key: 'bp' },
+                  { label: ts('demo.text.dataDisplay.radar.performance'), key: 'perf' },
+                  { label: ts('demo.text.dataDisplay.radar.accessibility'), key: 'a11y' },
+                  { label: ts('demo.text.dataDisplay.radar.bestPractices'), key: 'bp' },
                   { label: 'SEO', key: 'seo' },
                   { label: 'PWA', key: 'pwa' },
                 ]}
                 datasets={[
-                  { label: t('demo.text.dataDisplay.radar.desktop'), values: [92, 88, 95, 80, 60] },
-                  { label: t('demo.text.dataDisplay.radar.mobile'), values: [74, 85, 90, 75, 55] },
+                  { label: ts('demo.text.dataDisplay.radar.desktop'), values: [92, 88, 95, 80, 60] },
+                  { label: ts('demo.text.dataDisplay.radar.mobile'), values: [74, 85, 90, 75, 55] },
                 ]}
               />
             </PreviewGroup>
@@ -692,24 +694,24 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
 
         <ShowcaseSection
           title="ComparisonSelectionBar"
-          subtitle={t('demo.recron.showcase.comparisonSelectionBar.subtitle')}
+          subtitle={ts('demo.recron.showcase.comparisonSelectionBar.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="recronDemoWide recronDemoSurface">
                 <ComparisonSelectionBar
                   selectedCount={comparisonSelectionCount()}
                   compareDisabled={comparisonSelectionCount() < 2 || comparisonSelectionCount() > 5}
-                  onClear={() => addToast({ type: 'info', message: t('demo.toast.dataDisplay.selectionCleared') })}
+                  onClear={() => addToast({ type: 'info', message: ts('demo.toast.dataDisplay.selectionCleared') })}
                   onCompare={() => setComparisonOpen(true)}
                 />
                 <ComparisonInsightsDialog
                   open={comparisonOpen()}
-                  title={t('demo.recron.offer.comparison.dialog.title')}
-                  prompt={t('demo.recron.offer.comparison.dialog.prompt')}
+                  title={ts('demo.recron.offer.comparison.dialog.title')}
+                  prompt={ts('demo.recron.offer.comparison.dialog.prompt')}
                   isPending={comparisonPending()}
                   hasResult={comparisonReady()}
-                  selectionSummary={t('demo.recron.offer.comparison.dialog.selectionSummary')}
+                  selectionSummary={ts('demo.recron.offer.comparison.dialog.selectionSummary')}
                   axes={comparisonAxes}
                   datasets={comparisonDatasets}
                   columns={comparisonColumns}
@@ -723,11 +725,11 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
         </ShowcaseSection>
 
         <ShowcaseSection
-          title={t('demo.showcase.dataDisplay.tradingViewChart.title')}
-          subtitle={t('demo.showcase.dataDisplay.tradingViewChart.subtitle')}
+          title={ts('demo.showcase.dataDisplay.tradingViewChart.title')}
+          subtitle={ts('demo.showcase.dataDisplay.tradingViewChart.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <TradingViewChart symbol="XAUUSD" />
               <TradingViewChart symbol="XAUUSD custom feed" data={TRADING_VIEW_SAMPLE} height={420} />
               <TradingViewChart
@@ -758,13 +760,13 @@ const DataDisplayDemoBodies = (props: DataDisplayDemoBodiesProps) => {
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {renderRichText(t('demo.text.dataDisplay.trading.meta'), {
-              pollingFeed: (
+            {tx('demo.text.dataDisplay.trading.meta', {
+              pollingFeed: () => (
                 <CodeText as="span" class="codeInline">
                   useTradingViewPollingFeed
                 </CodeText>
               ),
-              wsFeed: (
+              wsFeed: () => (
                 <CodeText as="span" class="codeInline">
                   useTradingViewWsFeed
                 </CodeText>

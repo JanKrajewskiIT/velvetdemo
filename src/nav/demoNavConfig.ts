@@ -1,4 +1,4 @@
-import type { DemoI18nMessageKey } from '../i18n/messages';
+﻿import type { VelvetI18nKey } from '@jankrajewskiit/ui';
 
 export type SectionId =
   | 'overview'
@@ -54,11 +54,11 @@ export type SectionId =
 
 interface DemoNavItemConfig {
   id: SectionId;
-  labelKey: DemoI18nMessageKey;
+  labelKey: VelvetI18nKey;
 }
 
 interface DemoNavGroupConfig {
-  labelKey: DemoI18nMessageKey;
+  labelKey: VelvetI18nKey;
   items: DemoNavItemConfig[];
 }
 
@@ -155,7 +155,7 @@ export const NAV_GROUPS: DemoNavGroupConfig[] = [
   },
 ];
 
-export const PAGE_META_KEYS: Record<SectionId, { titleKey: DemoI18nMessageKey; descriptionKey: DemoI18nMessageKey }> = {
+export const PAGE_META_KEYS: Record<SectionId, { titleKey: VelvetI18nKey; descriptionKey: VelvetI18nKey }> = {
   overview: {
     titleKey: 'demo.page.overview.title',
     descriptionKey: 'demo.page.overview.description',
@@ -365,7 +365,7 @@ export const HEADER_SECTION_IDS: SectionId[] = [
   'feedback-alerts',
 ];
 
-export const OVERVIEW_TRACKS: { id: SectionId; groupKey: DemoI18nMessageKey }[] = [
+export const OVERVIEW_TRACKS: { id: SectionId; groupKey: VelvetI18nKey }[] = [
   { id: 'surfaces-main-layout', groupKey: 'demo.nav.surfaces' },
   { id: 'inputs-form-layout', groupKey: 'demo.nav.inputs' },
   { id: 'data-tables', groupKey: 'demo.nav.data' },

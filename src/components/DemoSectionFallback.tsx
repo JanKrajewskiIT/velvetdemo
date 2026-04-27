@@ -1,14 +1,12 @@
-import { Skeleton, Text } from '@jankrajewskiit/ui';
-
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-
+﻿import { Skeleton, Text } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 const DemoSectionFallback = () => {
-  const { t } = useDemoDictionary();
+  const { ts } = useI18n();
 
   return (
     <div class="demoSectionFallback">
       <Text as="p" variant="bodySm" tone="muted">
-        {t('demo.text.common.loadingSection')}
+        {ts('demo.text.common.loadingSection')}
       </Text>
       <Skeleton variant="text" width="90%" height={18} />
       <Skeleton variant="text" width="72%" height={14} />

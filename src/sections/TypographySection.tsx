@@ -1,88 +1,86 @@
-import { CodeText, Heading, LabelText, Text } from '@jankrajewskiit/ui';
+﻿import { CodeText, Heading, LabelText, Text } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { renderRichText } from '../i18n/renderRichText';
-
 const TypographySection = () => {
-  const { t } = useDemoDictionary();
-  const blockCodeTitle = () => t('demo.text.typography.blockCode.sectionTitle');
-  const blockCodeHelperText = () => t('demo.text.typography.blockCode.helperText');
+  const { ts, tx } = useI18n();
+  const blockCodeTitle = () => ts('demo.text.typography.blockCode.sectionTitle');
+  const blockCodeHelperText = () => ts('demo.text.typography.blockCode.helperText');
 
   return (
     <div>
       <ShowcaseSection
-        title={t('demo.showcase.typography.headingVariants.title')}
-        subtitle={t('demo.showcase.typography.headingVariants.subtitle')}
+        title={ts('demo.showcase.typography.headingVariants.title')}
+        subtitle={ts('demo.showcase.typography.headingVariants.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.typography.scale.title')}>
-            <Heading variant="displayLg">{t('demo.text.typography.scale.displayLarge')}</Heading>
-            <Heading variant="displayMd">{t('demo.text.typography.scale.displayMedium')}</Heading>
+          <PreviewGroup title={ts('demo.text.typography.scale.title')}>
+            <Heading variant="displayLg">{ts('demo.text.typography.scale.displayLarge')}</Heading>
+            <Heading variant="displayMd">{ts('demo.text.typography.scale.displayMedium')}</Heading>
             <Heading level={1} variant="h1">
-              {t('demo.text.typography.scale.h1')}
+              {ts('demo.text.typography.scale.h1')}
             </Heading>
             <Heading level={2} variant="h2">
-              {t('demo.text.typography.scale.h2')}
+              {ts('demo.text.typography.scale.h2')}
             </Heading>
             <Heading level={3} variant="h3">
-              {t('demo.text.typography.scale.h3')}
+              {ts('demo.text.typography.scale.h3')}
             </Heading>
             <Heading level={4} variant="titleLg">
-              {t('demo.text.typography.scale.titleLarge')}
+              {ts('demo.text.typography.scale.titleLarge')}
             </Heading>
             <Heading level={5} variant="titleMd">
-              {t('demo.text.typography.scale.titleMedium')}
+              {ts('demo.text.typography.scale.titleMedium')}
             </Heading>
           </PreviewGroup>
         </PreviewPanel>
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.typography.textVariants.title')}
-        subtitle={t('demo.showcase.typography.textVariants.subtitle')}
+        title={ts('demo.showcase.typography.textVariants.title')}
+        subtitle={ts('demo.showcase.typography.textVariants.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.typography.roles.title')}>
-            <Text variant="bodyLg">{t('demo.text.typography.roles.bodyLarge')}</Text>
-            <Text variant="bodyMd">{t('demo.text.typography.roles.bodyMedium')}</Text>
-            <Text variant="bodySm">{t('demo.text.typography.roles.bodySmall')}</Text>
-            <Text variant="labelLg">{t('demo.text.typography.roles.labelLarge')}</Text>
-            <Text variant="labelMd">{t('demo.text.typography.roles.labelMedium')}</Text>
-            <Text variant="caption">{t('demo.text.typography.roles.caption')}</Text>
-            <Text variant="overline">{t('demo.text.typography.roles.overline')}</Text>
+          <PreviewGroup title={ts('demo.text.typography.roles.title')}>
+            <Text variant="bodyLg">{ts('demo.text.typography.roles.bodyLarge')}</Text>
+            <Text variant="bodyMd">{ts('demo.text.typography.roles.bodyMedium')}</Text>
+            <Text variant="bodySm">{ts('demo.text.typography.roles.bodySmall')}</Text>
+            <Text variant="labelLg">{ts('demo.text.typography.roles.labelLarge')}</Text>
+            <Text variant="labelMd">{ts('demo.text.typography.roles.labelMedium')}</Text>
+            <Text variant="caption">{ts('demo.text.typography.roles.caption')}</Text>
+            <Text variant="overline">{ts('demo.text.typography.roles.overline')}</Text>
           </PreviewGroup>
-          <PreviewGroup title={t('demo.text.typography.tones.title')}>
-            <Text tone="default">{t('demo.text.typography.tones.default')}</Text>
-            <Text tone="secondary">{t('demo.text.typography.tones.secondary')}</Text>
-            <Text tone="muted">{t('demo.text.typography.tones.muted')}</Text>
-            <Text tone="tertiary">{t('demo.text.typography.tones.tertiary')}</Text>
-            <Text tone="primary">{t('demo.text.typography.tones.primary')}</Text>
+          <PreviewGroup title={ts('demo.text.typography.tones.title')}>
+            <Text tone="default">{ts('demo.text.typography.tones.default')}</Text>
+            <Text tone="secondary">{ts('demo.text.typography.tones.secondary')}</Text>
+            <Text tone="muted">{ts('demo.text.typography.tones.muted')}</Text>
+            <Text tone="tertiary">{ts('demo.text.typography.tones.tertiary')}</Text>
+            <Text tone="primary">{ts('demo.text.typography.tones.primary')}</Text>
           </PreviewGroup>
           <PreviewGroup title="LabelText">
-            <LabelText label={t('demo.text.typography.roles.labelLarge')} />
+            <LabelText label={ts('demo.text.typography.roles.labelLarge')} />
             <LabelText
-              label={t('demo.text.typography.scale.titleMedium')}
-              description={t('demo.text.typography.tones.muted')}
+              label={ts('demo.text.typography.scale.titleMedium')}
+              description={ts('demo.text.typography.tones.muted')}
             />
           </PreviewGroup>
         </PreviewPanel>
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.typography.codeTextVariants.title')}
-        subtitle={t('demo.showcase.typography.codeTextVariants.subtitle')}
+        title={ts('demo.showcase.typography.codeTextVariants.title')}
+        subtitle={ts('demo.showcase.typography.codeTextVariants.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.typography.inlineCode.title')}>
+          <PreviewGroup title={ts('demo.text.typography.inlineCode.title')}>
             <Text>
-              {renderRichText(t('demo.text.typography.inlineCode.message'), {
-                textCode: (
+              {tx('demo.text.typography.inlineCode.message', {
+                textCode: () => (
                   <CodeText as="span" class="codeInline">
                     &lt;Text variant="bodySm" /&gt;
                   </CodeText>
                 ),
-                headingCode: (
+                headingCode: () => (
                   <CodeText as="span" class="codeInline">
                     &lt;Heading variant="h2" /&gt;
                   </CodeText>
@@ -90,7 +88,7 @@ const TypographySection = () => {
               })}
             </Text>
           </PreviewGroup>
-          <PreviewGroup title={t('demo.text.typography.blockCode.title')}>
+          <PreviewGroup title={ts('demo.text.typography.blockCode.title')}>
             <CodeText as="pre" variant="block" size="md" class="installBlock">
               {`import { Heading, Text, CodeText } from '@jankrajewskiit/ui';
 
@@ -99,7 +97,7 @@ const TypographySection = () => {
             </CodeText>
           </PreviewGroup>
         </PreviewPanel>
-        <ShowcaseMeta>{t('demo.text.typography.meta')}</ShowcaseMeta>
+        <ShowcaseMeta>{ts('demo.text.typography.meta')}</ShowcaseMeta>
       </ShowcaseSection>
     </div>
   );

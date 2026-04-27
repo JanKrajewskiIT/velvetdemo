@@ -645,36 +645,37 @@ export const en = defineDictionary({
     'Slightly different usage: includes counts and variant-driven filter semantics.',
   'demo.text.dataDisplay.codeBlock.tsxSnippet.title': 'TSX snippet',
   'demo.text.dataDisplay.codeBlock.cliSnippet.title': 'CLI snippet',
-  'demo.text.overview.coreIdea.message': 'A reusable SolidJS UI component library published as {packageName}.',
+  'demo.text.overview.coreIdea.message': 'A reusable SolidJS UI component library published as <packageName/>.',
   'demo.text.typography.inlineCode.message':
-    'Use {textCode} for compact descriptions and {headingCode} for section headers.',
+    'Use <textCode/> for compact descriptions and <headingCode/> for section headers.',
   'demo.text.overlays.dialog.meta':
-    'This modal is built on the {dialogElement} element and handles focus trapping plus Escape to close.',
+    'This modal is built on the <dialogElement/> element and handles focus trapping plus Escape to close.',
   'demo.text.layout.mainLayout.privacy': 'Privacy',
   'demo.text.layout.mainLayout.builtWithVelvetUi': 'Built with VelvetUi',
   'demo.text.layout.mainLayout.dashboard': 'Dashboard',
   'demo.text.layout.mainLayout.fixedHeightContent':
     'Fixed-height card with scrollable page content and footer pinned to the bottom.',
-  'demo.text.layout.mainLayout.meta': 'Use {navbar} and {footer} slots in {mainLayout} to compose the full shell.',
-  'demo.text.layout.grid.meta': 'Set fixed columns with {columns} or use responsive auto-fit with {minColumnWidth}.',
+  'demo.text.layout.mainLayout.meta': 'Use <navbar/> and <footer/> slots in <mainLayout/> to compose the full shell.',
+  'demo.text.layout.grid.meta': 'Set fixed columns with <columns/> or use responsive auto-fit with <minColumnWidth/>.',
   'demo.text.layout.stack.meta':
-    'Use {direction}, {gap}, {align}, {justify}, and {wrap} to compose spacing layouts quickly.',
+    'Use <direction/>, <gap/>, <align/>, <justify/>, and <wrap/> to compose spacing layouts quickly.',
   'demo.text.layout.resizable.meta':
-    'Supports {horizontal} and {vertical} directions with a configurable minimum size.',
-  'demo.text.layout.card.meta': 'Use {card} as a minimal wrapper for grouped content.',
+    'Supports <horizontal/> and <vertical/> directions with a configurable minimum size.',
+  'demo.text.layout.card.meta': 'Use <card/> as a minimal wrapper for grouped content.',
   'demo.text.layout.surface.meta':
-    'Use {surface} as the primitive shell for neutral bordered panels and overlay content.',
-  'demo.text.layout.dataCard.meta': 'All variants support {header}, content, {footer}, and optional {hoverable}.',
+    'Use <surface/> as the primitive shell for neutral bordered panels and overlay content.',
+  'demo.text.layout.dataCard.meta': 'All variants support <header/>, content, <footer/>, and optional <hoverable/>.',
   'demo.text.layout.flipCard.clickToFlip': 'Click to flip',
-  'demo.text.layout.flipCard.meta': '{flipCard} reveals back content on click or hover.',
+  'demo.text.layout.flipCard.meta': '<flipCard/> reveals back content on click or hover.',
   'demo.text.layout.sectionCard.meta': 'combines a card with built-in collapsible behavior.',
   'demo.text.composites.scheduler.meta':
-    'Navigate months, select a day, add events with {addEvent}, double-click a day to create one faster, edit entries inline, drag {move} or {resizeEnd} onto a calendar day, use {esc} to cancel forms, and {ctrlEnter} to save.',
-  'demo.text.inputs.completeForm.meta': 'Combine {formLayout}, {formGrid}, {formField}, and {actionRow} in one form.',
+    'Navigate months, select a day, add events with <addEvent/>, double-click a day to create one faster, edit entries inline, drag <move/> or <resizeEnd/> onto a calendar day, use <esc/> to cancel forms, and <ctrlEnter/> to save.',
+  'demo.text.inputs.completeForm.meta':
+    'Combine <formLayout/>, <formGrid/>, <formField/>, and <actionRow/> in one form.',
   'demo.text.inputs.actionRow.use': 'Use',
-  'demo.text.feedback.circular.meta': 'Progress is driven by {value}.',
+  'demo.text.feedback.circular.meta': 'Progress is driven by <value/>.',
   'demo.text.feedback.toast.meta':
-    'Wrap your app in {toastProvider} and render {toastViewport} to show notifications anywhere.',
+    'Wrap your app in <toastProvider/> and render <toastViewport/> to show notifications anywhere.',
   'demo.text.developer.categories.inputs':
     'inputs/ (11) - Button, IconButton, Checkbox, Input, Radio, Switch, Autocomplete, ColorPicker, TagInput, DropdownButton, DropdownMenu',
   'demo.text.developer.categories.forms':
@@ -708,7 +709,7 @@ export const en = defineDictionary({
   'demo.text.composites.wizard.fullNamePlaceholder': 'Jan Kowalski',
   'demo.text.composites.wizard.bio': 'Bio',
   'demo.text.composites.wizard.bioPlaceholder': 'Short bio...',
-  'demo.text.composites.wizard.confirmMessage': 'Review your information and click {finish} to complete registration.',
+  'demo.text.composites.wizard.confirmMessage': 'Review your information and click <finish/> to complete registration.',
   'demo.text.composites.wizard.finish': 'Finish',
   'demo.text.composites.wizard.doneToast': 'Registration complete!',
   'demo.text.composites.ats.errorEmptyInput': 'Paste a resume excerpt before running the ATS analysis.',
@@ -928,7 +929,7 @@ export const en = defineDictionary({
   'demo.text.dataDisplay.carousel.autoSlide2': 'Auto Slide2',
   'demo.text.dataDisplay.carousel.autoSlide3': 'Auto Slide3',
   'demo.text.dataDisplay.carousel.meta':
-    'Use {autoPlay} with {interval} (ms). The carousel pauses on hover, and {showDots} plus {showArrows} stay configurable.',
+    'Use <autoPlay/> with <interval/> (ms). The carousel pauses on hover, and <showDots/> plus <showArrows/> stay configurable.',
   'demo.text.dataDisplay.carousel.slide1': 'Slide1',
   'demo.text.dataDisplay.carousel.slide2': 'Slide2',
   'demo.text.dataDisplay.carousel.slide3': 'Slide3',
@@ -1021,7 +1022,7 @@ export const en = defineDictionary({
   'demo.text.dataDisplay.timelineCard.label.addDialog': 'Add timeline session',
   'demo.text.dataDisplay.timelineCard.addedToast': 'Timeline session added in demo state.',
   'demo.text.dataDisplay.timelineCard.deletedToast': 'Timeline session deleted in demo state.',
-  'demo.text.dataDisplay.trading.meta': 'Live market data can be wired with {pollingFeed} and {wsFeed}.',
+  'demo.text.dataDisplay.trading.meta': 'Live market data can be wired with <pollingFeed/> and <wsFeed/>.',
   'demo.text.dataDisplay.tree.checked': 'Checked',
   'demo.text.dataDisplay.tree.lastMove': 'Last Move',
   'demo.text.dataDisplay.tree.movedToastMessage': 'Moved {draggedId} to {targetId}',
@@ -1307,9 +1308,10 @@ export const en = defineDictionary({
   'demo.text.inputs.tagInput.tags': 'Tags',
   'demo.text.inputs.textArea.description': 'Text Area description',
   'demo.text.inputs.textArea.enterLongerDescription': 'Enter a detailed description',
-  'demo.text.inputs.themeToggle.metaWithHook': 'Wraps {useTheme} and lets people switch between light and dark themes.',
+  'demo.text.inputs.themeToggle.metaWithHook':
+    'Wraps <useTheme/> and lets people switch between light and dark themes.',
   'demo.text.navigation.backToTop.meta':
-    'The button appears after scrolling the {main} area and jumps back to the top.',
+    'The button appears after scrolling the <main/> area and jumps back to the top.',
   'demo.text.navigation.bottomNav.active': 'Active',
   'demo.text.navigation.bottomNav.calendar': 'Calendar',
   'demo.text.navigation.bottomNav.home': 'Home',
@@ -1439,7 +1441,7 @@ export const en = defineDictionary({
   'demo.text.tables.dataGrid.meta': 'DataGrid saves and restores layout state. Selected rows: {count}.',
   'demo.text.tables.dataGrid.selectedRows': 'Selected rows',
   'demo.text.tables.dataGrid.resetSavedGrid': 'Reset Saved Grid',
-  'demo.text.tables.dataTable.meta': 'DataTable supports sorting, filtering, and pagination with {pageSize}.',
+  'demo.text.tables.dataTable.meta': 'DataTable supports sorting, filtering, and pagination with <pageSize/>.',
   'demo.text.tables.queryBuilder.clearConditions': 'Clear Conditions',
   'demo.text.tables.queryBuilder.description': 'Query Builder description',
   'demo.text.tables.simple.meta': 'Basic table layout.',
@@ -2082,7 +2084,7 @@ export const pl: DemoDictionary = {
   'demo.text.overview.stats.toolingPresets': 'Presety narzędzi',
   'demo.text.overview.coreIdea.title': 'Główna idea',
   'demo.text.overview.coreIdea.message':
-    'VelvetUI to biblioteka komponentów UI dla SolidJS, publikowana jako {packageName}.',
+    'VelvetUI to biblioteka komponentów UI dla SolidJS, publikowana jako <packageName/>.',
   'demo.text.overview.highlights.itemPeers': 'Działa z SolidJS i @solidjs/router jako peer dependencies',
   'demo.text.overview.highlights.itemThemes': 'Wspiera tryb jasny, ciemny i systemowy',
   'demo.text.overview.highlights.itemStyles': 'Eksportuje style komponentów jako @jankrajewskiit/ui/styles',
@@ -2115,7 +2117,8 @@ export const pl: DemoDictionary = {
   'demo.text.typography.tones.tertiary': 'Ton tertiary',
   'demo.text.typography.tones.primary': 'Ton primary',
   'demo.text.typography.inlineCode.title': 'Kod inline',
-  'demo.text.typography.inlineCode.message': 'Użyj {textCode} do zwięzłych opisów i {headingCode} do nagłówków sekcji.',
+  'demo.text.typography.inlineCode.message':
+    'Użyj <textCode/> do zwięzłych opisów i <headingCode/> do nagłówków sekcji.',
   'demo.text.typography.blockCode.title': 'Kod blokowy',
   'demo.text.typography.blockCode.sectionTitle': 'Tytuł sekcji',
   'demo.text.typography.blockCode.helperText': 'Tekst pomocniczy',
@@ -2160,35 +2163,35 @@ export const pl: DemoDictionary = {
   'demo.text.dataDisplay.codeBlock.tsxSnippet.title': 'Snippet TSX',
   'demo.text.dataDisplay.codeBlock.cliSnippet.title': 'Snippet CLI',
   'demo.text.overlays.dialog.meta':
-    'Ten modal jest zbudowany na elemencie {dialogElement} i obsługuje focus trap oraz zamykanie klawiszem Escape.',
+    'Ten modal jest zbudowany na elemencie <dialogElement/> i obsługuje focus trap oraz zamykanie klawiszem Escape.',
   'demo.text.layout.mainLayout.privacy': 'Prywatność',
   'demo.text.layout.mainLayout.builtWithVelvetUi': 'Zbudowane z VelvetUi',
   'demo.text.layout.mainLayout.dashboard': 'Panel główny',
   'demo.text.layout.mainLayout.fixedHeightContent':
     'Karta o stałej wysokości ze scrollowaną treścią strony i stopką przypiętą do dołu.',
-  'demo.text.layout.mainLayout.meta': 'Użyj slotów {navbar} i {footer} w {mainLayout}, aby zbudować pełny shell.',
+  'demo.text.layout.mainLayout.meta': 'Użyj slotów <navbar/> i <footer/> w <mainLayout/>, aby zbudować pełny shell.',
   'demo.text.layout.grid.meta':
-    'Ustaw stałe kolumny przez {columns} albo użyj responsywnego auto-fit z {minColumnWidth}.',
+    'Ustaw stałe kolumny przez <columns/> albo użyj responsywnego auto-fit z <minColumnWidth/>.',
   'demo.text.layout.stack.meta':
-    'Użyj {direction}, {gap}, {align}, {justify} i {wrap}, aby szybko budować układ odstępów.',
+    'Użyj <direction/>, <gap/>, <align/>, <justify/> i <wrap/>, aby szybko budować układ odstępów.',
   'demo.text.layout.resizable.meta':
-    'Obsługuje kierunki {horizontal} i {vertical} z konfigurowalnym minimalnym rozmiarem.',
-  'demo.text.layout.card.meta': 'Użyj {card} jako minimalnego wrappera dla grupowanej treści.',
+    'Obsługuje kierunki <horizontal/> i <vertical/> z konfigurowalnym minimalnym rozmiarem.',
+  'demo.text.layout.card.meta': 'Użyj <card/> jako minimalnego wrappera dla grupowanej treści.',
   'demo.text.layout.surface.meta':
-    'Uzyj {surface} jako prymitywnego shellu dla neutralnych paneli z obramowaniem i tresci overlayowych.',
+    'Uzyj <surface/> jako prymitywnego shellu dla neutralnych paneli z obramowaniem i tresci overlayowych.',
   'demo.text.layout.dataCard.meta':
-    'Wszystkie warianty obsługują {header}, treść, {footer} oraz opcjonalne {hoverable}.',
+    'Wszystkie warianty obsługują <header/>, treść, <footer/> oraz opcjonalne <hoverable/>.',
   'demo.text.layout.flipCard.clickToFlip': 'Kliknij, aby obrócić',
-  'demo.text.layout.flipCard.meta': '{flipCard} pokazuje tylną stronę po kliknięciu lub najechaniu.',
+  'demo.text.layout.flipCard.meta': '<flipCard/> pokazuje tylną stronę po kliknięciu lub najechaniu.',
   'demo.text.layout.sectionCard.meta': 'łączy kartę z wbudowanym zwijaniem.',
   'demo.text.composites.scheduler.meta':
-    'Nawiguj po miesiącach, wybierz dzień, dodaj wydarzenia przez {addEvent}, kliknij dzień dwa razy, aby utworzyć wydarzenie szybciej, edytuj wpisy inline, przeciągnij {move} lub {resizeEnd} na dzień kalendarza, użyj {esc} do anulowania formularzy oraz {ctrlEnter} do zapisania.',
+    'Nawiguj po miesiącach, wybierz dzień, dodaj wydarzenia przez <addEvent/>, kliknij dzień dwa razy, aby utworzyć wydarzenie szybciej, edytuj wpisy inline, przeciągnij <move/> lub <resizeEnd/> na dzień kalendarza, użyj <esc/> do anulowania formularzy oraz <ctrlEnter/> do zapisania.',
   'demo.text.inputs.completeForm.meta':
-    'Połącz {formLayout}, {formGrid}, {formField} i {actionRow} w jednym formularzu.',
+    'Połącz <formLayout/>, <formGrid/>, <formField/> i <actionRow/> w jednym formularzu.',
   'demo.text.inputs.actionRow.use': 'Użyj',
-  'demo.text.feedback.circular.meta': 'Postęp jest sterowany przez {value}.',
+  'demo.text.feedback.circular.meta': 'Postęp jest sterowany przez <value/>.',
   'demo.text.feedback.toast.meta':
-    'Owiń aplikację w {toastProvider} i wyrenderuj {toastViewport}, aby wyświetlać powiadomienia w dowolnym miejscu.',
+    'Owiń aplikację w <toastProvider/> i wyrenderuj <toastViewport/>, aby wyświetlać powiadomienia w dowolnym miejscu.',
   'demo.text.developer.categories.inputs':
     'inputs/ (11) - Button, IconButton, Checkbox, Input, Radio, Switch, Autocomplete, ColorPicker, TagInput, DropdownButton, DropdownMenu',
   'demo.text.developer.categories.forms':
@@ -2336,7 +2339,7 @@ export const pl: DemoDictionary = {
   'demo.text.composites.wizard.bio': 'Bio',
   'demo.text.composites.wizard.bioPlaceholder': 'Krótki opis...',
   'demo.text.composites.wizard.confirmStep': 'Potwierdzenie',
-  'demo.text.composites.wizard.confirmMessage': 'Sprawdź swoje dane i kliknij {finish}, aby zakończyć rejestrację.',
+  'demo.text.composites.wizard.confirmMessage': 'Sprawdź swoje dane i kliknij <finish/>, aby zakończyć rejestrację.',
   'demo.text.composites.wizard.doneToast': 'Rejestracja zakończona!',
   'demo.text.composites.ats.errorEmptyInput': 'Wklej fragment CV przed uruchomieniem analizy ATS.',
   'demo.text.composites.ats.category.keywordMatch': 'Dopasowanie słów kluczowych',
@@ -2373,7 +2376,7 @@ export const pl: DemoDictionary = {
   'demo.text.dataDisplay.carousel.autoSlide2': 'Automatyczny slajd 2',
   'demo.text.dataDisplay.carousel.autoSlide3': 'Automatyczny slajd 3',
   'demo.text.dataDisplay.carousel.meta':
-    'Użyj {autoPlay} z {interval} (ms). Karuzela zatrzymuje się po najechaniu, a {showDots} i {showArrows} pozostają konfigurowalne.',
+    'Użyj <autoPlay/> z <interval/> (ms). Karuzela zatrzymuje się po najechaniu, a <showDots/> i <showArrows/> pozostają konfigurowalne.',
   'demo.text.dataDisplay.carousel.slide1': 'Slajd 1',
   'demo.text.dataDisplay.carousel.slide2': 'Slajd 2',
   'demo.text.dataDisplay.carousel.slide3': 'Slajd 3',
@@ -2478,7 +2481,7 @@ export const pl: DemoDictionary = {
   'demo.text.dataDisplay.timelineCard.label.addDialog': 'Dodaj sesje osi czasu',
   'demo.text.dataDisplay.timelineCard.addedToast': 'Sesja osi czasu dodana w stanie demo.',
   'demo.text.dataDisplay.timelineCard.deletedToast': 'Sesja osi czasu usunieta w stanie demo.',
-  'demo.text.dataDisplay.trading.meta': 'Dane rynkowe na żywo możesz podłączyć przez {pollingFeed} oraz {wsFeed}.',
+  'demo.text.dataDisplay.trading.meta': 'Dane rynkowe na żywo możesz podłączyć przez <pollingFeed/> oraz <wsFeed/>.',
   'demo.text.dataDisplay.tree.checked': 'Zaznaczone',
   'demo.text.dataDisplay.tree.lastMove': 'Ostatni ruch',
   'demo.text.dataDisplay.tree.movedToastMessage': 'Przeniesiono {draggedId} do {targetId}',
@@ -2774,7 +2777,7 @@ export const pl: DemoDictionary = {
   'demo.text.inputs.textArea.description': 'Opis pola tekstowego',
   'demo.text.inputs.textArea.enterLongerDescription': 'Wpisz dłuższy opis',
   'demo.text.inputs.themeToggle.metaWithHook':
-    'Opakowuje {useTheme} i pozwala przełączać się między jasnym oraz ciemnym motywem.',
+    'Opakowuje <useTheme/> i pozwala przełączać się między jasnym oraz ciemnym motywem.',
   'demo.text.layout.accordion.disabledBody': 'Treść wyłączonego elementu',
   'demo.text.layout.accordion.disabledItem': 'Wyłączony element',
   'demo.text.layout.accordion.howInstall': 'Jak zainstalować',
@@ -2827,7 +2830,7 @@ export const pl: DemoDictionary = {
   'demo.text.layout.stack.thirdItem': 'Trzeci element',
   'demo.text.layout.stack.wrapEnabled': 'Zawijanie włączone',
   'demo.text.navigation.backToTop.meta':
-    'Przycisk pojawia się po przewinięciu obszaru {main} i pozwala szybko wrócić na górę.',
+    'Przycisk pojawia się po przewinięciu obszaru <main/> i pozwala szybko wrócić na górę.',
   'demo.text.navigation.backToTop.scrollPreview': 'Podgląd przewijania',
   'demo.text.navigation.bottomNav.active': 'Aktywne',
   'demo.text.navigation.bottomNav.calendar': 'Kalendarz',
@@ -2944,7 +2947,7 @@ export const pl: DemoDictionary = {
   'demo.text.tables.dataGrid.meta': 'DataGrid zapisuje i przywraca układ tabeli. Zaznaczone wiersze: {count}.',
   'demo.text.tables.dataGrid.resetSavedGrid': 'Resetuj zapisany układ',
   'demo.text.tables.dataGrid.selectedRows': 'Zaznaczone wiersze',
-  'demo.text.tables.dataTable.meta': 'DataTable obsługuje sortowanie, filtrowanie i paginację z użyciem {pageSize}.',
+  'demo.text.tables.dataTable.meta': 'DataTable obsługuje sortowanie, filtrowanie i paginację z użyciem <pageSize/>.',
   'demo.text.tables.queryBuilder.clearConditions': 'Wyczyść warunki',
   'demo.text.tables.queryBuilder.description': 'Buduj złożone zapytania za pomocą warunków i operatorów.',
   'demo.text.tables.simple.meta': 'Podstawowy układ tabeli.',

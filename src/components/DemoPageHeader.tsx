@@ -1,7 +1,7 @@
+﻿import type { TranslateFn, TranslateStaticFn, VelvetI18nKey } from '@jankrajewskiit/ui';
 import { Button, Card, Heading, Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
-import type { DemoI18nMessageKey } from '../i18n/messages';
 import type { SectionId } from '../nav/demoNavConfig';
 
 export interface DemoQuickJumpItem {
@@ -10,9 +10,10 @@ export interface DemoQuickJumpItem {
 }
 
 interface DemoPageHeaderProps {
-  t: (key: DemoI18nMessageKey, params?: Record<string, string | number>) => string;
-  titleKey: DemoI18nMessageKey;
-  descriptionKey: DemoI18nMessageKey;
+  t: TranslateFn;
+  ts: TranslateStaticFn;
+  titleKey: VelvetI18nKey;
+  descriptionKey: VelvetI18nKey;
   activeGroupLabel: string;
   navGroupCount: number;
   sectionPageCount: number;
@@ -27,7 +28,7 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
     <Card class="pageHeader">
       <div class="pageHeaderIntro">
         <Text as="p" variant="overline" tone="primary" class="pageEyebrow">
-          {props.t('demo.page.eyebrow')}
+          {props.ts('demo.page.eyebrow')}
         </Text>
         <Heading level={1} variant="displayMd" class="pageTitle">
           {props.t(props.titleKey)}
@@ -38,7 +39,7 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
         <div class="pageStats">
           <div class="statPill">
             <Text as="span" variant="overline" tone="tertiary">
-              {props.t('demo.page.header.currentTrack')}
+              {props.ts('demo.page.header.currentTrack')}
             </Text>
             <Heading as="span" level={4} variant="titleLg">
               {props.activeGroupLabel}
@@ -46,7 +47,7 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
           </div>
           <div class="statPill">
             <Text as="span" variant="overline" tone="tertiary">
-              {props.t('demo.page.header.groups')}
+              {props.ts('demo.page.header.groups')}
             </Text>
             <Heading as="span" level={4} variant="titleLg">
               {props.navGroupCount}
@@ -54,7 +55,7 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
           </div>
           <div class="statPill">
             <Text as="span" variant="overline" tone="tertiary">
-              {props.t('demo.page.header.pages')}
+              {props.ts('demo.page.header.pages')}
             </Text>
             <Heading as="span" level={4} variant="titleLg">
               {props.sectionPageCount}
@@ -65,10 +66,10 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
       <div class="pageHeaderActions">
         <div class="pageHeaderActionsCopy">
           <Text as="p" variant="labelMd" tone="secondary">
-            {props.t('demo.page.header.quickJump')}
+            {props.ts('demo.page.header.quickJump')}
           </Text>
           <Text as="p" variant="bodySm" tone="muted">
-            {props.t('demo.page.header.demoPurpose')}
+            {props.ts('demo.page.header.demoPurpose')}
           </Text>
         </div>
         <div class="pageHeaderActionGrid">
@@ -87,7 +88,7 @@ const DemoPageHeader = (props: DemoPageHeaderProps) => {
         </div>
         <div class="pageHeaderRemember">
           <Button type="button" variant="subtle" size="sm" onClick={() => props.onClearRememberedSection()}>
-            {props.t('demo.page.clearRememberedSection')}
+            {props.ts('demo.page.clearRememberedSection')}
           </Button>
         </div>
       </div>

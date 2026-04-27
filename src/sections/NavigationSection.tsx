@@ -1,4 +1,4 @@
-import {
+﻿import {
   addToast,
   BackToTop,
   BottomNav,
@@ -29,20 +29,19 @@ import {
   ThemeToggle,
   Wizard,
 } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import { BiLogosReact } from 'solid-icons/bi';
 import { IoAdd, IoCalendar, IoHome, IoPencil, IoPerson, IoSearch, IoSettings, IoShareSocial } from 'solid-icons/io';
 import { createMemo, createSignal, For, Show } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { renderRichText } from '../i18n/renderRichText';
 import type { SectionId } from '../nav/demoNavConfig';
 
 type TabValue = 'preview' | 'code' | 'props';
 
 const NavigationSection = (props: { sectionId: SectionId }) => {
   const sectionId = () => props.sectionId;
-  const { t } = useDemoDictionary();
+  const { ts, tx } = useI18n();
   const [tab, setTab] = createSignal<TabValue>('preview');
   const [activeStep, setActiveStep] = createSignal('details');
   const [page, setPage] = createSignal(3);
@@ -53,9 +52,9 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
   const tabCodeSample = createMemo(
     () => `<Tabs
   tabs={[
-    { value: 'preview', label: '${t('demo.text.navigation.tabs.preview')}' },
-    { value: 'code', label: '${t('demo.text.navigation.tabs.code')}' },
-    { value: 'props', label: '${t('demo.text.navigation.tabs.props')}' },
+    { value: 'preview', label: '${ts('demo.text.navigation.tabs.preview')}' },
+    { value: 'code', label: '${ts('demo.text.navigation.tabs.code')}' },
+    { value: 'props', label: '${ts('demo.text.navigation.tabs.props')}' },
   ]}
   value={tab()}
   onChange={setTab}
@@ -65,83 +64,83 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
   const tabProps = ['variant', 'activationMode', 'panelId', 'disabled'];
 
   const basicBreadcrumbs = createMemo<BreadcrumbItem[]>(() => [
-    { label: t('demo.text.navigation.breadcrumbs.home'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.products'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.detail') },
+    { label: ts('demo.text.navigation.breadcrumbs.home'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.products'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.detail') },
   ]);
 
   const collapsibleBreadcrumbs = createMemo<BreadcrumbItem[]>(() => [
-    { label: t('demo.text.navigation.breadcrumbs.home'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.category'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.subcategory'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.products'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.item'), href: '#' },
-    { label: t('demo.text.navigation.breadcrumbs.detail') },
+    { label: ts('demo.text.navigation.breadcrumbs.home'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.category'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.subcategory'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.products'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.item'), href: '#' },
+    { label: ts('demo.text.navigation.breadcrumbs.detail') },
   ]);
 
   const speedDialActions = createMemo<SpeedDialAction[]>(() => [
-    { icon: <IoAdd size={20} />, label: t('demo.text.navigation.speedDial.add'), onClick: () => {} },
-    { icon: <IoPencil size={20} />, label: t('demo.text.navigation.speedDial.edit'), onClick: () => {} },
-    { icon: <IoShareSocial size={20} />, label: t('demo.text.navigation.speedDial.share'), onClick: () => {} },
+    { icon: <IoAdd size={20} />, label: ts('demo.text.navigation.speedDial.add'), onClick: () => {} },
+    { icon: <IoPencil size={20} />, label: ts('demo.text.navigation.speedDial.edit'), onClick: () => {} },
+    { icon: <IoShareSocial size={20} />, label: ts('demo.text.navigation.speedDial.share'), onClick: () => {} },
   ]);
 
   const speedDialDirectionVariants = createMemo(() => [
-    { title: t('demo.text.navigation.speedDial.up'), direction: 'up' as const },
-    { title: t('demo.text.navigation.speedDial.down'), direction: 'down' as const },
-    { title: t('demo.text.navigation.speedDial.left'), direction: 'left' as const },
-    { title: t('demo.text.navigation.speedDial.right'), direction: 'right' as const },
+    { title: ts('demo.text.navigation.speedDial.up'), direction: 'up' as const },
+    { title: ts('demo.text.navigation.speedDial.down'), direction: 'down' as const },
+    { title: ts('demo.text.navigation.speedDial.left'), direction: 'left' as const },
+    { title: ts('demo.text.navigation.speedDial.right'), direction: 'right' as const },
   ]);
 
   const stepperSteps = createMemo(() => [
-    { value: 'info', label: t('demo.text.navigation.stepper.info') },
-    { value: 'details', label: t('demo.text.navigation.stepper.details') },
-    { value: 'review', label: t('demo.text.navigation.stepper.review') },
-    { value: 'done', label: t('demo.text.navigation.stepper.done') },
+    { value: 'info', label: ts('demo.text.navigation.stepper.info') },
+    { value: 'details', label: ts('demo.text.navigation.stepper.details') },
+    { value: 'review', label: ts('demo.text.navigation.stepper.review') },
+    { value: 'done', label: ts('demo.text.navigation.stepper.done') },
   ]);
 
   const wizardSteps = createMemo(() => [
     {
-      label: t('demo.text.composites.wizard.accountStep'),
+      label: ts('demo.text.composites.wizard.accountStep'),
       component: (
         <div class="col">
-          <FormField label={t('demo.text.composites.wizard.email')}>
+          <FormField label={ts('demo.text.composites.wizard.email')}>
             {(fieldProps) => (
-              <Input {...fieldProps} type="email" placeholder={t('demo.text.composites.wizard.emailPlaceholder')} />
+              <Input {...fieldProps} type="email" placeholder={ts('demo.text.composites.wizard.emailPlaceholder')} />
             )}
           </FormField>
-          <FormField label={t('demo.text.composites.wizard.username')}>
+          <FormField label={ts('demo.text.composites.wizard.username')}>
             {(fieldProps) => (
-              <Input {...fieldProps} type="text" placeholder={t('demo.text.composites.wizard.usernamePlaceholder')} />
+              <Input {...fieldProps} type="text" placeholder={ts('demo.text.composites.wizard.usernamePlaceholder')} />
             )}
           </FormField>
         </div>
       ),
     },
     {
-      label: t('demo.text.composites.wizard.profileStep'),
+      label: ts('demo.text.composites.wizard.profileStep'),
       component: (
         <div class="col">
-          <FormField label={t('demo.text.composites.wizard.fullName')}>
+          <FormField label={ts('demo.text.composites.wizard.fullName')}>
             {(fieldProps) => (
-              <Input {...fieldProps} type="text" placeholder={t('demo.text.composites.wizard.fullNamePlaceholder')} />
+              <Input {...fieldProps} type="text" placeholder={ts('demo.text.composites.wizard.fullNamePlaceholder')} />
             )}
           </FormField>
-          <FormField label={t('demo.text.composites.wizard.bio')}>
+          <FormField label={ts('demo.text.composites.wizard.bio')}>
             {(fieldProps) => (
-              <Input {...fieldProps} type="text" placeholder={t('demo.text.composites.wizard.bioPlaceholder')} />
+              <Input {...fieldProps} type="text" placeholder={ts('demo.text.composites.wizard.bioPlaceholder')} />
             )}
           </FormField>
         </div>
       ),
     },
     {
-      label: t('demo.text.composites.wizard.confirmStep'),
+      label: ts('demo.text.composites.wizard.confirmStep'),
       component: (
         <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-          {renderRichText(t('demo.text.composites.wizard.confirmMessage'), {
-            finish: (
+          {tx('demo.text.composites.wizard.confirmMessage', {
+            finish: () => (
               <Text as="span" variant="labelMd">
-                {t('demo.text.composites.wizard.finish')}
+                {ts('demo.text.composites.wizard.finish')}
               </Text>
             ),
           })}
@@ -151,47 +150,47 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
   ]);
 
   const bottomNavItems = createMemo<BottomNavItem[]>(() => [
-    { id: 'home', label: t('demo.text.navigation.bottomNav.home'), icon: <IoHome size={20} /> },
-    { id: 'search', label: t('demo.text.navigation.bottomNav.search'), icon: <IoSearch size={20} /> },
-    { id: 'calendar', label: t('demo.text.navigation.bottomNav.calendar'), icon: <IoCalendar size={20} />, badge: 2 },
-    { id: 'profile', label: t('demo.text.navigation.bottomNav.profile'), icon: <IoPerson size={20} /> },
+    { id: 'home', label: ts('demo.text.navigation.bottomNav.home'), icon: <IoHome size={20} /> },
+    { id: 'search', label: ts('demo.text.navigation.bottomNav.search'), icon: <IoSearch size={20} /> },
+    { id: 'calendar', label: ts('demo.text.navigation.bottomNav.calendar'), icon: <IoCalendar size={20} />, badge: 2 },
+    { id: 'profile', label: ts('demo.text.navigation.bottomNav.profile'), icon: <IoPerson size={20} /> },
   ]);
 
   const navbarItems = createMemo<NavItem[]>(() => [
-    { label: t('demo.text.navigation.navbar.dashboard'), href: '/dashboard', icon: IoHome },
-    { label: t('demo.text.navigation.navbar.search'), href: '/search', icon: IoSearch },
-    { label: t('demo.text.navigation.navbar.settings'), href: '/settings', icon: IoSettings },
+    { label: ts('demo.text.navigation.navbar.dashboard'), href: '/dashboard', icon: IoHome },
+    { label: ts('demo.text.navigation.navbar.search'), href: '/search', icon: IoSearch },
+    { label: ts('demo.text.navigation.navbar.settings'), href: '/settings', icon: IoSettings },
   ]);
 
   const sidebarItems = createMemo<SidebarItem[]>(() => [
-    { id: 'overview', label: t('demo.text.navigation.sidebars.overview'), icon: <IoHome size={16} /> },
+    { id: 'overview', label: ts('demo.text.navigation.sidebars.overview'), icon: <IoHome size={16} /> },
     {
       id: 'workspace',
-      label: t('demo.text.navigation.sidebars.workspace'),
+      label: ts('demo.text.navigation.sidebars.workspace'),
       icon: <IoCalendar size={16} />,
       children: [
-        { id: 'reports', label: t('demo.text.navigation.sidebars.reports'), badge: 6 },
-        { id: 'tasks', label: t('demo.text.navigation.sidebars.tasks'), badge: 3 },
-        { id: 'archive', label: t('demo.text.navigation.sidebars.archive') },
+        { id: 'reports', label: ts('demo.text.navigation.sidebars.reports'), badge: 6 },
+        { id: 'tasks', label: ts('demo.text.navigation.sidebars.tasks'), badge: 3 },
+        { id: 'archive', label: ts('demo.text.navigation.sidebars.archive') },
       ],
     },
-    { id: 'profile', label: t('demo.text.navigation.sidebars.profile'), icon: <IoPerson size={16} /> },
+    { id: 'profile', label: ts('demo.text.navigation.sidebars.profile'), icon: <IoPerson size={16} /> },
   ]);
 
   const sidebarNavGroups = createMemo<SidebarNavGroup[]>(() => [
     {
-      label: t('demo.text.navigation.sidebars.groupNavigation'),
+      label: ts('demo.text.navigation.sidebars.groupNavigation'),
       items: [
-        { id: 'nav-overview', label: t('demo.text.navigation.sidebars.overview') },
-        { id: 'nav-pages', label: t('demo.text.navigation.sidebars.pages') },
-        { id: 'nav-settings', label: t('demo.text.navigation.sidebars.settings') },
+        { id: 'nav-overview', label: ts('demo.text.navigation.sidebars.overview') },
+        { id: 'nav-pages', label: ts('demo.text.navigation.sidebars.pages') },
+        { id: 'nav-settings', label: ts('demo.text.navigation.sidebars.settings') },
       ],
     },
     {
-      label: t('demo.text.navigation.sidebars.groupManagement'),
+      label: ts('demo.text.navigation.sidebars.groupManagement'),
       items: [
-        { id: 'nav-users', label: t('demo.text.navigation.sidebars.users') },
-        { id: 'nav-billing', label: t('demo.text.navigation.sidebars.billing') },
+        { id: 'nav-users', label: ts('demo.text.navigation.sidebars.users') },
+        { id: 'nav-billing', label: ts('demo.text.navigation.sidebars.billing') },
       ],
     },
   ]);
@@ -200,11 +199,11 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
     <div>
       <Show when={sectionId() === 'nav-navbar'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.navbar.title')}
-          subtitle={t('demo.showcase.navigation.navbar.subtitle')}
+          title={ts('demo.showcase.navigation.navbar.title')}
+          subtitle={ts('demo.showcase.navigation.navbar.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="layoutPreviewShell">
                 <Navbar
                   navItems={navbarItems()}
@@ -224,11 +223,11 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-sidebars'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.sidebarAndSidebarNav.title')}
-          subtitle={t('demo.showcase.navigation.sidebarAndSidebarNav.subtitle')}
+          title={ts('demo.showcase.navigation.sidebarAndSidebarNav.title')}
+          subtitle={ts('demo.showcase.navigation.sidebarAndSidebarNav.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.navigation.sidebars.sidebar.title')}>
+            <PreviewGroup title={ts('demo.text.navigation.sidebars.sidebar.title')}>
               <div class="sidebarPreviewShell">
                 <Sidebar
                   class="sidebarNavPreview"
@@ -237,29 +236,29 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
                   onSelect={setSidebarActive}
                   collapsed={sidebarCollapsed()}
                   onToggle={() => setSidebarCollapsed((current) => !current)}
-                  header={t('demo.text.navigation.sidebars.workspace')}
+                  header={ts('demo.text.navigation.sidebars.workspace')}
                 />
                 <div class="sidebarPreviewBody">
                   <div class="scenarioShell scenarioShellCompact">
                     <div class="scenarioHeader">
                       <div class="scenarioHeaderCopy">
                         <Text as="p" variant="overline" tone="primary">
-                          {t('demo.page.navSidebars.title')}
+                          {ts('demo.page.navSidebars.title')}
                         </Text>
                         <Heading level={3} variant="titleLg">
-                          {t('demo.page.navSidebars.description')}
+                          {ts('demo.page.navSidebars.description')}
                         </Heading>
                       </div>
                       <div class="scenarioMetricRow">
                         <div class="scenarioMetric">
                           <Text as="span" variant="overline" tone="tertiary">
-                            {t('demo.text.navigation.sidebars.activeSidebar')}
+                            {ts('demo.text.navigation.sidebars.activeSidebar')}
                           </Text>
                           <CodeText as="span">{sidebarActive()}</CodeText>
                         </div>
                         <div class="scenarioMetric">
                           <Text as="span" variant="overline" tone="tertiary">
-                            {t('demo.text.navigation.sidebars.pages')}
+                            {ts('demo.text.navigation.sidebars.pages')}
                           </Text>
                           <Text as="span" variant="labelLg">
                             {sidebarItems().length}
@@ -270,18 +269,18 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
                     <div class="scenarioGrid">
                       <div class="scenarioCard">
                         <Text as="p" variant="labelMd">
-                          {t('demo.text.navigation.sidebars.reports')}
+                          {ts('demo.text.navigation.sidebars.reports')}
                         </Text>
                         <Text as="p" variant="bodySm" tone="muted">
-                          {t('demo.text.navigation.sidebars.tasks')}
+                          {ts('demo.text.navigation.sidebars.tasks')}
                         </Text>
                       </div>
                       <div class="scenarioCard">
                         <Text as="p" variant="labelMd">
-                          {t('demo.text.navigation.sidebars.archive')}
+                          {ts('demo.text.navigation.sidebars.archive')}
                         </Text>
                         <Text as="p" variant="bodySm" tone="muted">
-                          {t('demo.text.navigation.sidebars.profile')}
+                          {ts('demo.text.navigation.sidebars.profile')}
                         </Text>
                       </div>
                     </div>
@@ -290,24 +289,24 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
               </div>
             </PreviewGroup>
 
-            <PreviewGroup title={t('demo.text.navigation.sidebars.sidebarNav.title')}>
+            <PreviewGroup title={ts('demo.text.navigation.sidebars.sidebarNav.title')}>
               <div class="sidebarPreviewShell">
                 <SidebarNav
                   class="sidebarNavPreview"
                   groups={sidebarNavGroups()}
                   activeId={sidebarNavActive()}
                   onSelect={setSidebarNavActive}
-                  label={t('demo.text.navigation.sidebars.label')}
-                  subtitle={t('demo.text.navigation.sidebars.previewSubtitle')}
+                  label={ts('demo.text.navigation.sidebars.label')}
+                  subtitle={ts('demo.text.navigation.sidebars.previewSubtitle')}
                 />
                 <div class="sidebarPreviewBody">
                   <div class="scenarioShell scenarioShellCompact">
                     <div class="scenarioHeaderCopy">
                       <Text as="p" variant="overline" tone="primary">
-                        {t('demo.text.navigation.sidebars.groupNavigation')}
+                        {ts('demo.text.navigation.sidebars.groupNavigation')}
                       </Text>
                       <Text as="p" variant="bodySm" tone="muted">
-                        {t('demo.text.navigation.sidebars.activeSidebarNav')}:{' '}
+                        {ts('demo.text.navigation.sidebars.activeSidebarNav')}:{' '}
                         <CodeText as="span" class="codeInline">
                           {sidebarNavActive()}
                         </CodeText>
@@ -316,10 +315,10 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
                     <div class="scenarioGrid">
                       <div class="scenarioCard">
                         <Text as="p" variant="labelMd">
-                          {t('demo.text.navigation.sidebars.users')}
+                          {ts('demo.text.navigation.sidebars.users')}
                         </Text>
                         <Text as="p" variant="bodySm" tone="muted">
-                          {t('demo.text.navigation.sidebars.billing')}
+                          {ts('demo.text.navigation.sidebars.billing')}
                         </Text>
                       </div>
                     </div>
@@ -331,19 +330,19 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
             <PreviewGroup title="SidebarItemButton">
               <div class="row">
                 <SidebarItemButton
-                  label={t('demo.text.navigation.sidebars.workspace')}
+                  label={ts('demo.text.navigation.sidebars.workspace')}
                   prefix={<IoCalendar size={16} />}
                   active
                   badge={3}
                 />
                 <SidebarItemButton
-                  label={t('demo.text.navigation.sidebars.settings')}
+                  label={ts('demo.text.navigation.sidebars.settings')}
                   prefix={<IoSettings size={16} />}
                   hasChildren
                   expanded
                 />
                 <SidebarItemButton
-                  label={t('demo.text.navigation.sidebars.profile')}
+                  label={ts('demo.text.navigation.sidebars.profile')}
                   prefix={<IoPerson size={16} />}
                   collapsed
                 />
@@ -355,11 +354,11 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-breadcrumbs'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.breadcrumbs.title')}
-          subtitle={t('demo.showcase.navigation.breadcrumbs.subtitle')}
+          title={ts('demo.showcase.navigation.breadcrumbs.title')}
+          subtitle={ts('demo.showcase.navigation.breadcrumbs.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Breadcrumbs items={basicBreadcrumbs()} />
               <Breadcrumbs items={collapsibleBreadcrumbs()} maxItems={3} />
             </PreviewGroup>
@@ -370,11 +369,11 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
       <Show when={sectionId() === 'nav-stepper'}>
         <>
           <ShowcaseSection
-            title={t('demo.showcase.navigation.stepper.title')}
-            subtitle={t('demo.showcase.navigation.stepper.subtitle')}
+            title={ts('demo.showcase.navigation.stepper.title')}
+            subtitle={ts('demo.showcase.navigation.stepper.subtitle')}
           >
             <PreviewPanel>
-              <PreviewGroup title={t('demo.text.common.examples')}>
+              <PreviewGroup title={ts('demo.text.common.examples')}>
                 <Stepper steps={stepperSteps()} activeStep={activeStep()} />
                 <div class="stepButtons">
                   <For each={stepperSteps()}>
@@ -394,15 +393,15 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
           </ShowcaseSection>
 
           <ShowcaseSection
-            title={t('demo.showcase.composites.wizard.title')}
-            subtitle={t('demo.showcase.composites.wizard.subtitle')}
+            title={ts('demo.showcase.composites.wizard.title')}
+            subtitle={ts('demo.showcase.composites.wizard.subtitle')}
           >
             <PreviewPanel>
-              <PreviewGroup title={t('demo.text.common.examples')}>
+              <PreviewGroup title={ts('demo.text.common.examples')}>
                 <Wizard
                   steps={wizardSteps()}
                   onFinish={() => {
-                    addToast({ type: 'success', message: t('demo.text.composites.wizard.doneToast') });
+                    addToast({ type: 'success', message: ts('demo.text.composites.wizard.doneToast') });
                   }}
                 />
               </PreviewGroup>
@@ -413,28 +412,28 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-tabs'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.tabs.title')}
-          subtitle={t('demo.showcase.navigation.tabs.subtitle')}
+          title={ts('demo.showcase.navigation.tabs.title')}
+          subtitle={ts('demo.showcase.navigation.tabs.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.navigation.tabs.underlineVariant.title')}>
+            <PreviewGroup title={ts('demo.text.navigation.tabs.underlineVariant.title')}>
               <Tabs<TabValue>
                 tabs={[
-                  { value: 'preview', label: t('demo.text.navigation.tabs.preview') },
-                  { value: 'code', label: t('demo.text.navigation.tabs.code') },
-                  { value: 'props', label: t('demo.text.navigation.tabs.props') },
+                  { value: 'preview', label: ts('demo.text.navigation.tabs.preview') },
+                  { value: 'code', label: ts('demo.text.navigation.tabs.code') },
+                  { value: 'props', label: ts('demo.text.navigation.tabs.props') },
                 ]}
                 value={tab()}
                 onChange={setTab}
                 variant="underline"
               />
             </PreviewGroup>
-            <PreviewGroup title={t('demo.text.navigation.tabs.pillVariant.title')}>
+            <PreviewGroup title={ts('demo.text.navigation.tabs.pillVariant.title')}>
               <Tabs<TabValue>
                 tabs={[
-                  { value: 'preview', label: t('demo.text.navigation.tabs.preview') },
-                  { value: 'code', label: t('demo.text.navigation.tabs.code') },
-                  { value: 'props', label: t('demo.text.navigation.tabs.props') },
+                  { value: 'preview', label: ts('demo.text.navigation.tabs.preview') },
+                  { value: 'code', label: ts('demo.text.navigation.tabs.code') },
+                  { value: 'props', label: ts('demo.text.navigation.tabs.props') },
                 ]}
                 value={tab()}
                 onChange={setTab}
@@ -443,32 +442,32 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
               <div class="tabShowcasePanel">
                 <div class="scenarioHeaderCopy">
                   <Text as="p" variant="overline" tone="primary">
-                    {t('demo.text.navigation.tabs.activeTab')}
+                    {ts('demo.text.navigation.tabs.activeTab')}
                   </Text>
                   <Heading level={3} variant="titleLg">
                     {tab() === 'preview'
-                      ? t('demo.text.navigation.tabs.preview')
+                      ? ts('demo.text.navigation.tabs.preview')
                       : tab() === 'code'
-                        ? t('demo.text.navigation.tabs.code')
-                        : t('demo.text.navigation.tabs.props')}
+                        ? ts('demo.text.navigation.tabs.code')
+                        : ts('demo.text.navigation.tabs.props')}
                   </Heading>
                 </div>
                 <Show when={tab() === 'preview'}>
                   <div class="scenarioGrid">
                     <div class="scenarioCard">
                       <Text as="p" variant="labelMd">
-                        {t('demo.text.navigation.tabs.preview')}
+                        {ts('demo.text.navigation.tabs.preview')}
                       </Text>
                       <Text as="p" variant="bodySm" tone="muted">
-                        {t('demo.page.navTabs.description')}
+                        {ts('demo.page.navTabs.description')}
                       </Text>
                     </div>
                     <div class="scenarioCard">
                       <Text as="p" variant="labelMd">
-                        {t('demo.text.navigation.tabs.props')}
+                        {ts('demo.text.navigation.tabs.props')}
                       </Text>
                       <Text as="p" variant="bodySm" tone="muted">
-                        {t('demo.page.navPagination.description')}
+                        {ts('demo.page.navPagination.description')}
                       </Text>
                     </div>
                   </div>
@@ -487,15 +486,15 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
             </PreviewGroup>
             <PreviewGroup title="TabButton">
               <div class="row">
-                <TabButton label={t('demo.text.navigation.tabs.preview')} selected variant="underline" />
-                <TabButton label={t('demo.text.navigation.tabs.code')} variant="underline" />
-                <TabButton label={t('demo.text.navigation.tabs.preview')} selected variant="pill" />
-                <TabButton label={t('demo.text.navigation.tabs.props')} variant="pill" />
+                <TabButton label={ts('demo.text.navigation.tabs.preview')} selected variant="underline" />
+                <TabButton label={ts('demo.text.navigation.tabs.code')} variant="underline" />
+                <TabButton label={ts('demo.text.navigation.tabs.preview')} selected variant="pill" />
+                <TabButton label={ts('demo.text.navigation.tabs.props')} variant="pill" />
               </div>
             </PreviewGroup>
           </PreviewPanel>
           <ShowcaseMeta>
-            {t('demo.text.navigation.tabs.activeTab')}:{' '}
+            {ts('demo.text.navigation.tabs.activeTab')}:{' '}
             <CodeText as="span" class="codeInline">
               {tab()}
             </CodeText>
@@ -505,14 +504,14 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-pagination'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.pagination.title')}
-          subtitle={t('demo.showcase.navigation.pagination.subtitle')}
+          title={ts('demo.showcase.navigation.pagination.title')}
+          subtitle={ts('demo.showcase.navigation.pagination.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Pagination page={page()} totalPages={24} onChange={setPage} />
               <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                {t('demo.text.navigation.pagination.currentPage')}:{' '}
+                {ts('demo.text.navigation.pagination.currentPage')}:{' '}
                 <CodeText as="span" class="codeInline">
                   {page()}
                 </CodeText>
@@ -524,11 +523,11 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-speed-dial'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.speedDial.title')}
-          subtitle={t('demo.showcase.navigation.speedDial.subtitle')}
+          title={ts('demo.showcase.navigation.speedDial.title')}
+          subtitle={ts('demo.showcase.navigation.speedDial.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.navigation.speedDial.directionVariants.title')}>
+            <PreviewGroup title={ts('demo.text.navigation.speedDial.directionVariants.title')}>
               <div class="speedDialGrid">
                 <For each={speedDialDirectionVariants()}>
                   {(variant) => (
@@ -550,15 +549,15 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
       <Show when={sectionId() === 'nav-bottom-nav'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.bottomNav.title')}
-          subtitle={t('demo.showcase.navigation.bottomNav.subtitle')}
+          title={ts('demo.showcase.navigation.bottomNav.title')}
+          subtitle={ts('demo.showcase.navigation.bottomNav.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <div class="bottomNavPreview">
                 <div class="bottomNavPreviewLabel">
                   <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                    {t('demo.text.navigation.bottomNav.active')}:{' '}
+                    {ts('demo.text.navigation.bottomNav.active')}:{' '}
                     <CodeText as="span" class="codeInline">
                       {activeBottomNav()}
                     </CodeText>
@@ -573,24 +572,24 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
               </div>
             </PreviewGroup>
           </PreviewPanel>
-          <ShowcaseMeta>{t('demo.text.navigation.bottomNav.meta')}</ShowcaseMeta>
+          <ShowcaseMeta>{ts('demo.text.navigation.bottomNav.meta')}</ShowcaseMeta>
         </ShowcaseSection>
       </Show>
 
       <Show when={sectionId() === 'nav-back-to-top'}>
         <ShowcaseSection
-          title={t('demo.showcase.navigation.backToTop.title')}
-          subtitle={t('demo.showcase.navigation.backToTop.subtitle')}
+          title={ts('demo.showcase.navigation.backToTop.title')}
+          subtitle={ts('demo.showcase.navigation.backToTop.subtitle')}
         >
           <PreviewPanel>
-            <PreviewGroup title={t('demo.text.common.examples')}>
+            <PreviewGroup title={ts('demo.text.common.examples')}>
               <Text as="p" variant="bodySm" tone="muted" class="mutedText">
-                {renderRichText(t('demo.text.navigation.backToTop.meta'), {
-                  main: <CodeText as="span">main</CodeText>,
+                {tx('demo.text.navigation.backToTop.meta', {
+                  main: () => <CodeText as="span">main</CodeText>,
                 })}
               </Text>
               <BackToTop threshold={200} scrollRoot={() => document.querySelector<HTMLElement>('main.main')} />
-              <div class="backToTopScrollFiller" aria-label={t('demo.text.navigation.backToTop.scrollPreview')}>
+              <div class="backToTopScrollFiller" aria-label={ts('demo.text.navigation.backToTop.scrollPreview')}>
                 <For each={Array.from({ length: 16 }, (_, i) => i)}>
                   {() => (
                     <div class="backToTopScrollFillerCard">

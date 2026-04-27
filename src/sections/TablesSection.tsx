@@ -1,4 +1,4 @@
-import {
+﻿import {
   ColumnManager,
   type ColumnManagerColumn,
   DataGridPro,
@@ -25,12 +25,10 @@ import {
   TableRow,
   Text,
 } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/ui';
 import { createMemo, createSignal } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
-import { useDemoDictionary } from '../hooks/useDemoDictionary';
-import { renderRichText } from '../i18n/renderRichText';
-
 interface PackageRow extends Record<string, unknown> {
   id: string;
   name: string;
@@ -182,7 +180,7 @@ const createDefaultAdvancedQuery = (): QueryBuilderValue => ({
 });
 
 const TablesSection = () => {
-  const { t } = useDemoDictionary();
+  const { ts, tx } = useI18n();
   const [query, setQuery] = createSignal('');
   const [gridFilterQuery, setGridFilterQuery] = createSignal('');
   const [gridSort, setGridSort] = createSignal<DataGridProSortState>({ key: 'downloads', direction: 'desc' });
@@ -225,11 +223,11 @@ const TablesSection = () => {
   });
 
   const packageColumns = createMemo<DataTableColumn<PackageRow>[]>(() => [
-    { key: 'name', header: t('demo.text.tables.columns.package'), sortable: true },
-    { key: 'version', header: t('demo.text.tables.columns.version') },
+    { key: 'name', header: ts('demo.text.tables.columns.package'), sortable: true },
+    { key: 'version', header: ts('demo.text.tables.columns.version') },
     {
       key: 'downloads',
-      header: t('demo.text.tables.columns.downloads'),
+      header: ts('demo.text.tables.columns.downloads'),
       sortable: true,
       render: (val) => (
         <Text as="span" variant="bodySm">
@@ -237,22 +235,22 @@ const TablesSection = () => {
         </Text>
       ),
     },
-    { key: 'license', header: t('demo.text.tables.columns.license'), sortable: true },
+    { key: 'license', header: ts('demo.text.tables.columns.license'), sortable: true },
   ]);
 
   const dataGridColumns = createMemo<DataGridProColumn<PackageRow>[]>(() => [
     {
       key: 'name',
-      header: t('demo.text.tables.columns.package'),
+      header: ts('demo.text.tables.columns.package'),
       pinned: 'left',
       width: 220,
       minWidth: 150,
       sortable: true,
     },
-    { key: 'version', header: t('demo.text.tables.columns.version'), width: 120, minWidth: 90, sortable: true },
+    { key: 'version', header: ts('demo.text.tables.columns.version'), width: 120, minWidth: 90, sortable: true },
     {
       key: 'downloads',
-      header: t('demo.text.tables.columns.downloads'),
+      header: ts('demo.text.tables.columns.downloads'),
       width: 160,
       minWidth: 120,
       sortable: true,
@@ -262,10 +260,10 @@ const TablesSection = () => {
         </Text>
       ),
     },
-    { key: 'license', header: t('demo.text.tables.columns.license'), width: 140, minWidth: 100, sortable: true },
+    { key: 'license', header: ts('demo.text.tables.columns.license'), width: 140, minWidth: 100, sortable: true },
     {
       key: 'category',
-      header: t('demo.text.tables.columns.category'),
+      header: ts('demo.text.tables.columns.category'),
       width: 160,
       minWidth: 120,
       sortable: true,
@@ -283,11 +281,11 @@ const TablesSection = () => {
   );
 
   const queryBuilderFields = createMemo<QueryBuilderField[]>(() => [
-    { key: 'name', label: t('demo.text.tables.columns.package'), type: 'text' },
-    { key: 'version', label: t('demo.text.tables.columns.version'), type: 'text' },
+    { key: 'name', label: ts('demo.text.tables.columns.package'), type: 'text' },
+    { key: 'version', label: ts('demo.text.tables.columns.version'), type: 'text' },
     {
       key: 'license',
-      label: t('demo.text.tables.columns.license'),
+      label: ts('demo.text.tables.columns.license'),
       type: 'select',
       options: [
         { value: 'MIT', label: 'MIT' },
@@ -296,18 +294,18 @@ const TablesSection = () => {
     },
     {
       key: 'category',
-      label: t('demo.text.tables.columns.category'),
+      label: ts('demo.text.tables.columns.category'),
       type: 'select',
       options: [
-        { value: 'framework', label: t('demo.text.tables.category.framework') },
-        { value: 'tooling', label: t('demo.text.tables.category.tooling') },
-        { value: 'language', label: t('demo.text.tables.category.language') },
-        { value: 'testing', label: t('demo.text.tables.category.testing') },
-        { value: 'quality', label: t('demo.text.tables.category.quality') },
-        { value: 'css', label: t('demo.text.tables.category.css') },
+        { value: 'framework', label: ts('demo.text.tables.category.framework') },
+        { value: 'tooling', label: ts('demo.text.tables.category.tooling') },
+        { value: 'language', label: ts('demo.text.tables.category.language') },
+        { value: 'testing', label: ts('demo.text.tables.category.testing') },
+        { value: 'quality', label: ts('demo.text.tables.category.quality') },
+        { value: 'css', label: ts('demo.text.tables.category.css') },
       ],
     },
-    { key: 'downloads', label: t('demo.text.tables.columns.downloads'), type: 'number' },
+    { key: 'downloads', label: ts('demo.text.tables.columns.downloads'), type: 'number' },
   ]);
 
   const dataGridDefaultOrder = createMemo(() => dataGridColumns().map((column) => column.key));
@@ -330,48 +328,48 @@ const TablesSection = () => {
   return (
     <div>
       <ShowcaseSection
-        title={t('demo.showcase.tables.table.title')}
-        subtitle={t('demo.showcase.tables.table.subtitle')}
+        title={ts('demo.showcase.tables.table.title')}
+        subtitle={ts('demo.showcase.tables.table.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.common.examples')}>
+          <PreviewGroup title={ts('demo.text.common.examples')}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableHeader>{t('demo.text.tables.simple.name')}</TableHeader>
-                  <TableHeader>{t('demo.text.tables.simple.version')}</TableHeader>
-                  <TableHeader>{t('demo.text.tables.simple.status')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.simple.name')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.simple.version')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.simple.status')}</TableHeader>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
                   <TableCell>solid-js</TableCell>
                   <TableCell>1.9.7</TableCell>
-                  <TableCell>{t('demo.text.tables.simple.stable')}</TableCell>
+                  <TableCell>{ts('demo.text.tables.simple.stable')}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>vite</TableCell>
                   <TableCell>7.3.1</TableCell>
-                  <TableCell>{t('demo.text.tables.simple.stable')}</TableCell>
+                  <TableCell>{ts('demo.text.tables.simple.stable')}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>typescript</TableCell>
                   <TableCell>5.9.3</TableCell>
-                  <TableCell>{t('demo.text.tables.simple.stable')}</TableCell>
+                  <TableCell>{ts('demo.text.tables.simple.stable')}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
           </PreviewGroup>
         </PreviewPanel>
-        <ShowcaseMeta>{t('demo.text.tables.simple.meta')}</ShowcaseMeta>
+        <ShowcaseMeta>{ts('demo.text.tables.simple.meta')}</ShowcaseMeta>
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.tables.dataTable.title')}
-        subtitle={t('demo.showcase.tables.dataTable.subtitle')}
+        title={ts('demo.showcase.tables.dataTable.title')}
+        subtitle={ts('demo.showcase.tables.dataTable.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.common.examples')}>
+          <PreviewGroup title={ts('demo.text.common.examples')}>
             <DataTable<PackageRow>
               data={PACKAGE_DATA}
               columns={packageColumns()}
@@ -386,8 +384,8 @@ const TablesSection = () => {
           </PreviewGroup>
         </PreviewPanel>
         <ShowcaseMeta>
-          {renderRichText(t('demo.text.tables.dataTable.meta'), {
-            pageSize: (
+          {tx('demo.text.tables.dataTable.meta', {
+            pageSize: () => (
               <CodeText as="span" class="codeInline">
                 pageSize
               </CodeText>
@@ -397,32 +395,32 @@ const TablesSection = () => {
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.tables.dataTableEmptyState.title')}
-        subtitle={t('demo.showcase.tables.dataTableEmptyState.subtitle')}
+        title={ts('demo.showcase.tables.dataTableEmptyState.title')}
+        subtitle={ts('demo.showcase.tables.dataTableEmptyState.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.common.examples')}>
+          <PreviewGroup title={ts('demo.text.common.examples')}>
             <DataTable<PackageRow> data={[]} columns={packageColumns()} pageSize={4} />
           </PreviewGroup>
         </PreviewPanel>
       </ShowcaseSection>
 
-      <ShowcaseSection title="TableAddRowAction" subtitle={t('demo.recron.showcase.tableAddRowAction.subtitle')}>
+      <ShowcaseSection title="TableAddRowAction" subtitle={ts('demo.recron.showcase.tableAddRowAction.subtitle')}>
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.common.examples')}>
+          <PreviewGroup title={ts('demo.text.common.examples')}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableHeader>{t('demo.text.tables.columns.package')}</TableHeader>
-                  <TableHeader>{t('demo.text.tables.columns.version')}</TableHeader>
-                  <TableHeader>{t('demo.text.tables.columns.downloads')}</TableHeader>
-                  <TableHeader>{t('demo.text.tables.columns.license')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.columns.package')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.columns.version')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.columns.downloads')}</TableHeader>
+                  <TableHeader>{ts('demo.text.tables.columns.license')}</TableHeader>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableAddRowAction
                   colSpan={4}
-                  label={t('demo.recron.offer.tableAddRow.label')}
+                  label={ts('demo.recron.offer.tableAddRow.label')}
                   onClick={() => undefined}
                 />
               </TableBody>
@@ -432,25 +430,25 @@ const TablesSection = () => {
       </ShowcaseSection>
 
       <ShowcaseSection
-        title={t('demo.showcase.tables.dataGridProV3.title')}
-        subtitle={t('demo.showcase.tables.dataGridProV3.subtitle')}
+        title={ts('demo.showcase.tables.dataGridProV3.title')}
+        subtitle={ts('demo.showcase.tables.dataGridProV3.subtitle')}
       >
         <PreviewPanel>
-          <PreviewGroup title={t('demo.text.common.examples')}>
+          <PreviewGroup title={ts('demo.text.common.examples')}>
             <div class="scenarioShell">
               <div class="scenarioHeader">
                 <div class="scenarioHeaderCopy">
                   <Text as="p" variant="overline" tone="primary">
-                    {t('demo.page.dataTables.title')}
+                    {ts('demo.page.dataTables.title')}
                   </Text>
                   <Heading level={3} variant="titleLg">
-                    {t('demo.page.dataTables.description')}
+                    {ts('demo.page.dataTables.description')}
                   </Heading>
                 </div>
                 <div class="scenarioMetricRow">
                   <div class="scenarioMetric">
                     <Text as="span" variant="overline" tone="tertiary">
-                      {t('demo.text.tables.columns.package')}
+                      {ts('demo.text.tables.columns.package')}
                     </Text>
                     <Text as="span" variant="labelLg">
                       {serverRows().length}
@@ -458,7 +456,7 @@ const TablesSection = () => {
                   </div>
                   <div class="scenarioMetric">
                     <Text as="span" variant="overline" tone="tertiary">
-                      {t('demo.text.tables.dataGrid.selectedRows')}
+                      {ts('demo.text.tables.dataGrid.selectedRows')}
                     </Text>
                     <Text as="span" variant="labelLg">
                       {selectedRows().length}
@@ -466,7 +464,7 @@ const TablesSection = () => {
                   </div>
                   <div class="scenarioMetric">
                     <Text as="span" variant="overline" tone="tertiary">
-                      {t('demo.text.tables.columns.category')}
+                      {ts('demo.text.tables.columns.category')}
                     </Text>
                     <Text as="span" variant="labelLg">
                       {advancedQuery().rules.length}
@@ -482,10 +480,10 @@ const TablesSection = () => {
                   size="sm"
                   onClick={() => setAdvancedQuery(createDefaultAdvancedQuery())}
                 >
-                  {t('demo.text.tables.queryBuilder.clearConditions')}
+                  {ts('demo.text.tables.queryBuilder.clearConditions')}
                 </Button>
                 <Button type="button" variant="ghost" size="sm" onClick={resetGridWorkspace}>
-                  {t('demo.text.tables.dataGrid.resetSavedGrid')}
+                  {ts('demo.text.tables.dataGrid.resetSavedGrid')}
                 </Button>
               </div>
 
@@ -493,7 +491,7 @@ const TablesSection = () => {
                 fields={queryBuilderFields()}
                 value={advancedQuery()}
                 onChange={setAdvancedQuery}
-                description={t('demo.text.tables.queryBuilder.description')}
+                description={ts('demo.text.tables.queryBuilder.description')}
               />
               <ColumnManager
                 columns={dataGridColumnSettings()}
@@ -506,7 +504,7 @@ const TablesSection = () => {
                 defaultOrder={dataGridDefaultOrder()}
                 defaultVisibility={dataGridDefaultVisibility()}
                 defaultPinning={dataGridDefaultPinning()}
-                description={t('demo.text.tables.columnManager.description')}
+                description={ts('demo.text.tables.columnManager.description')}
               />
               <DataGridPro<PackageRow>
                 data={serverRows()}
@@ -540,7 +538,7 @@ const TablesSection = () => {
             </div>
           </PreviewGroup>
         </PreviewPanel>
-        <ShowcaseMeta>{t('demo.text.tables.dataGrid.meta', { count: selectedRows().length })}</ShowcaseMeta>
+        <ShowcaseMeta>{ts('demo.text.tables.dataGrid.meta', { count: selectedRows().length })}</ShowcaseMeta>
       </ShowcaseSection>
     </div>
   );
