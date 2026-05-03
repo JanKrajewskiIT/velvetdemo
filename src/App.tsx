@@ -1,4 +1,5 @@
-﻿import { en as dataEn, pl as dataPl } from '@jankrajewskiit/data';
+﻿import { AuthProvider } from '@jankrajewskiit/auth';
+import { en as dataEn, pl as dataPl } from '@jankrajewskiit/data';
 import {
   addToast,
   defineDictionaries,
@@ -18,6 +19,7 @@ import { createEffect, createMemo, createSignal, untrack } from 'solid-js';
 
 import DemoPageHeader from './components/DemoPageHeader';
 import DemoSectionSwitch from './components/DemoSectionSwitch';
+import { demoAuthConfig } from './demoAuth';
 import { en as demoEn, pl as demoPl } from './i18n/messages';
 import {
   DEMO_LAST_SECTION_STORAGE_KEY,
@@ -165,7 +167,9 @@ const App = () => {
   return (
     <I18nProvider dictionaries={dictionaries} storageKey="velvet-demo-library-locale">
       <ThemeProvider>
-        <InnerApp />
+        <AuthProvider config={demoAuthConfig}>
+          <InnerApp />
+        </AuthProvider>
       </ThemeProvider>
     </I18nProvider>
   );

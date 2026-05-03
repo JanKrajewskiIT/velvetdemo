@@ -9,7 +9,7 @@
     "url": "git+https://github.com/JanKrajewskiIT/velvetdemo.git"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=25"
   },
   "scripts": {
     "dev": "vite --force",
@@ -26,22 +26,25 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@jankrajewskiit/data": "^0.2.5",
-    "@jankrajewskiit/ui": "^3.0.10",
+    "@jankrajewskiit/auth": "^0.2.3",
+    "@jankrajewskiit/data": "^0.2.8",
+    "@jankrajewskiit/reactive": "^0.1.4",
+    "@jankrajewskiit/ui": "^3.0.14",
     "@solidjs/router": "^0.16.1",
     "lightweight-charts": "^5.2.0",
+    "oidc-client-ts": "^3.5.0",
     "solid-icons": "^1.2.0",
     "solid-js": "^1.9.12",
     "solid-markdown": "^2.1.1"
   },
   "devDependencies": {
-    "@jankrajewskiit/configs": "^1.1.4",
+    "@jankrajewskiit/configs": "^1.1.8",
     "@types/node": "^25.6.0",
     "eslint": "^9.39.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
-    "stylelint": "^17.9.0",
+    "stylelint": "^17.10.0",
     "typescript": "~6.0.3",
     "vite": "^8.0.10",
     "vite-plugin-solid": "^2.11.12"

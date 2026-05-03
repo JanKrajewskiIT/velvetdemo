@@ -1,3 +1,4 @@
+import '@jankrajewskiit/data/styles';
 import '@jankrajewskiit/ui/styles';
 import './demo.css';
 
