@@ -8,8 +8,8 @@ import {
   TimelineCard,
   TimelineCardEditDialog,
   type TreeNode,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { IoDocumentText, IoFolder, IoImage } from 'solid-icons/io';
 import { type ComponentProps, createMemo, createSignal } from 'solid-js';
 

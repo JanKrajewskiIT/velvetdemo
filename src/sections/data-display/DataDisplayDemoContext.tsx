@@ -1,18 +1,7 @@
-import { createContext, type ParentProps, useContext } from 'solid-js';
-
+import createDemoContext from '../createDemoContext';
 import type { DataDisplayDemoModel } from './dataDisplayTypes';
 
-const DataDisplayDemoContext = createContext<DataDisplayDemoModel>();
+const { Provider: DataDisplayDemoProvider, useDemoContext: useDataDisplayDemo } =
+  createDemoContext<DataDisplayDemoModel>('useDataDisplayDemo');
 
-export const DataDisplayDemoProvider = (props: ParentProps<{ value: DataDisplayDemoModel }>) => (
-  // eslint-disable-next-line solid/reactivity -- context value is intentionally static
-  <DataDisplayDemoContext.Provider value={props.value}>{props.children}</DataDisplayDemoContext.Provider>
-);
-
-export const useDataDisplayDemo = (): DataDisplayDemoModel => {
-  const ctx = useContext(DataDisplayDemoContext);
-  if (!ctx) {
-    throw new Error('useDataDisplayDemo must be used within DataDisplayDemoProvider');
-  }
-  return ctx;
-};
+export { DataDisplayDemoProvider, useDataDisplayDemo };

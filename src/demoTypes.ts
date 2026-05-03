@@ -1,12 +1,14 @@
+import type { SectionId } from './nav/demoNavConfig';
+
 export interface DemoOverviewTrack {
-  id: string;
+  id: SectionId;
   label: string;
   description: string;
   count: number;
 }
 
 export interface DemoOverviewFeaturedSection {
-  id: string;
+  id: SectionId;
   label: string;
   description: string;
   eyebrow: string;

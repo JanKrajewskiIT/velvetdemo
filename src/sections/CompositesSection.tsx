@@ -20,8 +20,8 @@ import {
   Text,
   type TransferItem,
   TransferList,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import {
   IoAdd,
   IoCalendar,
@@ -36,7 +36,7 @@ import {
   IoSettings,
   IoTrash,
 } from 'solid-icons/io';
-import { createEffect, createMemo, createSignal, For, Show } from 'solid-js';
+import { createMemo, createSignal, For, Show } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 import { DEMO_TRANSFER_INITIAL_SOURCE, DEMO_TRANSFER_INITIAL_TARGET } from '../fixtures/compositesFixtures';
@@ -330,7 +330,6 @@ const createAiRunScenarios = (ts: TranslateStaticFn): readonly AiRunScenario[] =
 ];
 
 const CompositesSection = (props: { sectionId: SectionId }) => {
-  const sectionId = () => props.sectionId;
   const { ts, tx } = useI18n();
   const aiRunScenarios = createMemo(() => createAiRunScenarios(ts));
   const commandItems = createMemo(() => createCommandItems(ts));
@@ -347,21 +346,9 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
     categories: { label: string; score: number }[];
     recommendations: { label: string; message: string; severity: 'critical' | 'warning' | 'suggestion' }[];
   } | null>(null);
-  const [tasks, setTasks] = createSignal<TaskItem[]>([]);
-  const [kanbanItems, setKanbanItems] = createSignal<KanbanDemoItem[]>([]);
-  const [schedulerEvents, setSchedulerEvents] = createSignal<SchedulerEvent[]>([]);
-
-  createEffect(() => {
-    if (tasks().length === 0) {
-      setTasks([createTask(1, ts), createTask(2, ts)]);
-    }
-    if (kanbanItems().length === 0) {
-      setKanbanItems(createInitialKanbanItems(ts));
-    }
-    if (schedulerEvents().length === 0) {
-      setSchedulerEvents(createSchedulerEvents(ts));
-    }
-  });
+  const [tasks, setTasks] = createSignal<TaskItem[]>([createTask(1, ts), createTask(2, ts)]);
+  const [kanbanItems, setKanbanItems] = createSignal<KanbanDemoItem[]>(createInitialKanbanItems(ts));
+  const [schedulerEvents, setSchedulerEvents] = createSignal<SchedulerEvent[]>(createSchedulerEvents(ts));
 
   const runAnalysis = () => {
     setAnalysisState('loading');
@@ -487,7 +474,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
 
   return (
     <div>
-      <Show when={sectionId() === 'composites-transfer-list'}>
+      <Show when={props.sectionId === 'composites-transfer-list'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.transferList.title')}
           subtitle={ts('demo.showcase.composites.transferList.subtitle')}
@@ -506,7 +493,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'composites-editable-collection'}>
+      <Show when={props.sectionId === 'composites-editable-collection'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.editableCollection.title')}
           subtitle={ts('demo.showcase.composites.editableCollection.subtitle')}
@@ -525,7 +512,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'composites-kanban-board'}>
+      <Show when={props.sectionId === 'composites-kanban-board'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.kanbanBoard.title')}
           subtitle={ts('demo.showcase.composites.kanbanBoard.subtitle')}
@@ -544,7 +531,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'composites-command-palette'}>
+      <Show when={props.sectionId === 'composites-command-palette'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.commandPalette.title')}
           subtitle={ts('demo.showcase.composites.commandPalette.subtitle')}
@@ -555,7 +542,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'composites-ai-result'}>
+      <Show when={props.sectionId === 'composites-ai-result'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.aiResultPanel.title')}
           subtitle={ts('demo.showcase.composites.aiResultPanel.subtitle')}
@@ -642,7 +629,7 @@ const CompositesSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'composites-scheduler'}>
+      <Show when={props.sectionId === 'composites-scheduler'}>
         <ShowcaseSection
           title={ts('demo.showcase.composites.scheduler.title')}
           subtitle={ts('demo.showcase.composites.scheduler.subtitle')}

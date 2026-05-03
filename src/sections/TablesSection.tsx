@@ -24,75 +24,12 @@ import {
   TableHeader,
   TableRow,
   Text,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
-import { createMemo, createSignal } from 'solid-js';
+import { createMemo, createSignal, untrack } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
-interface PackageRow extends Record<string, unknown> {
-  id: string;
-  name: string;
-  version: string;
-  downloads: number;
-  license: string;
-  category: string;
-}
-
-const PACKAGE_DATA: PackageRow[] = [
-  { id: 'solid-js', name: 'solid-js', version: '1.9.7', downloads: 45000, license: 'MIT', category: 'framework' },
-  { id: 'vite', name: 'vite', version: '7.3.1', downloads: 120000, license: 'MIT', category: 'tooling' },
-  {
-    id: 'typescript',
-    name: 'typescript',
-    version: '5.9.3',
-    downloads: 300000,
-    license: 'Apache-2.0',
-    category: 'language',
-  },
-  { id: 'vitest', name: 'vitest', version: '3.1.0', downloads: 68000, license: 'MIT', category: 'testing' },
-  { id: 'eslint', name: 'eslint', version: '9.18.0', downloads: 210000, license: 'MIT', category: 'quality' },
-  { id: 'prettier', name: 'prettier', version: '4.0.0', downloads: 175000, license: 'MIT', category: 'quality' },
-  { id: 'postcss', name: 'postcss', version: '8.5.1', downloads: 95000, license: 'MIT', category: 'css' },
-];
-
-const DATA_GRID_ROWS: PackageRow[] = Array.from({ length: 2500 }, (_, index) => {
-  const base = PACKAGE_DATA[index % PACKAGE_DATA.length] as PackageRow;
-  return {
-    ...base,
-    id: `${base.id}-${index + 1}`,
-    name: `${base.name}-${index + 1}`,
-    downloads: base.downloads + index * 11,
-  };
-});
-
-const DATA_GRID_COLUMNS: DataGridProColumn<PackageRow>[] = [
-  { key: 'name', header: 'Package', pinned: 'left', width: 220, minWidth: 150, sortable: true },
-  { key: 'version', header: 'Version', width: 120, minWidth: 90, sortable: true },
-  {
-    key: 'downloads',
-    header: 'Downloads',
-    width: 160,
-    minWidth: 120,
-    sortable: true,
-    render: (value) => (
-      <Text as="span" variant="bodySm">
-        {Number(value).toLocaleString()}
-      </Text>
-    ),
-  },
-  { key: 'license', header: 'License', width: 140, minWidth: 100, sortable: true },
-  { key: 'category', header: 'Category', width: 160, minWidth: 120, sortable: true, pinned: 'right' },
-];
-
-const DATA_GRID_DEFAULT_ORDER = DATA_GRID_COLUMNS.map((column) => column.key);
-
-const DATA_GRID_DEFAULT_VISIBILITY = Object.fromEntries(
-  DATA_GRID_COLUMNS.map((column) => [column.key, true]),
-) as Record<string, boolean>;
-
-const DATA_GRID_DEFAULT_PINNING: DataGridProColumnPinning = Object.fromEntries(
-  DATA_GRID_COLUMNS.map((column) => [column.key, column.pinned ?? null]),
-);
+import { DATA_GRID_ROWS, PACKAGE_DATA, type PackageRow } from '../fixtures/tablesFixtures';
 
 const QUERY_BUILDER_FIELDS: QueryBuilderField[] = [
   { key: 'name', label: 'Package', type: 'text' },
@@ -185,9 +122,6 @@ const TablesSection = () => {
   const [gridFilterQuery, setGridFilterQuery] = createSignal('');
   const [gridSort, setGridSort] = createSignal<DataGridProSortState>({ key: 'downloads', direction: 'desc' });
   const [selectedRows, setSelectedRows] = createSignal<string[]>([]);
-  const [gridColumnOrder, setGridColumnOrder] = createSignal(DATA_GRID_DEFAULT_ORDER);
-  const [gridColumnVisibility, setGridColumnVisibility] = createSignal(DATA_GRID_DEFAULT_VISIBILITY);
-  const [gridColumnPinning, setGridColumnPinning] = createSignal(DATA_GRID_DEFAULT_PINNING);
   const [advancedQuery, setAdvancedQuery] = createSignal<QueryBuilderValue>(createDefaultAdvancedQuery());
 
   const serverRows = createMemo(() => {
@@ -315,6 +249,11 @@ const TablesSection = () => {
   const dataGridDefaultPinning = createMemo<DataGridProColumnPinning>(() =>
     Object.fromEntries(dataGridColumns().map((column) => [column.key, column.pinned ?? null])),
   );
+
+  const [gridColumnOrder, setGridColumnOrder] = createSignal(untrack(dataGridDefaultOrder));
+  const [gridColumnVisibility, setGridColumnVisibility] = createSignal(untrack(dataGridDefaultVisibility));
+  const [gridColumnPinning, setGridColumnPinning] = createSignal(untrack(dataGridDefaultPinning));
+
   const resetGridWorkspace = () => {
     setGridFilterQuery('');
     setGridSort({ key: 'downloads', direction: 'desc' });

@@ -27,8 +27,8 @@
   StatCard,
   Surface,
   Text,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import type { IconTypes } from 'solid-icons';
 import { FaSolidBriefcase, FaSolidWandMagicSparkles } from 'solid-icons/fa';
 import { FiBookOpen, FiFileText } from 'solid-icons/fi';
@@ -48,7 +48,6 @@ const fallbackQuizResults: FlashcardPracticeResult<(typeof DEMO_FLASHCARD_ITEMS)
 );
 
 const LayoutSection = (props: { sectionId: SectionId }) => {
-  const sectionId = () => props.sectionId;
   const year = new Date().getFullYear();
   const { ts, tx } = useI18n();
   const featureCards = createMemo<{ icon: IconTypes; title: string; description: string; tone: FeatureCardTone }[]>(
@@ -109,7 +108,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
 
   return (
     <div>
-      <Show when={sectionId() === 'surfaces-main-layout'}>
+      <Show when={props.sectionId === 'surfaces-main-layout'}>
         <ShowcaseSection
           title={ts('demo.showcase.layout.mainLayout.title')}
           subtitle={ts('demo.showcase.layout.mainLayout.subtitle')}
@@ -167,7 +166,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'surfaces-layouts'}>
+      <Show when={props.sectionId === 'surfaces-layouts'}>
         <ShowcaseSection
           title={ts('demo.showcase.layout.grid.title')}
           subtitle={ts('demo.showcase.layout.grid.subtitle')}
@@ -342,7 +341,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'surfaces-cards'}>
+      <Show when={props.sectionId === 'surfaces-cards'}>
         <ShowcaseSection
           title={ts('demo.showcase.layout.card.title')}
           subtitle={ts('demo.showcase.layout.card.subtitle')}
@@ -517,7 +516,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'surfaces-interactive-cards'}>
+      <Show when={props.sectionId === 'surfaces-interactive-cards'}>
         <ShowcaseSection title="FlipCard" subtitle={ts('demo.showcase.layout.flipCard.subtitle')}>
           <PreviewPanel>
             <PreviewGroup title={ts('demo.text.layout.flipCard.samples.title')}>
@@ -642,7 +641,7 @@ const LayoutSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'surfaces-collapsible'}>
+      <Show when={props.sectionId === 'surfaces-collapsible'}>
         <ShowcaseSection
           title={ts('demo.showcase.layout.accordion.title')}
           subtitle={ts('demo.showcase.layout.accordion.subtitle')}

@@ -20,6 +20,7 @@ import { createEffect, createMemo, createSignal, untrack } from 'solid-js';
 import DemoPageHeader from './components/DemoPageHeader';
 import DemoSectionSwitch from './components/DemoSectionSwitch';
 import { demoAuthConfig } from './demoAuth';
+import { resolveSearchParam, safeSessionStorageRemove, safeSessionStorageSet } from './demoUtils';
 import { en as demoEn, pl as demoPl } from './i18n/messages';
 import {
   DEMO_LAST_SECTION_STORAGE_KEY,
@@ -48,7 +49,7 @@ const AppContent = () => {
 
   createEffect(() => {
     const raw = searchParams.section;
-    const s = typeof raw === 'string' ? raw : Array.isArray(raw) ? raw[0] : undefined;
+    const s = resolveSearchParam(raw);
     if (s && isValidSectionId(s) && s !== activeSection()) {
       setActiveSection(s);
     }
@@ -57,19 +58,14 @@ const AppContent = () => {
   createEffect(() => {
     const id = activeSection();
     const raw = untrack(() => searchParams.section);
-    const cur = typeof raw === 'string' ? raw : Array.isArray(raw) ? raw[0] : undefined;
+    const cur = resolveSearchParam(raw);
     if (cur !== id) {
       setSearchParams({ section: id }, { replace: true });
     }
   });
 
   createEffect(() => {
-    const id = activeSection();
-    try {
-      sessionStorage.setItem(DEMO_LAST_SECTION_STORAGE_KEY, id);
-    } catch {
-      // private mode
-    }
+    safeSessionStorageSet(DEMO_LAST_SECTION_STORAGE_KEY, activeSection());
   });
 
   const meta = () => PAGE_META_KEYS[activeSection()];
@@ -113,11 +109,7 @@ const AppContent = () => {
   );
 
   const clearRememberedSection = () => {
-    try {
-      sessionStorage.removeItem(DEMO_LAST_SECTION_STORAGE_KEY);
-    } catch {
-      // private mode
-    }
+    safeSessionStorageRemove(DEMO_LAST_SECTION_STORAGE_KEY);
     addToast({ type: 'info', message: ts('demo.page.clearRememberedSection.toast') });
   };
 
@@ -126,7 +118,9 @@ const AppContent = () => {
       <SidebarNav
         groups={navGroups()}
         activeId={activeSection()}
-        onSelect={(id) => setActiveSection(id as SectionId)}
+        onSelect={(id) => {
+          if (isValidSectionId(id)) setActiveSection(id);
+        }}
         label={ts('demo.sidebar.title')}
         subtitle={ts('demo.sidebar.subtitle')}
         actions={

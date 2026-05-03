@@ -1,13 +1,13 @@
-﻿import { Button, Card, CodeText, Heading, Text } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
+﻿import { Button, Card, CodeText, Heading, Text, useI18n } from '@jankrajewskiit/ui';
 import { createMemo, For } from 'solid-js';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 import type { DemoOverviewFeaturedSection, DemoOverviewTrack } from '../demoTypes';
+import type { SectionId } from '../nav/demoNavConfig';
 interface OverviewSectionProps {
   tracks: DemoOverviewTrack[];
   featuredSections: DemoOverviewFeaturedSection[];
-  onNavigate: (id: string) => void;
+  onNavigate: (id: SectionId) => void;
 }
 
 const OverviewSection = (props: OverviewSectionProps) => {

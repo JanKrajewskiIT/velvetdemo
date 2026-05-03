@@ -1,5 +1,4 @@
-﻿import { CodeText, Heading, LabelText, Text } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
+﻿import { CodeText, Heading, LabelText, Text, useI18n } from '@jankrajewskiit/ui';
 
 import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../components/ShowcaseSection';
 const TypographySection = () => {

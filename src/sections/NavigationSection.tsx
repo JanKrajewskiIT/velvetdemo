@@ -27,9 +27,9 @@
   Tabs,
   Text,
   ThemeToggle,
+  useI18n,
   Wizard,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { BiLogosReact } from 'solid-icons/bi';
 import { IoAdd, IoCalendar, IoHome, IoPencil, IoPerson, IoSearch, IoSettings, IoShareSocial } from 'solid-icons/io';
 import { createMemo, createSignal, For, Show } from 'solid-js';
@@ -40,7 +40,6 @@ import type { SectionId } from '../nav/demoNavConfig';
 type TabValue = 'preview' | 'code' | 'props';
 
 const NavigationSection = (props: { sectionId: SectionId }) => {
-  const sectionId = () => props.sectionId;
   const { ts, tx } = useI18n();
   const [tab, setTab] = createSignal<TabValue>('preview');
   const [activeStep, setActiveStep] = createSignal('details');
@@ -197,7 +196,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
 
   return (
     <div>
-      <Show when={sectionId() === 'nav-navbar'}>
+      <Show when={props.sectionId === 'nav-navbar'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.navbar.title')}
           subtitle={ts('demo.showcase.navigation.navbar.subtitle')}
@@ -221,7 +220,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-sidebars'}>
+      <Show when={props.sectionId === 'nav-sidebars'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.sidebarAndSidebarNav.title')}
           subtitle={ts('demo.showcase.navigation.sidebarAndSidebarNav.subtitle')}
@@ -352,7 +351,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-breadcrumbs'}>
+      <Show when={props.sectionId === 'nav-breadcrumbs'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.breadcrumbs.title')}
           subtitle={ts('demo.showcase.navigation.breadcrumbs.subtitle')}
@@ -366,7 +365,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-stepper'}>
+      <Show when={props.sectionId === 'nav-stepper'}>
         <>
           <ShowcaseSection
             title={ts('demo.showcase.navigation.stepper.title')}
@@ -410,7 +409,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </>
       </Show>
 
-      <Show when={sectionId() === 'nav-tabs'}>
+      <Show when={props.sectionId === 'nav-tabs'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.tabs.title')}
           subtitle={ts('demo.showcase.navigation.tabs.subtitle')}
@@ -502,7 +501,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-pagination'}>
+      <Show when={props.sectionId === 'nav-pagination'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.pagination.title')}
           subtitle={ts('demo.showcase.navigation.pagination.subtitle')}
@@ -521,7 +520,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-speed-dial'}>
+      <Show when={props.sectionId === 'nav-speed-dial'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.speedDial.title')}
           subtitle={ts('demo.showcase.navigation.speedDial.subtitle')}
@@ -547,7 +546,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-bottom-nav'}>
+      <Show when={props.sectionId === 'nav-bottom-nav'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.bottomNav.title')}
           subtitle={ts('demo.showcase.navigation.bottomNav.subtitle')}
@@ -576,7 +575,7 @@ const NavigationSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'nav-back-to-top'}>
+      <Show when={props.sectionId === 'nav-back-to-top'}>
         <ShowcaseSection
           title={ts('demo.showcase.navigation.backToTop.title')}
           subtitle={ts('demo.showcase.navigation.backToTop.subtitle')}

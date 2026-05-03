@@ -1,5 +1,4 @@
-﻿import { Skeleton, Text } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
+﻿import { Skeleton, Text, useI18n } from '@jankrajewskiit/ui';
 const DemoSectionFallback = () => {
   const { ts } = useI18n();
 

@@ -32,7 +32,7 @@ const DemoSectionSwitch = (props: DemoSectionSwitchProps) => {
           <LazyOverviewSection
             tracks={props.overviewTracks}
             featuredSections={props.featuredSections}
-            onNavigate={(id) => props.onNavigate(id as SectionId)}
+            onNavigate={props.onNavigate}
           />
         </Match>
         <Match when={props.activeSection === 'developer'}>

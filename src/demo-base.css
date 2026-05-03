@@ -76,7 +76,7 @@ body {
   align-items: baseline;
   justify-content: space-between;
   gap: var(--spacing-sm);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 55%) inset;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-surface) 45%, transparent);
 }
 
 .showcaseSection {

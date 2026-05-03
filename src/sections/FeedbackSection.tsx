@@ -42,8 +42,8 @@ import {
   Skeleton,
   Spinner,
   Text,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { IoFolder, IoMail, IoNotifications, IoSearch } from 'solid-icons/io';
 import { createMemo, createSignal, Show } from 'solid-js';
 
@@ -52,7 +52,6 @@ import { DEMO_COLOR_LABEL_CHIPS, DEMO_SELECTABLE_FILTER_ITEMS } from '../fixture
 import type { SectionId } from '../nav/demoNavConfig';
 
 const FeedbackSection = (props: { sectionId: SectionId }) => {
-  const sectionId = () => props.sectionId;
   const { ts, tx } = useI18n();
   const [retried, setRetried] = createSignal(false);
   const [bannerVisible, setBannerVisible] = createSignal(true);
@@ -100,7 +99,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
 
   return (
     <div>
-      <Show when={sectionId() === 'feedback-chips-tags'}>
+      <Show when={props.sectionId === 'feedback-chips-tags'}>
         <ShowcaseSection
           title={ts('demo.showcase.feedback.chip.title')}
           subtitle={ts('demo.showcase.feedback.chip.subtitle')}
@@ -251,7 +250,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'feedback-badges-chips'}>
+      <Show when={props.sectionId === 'feedback-badges-chips'}>
         <ShowcaseSection
           title={ts('demo.showcase.feedback.badge.title')}
           subtitle={ts('demo.showcase.feedback.badge.subtitle')}
@@ -302,7 +301,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'feedback-progress'}>
+      <Show when={props.sectionId === 'feedback-progress'}>
         <ShowcaseSection
           title={ts('demo.showcase.feedback.progress.title')}
           subtitle={ts('demo.showcase.feedback.progress.subtitle')}
@@ -404,7 +403,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'feedback-loaders'}>
+      <Show when={props.sectionId === 'feedback-loaders'}>
         <ShowcaseSection
           title={ts('demo.showcase.feedback.spinner.title')}
           subtitle={ts('demo.showcase.feedback.spinner.subtitle')}
@@ -619,7 +618,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'feedback-alerts'}>
+      <Show when={props.sectionId === 'feedback-alerts'}>
         <ShowcaseSection
           title={ts('demo.showcase.feedback.alert.title')}
           subtitle={ts('demo.showcase.feedback.alert.subtitle')}
@@ -759,7 +758,7 @@ const FeedbackSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'feedback-states'}>
+      <Show when={props.sectionId === 'feedback-states'}>
         <ShowcaseSection
           id="feedback-not-found"
           title={ts('demo.showcase.feedback.notFound.title')}

@@ -16,8 +16,8 @@
   Tooltip,
   Tour,
   type TourStep,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { IoCopy, IoPencil, IoTrash } from 'solid-icons/io';
 import { createMemo, createSignal, Show } from 'solid-js';
 
@@ -25,7 +25,6 @@ import { PreviewGroup, PreviewPanel, ShowcaseMeta, ShowcaseSection } from '../co
 import type { SectionId } from '../nav/demoNavConfig';
 
 const OverlaysSection = (props: { sectionId: SectionId }) => {
-  const sectionId = () => props.sectionId;
   const { ts, tx } = useI18n();
   const [tourOpen, setTourOpen] = createSignal(false);
   const [dialogOpen, setDialogOpen] = createSignal(false);
@@ -59,7 +58,7 @@ const OverlaysSection = (props: { sectionId: SectionId }) => {
 
   return (
     <div>
-      <Show when={sectionId() === 'overlays-tooltips'}>
+      <Show when={props.sectionId === 'overlays-tooltips'}>
         <ShowcaseSection
           title={ts('demo.showcase.overlays.tooltip.title')}
           subtitle={ts('demo.showcase.overlays.tooltip.subtitle')}
@@ -133,7 +132,7 @@ const OverlaysSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'overlays-dialogs'}>
+      <Show when={props.sectionId === 'overlays-dialogs'}>
         <ShowcaseSection
           title={ts('demo.showcase.overlays.dialog.title')}
           subtitle={ts('demo.showcase.overlays.dialog.subtitle')}
@@ -269,7 +268,7 @@ const OverlaysSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'overlays-sheets'}>
+      <Show when={props.sectionId === 'overlays-sheets'}>
         <ShowcaseSection
           title={ts('demo.showcase.overlays.sheets.title')}
           subtitle={ts('demo.showcase.overlays.sheets.subtitle')}
@@ -354,7 +353,7 @@ const OverlaysSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'overlays-context'}>
+      <Show when={props.sectionId === 'overlays-context'}>
         <ShowcaseSection
           title={ts('demo.showcase.overlays.contextMenu.title')}
           subtitle={ts('demo.showcase.overlays.contextMenu.subtitle')}
@@ -382,7 +381,7 @@ const OverlaysSection = (props: { sectionId: SectionId }) => {
         </ShowcaseSection>
       </Show>
 
-      <Show when={sectionId() === 'overlays-lightbox'}>
+      <Show when={props.sectionId === 'overlays-lightbox'}>
         <ShowcaseSection
           title={ts('demo.showcase.overlays.tour.title')}
           subtitle={ts('demo.showcase.overlays.tour.subtitle')}

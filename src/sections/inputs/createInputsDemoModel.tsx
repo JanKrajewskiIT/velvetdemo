@@ -1,5 +1,4 @@
-﻿import { addToast, type MultiSelectOption } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
+﻿import { addToast, type MultiSelectOption, useI18n } from '@jankrajewskiit/ui';
 import { IoAddSharp, IoCalendar, IoMail, IoSearch } from 'solid-icons/io';
 import { createMemo, createSignal } from 'solid-js';
 

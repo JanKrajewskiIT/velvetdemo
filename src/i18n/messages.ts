@@ -1,22 +1,3 @@
-﻿/**
- * VelvetDemo i18n dictionary.
- *
- * All keys live under the `demo.*` top-level namespace to avoid collisions
- * with VelvetUi foundation (`common`, `table`, `dir`, ...) and
- * `@jankrajewskiit/data` (`dataGrid`, `columnManager`, `query`, `trading`).
- *
- * Wired into the app via `App.tsx`:
- *
- *   const dictionaries = defineDictionaries({
- *     en: [uiEn, dataEn, en],
- *     pl: [uiPl, dataPl, pl],
- *   });
- *
- * The TypeScript module augmentation below extends `VelvetI18nDictionary`
- * so every `useI18n().ts(...)` callsite gains autocomplete and compile-time
- * checking for `demo.*` keys.
- */
-
 import { defineDictionary, type TranslationOf } from '@jankrajewskiit/ui';
 
 export const en = defineDictionary({
@@ -1478,8 +1459,6 @@ export const en = defineDictionary({
   'demo.text.typography.tones.title': 'Text tones',
 });
 
-/** Shape of the demo dictionary, with widened string leaves so that
- *  other locales can supply different translations against the same key set. */
 export type DemoDictionary = TranslationOf<typeof en>;
 
 export const pl: DemoDictionary = {
@@ -2958,6 +2937,7 @@ export const pl: DemoDictionary = {
 };
 
 declare module '@jankrajewskiit/ui' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  interface VelvetI18nDictionary extends DemoDictionary {}
+  interface VelvetI18nDictionary extends DemoDictionary {
+    _brand?: never;
+  }
 }

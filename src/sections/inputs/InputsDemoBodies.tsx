@@ -51,8 +51,8 @@
   TextArea,
   ThemeToggle,
   TimePicker,
+  useI18n,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { IoAdd, IoClose, IoDocument, IoDownload, IoEllipsisHorizontal, IoPencil, IoTrash } from 'solid-icons/io';
 import { Show } from 'solid-js';
 

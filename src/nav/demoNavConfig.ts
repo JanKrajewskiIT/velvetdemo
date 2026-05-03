@@ -377,5 +377,4 @@ export const DEMO_SECTION_PAGE_COUNT = NAV_GROUPS.reduce((total, group) => total
 
 export const isValidSectionId = (value: string): value is SectionId => Object.hasOwn(PAGE_META_KEYS, value);
 
-/** sessionStorage key: last demo section when the URL has no valid `?section=`. */
 export const DEMO_LAST_SECTION_STORAGE_KEY = 'velvet-demo-last-section';

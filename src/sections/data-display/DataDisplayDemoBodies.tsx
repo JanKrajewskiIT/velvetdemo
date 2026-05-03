@@ -26,9 +26,9 @@ import {
   TimelineCard,
   TimelineCardEditDialog,
   TreeView,
+  useI18n,
   VirtualizedList,
 } from '@jankrajewskiit/ui';
-import { useI18n } from '@jankrajewskiit/ui';
 import { IoDocumentText, IoFolder, IoImage } from 'solid-icons/io';
 import { For, Show } from 'solid-js';
 
