@@ -5,3 +5,13 @@ dist-ssr/
 .env*
 !deploy/.env.example
 AGENTS.md
+
+# Generated agent customizations
+/AGENTS.md
+/CLAUDE.md
+/.claude
+/.codex
+/.cursor
+/.github/skills/
+/.github/instructions/
+/.vscode/settings.json
