@@ -7,11 +7,19 @@ dist-ssr/
 AGENTS.md
 
 # Generated agent customizations
-/AGENTS.md
-/CLAUDE.md
 /.claude
 /.codex
 /.cursor
 /.github/skills/
 /.github/instructions/
 /.vscode/settings.json
+
+/.claude/skills/
+/.claude/rules/
+/.codex/skills/
+/.cursor/rules/
+/.cursor/skills/
+/.claude/settings.json
+/.codex/config.toml
+/.cursor/cli.json
+/.cursor/permissions.json
