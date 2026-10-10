@@ -1,4 +1,5 @@
-import { type CropArea, ImageCropper, Stack, Text } from '@jankrajewskiit/ui';
+import type { CropArea, ImageCropperProps } from '@jankrajewskiit/ui';
+import { ImageCropper, Segmented, SegmentedItem, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
 import { sampleImage } from './sampleImages';
@@ -11,11 +12,30 @@ const describeCrop = (area: CropArea): string =>
 
 export const ImageCropperDemo = () => {
   const [area, setArea] = createSignal<CropArea>();
+  const [shape, setShape] = createSignal<NonNullable<ImageCropperProps['shape']>>('rect');
+  const [zoom, setZoom] = createSignal(1);
 
   return (
     <Stack gap={3}>
-      <ImageCropper src={IMAGE.src} alt={IMAGE.alt} aspect={4 / 3} height={280} onCropChange={setArea} />
-      <div aria-live="polite">
+      <Segmented role="group" aria-label="Crop shape">
+        <SegmentedItem selected={shape() === 'rect'} onClick={() => setShape('rect')}>
+          Cover
+        </SegmentedItem>
+        <SegmentedItem selected={shape() === 'circle'} onClick={() => setShape('circle')}>
+          Avatar
+        </SegmentedItem>
+      </Segmented>
+      <ImageCropper
+        src={IMAGE.src}
+        alt={IMAGE.alt}
+        shape={shape()}
+        aspect={4 / 3}
+        height={280}
+        zoom={zoom()}
+        onZoomChange={setZoom}
+        onCropChange={setArea}
+      />
+      <div>
         <Show when={area()} fallback={<Text variant="caption">Drag, zoom or rotate to change the crop</Text>}>
           {(current) => (
             <Text variant="caption" tone="secondary" tabular>

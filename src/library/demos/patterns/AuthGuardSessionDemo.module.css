@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.caption {
+  margin: 0;
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+}
+
+.stage {
+  position: relative;
+  min-height: 20rem;
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-sunken);
+  transform: translateZ(0);
+}
+
+.content {
+  padding: var(--space-6);
+}

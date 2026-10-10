@@ -4,8 +4,17 @@ export const dataEn = defineDictionary({
   title: 'Data',
   blurb: 'Tables, grids, lists, timelines and logs.',
   specimens: {
-    'data-table': { name: 'Table', subtitle: 'Sortable, selectable rows with bulk actions' },
-    'data-grid': { name: 'DataGrid', subtitle: 'Editable cells, search, filters and column manager' },
+    'data-table': { name: 'Table', subtitle: 'Pinned, resizable columns with selection and bulk actions' },
+    'data-grid': { name: 'DataGrid', subtitle: 'Editable cells, controlled view, filters and view settings' },
+    'data-column-manager': {
+      name: 'ColumnManager',
+      subtitle: 'Live visibility, order and pinning with a table preview',
+    },
+    'data-table-add-row': { name: 'TableAddRowAction', subtitle: 'Add invitations through a full-width table row' },
+    'data-grid-virtual': {
+      name: 'DataGrid virtualization',
+      subtitle: 'Ten thousand orders, stable keys and expandable details',
+    },
     'data-virtual-table': { name: 'VirtualTable', subtitle: 'One hundred thousand rows in a window' },
     'data-virtual-list': { name: 'VirtualList', subtitle: 'Twenty thousand selectable list rows' },
     'data-accordion': { name: 'Accordion', subtitle: 'Separated, flush and elevated with item tone' },
@@ -22,8 +31,23 @@ export const dataPl: TranslationOf<typeof dataEn> = {
   title: 'Dane',
   blurb: 'Tabele, siatki, listy, osie czasu i logi.',
   specimens: {
-    'data-table': { name: 'Table', subtitle: 'Sortowalne, zaznaczalne wiersze z akcjami zbiorczymi' },
-    'data-grid': { name: 'DataGrid', subtitle: 'Edytowalne komórki, wyszukiwanie, filtry i menedżer kolumn' },
+    'data-table': {
+      name: 'Table',
+      subtitle: 'Przypinane kolumny ze zmianą szerokości, zaznaczaniem i akcjami zbiorczymi',
+    },
+    'data-grid': { name: 'DataGrid', subtitle: 'Edytowalne komórki, kontrolowany widok, filtry i ustawienia widoku' },
+    'data-column-manager': {
+      name: 'ColumnManager',
+      subtitle: 'Widoczność, kolejność i przypinanie z podglądem tabeli',
+    },
+    'data-table-add-row': {
+      name: 'TableAddRowAction',
+      subtitle: 'Dodawanie zaproszeń przez wiersz na całą szerokość tabeli',
+    },
+    'data-grid-virtual': {
+      name: 'Wirtualizacja DataGrid',
+      subtitle: 'Dziesięć tysięcy zamówień, stałe klucze i rozwijane szczegóły',
+    },
     'data-virtual-table': { name: 'VirtualTable', subtitle: 'Sto tysięcy wierszy w oknie widoku' },
     'data-virtual-list': { name: 'VirtualList', subtitle: 'Dwadzieścia tysięcy zaznaczalnych wierszy listy' },
     'data-accordion': { name: 'Accordion', subtitle: 'Rozdzielony, płaski i podniesiony z tonem pozycji' },

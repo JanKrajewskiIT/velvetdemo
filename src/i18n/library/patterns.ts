@@ -4,12 +4,21 @@ export const patternsEn = defineDictionary({
   title: 'Patterns',
   blurb: 'Product-level compositions — AI panels, filters, comments, pricing.',
   specimens: {
+    'patterns-auth-guard': {
+      name: 'AuthGuard',
+      subtitle: 'Offline session, loading, sign-in failure and required roles',
+    },
     'patterns-filters': { name: 'Filters and queries', subtitle: 'Faceted bar, dual chip bar, query builder' },
     'patterns-dialogs': {
       name: 'Labels and import dialogs',
       subtitle: 'Label picker, label manager, import sources',
     },
     'patterns-flashcards': { name: 'Flashcard study flow', subtitle: 'Setup, session and summary in one flow' },
+    'patterns-file-url-import': { name: 'FileUrlImportDialog', subtitle: 'URL validation and local file selection' },
+    'patterns-typing-indicator': {
+      name: 'TypingIndicator',
+      subtitle: 'Animated dots with an accessible status label',
+    },
     'patterns-calendar-organizer': { name: 'Calendar organiser', subtitle: 'Month planner with quick add and drag' },
     'patterns-comment-thread': { name: 'Comment thread', subtitle: 'Replies, likes, inline edit and delete' },
     'patterns-ai-result': { name: 'AI result panel', subtitle: 'Scored answer with sources and feedback' },
@@ -27,6 +36,7 @@ export const patternsPl: TranslationOf<typeof patternsEn> = {
   title: 'Wzorce',
   blurb: 'Kompozycje na poziomie produktu — panele AI, filtry, komentarze, cenniki.',
   specimens: {
+    'patterns-auth-guard': { name: 'AuthGuard', subtitle: 'Lokalna sesja, ładowanie, błąd logowania i wymagane role' },
     'patterns-filters': {
       name: 'Filtry i zapytania',
       subtitle: 'Pasek facetów, podwójny pasek chipów, kreator zapytań',
@@ -39,6 +49,8 @@ export const patternsPl: TranslationOf<typeof patternsEn> = {
       name: 'Nauka z fiszek',
       subtitle: 'Konfiguracja, sesja i podsumowanie w jednym przepływie',
     },
+    'patterns-file-url-import': { name: 'FileUrlImportDialog', subtitle: 'Walidacja URL i wybór lokalnego pliku' },
+    'patterns-typing-indicator': { name: 'TypingIndicator', subtitle: 'Animowane kropki z dostępną etykietą stanu' },
     'patterns-calendar-organizer': {
       name: 'Organizer kalendarza',
       subtitle: 'Planer miesiąca z szybkim dodawaniem i przeciąganiem',

@@ -13,6 +13,7 @@ import {
 import styles from './ChatThreadDemo.module.css';
 
 const formatTime = (): string => new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+const HISTORY_LIMIT = 50;
 
 const authorOf = (entry: ChatEntry): string | undefined => {
   if (entry.role === 'assistant') return CHAT_ASSISTANT_NAME;
@@ -28,7 +29,8 @@ export const ChatThreadDemo = () => {
   let timer: number | undefined;
 
   const append = (entry: Omit<ChatEntry, 'id' | 'time' | 'feedback'>) => {
-    setEntries((current) => [...current, { ...entry, id: nextId++, time: formatTime(), feedback: null }]);
+    const next = { ...entry, id: nextId++, time: formatTime(), feedback: null };
+    setEntries((current) => [...current.slice(-(HISTORY_LIMIT - 1)), next]);
   };
 
   const stopReply = () => {

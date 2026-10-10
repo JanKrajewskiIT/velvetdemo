@@ -3,9 +3,18 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const feedbackEn = defineDictionary({
   title: 'Feedback',
   blurb: 'Alerts, toasts, progress, skeletons and loaders.',
+  region: {
+    add: 'Add a notification',
+    message: 'Notification {id}',
+    description: 'Dismisses after five seconds; hover or focus pauses the timer.',
+  },
   specimens: {
     'feedback-messages': { name: 'Alert and Banner', subtitle: 'Inline messages and the app-wide notice strip' },
     'feedback-toasts': { name: 'Toast', subtitle: 'Static tones and a live toast queue' },
+    'feedback-toast-region': {
+      name: 'ToastRegion',
+      subtitle: 'Contained live region, dismissal and a bounded queue',
+    },
     'feedback-progress': { name: 'Progress', subtitle: 'Bars, sizes, indeterminate and rings' },
     'feedback-loading': { name: 'Spinner and Skeleton', subtitle: 'Unknown waits versus known content shapes' },
     'feedback-loaders': { name: 'Loader and PageLoader', subtitle: 'Decorative brand loaders, every variant' },
@@ -20,12 +29,21 @@ export const feedbackEn = defineDictionary({
 export const feedbackPl: TranslationOf<typeof feedbackEn> = {
   title: 'Informacje zwrotne',
   blurb: 'Alerty, toasty, postęp, szkielety i loadery.',
+  region: {
+    add: 'Dodaj powiadomienie',
+    message: 'Powiadomienie {id}',
+    description: 'Znika po pięciu sekundach; najechanie lub fokus wstrzymuje licznik.',
+  },
   specimens: {
     'feedback-messages': {
       name: 'Alert i Banner',
       subtitle: 'Komunikaty w linii i pasek powiadomień całej aplikacji',
     },
     'feedback-toasts': { name: 'Toast', subtitle: 'Statyczne tony i kolejka toastów na żywo' },
+    'feedback-toast-region': {
+      name: 'ToastRegion',
+      subtitle: 'Region na żywo w ramce, zamykanie i ograniczona kolejka',
+    },
     'feedback-progress': { name: 'Progress', subtitle: 'Paski, rozmiary, stan nieokreślony i pierścienie' },
     'feedback-loading': { name: 'Spinner i Skeleton', subtitle: 'Nieznany czas oczekiwania a znane kształty treści' },
     'feedback-loaders': { name: 'Loader i PageLoader', subtitle: 'Dekoracyjne loadery marki, każdy wariant' },

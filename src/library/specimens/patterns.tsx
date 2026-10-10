@@ -1,12 +1,14 @@
-import { AiResultPanel, QueryBuilder } from '@jankrajewskiit/ui';
+import { AiResultPanel, QueryBuilder, TypingIndicator } from '@jankrajewskiit/ui';
 
 import type { patternsEn } from '../../i18n/library/patterns';
 import { AnalysisFlowDemo } from '../demos/patterns/AnalysisFlowDemo';
+import { AuthGuardDemo } from '../demos/patterns/AuthGuardDemo';
 import { CalendarOrganizerDemo } from '../demos/patterns/CalendarOrganizerDemo';
 import { ChatThreadDemo } from '../demos/patterns/ChatThreadDemo';
 import { ColorLabelsDemo } from '../demos/patterns/ColorLabelsDemo';
 import { CommentThreadDemo } from '../demos/patterns/CommentThreadDemo';
 import { DualFilterBarDemo } from '../demos/patterns/DualFilterBarDemo';
+import { FileUrlImportDemo } from '../demos/patterns/FileUrlImportDemo';
 import { FilterBarDemo } from '../demos/patterns/FilterBarDemo';
 import { FlashcardFlowDemo } from '../demos/patterns/FlashcardFlowDemo';
 import { ImportSourcesDemo } from '../demos/patterns/ImportSourcesDemo';
@@ -17,6 +19,11 @@ import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './patterns.module.css';
 
 export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>>[] = [
+  {
+    id: 'patterns-auth-guard',
+    span: 12,
+    render: () => <AuthGuardDemo />,
+  },
   {
     id: 'patterns-filters',
     span: 12,
@@ -35,6 +42,22 @@ export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>
       <div class={styles.actions}>
         <ColorLabelsDemo />
         <ImportSourcesDemo />
+      </div>
+    ),
+  },
+  {
+    id: 'patterns-file-url-import',
+    span: 6,
+    render: () => <FileUrlImportDemo />,
+  },
+  {
+    id: 'patterns-typing-indicator',
+    span: 6,
+    render: () => (
+      <div class={styles.actions}>
+        <TypingIndicator />
+        <TypingIndicator label="Velvet Assistant is preparing a reply" />
+        <span class={styles.caption}>Preparing a reply</span>
       </div>
     ),
   },

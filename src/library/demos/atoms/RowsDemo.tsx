@@ -1,4 +1,6 @@
-import { Count, Grid, IconTile, Kbd, ListItem, Option, SectionLabel, Stack, Surface } from '@jankrajewskiit/ui';
+import { Count, IconTile, ListItem, SectionLabel, Stack } from '@jankrajewskiit/ui';
+
+import { OptionsDemo } from './OptionsDemo';
 
 export const RowsDemo = () => (
   <Stack gap={5}>
@@ -22,17 +24,7 @@ export const RowsDemo = () => (
     </Stack>
     <Stack gap={2}>
       <SectionLabel>Option</SectionLabel>
-      <Grid min={200} gap={3}>
-        <Surface variant="raised" padding="sm" role="listbox" aria-label="Sort by">
-          <Option label="Recently updated" showCheck selected />
-          <Option label="Name" description="A to Z" showCheck active />
-          <Option label="Owner" showCheck disabled />
-        </Surface>
-        <Surface variant="raised" padding="sm" role="menu" aria-label="Row actions">
-          <Option role="menuitem" icon="copy" label="Duplicate" shortcut={<Kbd plain keys="mod+d" />} />
-          <Option role="menuitem" icon="trash-2" label="Delete" danger />
-        </Surface>
-      </Grid>
+      <OptionsDemo />
     </Stack>
     <Stack gap={2}>
       <SectionLabel>Icon tile</SectionLabel>

@@ -1,0 +1,19 @@
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: var(--fg-primary);
+  font-size: var(--type-body-sm-size);
+}
+
+.cell {
+  padding: var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-default);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.heading {
+  composes: cell;
+  position: relative;
+}

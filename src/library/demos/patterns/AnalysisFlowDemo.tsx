@@ -1,6 +1,6 @@
 import type { AtsResult } from '@jankrajewskiit/ui';
 import { AnalysisRequest, AtsAnalysisPanel } from '@jankrajewskiit/ui';
-import { createSignal } from 'solid-js';
+import { createSignal, onCleanup } from 'solid-js';
 
 import styles from './AnalysisFlowDemo.module.css';
 import { ANALYSIS_SOURCES, ANALYSIS_STEPS, ANALYSIS_TYPES, ATS_RESULT } from './analysisSamples';
@@ -14,6 +14,9 @@ export const AnalysisFlowDemo = () => {
   const [step, setStep] = createSignal(0);
   const [result, setResult] = createSignal<AtsResult | null>(null);
   let runId = 0;
+  onCleanup(() => {
+    runId += 1;
+  });
 
   const run = async () => {
     runId += 1;
@@ -22,7 +25,12 @@ export const AnalysisFlowDemo = () => {
     setResult(null);
     for (let index = 0; index < ANALYSIS_STEPS.length; index += 1) {
       setStep(index);
-      await delay();
+      try {
+        await delay();
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        throw error;
+      }
       if (current !== runId) return;
     }
     setResult(ATS_RESULT);

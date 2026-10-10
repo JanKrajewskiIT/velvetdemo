@@ -39,7 +39,13 @@ const record = (signal: AbortSignal | undefined, resolve: (url: string | undefin
 
   const mimeType = MIME_TYPES.find((type) => MediaRecorder.isTypeSupported(type));
   const stream = canvas.captureStream(FPS);
-  const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+  let recorder: MediaRecorder;
+  try {
+    recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+  } catch (error) {
+    stream.getTracks().forEach((track) => track.stop());
+    throw error;
+  }
   const chunks: Blob[] = [];
   let settled = false;
   let frame = 0;
@@ -63,6 +69,7 @@ const record = (signal: AbortSignal | undefined, resolve: (url: string | undefin
   };
 
   function onAbort(): void {
+    window.clearInterval(timer);
     if (recorder.state === 'inactive') {
       finish(undefined);
       return;
@@ -78,13 +85,19 @@ const record = (signal: AbortSignal | undefined, resolve: (url: string | undefin
     finish(undefined);
   };
   recorder.onstop = () => {
+    if (settled) return;
     const usable = chunks.length > 0 && !signal?.aborted;
     finish(usable ? URL.createObjectURL(new Blob(chunks, { type: recorder.mimeType })) : undefined);
   };
   signal?.addEventListener('abort', onAbort);
 
   drawFrame(context, frame);
-  recorder.start();
+  try {
+    recorder.start();
+  } catch (error) {
+    finish(undefined);
+    throw error;
+  }
 };
 
 export const createDemoVideo = (signal?: AbortSignal): Promise<string | undefined> =>

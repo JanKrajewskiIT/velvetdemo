@@ -10,7 +10,11 @@ const VARIANTS = [
   'subtle',
   'sunken',
   'brand',
+  'brand-solid',
   'inverse',
+  'overlay',
+  'dialog',
+  'glass',
 ] as const satisfies readonly SurfaceVariant[];
 
 export const SurfaceVariantsDemo = () => (

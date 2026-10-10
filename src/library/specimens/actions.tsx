@@ -85,6 +85,8 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
           <p class={styles.caption}>Button</p>
           <div class={styles.row}>
             <CopyButton value="npm install @jankrajewskiit/ui" />
+            <CopyButton value="npm install @jankrajewskiit/ui" variant="primary" size="md" />
+            <CopyButton value="npm install @jankrajewskiit/ui" variant="soft" size="lg" />
             <CopyButton value="npm install @jankrajewskiit/ui" iconOnly variant="ghost" />
           </div>
         </div>
@@ -104,6 +106,9 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
               {(item) => <IconButton variant={item.variant} icon={item.icon} label={item.label} />}
             </For>
             <IconButton icon="chevron-right" label="Next" variant="raised" shape="circle" />
+            <div class={styles.onMedia}>
+              <IconButton icon="play" label="Play preview" variant="overlay" shape="circle" />
+            </div>
           </div>
         </div>
         <div class={styles.group}>
@@ -171,6 +176,14 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
               <ToggleButton value="week">Week</ToggleButton>
               <ToggleButton value="month">Month</ToggleButton>
             </ToggleGroup>
+            <ToggleGroup attached={false} defaultValue={['email']} label="Notification channels" size="lg">
+              <ToggleButton value="email" icon="mail">
+                Email
+              </ToggleButton>
+              <ToggleButton value="in-app" icon="bell">
+                In-app
+              </ToggleButton>
+            </ToggleGroup>
           </div>
         </div>
       </div>
@@ -200,7 +213,7 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
     render: () => (
       <div class={styles.stack}>
         <div class={styles.group}>
-          <p class={styles.caption}>Sign in with a simulated delay</p>
+          <p class={styles.caption}>AuthButton and AuthActionButton use an offline demo session</p>
           <AuthButtonDemo />
         </div>
         <div class={styles.group}>

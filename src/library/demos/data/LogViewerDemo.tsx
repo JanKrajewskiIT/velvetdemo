@@ -8,8 +8,13 @@ const INITIAL_LINE_COUNT = 48;
 
 export const LogViewerDemo = () => {
   const [lines, setLines] = createSignal(makeLogLines(INITIAL_LINE_COUNT));
+  let nextLineIndex = INITIAL_LINE_COUNT;
 
-  const appendLine = () => setLines((current) => [...current, makeLogLine(current.length)].slice(-MAX_LOG_LINES));
+  const appendLine = () => {
+    const line = makeLogLine(nextLineIndex);
+    nextLineIndex += 1;
+    setLines((current) => [...current, line].slice(-MAX_LOG_LINES));
+  };
 
   return (
     <div class={styles.root}>

@@ -10,6 +10,7 @@ const POSTER = sampleImage();
 
 export const VideoPlayerDemo = () => {
   const [clip, setClip] = createSignal<ClipState>({ kind: 'preparing' });
+  const [failed, setFailed] = createSignal(false);
 
   const readyUrl = createMemo(() => {
     const state = clip();
@@ -32,7 +33,9 @@ export const VideoPlayerDemo = () => {
   return (
     <Stack gap={3}>
       <Show when={readyUrl()} fallback={<MediaFrame src={POSTER.src} alt={POSTER.alt} ratio="video" />}>
-        {(url) => <VideoPlayer src={url()} poster={POSTER.src} title="Sample clip" muted loop />}
+        {(url) => (
+          <VideoPlayer src={url()} poster={POSTER.src} title="Sample clip" muted loop onError={() => setFailed(true)} />
+        )}
       </Show>
       <div role="status">
         <Text variant="caption" tone="secondary">
@@ -43,6 +46,11 @@ export const VideoPlayerDemo = () => {
           </Switch>
         </Text>
       </div>
+      <Show when={failed()}>
+        <Text variant="caption" tone="danger">
+          Video playback failed. Try playing the sample again.
+        </Text>
+      </Show>
     </Stack>
   );
 };

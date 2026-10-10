@@ -5,7 +5,7 @@ import styles from './PeopleListDemo.module.css';
 
 const trailing = (text: string) => <span class={styles.trailing}>{text}</span>;
 
-const PEOPLE: ListItemData[] = [
+const makePeople = (): ListItemData[] => [
   {
     id: 'anna',
     title: 'Anna Kowalska',
@@ -36,7 +36,7 @@ const PEOPLE: ListItemData[] = [
   },
 ];
 
-const FILES: ListItemData[] = [
+const makeFiles = (): ListItemData[] => [
   { id: 'roadmap', title: 'Roadmap.pdf', leading: <Glyph name="file-text" />, trailing: trailing('1.2 MB') },
   { id: 'brand', title: 'Brand guidelines', leading: <Glyph name="folder" />, trailing: trailing('14 files') },
   { id: 'cover', title: 'Cover.png', leading: <Glyph name="image" />, trailing: trailing('480 KB') },
@@ -44,11 +44,13 @@ const FILES: ListItemData[] = [
 ];
 
 export const PeopleListDemo = () => {
+  const people = makePeople();
+  const files = makeFiles();
   const [selected, setSelected] = createSignal<string | number>('anna');
   return (
     <div class={styles.root}>
-      <List items={PEOPLE} value={selected()} onValueChange={setSelected} label="Team" />
-      <List items={FILES} size="sm" label="Files" />
+      <List items={people} value={selected()} onValueChange={setSelected} label="Team" />
+      <List items={files} size="sm" label="Files" />
     </div>
   );
 };

@@ -2,9 +2,13 @@
 
 VelvetUi component showcase application.
 
+See [showcase coverage](docs/showcase-coverage.md) for the public component inventory, live examples and the API changes covered by the demo.
+
 Consumes published packages from GitHub Packages:
 
 - `@jankrajewskiit/ui`
+- `@jankrajewskiit/auth` (offline showcase sessions)
+- `@jankrajewskiit/i18n`
 - `@jankrajewskiit/configs` (dev)
 
 ## Local development

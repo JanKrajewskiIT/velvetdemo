@@ -1,12 +1,19 @@
-import { DataGrid, type GridColumn, type QueryField } from '@jankrajewskiit/ui';
+import {
+  Button,
+  DataGrid,
+  type GridColumn,
+  type GridViewState,
+  type QueryField,
+  type RowKey,
+} from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import { type Member, MEMBERS, ROLES } from './members';
 
 const COLUMNS: GridColumn<Member>[] = [
-  { key: 'name', label: 'Member', editable: true, width: 200 },
+  { key: 'name', label: 'Member', editable: true, width: 200, pin: 'left', canHide: false },
   { key: 'role', label: 'Role', editable: true, options: ROLES, width: 140 },
-  { key: 'seats', label: 'Seats', type: 'number', editable: true, width: 120 },
+  { key: 'seats', label: 'Seats', type: 'number', editable: true, width: 120, minWidth: 80, maxWidth: 240 },
   { key: 'email', label: 'Email', width: 280 },
   { key: 'status', label: 'Status', width: 140 },
 ];
@@ -19,14 +26,42 @@ const FILTER_FIELDS: QueryField[] = [
 
 export const DataGridDemo = () => {
   const [rows, setRows] = createSignal(MEMBERS);
+  const [selected, setSelected] = createSignal<RowKey[]>([]);
+  const [view, setView] = createSignal<GridViewState>({
+    search: '',
+    sort: null,
+    columns: COLUMNS.map((column) => ({ key: column.key, visible: !column.hidden, pin: column.pin ?? null })),
+    widths: {},
+  });
+  const suspendMembers = (members: Member[]) => {
+    const keys = new Set(members.map((member) => member.id));
+    setRows((current) => current.map<Member>((row) => (keys.has(row.id) ? { ...row, status: 'Suspended' } : row)));
+    setSelected([]);
+  };
   return (
     <DataGrid
+      label="Editable team members"
       columns={COLUMNS}
       rows={rows()}
       onRowsChange={(next) => setRows(next)}
       height={320}
       searchable
       selectable
+      selected={selected()}
+      onSelectionChange={setSelected}
+      bulkActions={(members) => (
+        <Button size="sm" variant="secondary" onClick={() => suspendMembers(members)}>
+          Suspend
+        </Button>
+      )}
+      view={view()}
+      onViewChange={setView}
+      viewSettings
+      renderDetail={(row) => (
+        <p>
+          {row.name} · {row.email}
+        </p>
+      )}
       columnManager
       filterFields={FILTER_FIELDS}
       onExport={null}

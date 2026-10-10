@@ -27,7 +27,7 @@ export const VirtualTableDemo = () => {
   return (
     <div class={styles.root}>
       <p class={styles.caption}>{ROW_COUNT.toLocaleString('en')} orders. Only the visible window is in the DOM.</p>
-      <VirtualTable columns={COLUMNS} rows={rows} height={320} />
+      <VirtualTable columns={COLUMNS} rows={rows} rowKey="reference" height={320} />
     </div>
   );
 };

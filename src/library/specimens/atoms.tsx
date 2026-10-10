@@ -1,6 +1,9 @@
 import type { atomsEn } from '../../i18n/library/atoms';
+import { ColumnResizeDemo } from '../demos/atoms/ColumnResizeDemo';
 import { DisclosureDismissDemo } from '../demos/atoms/DisclosureDismissDemo';
+import { FieldHintDemo } from '../demos/atoms/FieldHintDemo';
 import { FieldShellDemo } from '../demos/atoms/FieldShellDemo';
+import { IndicatorDemo } from '../demos/atoms/IndicatorDemo';
 import { RowsDemo } from '../demos/atoms/RowsDemo';
 import { StatusMarksDemo } from '../demos/atoms/StatusMarksDemo';
 import { StepsDemo } from '../demos/atoms/StepsDemo';
@@ -46,6 +49,21 @@ export const atomSpecimens: readonly Specimen<SpecimenIdOf<typeof atomsEn>>[] = 
     id: 'atoms-text-emphasis',
     span: 4,
     render: () => <TextEmphasisDemo />,
+  },
+  {
+    id: 'atoms-indicator',
+    span: 6,
+    render: () => <IndicatorDemo />,
+  },
+  {
+    id: 'atoms-column-resize',
+    span: 6,
+    render: () => <ColumnResizeDemo />,
+  },
+  {
+    id: 'atoms-field-hint',
+    span: 6,
+    render: () => <FieldHintDemo />,
   },
   {
     id: 'atoms-steps-tracks',

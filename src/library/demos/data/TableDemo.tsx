@@ -10,6 +10,8 @@ const COLUMNS: TableColumn<Member>[] = [
     key: 'name',
     label: 'Member',
     sortable: true,
+    width: 220,
+    pin: 'left',
     render: (row) => (
       <span class={styles.member}>
         <Avatar name={row.name} size="xs" color="auto" />
@@ -17,7 +19,7 @@ const COLUMNS: TableColumn<Member>[] = [
       </span>
     ),
   },
-  { key: 'role', label: 'Role', sortable: true, hideOnMobile: true },
+  { key: 'role', label: 'Role', sortable: true, hideOnMobile: true, width: 140 },
   {
     key: 'status',
     label: 'Status',
@@ -35,17 +37,30 @@ const COLUMNS: TableColumn<Member>[] = [
     hideOnMobile: true,
     render: (row) => formatDaysAgo(row.lastActiveDays),
   },
-  { key: 'seats', label: 'Seats', align: 'right', sortable: true },
+  { key: 'seats', label: 'Seats', align: 'right', sortable: true, pin: 'right', width: 90 },
 ];
 
 export const TableDemo = () => {
+  const [rows, setRows] = createSignal(MEMBERS);
   const [selected, setSelected] = createSignal<RowKey[]>([]);
   const [loading, setLoading] = createSignal(false);
+  const suspendSelected = () => {
+    const keys = new Set(selected());
+    setRows((current) => current.map<Member>((row) => (keys.has(row.id) ? { ...row, status: 'Suspended' } : row)));
+    setSelected([]);
+  };
+  const changeSelectedRole = () => {
+    const keys = new Set(selected());
+    setRows((current) => current.map((row) => (keys.has(row.id) ? { ...row, role: 'Viewer' } : row)));
+    setSelected([]);
+  };
   return (
     <Table
       title="Members"
       columns={COLUMNS}
-      rows={MEMBERS}
+      rows={rows()}
+      resizable
+      maxHeight={340}
       selectable
       selected={selected()}
       onSelectedChange={setSelected}
@@ -59,10 +74,10 @@ export const TableDemo = () => {
       }
       bulkActions={
         <>
-          <Button size="sm" variant="secondary">
-            Change role
+          <Button size="sm" variant="secondary" onClick={changeSelectedRole}>
+            Make viewer
           </Button>
-          <Button size="sm" variant="secondary">
+          <Button size="sm" variant="secondary" onClick={suspendSelected}>
             Suspend
           </Button>
         </>

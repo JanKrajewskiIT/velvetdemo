@@ -19,13 +19,18 @@ export const CalendarEventsDemo = () => {
     <div class={styles.root}>
       <CalendarEventButton
         event={{ title: 'Design review', start, durationMinutes: REVIEW_MINUTES, location: 'Online' }}
+        variant="primary"
       />
       <CalendarEventButton
         event={{ title: 'Release deadline', start, allDay: true }}
         providers={['ics']}
         label="Download .ics"
+        variant="soft"
+        size="sm"
       />
-      <CalendarEventButton event={{ title: 'Design review', start }} iconOnly />
+      <CalendarEventButton event={{ title: 'Design review', start }} iconOnly variant="ghost" size="lg" />
+      <CalendarEventButton event={{ title: 'Planning', start }} added />
+      <CalendarEventButton event={{ title: 'Planning', start }} disabled />
     </div>
   );
 };

@@ -27,6 +27,7 @@ import { NotificationsDemo } from '../demos/feedback/NotificationsDemo';
 import { PreviewTile } from '../demos/feedback/PreviewTile';
 import { SetupChecklistDemo } from '../demos/feedback/SetupChecklistDemo';
 import { ToastLiveDemo } from '../demos/feedback/ToastLiveDemo';
+import { ToastRegionDemo } from '../demos/feedback/ToastRegionDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './feedback.module.css';
 
@@ -133,6 +134,11 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
         </CaptionedRow>
       </div>
     ),
+  },
+  {
+    id: 'feedback-toast-region',
+    span: 6,
+    render: () => <ToastRegionDemo />,
   },
   {
     id: 'feedback-progress',

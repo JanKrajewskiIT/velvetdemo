@@ -4,7 +4,7 @@ export const cardsEn = defineDictionary({
   title: 'Cards',
   blurb: 'Card and every card built on top of it.',
   specimens: {
-    'cards-surfaces': { name: 'Card surfaces', subtitle: 'Nine paints from one Card prop' },
+    'cards-surfaces': { name: 'Card surfaces', subtitle: 'All twelve Surface paints through Card' },
     'cards-card': { name: 'Card', subtitle: 'Regions, padding, hover and selection' },
     'cards-structured': { name: 'StructuredCard', subtitle: 'Media, scrim, tag, header, body and footer' },
     'cards-flip': { name: 'FlipCard', subtitle: 'Two faces, flips on click or Enter' },
@@ -18,7 +18,7 @@ export const cardsPl: TranslationOf<typeof cardsEn> = {
   title: 'Karty',
   blurb: 'Card oraz wszystkie karty zbudowane na jej podstawie.',
   specimens: {
-    'cards-surfaces': { name: 'Powierzchnie kart', subtitle: 'Dziewięć wypełnień z jednej właściwości Card' },
+    'cards-surfaces': { name: 'Powierzchnie kart', subtitle: 'Wszystkie dwanaście wypełnień Surface w Card' },
     'cards-card': { name: 'Card', subtitle: 'Obszary, odstępy, najechanie i zaznaczenie' },
     'cards-structured': { name: 'StructuredCard', subtitle: 'Media, przyciemnienie, tag, nagłówek, treść i stopka' },
     'cards-flip': { name: 'FlipCard', subtitle: 'Dwie strony, obracana kliknięciem lub klawiszem Enter' },

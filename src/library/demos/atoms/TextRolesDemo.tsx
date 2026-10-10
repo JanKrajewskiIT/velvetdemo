@@ -8,9 +8,14 @@ interface RoleSample {
 }
 
 const ROLES: readonly RoleSample[] = [
+  { role: 'display-lg', sample: 'Velvet' },
+  { role: 'display-md', sample: 'Design' },
   { role: 'display-sm', sample: 'Quiet confidence' },
+  { role: 'h1', sample: 'Page heading' },
   { role: 'h2', sample: 'Section heading' },
+  { role: 'h3', sample: 'Group heading' },
   { role: 'h4', sample: 'Card heading' },
+  { role: 'h5', sample: 'Detail heading' },
   { role: 'title', sample: 'Panel title' },
   { role: 'body-lg', sample: 'Lead paragraph' },
   { role: 'body', sample: 'Body copy for reading' },
@@ -18,6 +23,7 @@ const ROLES: readonly RoleSample[] = [
   { role: 'label', sample: 'Field label' },
   { role: 'caption', sample: 'Caption and metadata' },
   { role: 'overline', sample: 'Overline' },
+  { role: 'section', sample: 'Section label' },
   { role: 'kpi', sample: '1,284' },
 ];
 

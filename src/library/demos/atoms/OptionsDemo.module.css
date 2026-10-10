@@ -1,0 +1,26 @@
+.row {
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--border-width-thick) solid var(--border-focus);
+    outline-offset: var(--space-0-5);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}

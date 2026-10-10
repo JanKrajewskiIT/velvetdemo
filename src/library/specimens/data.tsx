@@ -2,12 +2,15 @@ import { Accordion, CodeSnippet, DescriptionList, Divider, SkillBar, Timeline } 
 
 import type { dataEn } from '../../i18n/library/data';
 import { FAQ_ITEMS, STATUS_ITEMS } from '../demos/data/accordionItems';
+import { ColumnManagerDemo } from '../demos/data/ColumnManagerDemo';
 import { DataGridDemo } from '../demos/data/DataGridDemo';
 import { DiffViewerDemo } from '../demos/data/DiffViewerDemo';
 import { LogViewerDemo } from '../demos/data/LogViewerDemo';
 import { PeopleListDemo } from '../demos/data/PeopleListDemo';
+import { TableAddRowDemo } from '../demos/data/TableAddRowDemo';
 import { TableDemo } from '../demos/data/TableDemo';
 import { makeFeedItems, makeHistoryItems, makePipelineItems } from '../demos/data/timelines';
+import { VirtualDataGridDemo } from '../demos/data/VirtualDataGridDemo';
 import { VirtualListDemo } from '../demos/data/VirtualListDemo';
 import { VirtualTableDemo } from '../demos/data/VirtualTableDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
@@ -46,6 +49,21 @@ export const dataSpecimens: readonly Specimen<SpecimenIdOf<typeof dataEn>>[] = [
     id: 'data-grid',
     span: 12,
     render: () => <DataGridDemo />,
+  },
+  {
+    id: 'data-column-manager',
+    span: 12,
+    render: () => <ColumnManagerDemo />,
+  },
+  {
+    id: 'data-table-add-row',
+    span: 6,
+    render: () => <TableAddRowDemo />,
+  },
+  {
+    id: 'data-grid-virtual',
+    span: 12,
+    render: () => <VirtualDataGridDemo />,
   },
   {
     id: 'data-virtual-table',

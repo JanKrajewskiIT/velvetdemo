@@ -10,6 +10,7 @@ import { LibrarySection } from './components/library/LibrarySection';
 import { ShowcaseNav } from './components/ShowcaseNav';
 import { SiteFooter } from './components/SiteFooter';
 import { countSpecimens } from './library/countSpecimens';
+import { OfflineAuthShowcaseProvider } from './library/demos/actions/OfflineAuthShowcaseProvider';
 import { LIBRARY_GROUPS } from './library/groups';
 
 const SPECIMEN_COUNT = countSpecimens(LIBRARY_GROUPS);
@@ -30,7 +31,9 @@ export const App = () => {
         <BrandBand />
         <FoundationsSection />
         <EcosystemSection />
-        <LibrarySection groups={LIBRARY_GROUPS} />
+        <OfflineAuthShowcaseProvider>
+          <LibrarySection groups={LIBRARY_GROUPS} />
+        </OfflineAuthShowcaseProvider>
       </main>
       <SiteFooter />
     </>

@@ -25,7 +25,7 @@ export const AudioPlayerDemo = () => {
       <div role="status">
         <Show when={failed()}>
           <Text variant="caption" tone="danger">
-            Playback was blocked by the browser
+            Audio playback failed. Try playing the sample again.
           </Text>
         </Show>
       </div>

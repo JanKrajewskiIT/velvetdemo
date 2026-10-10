@@ -2,6 +2,8 @@ import type { DualFilterOption } from '@jankrajewskiit/ui';
 import { DualFilterBar } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
+import styles from './DualFilterBarDemo.module.css';
+
 const RESULTS_PER_FILTER = 11;
 const ALL_RESULTS = 73;
 
@@ -20,16 +22,30 @@ const SORTS: DualFilterOption[] = [
 export const DualFilterBarDemo = () => {
   const [filters, setFilters] = createSignal<string[]>(['design']);
   const [query, setQuery] = createSignal('');
+  const [sort, setSort] = createSignal('new');
 
   return (
-    <DualFilterBar
-      filters={FILTERS}
-      filterValue={filters()}
-      onFilterChange={setFilters}
-      sorts={SORTS}
-      search={query()}
-      onSearchChange={setQuery}
-      count={filters().length ? filters().length * RESULTS_PER_FILTER : ALL_RESULTS}
-    />
+    <div class={styles.root}>
+      <DualFilterBar
+        filters={FILTERS}
+        filterValue={filters()}
+        onFilterChange={setFilters}
+        sorts={SORTS}
+        sortValue={sort()}
+        onSortChange={setSort}
+        search={query()}
+        onSearchChange={setQuery}
+        count={filters().length ? filters().length * RESULTS_PER_FILTER : ALL_RESULTS}
+      />
+      <DualFilterBar
+        variant="simple"
+        filters={FILTERS}
+        filterValue={filters()}
+        onFilterChange={setFilters}
+        sorts={SORTS}
+        sortValue={sort()}
+        onSortChange={setSort}
+      />
+    </div>
   );
 };

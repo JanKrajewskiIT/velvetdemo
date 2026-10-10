@@ -6,6 +6,7 @@ import { CarouselDemo } from '../demos/media/CarouselDemo';
 import { ImageCropperDemo } from '../demos/media/ImageCropperDemo';
 import { LightboxDemo } from '../demos/media/LightboxDemo';
 import { MarqueeDemo } from '../demos/media/MarqueeDemo';
+import { PlayerButtonDemo } from '../demos/media/PlayerButtonDemo';
 import { sampleImage, sampleImages } from '../demos/media/sampleImages';
 import { VideoPlayerDemo } from '../demos/media/VideoPlayerDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
@@ -17,6 +18,10 @@ const COVER_GRID_IMAGES = sampleImages(6).map((image, index) =>
 );
 
 const FEATURE_GRID_IMAGES = sampleImages(5);
+const MASONRY_IMAGES = sampleImages(5).map((image, index) => ({
+  ...image,
+  ratio: index % 2 === 0 ? '4 / 3' : '3 / 4',
+}));
 
 export const mediaSpecimens: readonly Specimen<SpecimenIdOf<typeof mediaEn>>[] = [
   {
@@ -53,6 +58,16 @@ export const mediaSpecimens: readonly Specimen<SpecimenIdOf<typeof mediaEn>>[] =
     id: 'media-image-grid-feature',
     span: 6,
     render: () => <ImageGrid layout="feature" images={FEATURE_GRID_IMAGES} />,
+  },
+  {
+    id: 'media-image-grid-masonry',
+    span: 6,
+    render: () => <ImageGrid layout="masonry" columns={2} max={4} images={MASONRY_IMAGES} />,
+  },
+  {
+    id: 'media-player-button',
+    span: 6,
+    render: () => <PlayerButtonDemo />,
   },
   {
     id: 'media-marquee',

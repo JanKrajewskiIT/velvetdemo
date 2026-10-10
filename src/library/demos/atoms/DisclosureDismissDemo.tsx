@@ -13,6 +13,7 @@ import { createSignal, createUniqueId } from 'solid-js';
 
 export const DisclosureDismissDemo = () => {
   const [open, setOpen] = createSignal(false);
+  const [search, setSearch] = createSignal('velvet');
   const panelId = createUniqueId();
 
   return (
@@ -37,8 +38,17 @@ export const DisclosureDismissDemo = () => {
         <Stack direction="row" gap={3} align="center" wrap>
           <CloseButton label="Close panel" />
           <CloseButton size="xs" label="Dismiss notice" />
-          <Control end={<CloseButton variant="field" label="Clear search" />}>
-            <input class="vui-control__input" aria-label="Search" value="velvet" />
+          <Control
+            end={
+              <CloseButton variant="field" label="Clear search" disabled={!search()} onClick={() => setSearch('')} />
+            }
+          >
+            <input
+              class="vui-control__input"
+              aria-label="Search"
+              value={search()}
+              onInput={(event) => setSearch(event.currentTarget.value)}
+            />
           </Control>
         </Stack>
       </Stack>

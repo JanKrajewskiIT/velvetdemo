@@ -16,6 +16,9 @@ const VARIANTS: readonly VariantNote[] = [
   { variant: 'brand', note: 'Brand-tinted fill and border.' },
   { variant: 'brand-solid', note: 'Full brand fill for one focal card.' },
   { variant: 'inverse', note: 'Opposite theme for contrast.' },
+  { variant: 'overlay', note: 'Elevated paint for floating content.' },
+  { variant: 'dialog', note: 'Modal surface with dialog elevation.' },
+  { variant: 'glass', note: 'Translucent surface with backdrop blur.' },
 ];
 
 export const CardVariantsDemo = () => (

@@ -1,0 +1,15 @@
+.stage {
+  position: relative;
+  min-height: calc(var(--space-24) * 4);
+  contain: layout;
+  border: var(--border-width) dashed var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.stage .region {
+  position: absolute;
+  inset: var(--space-4);
+  width: auto;
+  justify-content: flex-end;
+}

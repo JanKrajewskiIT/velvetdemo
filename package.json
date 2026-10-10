@@ -26,18 +26,19 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@jankrajewskiit/i18n": "^3.3.4",
-    "@jankrajewskiit/ui": "^3.3.6",
+    "@jankrajewskiit/auth": "^3.4.1",
+    "@jankrajewskiit/i18n": "^3.4.1",
+    "@jankrajewskiit/ui": "^3.4.3",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {
-    "@jankrajewskiit/configs": "^3.3.4",
+    "@jankrajewskiit/configs": "^3.4.2",
     "@types/node": "^26.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "stylelint": "^17.16.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.4",
