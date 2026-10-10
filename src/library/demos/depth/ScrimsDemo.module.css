@@ -1,0 +1,116 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 1.5), 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  display: grid;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 var(--border-width) var(--border-subtle);
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-1-5);
+  padding: var(--space-2);
+}
+
+.art span {
+  border-radius: var(--radius-sm);
+}
+
+.art span:nth-child(1) {
+  background: var(--bg-brand);
+}
+
+.art span:nth-child(2) {
+  background: var(--dv-4);
+}
+
+.art span:nth-child(3) {
+  background: var(--dv-2);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--frame-scrim);
+}
+
+.content {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: var(--space-3);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 80%;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--bg-overlay);
+  box-shadow: var(--elevation-dialog);
+}
+
+.dialogTitle {
+  font: var(--type-label);
+  color: var(--fg-primary);
+}
+
+.dialogLine {
+  height: var(--space-2);
+  width: 70%;
+  border-radius: var(--radius-full);
+  background: var(--border-default);
+}
+
+.imageCaption {
+  display: flex;
+  flex-direction: column;
+  place-self: end start;
+  margin: 0;
+  font: var(--type-caption);
+  color: var(--on-color-muted);
+}
+
+.imageCaption strong {
+  font: var(--type-label);
+  color: var(--on-color-fg);
+}
+
+.viewer {
+  margin: 0;
+  font: var(--type-label);
+  color: var(--on-color-fg);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  font: var(--type-caption);
+  color: var(--fg-secondary);
+}
+
+.caption code {
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}

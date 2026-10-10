@@ -1,0 +1,29 @@
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  min-width: 0;
+}
+
+.stage {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--space-24) * 1.25);
+  margin-bottom: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+}
+
+.name {
+  color: var(--fg-primary);
+  font: var(--type-label);
+}
+
+.token {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}

@@ -1,0 +1,8 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+  min-height: 320px;
+  min-width: 0;
+}

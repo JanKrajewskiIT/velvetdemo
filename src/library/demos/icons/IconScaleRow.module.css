@@ -1,0 +1,56 @@
+.row {
+  display: grid;
+  grid-template-columns: var(--size-icon-tile-md) 2.5rem minmax(0, 1fr) 3.5rem;
+  grid-template-areas:
+    'stage step token size'
+    'stage use use use';
+  align-items: center;
+  gap: var(--space-0-5) var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.stage {
+  display: grid;
+  grid-area: stage;
+  place-items: center;
+  height: var(--size-icon-tile-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  color: var(--fg-primary);
+}
+
+.row .glyph {
+  font-size: var(--glyph-size);
+}
+
+.step {
+  grid-area: step;
+  color: var(--fg-primary);
+  font: var(--type-label);
+}
+
+.token {
+  grid-area: token;
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}
+
+.size {
+  grid-area: size;
+  color: var(--fg-primary);
+  font: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.use {
+  grid-area: use;
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+}

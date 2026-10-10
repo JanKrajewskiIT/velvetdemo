@@ -1,0 +1,14 @@
+.centred {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.gauges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: var(--space-6);
+  min-width: 0;
+}

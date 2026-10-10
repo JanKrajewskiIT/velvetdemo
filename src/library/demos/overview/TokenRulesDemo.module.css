@@ -1,0 +1,97 @@
+.rules {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.head,
+.row {
+  display: grid;
+  grid-template-columns: var(--space-20) minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+.head {
+  border-bottom-color: var(--border-default);
+  font: var(--type-overline);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+.read,
+.never {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+
+.read {
+  color: var(--status-success-fg);
+}
+
+.never {
+  color: var(--status-danger-fg);
+}
+
+.area {
+  font: var(--type-label);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  min-width: 0;
+  margin: 0;
+}
+
+.cellLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.code {
+  color: var(--fg-primary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+  overflow-wrap: anywhere;
+}
+
+.struck {
+  color: var(--fg-tertiary);
+  text-decoration: line-through;
+  text-decoration-color: var(--status-danger-border);
+}
+
+@container (max-width: 35.99rem) {
+  .head {
+    display: none;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1-5);
+    padding: var(--space-3) 0;
+  }
+
+  .cellLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    color: var(--fg-tertiary);
+    font: var(--type-overline);
+    letter-spacing: var(--type-overline-tracking);
+    text-transform: uppercase;
+  }
+}

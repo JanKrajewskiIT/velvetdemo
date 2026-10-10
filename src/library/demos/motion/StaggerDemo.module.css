@@ -1,0 +1,86 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.note {
+  margin: 0;
+  font: var(--type-body-sm);
+  color: var(--fg-secondary);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: var(--space-8);
+  padding: 0 var(--space-3);
+  font: var(--type-body-sm);
+  color: var(--fg-primary);
+}
+
+.row + .row {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+.tokens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.token {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+}
+
+.token dt,
+.token dd {
+  margin: 0;
+}
+
+.token code {
+  font: var(--type-caption);
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}
+
+.token dd {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.use {
+  font: var(--type-caption);
+  color: var(--fg-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label {
+    /* Inline animation shorthand would otherwise win. */
+    animation: none !important;
+  }
+}

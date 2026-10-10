@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.readout {
+  margin: 0;
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+}

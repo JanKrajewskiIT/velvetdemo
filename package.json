@@ -26,26 +26,20 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@jankrajewskiit/auth": "^3.3.4",
-    "@jankrajewskiit/data": "^0.2.8",
-    "@jankrajewskiit/reactive": "^3.3.5",
+    "@jankrajewskiit/i18n": "^3.3.4",
     "@jankrajewskiit/ui": "^3.3.6",
-    "@solidjs/router": "^1.0.0",
-    "lightweight-charts": "^5.2.1",
-    "oidc-client-ts": "^3.5.0",
-    "solid-icons": "^1.2.0",
-    "solid-js": "^1.9.17",
-    "solid-markdown": "^2.1.1"
+    "solid-js": "^1.9.17"
   },
   "devDependencies": {
     "@jankrajewskiit/configs": "^3.3.4",
     "@types/node": "^26.6.5",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.9",
     "stylelint": "^17.16.0",
-    "typescript": "~7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.4",
     "vite-plugin-solid": "^2.11.14"
   }

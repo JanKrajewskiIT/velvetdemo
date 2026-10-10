@@ -1,0 +1,6 @@
+.value {
+  font: var(--type-caption);
+  font-family: var(--font-mono);
+  color: var(--fg-secondary);
+  overflow-wrap: anywhere;
+}

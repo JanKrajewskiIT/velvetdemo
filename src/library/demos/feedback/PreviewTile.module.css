@@ -1,0 +1,24 @@
+.tile {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  margin: 0;
+}
+
+.stage {
+  display: grid;
+  min-height: var(--space-24);
+  flex: 1;
+  place-items: center;
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.caption {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+  font-family: var(--font-mono);
+}

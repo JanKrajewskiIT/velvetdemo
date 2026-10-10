@@ -1,0 +1,82 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.note {
+  margin: 0;
+  font: var(--type-body-sm);
+  color: var(--fg-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-24) * 1.2), 1fr));
+  gap: var(--space-5) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.well {
+  display: grid;
+  place-items: center;
+  height: var(--space-20);
+  margin-bottom: var(--space-1);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.sample[data-kind='tile'] {
+  width: var(--space-12);
+  height: var(--space-8);
+  border-radius: var(--radius-md);
+  background: var(--bg-brand);
+}
+
+.sample[data-kind='ring'] {
+  width: var(--space-8);
+  height: var(--space-8);
+  border: var(--border-width-thick) solid var(--border-default);
+  border-top-color: var(--action-primary);
+  border-radius: var(--radius-full);
+}
+
+.name {
+  font: var(--type-caption);
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}
+
+.detail {
+  font: var(--type-caption);
+  color: var(--fg-secondary);
+}
+
+code.detail {
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sample {
+    /* Inline animation shorthand would otherwise win. */
+    animation: none !important;
+  }
+}

@@ -1,0 +1,33 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.caption {
+  padding-bottom: var(--space-3);
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  text-align: left;
+}
+
+.head {
+  padding: var(--space-1-5) var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-default);
+  color: var(--fg-tertiary);
+  font: var(--type-overline);
+  letter-spacing: var(--type-overline-tracking);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.cell {
+  padding: var(--space-1-5) var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+  font: var(--type-body);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.proportional {
+  font-variant-numeric: proportional-nums;
+}

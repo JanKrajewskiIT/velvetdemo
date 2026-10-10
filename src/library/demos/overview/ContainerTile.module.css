@@ -1,0 +1,35 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.live {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.live > * {
+  flex: 1;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.name {
+  color: var(--fg-brand);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+  overflow-wrap: anywhere;
+}
+
+.purpose {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+}

@@ -1,0 +1,94 @@
+.stack {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.list,
+.banners {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.banners {
+  gap: var(--space-2);
+}
+
+.alertGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 2.5), 1fr));
+  align-items: start;
+  gap: var(--space-3);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 2.75), 1fr));
+  gap: var(--space-6);
+}
+
+.overlay {
+  width: 100%;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.overlayBody {
+  min-height: var(--space-24);
+  margin: 0;
+  padding: var(--space-4);
+  color: var(--fg-secondary);
+  font: var(--type-body);
+}
+
+.skeletonCard {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.identityText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tileGrid,
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 1.5), 1fr));
+  gap: var(--space-3);
+}
+
+.statusGrid {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 2.25), 1fr));
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.pageLoaderBox {
+  position: relative;
+  width: 100%;
+  height: var(--space-24);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}

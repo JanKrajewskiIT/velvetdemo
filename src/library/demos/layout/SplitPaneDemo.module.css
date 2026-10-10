@@ -1,0 +1,11 @@
+.frame {
+  height: calc(var(--space-16) * 4);
+}
+
+.list {
+  padding: var(--space-2);
+}
+
+.detail {
+  padding: var(--space-4);
+}

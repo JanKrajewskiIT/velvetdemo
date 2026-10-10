@@ -1,4 +1,4 @@
-# VelvetUi Demo — production docker-compose with Traefik labels
+# VelvetUi Demo - production docker-compose with Traefik labels
 # Deployed to /opt/velvet/ on VPS
 
 services:

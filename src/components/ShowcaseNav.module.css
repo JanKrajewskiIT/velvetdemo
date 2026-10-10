@@ -1,0 +1,74 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--bg-page) 82%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inner {
+  composes: wrap from '../styles/shared.module.css';
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 64px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--fg-primary);
+  font: 600 17px/1 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.brand i {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  background: var(--bg-brand);
+  display: grid;
+  place-items: center;
+  color: var(--on-color-fg);
+  font: 700 15px/1 var(--font-display);
+  font-style: normal;
+}
+
+.links {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.links a {
+  color: var(--fg-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+}
+
+.links a:hover {
+  color: var(--fg-primary);
+  background: var(--bg-hover);
+}
+
+@media (width <= 720px) {
+  .links {
+    display: none;
+  }
+
+  .inner {
+    justify-content: space-between;
+  }
+}

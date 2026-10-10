@@ -1,0 +1,94 @@
+.band {
+  background: var(--bg-brand);
+  color: var(--on-color-fg);
+  padding: 96px 0 0;
+  overflow: hidden;
+}
+
+.overline {
+  composes: overline from '../styles/shared.module.css';
+  color: var(--on-color-muted);
+}
+
+.top {
+  composes: wrap from '../styles/shared.module.css';
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.hex {
+  font: 600 clamp(72px, 12vw, 180px) / 0.85 var(--font-display);
+  letter-spacing: -0.05em;
+  margin: 20px 0 0;
+}
+
+.top p {
+  max-width: 26em;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--on-color-muted);
+  margin: 0;
+}
+
+.ramp {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  height: 220px;
+}
+
+.step {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 16px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  position: relative;
+  color: var(--on-color-fg);
+}
+
+.step.light {
+  color: var(--velvet-900);
+}
+
+.step b {
+  font: 600 14px/1 var(--font-display);
+}
+
+.step:focus-visible {
+  outline: 2px solid var(--on-color-fg);
+  outline-offset: -4px;
+}
+
+.step.light:focus-visible {
+  outline-color: var(--velvet-900);
+}
+
+.brand::after {
+  content: 'brand';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+@media (width <= 720px) {
+  .ramp {
+    height: 160px;
+  }
+
+  .step span {
+    display: none;
+  }
+}

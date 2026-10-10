@@ -1,0 +1,16 @@
+.curve {
+  width: var(--space-10);
+  height: auto;
+  overflow: visible;
+}
+
+.axis {
+  fill: none;
+  stroke: var(--border-default);
+}
+
+.line {
+  fill: none;
+  stroke: var(--action-primary);
+  stroke-width: 2;
+}

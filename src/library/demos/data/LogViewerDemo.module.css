@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.root > :last-child {
+  align-self: stretch;
+}

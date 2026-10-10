@@ -1,0 +1,169 @@
+.root {
+  --scale: 0.6;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-page);
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  box-sizing: border-box;
+  height: calc(var(--topbar-height) * var(--scale));
+  padding: 0 var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-default);
+  background: var(--bg-raised);
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+}
+
+.mark {
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-xs);
+  background: var(--bg-brand);
+}
+
+.title {
+  flex: 1;
+}
+
+.avatar {
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--bg-sunken);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: calc(var(--sidebar-width) * var(--scale)) minmax(0, 1fr);
+  min-height: calc(var(--space-24) * 2);
+  transition: grid-template-columns var(--motion-base);
+}
+
+.body[data-collapsed] {
+  grid-template-columns: calc(var(--sidebar-width-collapsed) * var(--scale)) minmax(0, 1fr);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  padding: var(--space-2);
+  border-right: var(--border-width) solid var(--border-default);
+  background: var(--bg-raised);
+  overflow: hidden;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5);
+  border-radius: var(--radius-sm);
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  white-space: nowrap;
+}
+
+.nav[data-current] {
+  background: var(--bg-selected);
+  color: var(--fg-brand);
+}
+
+.navIcon {
+  flex: none;
+  width: var(--space-3-5);
+  height: var(--space-3-5);
+  border-radius: var(--radius-2xs);
+  background: currentcolor;
+  opacity: 0.45;
+}
+
+.body[data-collapsed] .navLabel {
+  display: none;
+}
+
+.content {
+  min-width: 0;
+  padding: var(--space-3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: calc(var(--grid-gap) * var(--scale));
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  min-height: var(--space-12);
+  padding: var(--space-1);
+  border: var(--border-width) dashed var(--border-brand);
+  border-radius: var(--radius-sm);
+  background: var(--bg-brand-subtle);
+  color: var(--fg-brand);
+  font: var(--type-caption);
+  text-align: center;
+}
+
+.tile[data-span='8'] {
+  grid-column: span 8;
+}
+
+.tile[data-span='4'] {
+  grid-column: span 4;
+}
+
+.tile[data-span='12'] {
+  grid-column: span 12;
+}
+
+.measures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--space-3) var(--space-4);
+  align-self: stretch;
+  margin: 0;
+}
+
+.measure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.measure dt {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+}
+
+.measure dd {
+  margin: 0;
+  color: var(--fg-primary);
+  font: var(--type-label);
+  font-variant-numeric: tabular-nums;
+}
+
+.measure code {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}

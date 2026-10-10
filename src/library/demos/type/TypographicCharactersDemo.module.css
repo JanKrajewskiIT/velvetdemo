@@ -1,0 +1,43 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  min-width: 0;
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.glyph {
+  color: var(--fg-brand);
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-none);
+}
+
+.name {
+  margin-top: var(--space-1-5);
+  font: var(--type-label);
+}
+
+.example {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+}
+
+.code {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}

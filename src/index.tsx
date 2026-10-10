@@ -1,20 +1,10 @@
-import '@jankrajewskiit/data/styles';
 import '@jankrajewskiit/ui/styles';
-import './demo.css';
+import './styles/page.css';
 
-import { Route, Router } from '@solidjs/router';
-import { render } from 'solid-js/web';
+import { mountVelvetApp } from '@jankrajewskiit/ui';
 
-import App from './App';
+import { App } from './App';
+import { resolveInitialLocale } from './i18n/initialLocale';
+import { messages } from './i18n/messages';
 
-const root = document.getElementById('root');
-if (root) {
-  render(
-    () => (
-      <Router>
-        <Route path="/*" component={App} />
-      </Router>
-    ),
-    root,
-  );
-}
+mountVelvetApp({ root: 'root', messages, initialLocale: resolveInitialLocale(), app: () => <App /> });

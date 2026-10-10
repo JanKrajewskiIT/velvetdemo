@@ -1,0 +1,53 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-3) var(--space-1-5) var(--space-2);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--fg-secondary);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+
+.tile:hover {
+  background: var(--bg-hover);
+  color: var(--fg-primary);
+}
+
+.tile:focus-visible {
+  outline: var(--focus-ring-width) solid var(--border-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.tile[aria-pressed='true'] {
+  border-color: var(--border-brand);
+  background: var(--bg-selected);
+  color: var(--fg-brand);
+}
+
+.tile .glyph {
+  font-size: var(--size-icon-2xl);
+}
+
+.name {
+  max-width: 100%;
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.tile[aria-pressed='true'] .name {
+  color: inherit;
+}

@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.status {
+  margin: 0;
+  font-size: var(--type-caption-size);
+  color: var(--fg-tertiary);
+}

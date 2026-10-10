@@ -1,0 +1,173 @@
+import type { GroupSlug } from '../i18n/library';
+import type { LibraryGroup } from './types';
+
+export const LIBRARY_GROUPS: readonly LibraryGroup<GroupSlug>[] = [
+  {
+    number: '01',
+    slug: 'overview',
+    kind: 'foundation',
+    load: () => import('./specimens/overview').then((module) => module.overviewSpecimens),
+  },
+  {
+    number: '02',
+    slug: 'brand',
+    kind: 'foundation',
+    load: () => import('./specimens/brand').then((module) => module.brandSpecimens),
+  },
+  {
+    number: '03',
+    slug: 'color',
+    kind: 'foundation',
+    load: () => import('./specimens/color').then((module) => module.colorSpecimens),
+  },
+  {
+    number: '04',
+    slug: 'type',
+    kind: 'foundation',
+    load: () => import('./specimens/type').then((module) => module.typeSpecimens),
+  },
+  {
+    number: '05',
+    slug: 'icons',
+    kind: 'foundation',
+    load: () => import('./specimens/icons').then((module) => module.iconSpecimens),
+  },
+  {
+    number: '06',
+    slug: 'shape',
+    kind: 'foundation',
+    load: () => import('./specimens/shape').then((module) => module.shapeSpecimens),
+  },
+  {
+    number: '07',
+    slug: 'spaceLayout',
+    kind: 'foundation',
+    load: () => import('./specimens/space-layout').then((module) => module.spaceLayoutSpecimens),
+  },
+  {
+    number: '08',
+    slug: 'depth',
+    kind: 'foundation',
+    load: () => import('./specimens/depth').then((module) => module.depthSpecimens),
+  },
+  {
+    number: '09',
+    slug: 'motion',
+    kind: 'foundation',
+    load: () => import('./specimens/motion').then((module) => module.motionSpecimens),
+  },
+  {
+    number: '10',
+    slug: 'state',
+    kind: 'foundation',
+    load: () => import('./specimens/state').then((module) => module.stateSpecimens),
+  },
+  {
+    number: '11',
+    slug: 'atoms',
+    kind: 'component',
+    load: () => import('./specimens/atoms').then((module) => module.atomSpecimens),
+  },
+  {
+    number: '12',
+    slug: 'layout',
+    kind: 'component',
+    load: () => import('./specimens/layout').then((module) => module.layoutSpecimens),
+  },
+  {
+    number: '13',
+    slug: 'display',
+    kind: 'component',
+    load: () => import('./specimens/display').then((module) => module.displaySpecimens),
+  },
+  {
+    number: '14',
+    slug: 'feedback',
+    kind: 'component',
+    load: () => import('./specimens/feedback').then((module) => module.feedbackSpecimens),
+  },
+  {
+    number: '15',
+    slug: 'actions',
+    kind: 'component',
+    load: () => import('./specimens/actions').then((module) => module.actionSpecimens),
+  },
+  {
+    number: '16',
+    slug: 'inputs',
+    kind: 'component',
+    load: () => import('./specimens/inputs').then((module) => module.inputSpecimens),
+  },
+  {
+    number: '17',
+    slug: 'selection',
+    kind: 'component',
+    load: () => import('./specimens/selection').then((module) => module.selectionSpecimens),
+  },
+  {
+    number: '18',
+    slug: 'pickers',
+    kind: 'component',
+    load: () => import('./specimens/pickers').then((module) => module.pickerSpecimens),
+  },
+  {
+    number: '19',
+    slug: 'forms',
+    kind: 'component',
+    load: () => import('./specimens/forms').then((module) => module.formSpecimens),
+  },
+  {
+    number: '20',
+    slug: 'overlays',
+    kind: 'component',
+    load: () => import('./specimens/overlays').then((module) => module.overlaySpecimens),
+  },
+  {
+    number: '21',
+    slug: 'menus',
+    kind: 'component',
+    load: () => import('./specimens/menus').then((module) => module.menuSpecimens),
+  },
+  {
+    number: '22',
+    slug: 'navigation',
+    kind: 'component',
+    load: () => import('./specimens/navigation').then((module) => module.navigationSpecimens),
+  },
+  {
+    number: '23',
+    slug: 'cards',
+    kind: 'component',
+    load: () => import('./specimens/cards').then((module) => module.cardSpecimens),
+  },
+  {
+    number: '24',
+    slug: 'media',
+    kind: 'component',
+    load: () => import('./specimens/media').then((module) => module.mediaSpecimens),
+  },
+  {
+    number: '25',
+    slug: 'dataViz',
+    kind: 'component',
+    load: () => import('./specimens/data-viz').then((module) => module.dataVizSpecimens),
+  },
+  {
+    number: '26',
+    slug: 'data',
+    kind: 'component',
+    load: () => import('./specimens/data').then((module) => module.dataSpecimens),
+  },
+  {
+    number: '27',
+    slug: 'planning',
+    kind: 'component',
+    load: () => import('./specimens/planning').then((module) => module.planningSpecimens),
+  },
+  {
+    number: '28',
+    slug: 'patterns',
+    kind: 'component',
+    load: () => import('./specimens/patterns').then((module) => module.patternSpecimens),
+  },
+];

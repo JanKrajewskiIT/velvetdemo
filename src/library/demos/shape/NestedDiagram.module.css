@@ -1,0 +1,50 @@
+.figure {
+  --zoom: 3;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  margin: 0;
+}
+
+.outer {
+  box-sizing: border-box;
+  height: calc(var(--size-icon-tile-xl) * 2);
+  padding: calc(var(--inset) * var(--zoom));
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: calc(var(--outer-radius) * var(--zoom));
+  background: var(--bg-sunken);
+}
+
+.inner {
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  border: var(--border-width-medium) solid var(--border-brand);
+  border-radius: calc(var(--inner-radius) * var(--zoom));
+  background: var(--bg-brand-subtle);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.title {
+  color: var(--fg-primary);
+  font: var(--type-label);
+}
+
+.code {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}
+
+.formula {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+}

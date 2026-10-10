@@ -1,0 +1,35 @@
+.row {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) 3.5rem;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--space-6);
+}
+
+.token {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.bar {
+  display: block;
+  flex: none;
+  width: var(--bar-size);
+  height: var(--space-3);
+  border-radius: var(--radius-2xs);
+  background: var(--bg-brand);
+}
+
+.value {
+  color: var(--fg-primary);
+  font: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}

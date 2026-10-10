@@ -1,2 +1,3 @@
-declare module '@jankrajewskiit/data/styles';
+/// <reference types="vite/client" />
+
 declare module '@jankrajewskiit/ui/styles';

@@ -1,0 +1,59 @@
+.layers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.page,
+.subtle,
+.raised,
+.overlay {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
+.page {
+  background: var(--bg-page);
+  border: var(--border-width) solid var(--border-default);
+}
+
+.subtle {
+  border: var(--border-width) solid var(--border-subtle);
+  background: var(--bg-subtle);
+}
+
+.raised {
+  border: var(--border-width) solid var(--border-subtle);
+  background: var(--bg-raised);
+  box-shadow: var(--elevation-card);
+}
+
+.overlay {
+  border: var(--border-width) solid var(--border-subtle);
+  background: var(--bg-overlay);
+  box-shadow: var(--elevation-popover);
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+  font: var(--type-caption);
+  color: var(--fg-secondary);
+}
+
+.caption code {
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}
+
+.note {
+  margin: 0;
+  font: var(--type-body-sm);
+  color: var(--fg-secondary);
+}

@@ -1,0 +1,14 @@
+.stage {
+  display: flex;
+  gap: var(--space-6);
+  height: calc(var(--space-16) * 7);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--bg-sunken);
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+}

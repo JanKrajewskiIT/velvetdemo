@@ -1,0 +1,32 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.shape {
+  width: var(--size-icon-tile-3xl);
+  height: var(--size-icon-tile-3xl);
+  margin-bottom: var(--space-2);
+  border: var(--border-width-medium) solid var(--border-brand);
+  border-radius: var(--tile-radius);
+  background: var(--bg-brand-subtle);
+}
+
+.token {
+  color: var(--fg-secondary);
+  font: var(--type-caption);
+  font-family: var(--type-code-family);
+}
+
+.value {
+  color: var(--fg-primary);
+  font: var(--type-label);
+  font-variant-numeric: tabular-nums;
+}
+
+.use {
+  color: var(--fg-tertiary);
+  font: var(--type-caption);
+}

@@ -1,5 +1,5 @@
-# Build stage — context = repo root (VelvetDemo)
-FROM node:25-alpine AS builder
+# Build stage - context = repo root (VelvetDemo)
+FROM node:26-alpine AS builder
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ COPY src/ src/
 RUN npm run build
 
 # -----------------------------------------------------------
-# Production stage — serve static SPA with nginx
+# Production stage - serve static SPA with nginx
 # -----------------------------------------------------------
 FROM nginx:alpine AS runner
 

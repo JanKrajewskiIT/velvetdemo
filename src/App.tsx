@@ -1,180 +1,38 @@
-﻿import { AuthProvider } from '@jankrajewskiit/auth';
-import { en as dataEn, pl as dataPl } from '@jankrajewskiit/data';
-import {
-  addToast,
-  defineDictionaries,
-  en as uiEn,
-  I18nProvider,
-  LocaleSwitcher,
-  pl as uiPl,
-  SidebarNav,
-  type SidebarNavGroup,
-  ThemeProvider,
-  ThemeToggle,
-  ToastProvider,
-  useI18n,
-} from '@jankrajewskiit/ui';
-import { useSearchParams } from '@solidjs/router';
-import { createEffect, createMemo, createSignal, untrack } from 'solid-js';
+import { useI18n } from '@jankrajewskiit/i18n';
+import { SkipLink } from '@jankrajewskiit/ui';
+import { createEffect } from 'solid-js';
 
-import DemoPageHeader from './components/DemoPageHeader';
-import DemoSectionSwitch from './components/DemoSectionSwitch';
-import { demoAuthConfig } from './demoAuth';
-import { resolveSearchParam, safeSessionStorageRemove, safeSessionStorageSet } from './demoUtils';
-import { en as demoEn, pl as demoPl } from './i18n/messages';
-import {
-  DEMO_LAST_SECTION_STORAGE_KEY,
-  DEMO_NAV_GROUP_COUNT,
-  DEMO_SECTION_PAGE_COUNT,
-  HEADER_SECTION_IDS,
-  isValidSectionId,
-  NAV_GROUPS,
-  OVERVIEW_TRACKS,
-  PAGE_META_KEYS,
-  type SectionId,
-} from './nav/demoNavConfig';
-import { readInitialDemoSection } from './nav/readInitialDemoSection';
+import { BrandBand } from './components/BrandBand';
+import { EcosystemSection } from './components/ecosystem/EcosystemSection';
+import { FoundationsSection } from './components/foundations/FoundationsSection';
+import { Hero } from './components/Hero';
+import { LibrarySection } from './components/library/LibrarySection';
+import { ShowcaseNav } from './components/ShowcaseNav';
+import { SiteFooter } from './components/SiteFooter';
+import { countSpecimens } from './library/countSpecimens';
+import { LIBRARY_GROUPS } from './library/groups';
 
-export type { SectionId } from './nav/demoNavConfig';
+const SPECIMEN_COUNT = countSpecimens(LIBRARY_GROUPS);
 
-const dictionaries = defineDictionaries({
-  en: [uiEn, dataEn, demoEn],
-  pl: [uiPl, dataPl, demoPl],
-});
-
-const AppContent = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { t, ts } = useI18n();
-  const [activeSection, setActiveSection] = createSignal<SectionId>(readInitialDemoSection());
+export const App = () => {
+  const { ts } = useI18n();
 
   createEffect(() => {
-    const raw = searchParams.section;
-    const s = resolveSearchParam(raw);
-    if (s && isValidSectionId(s) && s !== activeSection()) {
-      setActiveSection(s);
-    }
+    document.title = ts('showcase.meta.title');
   });
-
-  createEffect(() => {
-    const id = activeSection();
-    const raw = untrack(() => searchParams.section);
-    const cur = resolveSearchParam(raw);
-    if (cur !== id) {
-      setSearchParams({ section: id }, { replace: true });
-    }
-  });
-
-  createEffect(() => {
-    safeSessionStorageSet(DEMO_LAST_SECTION_STORAGE_KEY, activeSection());
-  });
-
-  const meta = () => PAGE_META_KEYS[activeSection()];
-  const activeGroupLabel = createMemo(() => {
-    const group = NAV_GROUPS.find((entry) => entry.items.some((item) => item.id === activeSection()));
-    return t(group?.labelKey ?? 'demo.nav.start');
-  });
-  const navGroups = createMemo((): SidebarNavGroup[] => {
-    return NAV_GROUPS.map((group) => ({
-      label: t(group.labelKey),
-      items: group.items.map((item) => ({
-        id: item.id,
-        label: t(item.labelKey),
-      })),
-    }));
-  });
-  const quickJumpSections = createMemo(() =>
-    HEADER_SECTION_IDS.map((id) => ({
-      id,
-      label: t(PAGE_META_KEYS[id].titleKey),
-    })),
-  );
-  const overviewTracks = createMemo(() =>
-    OVERVIEW_TRACKS.map((item) => ({
-      id: item.id,
-      label: t(item.groupKey),
-      description: t(PAGE_META_KEYS[item.id].descriptionKey),
-      count: NAV_GROUPS.find((group) => group.labelKey === item.groupKey)?.items.length ?? 0,
-    })),
-  );
-  const featuredSections = createMemo(() =>
-    HEADER_SECTION_IDS.map((id) => {
-      const group = NAV_GROUPS.find((entry) => entry.items.some((item) => item.id === id));
-      return {
-        id,
-        label: t(PAGE_META_KEYS[id].titleKey),
-        description: t(PAGE_META_KEYS[id].descriptionKey),
-        eyebrow: t(group?.labelKey ?? 'demo.nav.start'),
-      };
-    }),
-  );
-
-  const clearRememberedSection = () => {
-    safeSessionStorageRemove(DEMO_LAST_SECTION_STORAGE_KEY);
-    addToast({ type: 'info', message: ts('demo.page.clearRememberedSection.toast') });
-  };
 
   return (
-    <div class="layout">
-      <SidebarNav
-        groups={navGroups()}
-        activeId={activeSection()}
-        onSelect={(id) => {
-          if (isValidSectionId(id)) setActiveSection(id);
-        }}
-        label={ts('demo.sidebar.title')}
-        subtitle={ts('demo.sidebar.subtitle')}
-        actions={
-          <>
-            <LocaleSwitcher variant="ghost" />
-            <ThemeToggle variant="light" />
-          </>
-        }
-      />
-
-      <main class="main">
-        <DemoPageHeader
-          t={t}
-          ts={ts}
-          titleKey={meta().titleKey}
-          descriptionKey={meta().descriptionKey}
-          activeGroupLabel={activeGroupLabel()}
-          navGroupCount={DEMO_NAV_GROUP_COUNT}
-          sectionPageCount={DEMO_SECTION_PAGE_COUNT}
-          quickJumpSections={quickJumpSections()}
-          activeSection={activeSection()}
-          onSelectSection={setActiveSection}
-          onClearRememberedSection={clearRememberedSection}
-        />
-
-        <DemoSectionSwitch
-          activeSection={activeSection()}
-          onNavigate={setActiveSection}
-          overviewTracks={overviewTracks()}
-          featuredSections={featuredSections()}
-        />
+    <>
+      <SkipLink href="#main" />
+      <ShowcaseNav />
+      <main id="main">
+        <Hero groupCount={LIBRARY_GROUPS.length} specimenCount={SPECIMEN_COUNT} />
+        <BrandBand />
+        <FoundationsSection />
+        <EcosystemSection />
+        <LibrarySection groups={LIBRARY_GROUPS} />
       </main>
-    </div>
+      <SiteFooter />
+    </>
   );
 };
-
-const App = () => {
-  return (
-    <I18nProvider dictionaries={dictionaries} storageKey="velvet-demo-library-locale">
-      <ThemeProvider>
-        <AuthProvider config={demoAuthConfig}>
-          <InnerApp />
-        </AuthProvider>
-      </ThemeProvider>
-    </I18nProvider>
-  );
-};
-
-const InnerApp = () => {
-  return (
-    <ToastProvider>
-      <AppContent />
-    </ToastProvider>
-  );
-};
-
-export default App;

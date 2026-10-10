@@ -1,0 +1,137 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 1.25), 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+  height: var(--space-20);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  font: var(--type-caption);
+  color: var(--fg-secondary);
+}
+
+.caption code {
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  height: var(--control-height-sm);
+  padding: 0 var(--space-4);
+  border-radius: var(--button-radius);
+  background: var(--action-primary);
+  color: var(--action-primary-fg);
+  font: var(--type-button-sm);
+  box-shadow: var(--focus-ring);
+}
+
+.field {
+  width: 70%;
+  height: var(--control-height-sm);
+  border: var(--border-width) solid var(--control-border-invalid);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  box-shadow: var(--focus-ring-danger);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  overflow: hidden;
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  font: var(--type-body-sm);
+}
+
+.row,
+.focusedRow {
+  display: flex;
+  align-items: center;
+  height: var(--control-height-xs);
+  padding: 0 var(--space-2-5);
+  color: var(--fg-primary);
+}
+
+.row {
+  color: var(--fg-secondary);
+}
+
+.focusedRow {
+  background: var(--bg-hover);
+  box-shadow: var(--focus-ring-inset);
+}
+
+.free {
+  width: var(--space-10);
+  height: var(--space-10);
+  border-radius: var(--radius-md);
+  background: var(--bg-brand);
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.note {
+  margin: 0;
+  font: var(--type-body-sm);
+  color: var(--fg-secondary);
+}
+
+.note code {
+  font-family: var(--font-mono);
+  color: var(--fg-primary);
+}
+
+.live {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+.liveLabel {
+  margin: 0;
+  font: var(--type-label);
+  color: var(--fg-primary);
+}
+
+.liveRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+
+.input {
+  flex: 1 1 calc(var(--space-24) * 1.5);
+  min-width: 0;
+  max-width: calc(var(--space-24) * 2.5);
+}

@@ -1,0 +1,25 @@
+.track {
+  position: relative;
+  height: var(--space-6);
+  border-radius: var(--radius-full);
+  background: var(--bg-sunken);
+}
+
+.dot {
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--action-primary);
+  transition: left var(--track-duration) var(--track-easing);
+}
+
+.track[data-end] .dot {
+  left: calc(100% - var(--space-5));
+}
+
+.track[data-still] .dot {
+  transition: none;
+}

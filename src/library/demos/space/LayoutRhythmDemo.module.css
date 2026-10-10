@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--grid-gap-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.column {
+  display: grid;
+  place-items: center;
+  height: var(--space-12);
+  border-radius: var(--radius-xs);
+  background: var(--bg-brand-subtle);
+  color: var(--fg-brand);
+  font: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+}

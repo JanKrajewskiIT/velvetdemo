@@ -1,0 +1,47 @@
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.row span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--fg-secondary);
+}
+
+.track {
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--bg-sunken);
+  position: relative;
+}
+
+.track b {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--velvet-600);
+  transition: left var(--dur-slower);
+}
+
+.forward .track b {
+  left: calc(100% - 24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track b {
+    transition: none;
+  }
+}
