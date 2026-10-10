@@ -4,6 +4,8 @@ Audited on 2026-10-10 against VelvetUi 3.4.3, commit `cadcd03`, using the public
 
 All **225 public visual components** have a live representation in the showcase. The table links to the rendering source. A component can appear as a composition within a larger specimen; dialogs and other temporary surfaces appear after activating their triggers. `SkipLink` is represented by the actual page skip link, visible on keyboard focus.
 
+The inventory was rechecked against the current public barrels and mapped JSX after the lint fixes: 225 unique components, no missing exports or mapped source files. This establishes component representation, not exhaustive coverage of every prop, variant combination or interaction.
+
 Hooks, utilities, types, constants and configuration are outside this inventory. `VelvetProvider`, `AuthProvider` and `ToastProvider` are integration providers: the entry mounts theme/i18n/toasts through `mountVelvetApp`, while the auth specimens mount their own `AuthProvider`.
 
 ## Additions and updates
@@ -255,9 +257,9 @@ The auth examples use the public `@jankrajewskiit/auth` factory adapter and inde
 
 ## Verification
 
-Coverage and public API compatibility were inspected statically. Builds, type checking, linting and browser interaction have not yet been run for this change.
+Coverage and public API compatibility were inspected statically. Type checking passed in the supplied `npm run verify` output. The final agent-run `npm run lint`, using `@jankrajewskiit/configs` 3.4.2, passed with no errors or warnings. The user subsequently reported successful manual execution; a complete browser interaction audit has not been recorded.
 
-Proposed project checks, from the VelvetDemo root:
+Project checks, from the VelvetDemo root (the agent has not run `npm run lint:css` or `npm run build`):
 
 ```powershell
 npm run typecheck
