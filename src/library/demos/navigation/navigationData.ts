@@ -20,6 +20,8 @@ export const FILE_TREE: TreeNode[] = [
   { id: 'remote', label: 'releases (loads on expand)', lazy: true },
 ];
 
+export const MOVABLE_FILE_TREE = FILE_TREE.filter((node) => !node.lazy);
+
 export const PERMISSIONS: TreeNode[] = [
   {
     id: 'reports',

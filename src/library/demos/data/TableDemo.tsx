@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Avatar, Badge, Button, type RowKey, Table, type TableColumn } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
@@ -41,9 +42,11 @@ const COLUMNS: TableColumn<Member>[] = [
 ];
 
 export const TableDemo = () => {
+  const { ts } = useI18n();
   const [rows, setRows] = createSignal(MEMBERS);
   const [selected, setSelected] = createSignal<RowKey[]>([]);
   const [loading, setLoading] = createSignal(false);
+  const [fixed, setFixed] = createSignal(true);
   const suspendSelected = () => {
     const keys = new Set(selected());
     setRows((current) => current.map<Member>((row) => (keys.has(row.id) ? { ...row, status: 'Suspended' } : row)));
@@ -57,6 +60,7 @@ export const TableDemo = () => {
   return (
     <Table
       title="Members"
+      layout={fixed() ? 'fixed' : 'auto'}
       columns={COLUMNS}
       rows={rows()}
       resizable
@@ -68,9 +72,14 @@ export const TableDemo = () => {
       defaultSort={{ key: 'name', dir: 'asc' }}
       renderExpanded={(row) => <span class={styles.detail}>{row.email}</span>}
       toolbar={
-        <Button size="sm" variant="secondary" aria-pressed={loading()} onClick={() => setLoading((value) => !value)}>
-          Loading state
-        </Button>
+        <>
+          <Button size="sm" variant="secondary" aria-pressed={fixed()} onClick={() => setFixed((value) => !value)}>
+            {ts('library.data.table.fixedLayout')}
+          </Button>
+          <Button size="sm" variant="secondary" aria-pressed={loading()} onClick={() => setLoading((value) => !value)}>
+            Loading state
+          </Button>
+        </>
       }
       bulkActions={
         <>

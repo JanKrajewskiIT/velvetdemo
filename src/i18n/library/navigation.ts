@@ -3,11 +3,29 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const navigationEn = defineDictionary({
   title: 'Navigation',
   blurb: 'Navbar, sidebar, tabs, breadcrumbs, steppers and pagination.',
+  account: {
+    links: 'Main, links',
+    pill: 'Main, account pill',
+    compact: 'Main, compact account panel',
+    search: 'Search',
+    searchSelected: 'Search action received in this offline demo.',
+    profile: 'Profile',
+    profileSelected: 'Profile action received in this offline demo.',
+    settings: 'Settings',
+    settingsSelected: 'Settings action received in this offline demo.',
+    billing: 'Billing (unavailable)',
+    signOut: 'Sign out',
+    signedOut: 'Sign-out action received in this offline demo. No session was changed.',
+    plan: 'Team plan · administrator',
+  },
   move: {
     instructions:
-      'Drag a node onto another node, or press Space, choose a destination with the arrow keys and press Enter. Escape cancels the move.',
+      'Drag to the top or bottom edge to reorder, or onto a folder centre to move inside. Alt+Up/Down reorders, Alt+Right moves into the previous folder and Alt+Left moves out. README.md cannot be moved directly.',
     label: 'Move project files',
     reset: 'Reset tree',
+    legacyInstructions:
+      'Legacy parent-only moves: drag onto a folder, or press Space, choose a folder with the arrow keys and press Enter. Escape cancels the move.',
+    legacyLabel: 'Move project files into folders',
   },
   specimens: {
     'navigation-tabs': { name: 'Tabs', subtitle: 'Underline, segmented and vertical peer views' },
@@ -21,10 +39,13 @@ export const navigationEn = defineDictionary({
       name: 'TreeView and HierarchyNavigator',
       subtitle: 'Lazy and checkable trees, drill-down picker',
     },
-    'navigation-navbar': { name: 'Navbar', subtitle: 'Brand, links and actions; links and menubar' },
+    'navigation-navbar': {
+      name: 'Navbar',
+      subtitle: 'Links, menubar, account pill and compact account panel with theme controls',
+    },
     'navigation-tree-move': {
       name: 'TreeView · moving nodes',
-      subtitle: 'Drag and drop or keyboard move mode with live data updates',
+      subtitle: 'Positional moves, drop restrictions and legacy parent-only moves',
     },
     'navigation-bottom-nav': { name: 'BottomNav', subtitle: 'Mobile tab bar in a phone-width frame' },
     'navigation-anchor': { name: 'Anchor and BackToTop', subtitle: 'Contents list that follows a scrolling region' },
@@ -34,11 +55,29 @@ export const navigationEn = defineDictionary({
 export const navigationPl: TranslationOf<typeof navigationEn> = {
   title: 'Nawigacja',
   blurb: 'Navbar, panel boczny, zakładki, ścieżki okruszków, kreatory krokowe i paginacja.',
+  account: {
+    links: 'Nawigacja główna, linki',
+    pill: 'Nawigacja główna, pigułka konta',
+    compact: 'Nawigacja główna, kompaktowy panel konta',
+    search: 'Szukaj',
+    searchSelected: 'Odebrano akcję wyszukiwania w demonstracji offline.',
+    profile: 'Profil',
+    profileSelected: 'Odebrano akcję profilu w demonstracji offline.',
+    settings: 'Ustawienia',
+    settingsSelected: 'Odebrano akcję ustawień w demonstracji offline.',
+    billing: 'Rozliczenia (niedostępne)',
+    signOut: 'Wyloguj',
+    signedOut: 'Odebrano akcję wylogowania w demonstracji offline. Sesja nie została zmieniona.',
+    plan: 'Plan zespołowy · administrator',
+  },
   move: {
     instructions:
-      'Przeciągnij węzeł na inny węzeł albo naciśnij Spację, wybierz cel strzałkami i naciśnij Enter. Escape anuluje przenoszenie.',
+      'Przeciągnij na górną lub dolną krawędź, aby zmienić kolejność, albo na środek folderu, aby przenieść do środka. Alt+góra/dół zmienia kolejność, Alt+prawo przenosi do poprzedniego folderu, a Alt+lewo przenosi na zewnątrz. README.md nie można przenosić bezpośrednio.',
     label: 'Przenoszenie plików projektu',
     reset: 'Przywróć drzewo',
+    legacyInstructions:
+      'Dotychczasowe przenoszenie do folderu: przeciągnij węzeł na folder albo naciśnij Spację, wybierz folder strzałkami i naciśnij Enter. Escape anuluje przenoszenie.',
+    legacyLabel: 'Przenoszenie plików projektu do folderów',
   },
   specimens: {
     'navigation-tabs': {
@@ -61,10 +100,13 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
       name: 'TreeView i HierarchyNavigator',
       subtitle: 'Drzewa ładowane na żądanie i z polami wyboru, selektor drill-down',
     },
-    'navigation-navbar': { name: 'Navbar', subtitle: 'Marka, linki i akcje; linki oraz pasek menu' },
+    'navigation-navbar': {
+      name: 'Navbar',
+      subtitle: 'Linki, pasek menu, pigułka i kompaktowy panel konta z wyborem motywu',
+    },
     'navigation-tree-move': {
       name: 'TreeView · przenoszenie węzłów',
-      subtitle: 'Przeciąganie lub obsługa klawiaturą z aktualizacją danych',
+      subtitle: 'Przenoszenie pozycyjne, ograniczenia celu i dotychczasowe przenoszenie do folderu',
     },
     'navigation-bottom-nav': { name: 'BottomNav', subtitle: 'Mobilny pasek kart w ramce o szerokości telefonu' },
     'navigation-anchor': {

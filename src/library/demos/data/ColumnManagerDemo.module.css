@@ -5,3 +5,16 @@
   align-items: start;
   min-width: 0;
 }
+
+.manager {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.caption {
+  margin: 0;
+  color: var(--fg-secondary);
+  font: var(--type-body-sm);
+}

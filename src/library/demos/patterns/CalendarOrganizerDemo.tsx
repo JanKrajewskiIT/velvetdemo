@@ -1,5 +1,6 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { OrganizerEvent } from '@jankrajewskiit/ui';
-import { addDays, CalendarOrganizer, startOfDay } from '@jankrajewskiit/ui';
+import { addDays, Button, CalendarOrganizer, Checkbox, Stack, startOfDay } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 type EventDetails = Omit<OrganizerEvent, 'date' | 'endDate'>;
@@ -23,7 +24,33 @@ const createEvents = (): OrganizerEvent[] => {
 };
 
 export const CalendarOrganizerDemo = () => {
+  const { ts } = useI18n();
   const [events, setEvents] = createSignal<OrganizerEvent[]>(createEvents());
+  const [selected, setSelected] = createSignal(startOfDay(new Date()));
+  const [confirmDelete, setConfirmDelete] = createSignal(true);
 
-  return <CalendarOrganizer events={events()} onEventsChange={setEvents} />;
+  return (
+    <Stack gap={3}>
+      <Checkbox
+        checked={confirmDelete()}
+        onChange={(event) => setConfirmDelete(event.currentTarget.checked)}
+        label={ts('library.patterns.organizer.confirmDelete')}
+      />
+      <Stack direction="row" gap={2} wrap>
+        <Button size="sm" variant="secondary" onClick={() => setSelected(startOfDay(new Date()))}>
+          {ts('library.patterns.organizer.today')}
+        </Button>
+        <Button size="sm" variant="secondary" onClick={() => setSelected(addDays(startOfDay(new Date()), 40))}>
+          {ts('library.patterns.organizer.future')}
+        </Button>
+      </Stack>
+      <CalendarOrganizer
+        events={events()}
+        onEventsChange={setEvents}
+        selected={selected()}
+        onSelectedChange={setSelected}
+        confirmDelete={confirmDelete()}
+      />
+    </Stack>
+  );
 };

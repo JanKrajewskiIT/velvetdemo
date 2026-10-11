@@ -1,9 +1,11 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { IconButton, Menu, type MenuItem } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import styles from './MenuDemo.module.css';
 
 export const MenuDemo = () => {
+  const { ts } = useI18n();
   const [last, setLast] = createSignal<string>();
   const [grid, setGrid] = createSignal(true);
   const [rulers, setRulers] = createSignal(false);
@@ -22,6 +24,15 @@ export const MenuDemo = () => {
   const viewItems = (): MenuItem[] => [
     { label: 'Snap to grid', checked: grid(), keepOpen: true, onSelect: () => setGrid(!grid()) },
     { label: 'Show rulers', checked: rulers(), keepOpen: true, onSelect: () => setRulers(!rulers()) },
+    { divider: true },
+    {
+      label: 'Reset layout',
+      icon: 'rotate-ccw',
+      onSelect: () => {
+        setGrid(true);
+        setRulers(false);
+      },
+    },
   ];
 
   const rowItems: MenuItem[] = [
@@ -34,8 +45,14 @@ export const MenuDemo = () => {
   return (
     <div class={styles.root}>
       <div class={styles.row}>
-        <Menu trigger="Project" width={248} items={projectItems} />
-        <Menu trigger="View" items={viewItems()} />
+        <Menu
+          trigger={ts('library.menus.positions.projectStart')}
+          iconPosition="start"
+          width={248}
+          items={projectItems}
+        />
+        <Menu trigger={ts('library.menus.positions.projectEnd')} iconPosition="end" width={248} items={projectItems} />
+        <Menu trigger={ts('library.menus.positions.viewEnd')} iconPosition="end" items={viewItems()} />
         <Menu
           align="end"
           items={rowItems}

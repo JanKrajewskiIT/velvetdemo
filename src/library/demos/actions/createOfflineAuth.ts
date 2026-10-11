@@ -100,7 +100,10 @@ export const createOfflineAuth = (demoId: OfflineAuthDemoId) => {
       addAccessTokenExpired: expired.add,
       removeAccessTokenExpired: expired.remove,
     },
-    getUser: () => Promise.resolve(user),
+    getUser: async () => {
+      await delay();
+      return user;
+    },
     signinRedirect: signIn,
     signinRedirectCallback: () => Promise.reject(new Error('The offline showcase does not use redirects.')),
     signinSilent: () => Promise.resolve(user),

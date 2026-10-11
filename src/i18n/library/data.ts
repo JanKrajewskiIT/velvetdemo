@@ -3,14 +3,34 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const dataEn = defineDictionary({
   title: 'Data',
   blurb: 'Tables, grids, lists, timelines and logs.',
+  grid: { loadSavedView: 'Load saved view' },
+  table: { fixedLayout: 'Fixed layout' },
+  columns: {
+    instructions:
+      'Member is locked, Role cannot be pinned, Status cannot move and Seats cannot be hidden. Reset restores the starting layout with Email hidden.',
+  },
+  server: {
+    label: 'Team members in offline server pages',
+    search: 'Search all members…',
+    previous: 'Previous page',
+    next: 'Next page',
+    page: 'Page {page} of {count} · offline server example',
+  },
   specimens: {
-    'data-table': { name: 'Table', subtitle: 'Pinned, resizable columns with selection and bulk actions' },
-    'data-grid': { name: 'DataGrid', subtitle: 'Editable cells, controlled view, filters and view settings' },
+    'data-table': { name: 'Table', subtitle: 'Fixed or automatic layout, pinned columns, resizing and bulk actions' },
+    'data-grid': {
+      name: 'DataGrid',
+      subtitle: 'Saved view reconciliation and resets to initial filters, columns and widths',
+    },
+    'data-grid-server': {
+      name: 'DataGrid server pages',
+      subtitle: 'Consumer filtering and sorting with the total record count',
+    },
     'data-column-manager': {
       name: 'ColumnManager',
-      subtitle: 'Live visibility, order and pinning with a table preview',
+      subtitle: 'Column capabilities and a custom reset layout with a table preview',
     },
-    'data-table-add-row': { name: 'TableAddRowAction', subtitle: 'Add invitations through a full-width table row' },
+    'data-table-add-row': { name: 'TableAddRowAction', subtitle: 'Sticky ghost action below a fixed-layout table' },
     'data-grid-virtual': {
       name: 'DataGrid virtualization',
       subtitle: 'Ten thousand orders, stable keys and expandable details',
@@ -30,19 +50,39 @@ export const dataEn = defineDictionary({
 export const dataPl: TranslationOf<typeof dataEn> = {
   title: 'Dane',
   blurb: 'Tabele, siatki, listy, osie czasu i logi.',
+  grid: { loadSavedView: 'Wczytaj zapisany widok' },
+  table: { fixedLayout: 'Stały układ' },
+  columns: {
+    instructions:
+      'Member jest zablokowana, Role nie można przypiąć, Status nie można przenieść, a Seats ukryć. Reset przywraca układ początkowy z ukrytą kolumną Email.',
+  },
+  server: {
+    label: 'Członkowie zespołu na stronach serwera offline',
+    search: 'Przeszukaj wszystkich członków…',
+    previous: 'Poprzednia strona',
+    next: 'Następna strona',
+    page: 'Strona {page} z {count} · przykład serwera offline',
+  },
   specimens: {
     'data-table': {
       name: 'Table',
-      subtitle: 'Przypinane kolumny ze zmianą szerokości, zaznaczaniem i akcjami zbiorczymi',
+      subtitle: 'Stały lub automatyczny układ, przypinanie kolumn, zmiana szerokości i akcje zbiorcze',
     },
-    'data-grid': { name: 'DataGrid', subtitle: 'Edytowalne komórki, kontrolowany widok, filtry i ustawienia widoku' },
+    'data-grid': {
+      name: 'DataGrid',
+      subtitle: 'Uzgadnianie zapisanego widoku i reset do początkowych filtrów, kolumn i szerokości',
+    },
+    'data-grid-server': {
+      name: 'DataGrid ze stronami serwera',
+      subtitle: 'Filtrowanie i sortowanie po stronie aplikacji z całkowitą liczbą rekordów',
+    },
     'data-column-manager': {
       name: 'ColumnManager',
-      subtitle: 'Widoczność, kolejność i przypinanie z podglądem tabeli',
+      subtitle: 'Uprawnienia kolumn i własny układ przywracania z podglądem tabeli',
     },
     'data-table-add-row': {
       name: 'TableAddRowAction',
-      subtitle: 'Dodawanie zaproszeń przez wiersz na całą szerokość tabeli',
+      subtitle: 'Przyklejona akcja ghost pod tabelą o stałym układzie',
     },
     'data-grid-virtual': {
       name: 'Wirtualizacja DataGrid',

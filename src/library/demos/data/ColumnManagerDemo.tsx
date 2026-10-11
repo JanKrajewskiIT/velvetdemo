@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import {
   applyColumns,
   ColumnManager,
@@ -24,25 +25,36 @@ const MANAGED_COLUMNS: ManagedColumn[] = COLUMNS.map((column) => ({
   label: column.label,
   pin: column.pin,
   locked: column.key === 'name',
+  pinnable: column.key !== 'role',
+  movable: column.key !== 'status',
+  hideable: column.key !== 'seats',
 }));
 
 export const ColumnManagerDemo = () => {
-  const [columns, setColumns] = createSignal<ColumnState[]>(
-    COLUMNS.map((column) => ({ key: column.key, visible: true, pin: column.pin ?? null })),
-  );
+  const { ts } = useI18n();
+  const initial: ColumnState[] = COLUMNS.map((column) => ({
+    key: column.key,
+    visible: column.key !== 'email',
+    pin: column.pin ?? null,
+  }));
+  const [columns, setColumns] = createSignal(initial);
   const visibleColumns = createMemo(() => applyColumns(COLUMNS, columns()));
 
   return (
     <div class={styles.root}>
-      <ColumnManager
-        columns={MANAGED_COLUMNS}
-        value={columns()}
-        onValueChange={setColumns}
-        pinRight
-        searchable
-        minVisible={2}
-        maxPinned={3}
-      />
+      <div class={styles.manager}>
+        <p class={styles.caption}>{ts('library.data.columns.instructions')}</p>
+        <ColumnManager
+          columns={MANAGED_COLUMNS}
+          value={columns()}
+          resetValue={initial}
+          onValueChange={setColumns}
+          pinRight
+          searchable
+          minVisible={2}
+          maxPinned={3}
+        />
+      </div>
       <Table title="Preview" columns={visibleColumns()} rows={MEMBERS.slice(0, 4)} maxHeight={280} />
     </div>
   );

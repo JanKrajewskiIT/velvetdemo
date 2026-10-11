@@ -3,6 +3,17 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const patternsEn = defineDictionary({
   title: 'Patterns',
   blurb: 'Product-level compositions — AI panels, filters, comments, pricing.',
+  query: {
+    disabled: 'Disable query editing',
+    cleared: 'Query cleared. All records match.',
+    hint: 'Clear every condition, restore the example or reorder rules. Email offers a limited operator list.',
+    restore: 'Restore example query',
+  },
+  organizer: {
+    confirmDelete: 'Confirm event deletion',
+    today: 'Select today',
+    future: 'Select a day in 40 days',
+  },
   specimens: {
     'patterns-auth-guard': {
       name: 'AuthGuard',
@@ -19,7 +30,10 @@ export const patternsEn = defineDictionary({
       name: 'TypingIndicator',
       subtitle: 'Animated dots with an accessible status label',
     },
-    'patterns-calendar-organizer': { name: 'Calendar organiser', subtitle: 'Month planner with quick add and drag' },
+    'patterns-calendar-organizer': {
+      name: 'Calendar organiser',
+      subtitle: 'Controlled day, month sync and deletion confirmation',
+    },
     'patterns-comment-thread': { name: 'Comment thread', subtitle: 'Replies, likes, inline edit and delete' },
     'patterns-ai-result': { name: 'AI result panel', subtitle: 'Scored answer with sources and feedback' },
     'patterns-analysis-flow': {
@@ -35,6 +49,17 @@ export const patternsEn = defineDictionary({
 export const patternsPl: TranslationOf<typeof patternsEn> = {
   title: 'Wzorce',
   blurb: 'Kompozycje na poziomie produktu — panele AI, filtry, komentarze, cenniki.',
+  query: {
+    disabled: 'Wyłącz edycję zapytania',
+    cleared: 'Zapytanie wyczyszczone. Wszystkie rekordy pasują.',
+    hint: 'Usuń wszystkie warunki, przywróć przykład lub zmień kolejność reguł. Email ma ograniczoną listę operatorów.',
+    restore: 'Przywróć przykładowe zapytanie',
+  },
+  organizer: {
+    confirmDelete: 'Potwierdzaj usuwanie wydarzeń',
+    today: 'Wybierz dzisiaj',
+    future: 'Wybierz dzień za 40 dni',
+  },
   specimens: {
     'patterns-auth-guard': { name: 'AuthGuard', subtitle: 'Lokalna sesja, ładowanie, błąd logowania i wymagane role' },
     'patterns-filters': {
@@ -53,7 +78,7 @@ export const patternsPl: TranslationOf<typeof patternsEn> = {
     'patterns-typing-indicator': { name: 'TypingIndicator', subtitle: 'Animowane kropki z dostępną etykietą stanu' },
     'patterns-calendar-organizer': {
       name: 'Organizer kalendarza',
-      subtitle: 'Planer miesiąca z szybkim dodawaniem i przeciąganiem',
+      subtitle: 'Kontrolowany dzień, synchronizacja miesiąca i potwierdzanie usuwania',
     },
     'patterns-comment-thread': {
       name: 'Wątek komentarzy',

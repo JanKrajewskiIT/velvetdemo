@@ -14,6 +14,7 @@
   list-style: none;
 }
 
+.tile,
 .toggle {
   display: flex;
   flex-direction: column;
@@ -28,6 +29,9 @@
   background: var(--bg-raised);
   color: var(--fg-secondary);
   font: inherit;
+}
+
+.toggle {
   cursor: pointer;
   transition:
     background-color var(--motion-fast),
@@ -50,7 +54,7 @@
   color: var(--fg-brand);
 }
 
-.toggle .glyph {
+.glyph {
   font-size: var(--size-icon-2xl);
 }
 

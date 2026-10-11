@@ -25,6 +25,29 @@ Hooks, utilities, types, constants and configuration are outside this inventory.
 
 The auth examples use the public `@jankrajewskiit/auth` factory adapter and independent provider-owned registrations. They use synthetic sessions and never contact an identity server. Search may mount both auth examples at once; each has a separate client id, manager and return-url key. The showcase owns the factory until it is disposed, so this adapter belongs only in this standalone demo.
 
+## UI 3.4.4 adaptation
+
+Updated on 2026-10-11 from the committed VelvetUi 3.4.4 source, within the preceding Git-based design-system change scope. The component inventory above records the 3.4.3 audit; this update adds behavior coverage rather than repeating that complete inventory.
+
+| Area              | Live coverage                                                                                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Navbar            | Existing account pill plus compact account panel with email, metadata, theme choices, disabled action and offline sign-out feedback                            |
+| TreeView          | Public `moveTreeNode`, positional drops, Alt+arrow moves and `canDrop`; separate legacy parent-only keyboard example                                           |
+| Menu              | Start/end icons in popup and inline panels, including checkable items                                                                                          |
+| Table             | Fixed/auto layout switch and percentage-width fixed table with the library's sticky ghost add-row action                                                       |
+| ColumnManager     | Capability aliases and reset to an explicit baseline with email initially hidden                                                                               |
+| DataGrid          | `defaultGridView` baseline, `reconcileGridView` saved view, nonempty initial filters, column/width resets and a separate offline paged example with `rowCount` |
+| QueryBuilder      | Controlled query, clear-to-empty, `onClear` feedback, disabled editing, limited Email operators and existing reorder controls                                  |
+| CalendarOrganizer | Controlled `selected`/`onSelectedChange`, external day changes that cross months, and switchable deletion confirmation                                         |
+| AuthButton        | Visible offline initialization delay, secondary variant and simulated sign-in failure                                                                          |
+| Markdown          | WWW/email autolinks, full/collapsed/shortcut reference images from local favicon and colliding/empty heading slugs                                             |
+| Icons             | Registry-derived gallery covers the four new filled glyphs; filled-only person/desktop are kept separate from actual outline/filled pairs                      |
+| Motion            | `--ease-back` track and `--motion-travel` intent with reduced-motion handling                                                                                  |
+
+New specimen `data-grid-server` uses the existing typed EN/PL registry, so search and counts include it automatically. New controls and specimen labels have EN/PL messages. The showcase continues to import the published UI package; no sibling source or copied library styles are used at runtime.
+
+The approved UI installation returned GitHub Packages HTTP 401 twice. The user confirmed that 3.4.4 is deployed, but the local installed package and lockfile still resolve 3.4.3. Dependency metadata has not been fabricated. Run the approved `npm install @jankrajewskiit/ui@3.4.4 --ignore-scripts --no-audit --no-fund` after restoring local registry access to update the manifest and lockfile.
+
 ## Component map
 
 | Component                   | Public module | Live representation                                                                  |
@@ -215,7 +238,7 @@ The auth examples use the public `@jankrajewskiit/auth` factory adapter and inde
 | `ImportSourcesDialog`       | patterns      | [ImportSourcesDemo.tsx](../src/library/demos/patterns/ImportSourcesDemo.tsx)         |
 | `PricingTable`              | patterns      | [PricingDemo.tsx](../src/library/demos/patterns/PricingDemo.tsx)                     |
 | `PromptInput`               | patterns      | [ChatThreadDemo.tsx](../src/library/demos/patterns/ChatThreadDemo.tsx)               |
-| `QueryBuilder`              | patterns      | [patterns.tsx](../src/library/specimens/patterns.tsx)                                |
+| `QueryBuilder`              | patterns      | [QueryBuilderDemo.tsx](../src/library/demos/patterns/QueryBuilderDemo.tsx)           |
 | `TypingIndicator`           | patterns      | [patterns.tsx](../src/library/specimens/patterns.tsx)                                |
 | `Checkmark`                 | primitives    | [DisclosureDismissDemo.tsx](../src/library/demos/atoms/DisclosureDismissDemo.tsx)    |
 | `Chevron`                   | primitives    | [DisclosureDismissDemo.tsx](../src/library/demos/atoms/DisclosureDismissDemo.tsx)    |
@@ -255,11 +278,11 @@ The auth examples use the public `@jankrajewskiit/auth` factory adapter and inde
 | `AuthButton`                | auth          | [AuthSessionDemo.tsx](../src/library/demos/actions/AuthSessionDemo.tsx)              |
 | `AuthGuard`                 | auth          | [AuthGuardSessionDemo.tsx](../src/library/demos/patterns/AuthGuardSessionDemo.tsx)   |
 
-## Verification
+## Verification of the 3.4.3 audit
 
 Coverage and public API compatibility were inspected statically. Type checking passed in the supplied `npm run verify` output. The final agent-run `npm run lint`, using `@jankrajewskiit/configs` 3.4.2, passed with no errors or warnings. The user subsequently reported successful manual execution; a complete browser interaction audit has not been recorded.
 
-Project checks, from the VelvetDemo root (the agent has not run `npm run lint:css` or `npm run build`):
+Checks recorded for that earlier audit, from the VelvetDemo root (CSS lint and build were not agent-run at that time):
 
 ```powershell
 npm run typecheck
@@ -271,3 +294,18 @@ npm run build
 A browser pass should cover both themes, a narrow viewport, overlays, table column resizing, tree keyboard moves, and a search for "Auth" that displays both independent auth sessions.
 
 Adding the existing auth package as a direct dependency was approved. The installation attempt returned GitHub Packages HTTP 401; the manifest and root lockfile declaration therefore use the already installed, locked 3.4.1 package without changing its resolved URL or integrity.
+
+## Verification of the 3.4.4 adaptation
+
+All approved checks ran on 2026-10-11 in VelvetDemo. The local UI package remained 3.4.3 after the rejected installation.
+
+| Command                                                      | Result                                                                                                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm exec -- prettier --write src docs/showcase-coverage.md` | Passed; requested source and coverage documentation formatted                                                                               |
+| `npm run lint:css`                                           | Passed                                                                                                                                      |
+| `npm run typecheck`                                          | Failed: installed 3.4.3 lacks the new helpers and props; positional handler inference errors follow those missing types                     |
+| `npm run build`                                              | Failed at the same TypeScript stage; Vite did not build the updated app                                                                     |
+| `npm run lint`                                               | New helper and handler types cannot resolve through installed 3.4.3; unrelated import ordering and auth conditional findings were corrected |
+| `npm run format:check`                                       | Failed on 57 untouched files in `.agents` and `docs/contabo-deployment.md`; no changed source or coverage file was flagged                  |
+
+Compatibility of the new calls was checked statically against the 3.4.4 public source. This does not replace type checking and building with the installed release. After registry access is restored, repeat the approved install and checks. No application or browser interaction pass was run. The existing README and deployment-document edits were preserved.

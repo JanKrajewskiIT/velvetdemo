@@ -22,7 +22,7 @@ const ICONS: Partial<Record<IntentKind, string>> = {
   bounce: 'plus',
 };
 
-const NESTED_PART: readonly IntentKind[] = ['switch', 'slide', 'progress'];
+const NESTED_PART: readonly IntentKind[] = ['switch', 'slide', 'travel', 'progress'];
 
 export const IntentSample = (props: IntentSampleProps) => (
   <div

@@ -11,6 +11,7 @@ export type IntentKind =
   | 'pop'
   | 'lift'
   | 'slide'
+  | 'travel'
   | 'progress';
 
 export interface MotionIntent {
@@ -32,5 +33,6 @@ export const MOTION_INTENTS: readonly MotionIntent[] = [
   { token: '--motion-pop', kind: 'pop', use: 'Things appearing' },
   { token: '--motion-lift', kind: 'lift', use: 'Card hover' },
   { token: '--motion-slide', kind: 'slide', use: 'Carousels and drawers' },
+  { token: '--motion-travel', kind: 'travel', use: 'Navigation indicator travel' },
   { token: '--motion-progress', kind: 'progress', use: 'Bars and meters' },
 ];

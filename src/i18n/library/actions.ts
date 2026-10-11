@@ -3,6 +3,13 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const actionsEn = defineDictionary({
   title: 'Actions',
   blurb: 'Buttons in every variant, size and state.',
+  auth: {
+    failure: 'Simulate a sign-in failure',
+    loading: 'Resolving the local session…',
+    signedOut: 'Signed out. Sign in to create a local demo session.',
+    signedIn: 'Signed in as {email}.',
+    failed: 'Sign-in failed. Turn off the failure simulation and try again.',
+  },
   specimens: {
     'actions-button': { name: 'Button', subtitle: 'Seven variants, four sizes, icons and states' },
     'actions-copy': { name: 'CopyButton and CopyField', subtitle: 'Clipboard copy with announced feedback' },
@@ -14,7 +21,7 @@ export const actionsEn = defineDictionary({
     'actions-fab': { name: 'Fab', subtitle: 'Plain, extended and speed dial, contained' },
     'actions-session': {
       name: 'AuthButton, AuthActionButton and CalendarEventButton',
-      subtitle: 'Offline AuthProvider session, sign-in failure and add-to-calendar',
+      subtitle: 'Offline session initialization, sign-in failure and add-to-calendar',
     },
     'actions-preferences': { name: 'ThemeToggle and LocaleSwitcher', subtitle: 'Appearance and language switches' },
   },
@@ -23,6 +30,13 @@ export const actionsEn = defineDictionary({
 export const actionsPl: TranslationOf<typeof actionsEn> = {
   title: 'Akcje',
   blurb: 'Przyciski w każdym wariancie, rozmiarze i stanie.',
+  auth: {
+    failure: 'Symuluj błąd logowania',
+    loading: 'Sprawdzanie lokalnej sesji…',
+    signedOut: 'Wylogowano. Zaloguj się, aby utworzyć lokalną sesję demo.',
+    signedIn: 'Zalogowano jako {email}.',
+    failed: 'Logowanie nie powiodło się. Wyłącz symulację błędu i spróbuj ponownie.',
+  },
   specimens: {
     'actions-button': { name: 'Button', subtitle: 'Siedem wariantów, cztery rozmiary, ikony i stany' },
     'actions-copy': { name: 'CopyButton i CopyField', subtitle: 'Kopiowanie do schowka z komunikatem zwrotnym' },
@@ -37,7 +51,7 @@ export const actionsPl: TranslationOf<typeof actionsEn> = {
     'actions-fab': { name: 'Fab', subtitle: 'Zwykły, rozszerzony i szybkie menu, w kontenerze' },
     'actions-session': {
       name: 'AuthButton, AuthActionButton i CalendarEventButton',
-      subtitle: 'Lokalna sesja AuthProvider, błąd logowania i dodawanie do kalendarza',
+      subtitle: 'Inicjalizacja lokalnej sesji, błąd logowania i dodawanie do kalendarza',
     },
     'actions-preferences': { name: 'ThemeToggle i LocaleSwitcher', subtitle: 'Przełączniki wyglądu i języka' },
   },

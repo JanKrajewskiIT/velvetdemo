@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button } from '@jankrajewskiit/ui';
 import { For, Show } from 'solid-js';
 
@@ -11,6 +12,7 @@ import { MotionTokenValue } from './MotionTokenValue';
 const REPLAY_HOLD_MS = 1400;
 
 export const MotionIntentsDemo = () => {
+  const { ts } = useI18n();
   const reduced = createReducedMotion();
   const { playing, replay } = createReplay(REPLAY_HOLD_MS);
   return (
@@ -34,7 +36,11 @@ export const MotionIntentsDemo = () => {
               </div>
               <code class={styles.token}>{intent.token}</code>
               <MotionTokenValue token={intent.token} />
-              <span class={styles.use}>{intent.use}</span>
+              <span class={styles.use}>
+                <Show when={intent.kind === 'travel'} fallback={intent.use}>
+                  {ts('library.motion.travel')}
+                </Show>
+              </span>
             </li>
           )}
         </For>

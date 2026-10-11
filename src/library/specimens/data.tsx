@@ -7,6 +7,7 @@ import { DataGridDemo } from '../demos/data/DataGridDemo';
 import { DiffViewerDemo } from '../demos/data/DiffViewerDemo';
 import { LogViewerDemo } from '../demos/data/LogViewerDemo';
 import { PeopleListDemo } from '../demos/data/PeopleListDemo';
+import { ServerDataGridDemo } from '../demos/data/ServerDataGridDemo';
 import { TableAddRowDemo } from '../demos/data/TableAddRowDemo';
 import { TableDemo } from '../demos/data/TableDemo';
 import { makeFeedItems, makeHistoryItems, makePipelineItems } from '../demos/data/timelines';
@@ -49,6 +50,11 @@ export const dataSpecimens: readonly Specimen<SpecimenIdOf<typeof dataEn>>[] = [
     id: 'data-grid',
     span: 12,
     render: () => <DataGridDemo />,
+  },
+  {
+    id: 'data-grid-server',
+    span: 12,
+    render: () => <ServerDataGridDemo />,
   },
   {
     id: 'data-column-manager',

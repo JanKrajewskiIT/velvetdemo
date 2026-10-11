@@ -1,15 +1,13 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { Button, Stack, Text, TreeView } from '@jankrajewskiit/ui';
+import { Button, moveTreeNode, Stack, Text, TreeView } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
-import { moveTreeNode } from './moveTreeNode';
-import { FILE_TREE } from './navigationData';
-
-const INITIAL_TREE = FILE_TREE.filter((node) => !node.lazy);
+import { LegacyTreeMoveDemo } from './LegacyTreeMoveDemo';
+import { MOVABLE_FILE_TREE } from './navigationData';
 
 export const MovableTreeDemo = () => {
   const { ts } = useI18n();
-  const [data, setData] = createSignal(INITIAL_TREE);
+  const [data, setData] = createSignal(MOVABLE_FILE_TREE);
 
   return (
     <Stack gap={3}>
@@ -20,12 +18,13 @@ export const MovableTreeDemo = () => {
         label={ts('library.navigation.move.label')}
         data={data()}
         defaultExpanded={['src', 'docs', 'components']}
-        draggable
-        onMove={(sourceId, targetId) => setData((nodes) => moveTreeNode(nodes, sourceId, targetId))}
+        canDrop={(node) => node.id !== 'readme'}
+        onMovePosition={(move) => setData((nodes) => moveTreeNode(nodes, move))}
       />
-      <Button size="sm" variant="ghost" onClick={() => setData(INITIAL_TREE)}>
+      <Button size="sm" variant="ghost" onClick={() => setData(MOVABLE_FILE_TREE)}>
         {ts('library.navigation.move.reset')}
       </Button>
+      <LegacyTreeMoveDemo />
     </Stack>
   );
 };

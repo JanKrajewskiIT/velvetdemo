@@ -21,7 +21,7 @@ export const QUERY_FIELDS: QueryField[] = [
     ],
   },
   { key: 'seats', label: 'Seats', type: 'number' },
-  { key: 'email', label: 'Email', type: 'text' },
+  { key: 'email', label: 'Email', type: 'text', operators: ['contains', 'eq', 'empty'] },
   { key: 'signup', label: 'Signed up', type: 'date' },
 ];
 

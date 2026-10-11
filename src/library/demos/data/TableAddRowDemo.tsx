@@ -13,8 +13,8 @@ const INITIAL_INVITES: Invite[] = [
 ];
 
 const COLUMNS: TableColumn<Invite>[] = [
-  { key: 'name', label: 'Member' },
-  { key: 'status', label: 'Invitation' },
+  { key: 'name', label: 'Member', width: '65%' },
+  { key: 'status', label: 'Invitation', width: '35%' },
 ];
 
 const MAX_INVITES = 8;
@@ -28,6 +28,7 @@ export const TableAddRowDemo = () => {
 
   return (
     <Table
+      layout="fixed"
       columns={COLUMNS}
       rows={invites()}
       maxHeight={280}

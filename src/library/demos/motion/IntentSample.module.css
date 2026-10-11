@@ -182,13 +182,15 @@
   transform: translateY(var(--surface-lift));
 }
 
-.sample[data-kind='slide'] {
+.sample[data-kind='slide'],
+.sample[data-kind='travel'] {
   display: block;
   width: var(--box-width);
   height: var(--space-10);
 }
 
-.sample[data-kind='slide'] .part {
+.sample[data-kind='slide'] .part,
+.sample[data-kind='travel'] .part {
   display: block;
   width: var(--space-10);
   height: var(--space-10);
@@ -197,7 +199,8 @@
   transition: transform var(--intent);
 }
 
-.sample[data-kind='slide'][data-playing] .part {
+.sample[data-kind='slide'][data-playing] .part,
+.sample[data-kind='travel'][data-playing] .part {
   transform: translateX(var(--space-12));
 }
 

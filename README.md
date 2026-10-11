@@ -41,4 +41,4 @@ docker run -p 3000:3000 velvet-demo
 
 Production deploy is handled by `.github/workflows/deploy.yml` (image push to GHCR + SSH deploy to VPS).
 
-Image publishing authenticates with the job's `GITHUB_TOKEN` and `packages: write`. `GHCR_TOKEN` is used to read npm packages during installation/build and pull images on the VPS; it needs `read:packages` access to those packages. For an existing GHCR image, grant the `velvetdemo` repository Write access under the package's Settings → Manage Actions access so its workflow can publish new versions.
+See the [Contabo deployment guide](docs/contabo-deployment.md) for SSH key generation, server access, GitHub secrets, package permissions, Hostinger DNS, HTTPS certificate recovery and Edge troubleshooting.

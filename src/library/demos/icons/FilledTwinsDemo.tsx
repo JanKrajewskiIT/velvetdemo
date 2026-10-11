@@ -1,11 +1,15 @@
-import { filledIcon, Glyph, IconFilled, Text } from '@jankrajewskiit/ui';
-import { createSignal, For } from 'solid-js';
+import { useI18n } from '@jankrajewskiit/i18n';
+import { filledIcon, Glyph, IconFilled, SectionLabel, Text, VelvetIcons } from '@jankrajewskiit/ui';
+import { createSignal, For, Show } from 'solid-js';
 
 import styles from './FilledTwinsDemo.module.css';
 
 const INITIAL_SELECTION: readonly string[] = ['home', 'bell'];
+const TWINS = IconFilled.filter((name) => name in VelvetIcons);
+const FILLED_ONLY = IconFilled.filter((name) => !(name in VelvetIcons)).map((name) => filledIcon(name, true));
 
 export const FilledTwinsDemo = () => {
+  const { ts } = useI18n();
   const [selection, setSelection] = createSignal<ReadonlySet<string>>(new Set(INITIAL_SELECTION));
 
   const toggle = (name: string) =>
@@ -18,8 +22,9 @@ export const FilledTwinsDemo = () => {
 
   return (
     <div class={styles.root}>
+      <SectionLabel>{ts('library.icons.filled.paired')}</SectionLabel>
       <ul class={styles.grid}>
-        <For each={IconFilled}>
+        <For each={TWINS}>
           {(name) => (
             <li>
               <button
@@ -30,14 +35,32 @@ export const FilledTwinsDemo = () => {
               >
                 <Glyph name={filledIcon(name, selection().has(name))} class={styles.glyph} />
                 <span class={styles.name}>{name}</span>
-                <span class={styles.state}>{selection().has(name) ? 'Selected' : 'Rest'}</span>
+                <span class={styles.state}>
+                  <Show when={selection().has(name)} fallback={ts('library.icons.filled.rest')}>
+                    {ts('library.icons.filled.selected')}
+                  </Show>
+                </span>
               </button>
             </li>
           )}
         </For>
       </ul>
+      <Show when={FILLED_ONLY.length > 0}>
+        <SectionLabel>{ts('library.icons.filled.print')}</SectionLabel>
+        <ul class={styles.grid}>
+          <For each={FILLED_ONLY}>
+            {(name) => (
+              <li class={styles.tile}>
+                <Glyph name={name} class={styles.glyph} />
+                <span class={styles.name}>{name}</span>
+                <span class={styles.state}>{ts('library.icons.filled.printState')}</span>
+              </li>
+            )}
+          </For>
+        </ul>
+      </Show>
       <Text variant="caption" tone="tertiary">
-        The filled twin marks a selected state, such as an active tab or a pressed toggle. It is never decoration.
+        {ts('library.icons.filled.caption')}
       </Text>
     </div>
   );

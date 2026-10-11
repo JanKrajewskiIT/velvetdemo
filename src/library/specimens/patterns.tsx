@@ -1,4 +1,4 @@
-import { AiResultPanel, QueryBuilder, TypingIndicator } from '@jankrajewskiit/ui';
+import { AiResultPanel, TypingIndicator } from '@jankrajewskiit/ui';
 
 import type { patternsEn } from '../../i18n/library/patterns';
 import { AnalysisFlowDemo } from '../demos/patterns/AnalysisFlowDemo';
@@ -12,9 +12,10 @@ import { FileUrlImportDemo } from '../demos/patterns/FileUrlImportDemo';
 import { FilterBarDemo } from '../demos/patterns/FilterBarDemo';
 import { FlashcardFlowDemo } from '../demos/patterns/FlashcardFlowDemo';
 import { ImportSourcesDemo } from '../demos/patterns/ImportSourcesDemo';
-import { AI_SECTIONS, AI_SOURCES, QUERY, QUERY_FIELDS } from '../demos/patterns/patternSamples';
+import { AI_SECTIONS, AI_SOURCES } from '../demos/patterns/patternSamples';
 import { PricingDemo } from '../demos/patterns/PricingDemo';
 import { PromptInputDemo } from '../demos/patterns/PromptInputDemo';
+import { QueryBuilderDemo } from '../demos/patterns/QueryBuilderDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './patterns.module.css';
 
@@ -31,7 +32,7 @@ export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>
       <div class={styles.stack}>
         <FilterBarDemo />
         <DualFilterBarDemo />
-        <QueryBuilder fields={QUERY_FIELDS} defaultValue={QUERY} showSummary />
+        <QueryBuilderDemo />
       </div>
     ),
   },

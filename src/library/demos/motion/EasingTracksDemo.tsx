@@ -8,7 +8,14 @@ import { MotionTrack } from './MotionTrack';
 import { PlaybackBar } from './PlaybackBar';
 
 const TRACK_DURATION = '--dur-slow';
-const EASINGS = ['--ease-linear', '--ease-standard', '--ease-emphasized', '--ease-exit', '--ease-spring'] as const;
+const EASINGS = [
+  '--ease-linear',
+  '--ease-standard',
+  '--ease-emphasized',
+  '--ease-exit',
+  '--ease-spring',
+  '--ease-back',
+] as const;
 
 export const EasingTracksDemo = () => {
   const playback = createMotionPlayback(TRACK_DURATION);
