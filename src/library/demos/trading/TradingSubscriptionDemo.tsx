@@ -11,7 +11,7 @@ import { DEMO_SYMBOL, FEED_POINT_LIMIT, FEED_UPDATE_MS, INITIAL_INTERVAL, TRADIN
 export const TradingSubscriptionDemo = () => {
   const { ts } = useI18n();
   const [enabled, setEnabled] = createSignal(true);
-  const [interval, setInterval] = createSignal<string>(INITIAL_INTERVAL);
+  const [interval, setChartInterval] = createSignal<string>(INITIAL_INTERVAL);
   let failNext = false;
   const sequence = createOfflineTradingSequence();
   const feed = useTradingViewWsFeed({
@@ -21,10 +21,10 @@ export const TradingSubscriptionDemo = () => {
     initialData: sequence.initialData,
     subscribe: ({ signal, onData, onOpen, onError }) => {
       const stop = () => {
-        clearInterval(timer);
+        window.clearInterval(timer);
         signal.removeEventListener('abort', stop);
       };
-      const timer = setInterval(() => {
+      const timer = window.setInterval(() => {
         if (signal.aborted) return;
         if (failNext) {
           failNext = false;
@@ -58,7 +58,7 @@ export const TradingSubscriptionDemo = () => {
         height={280}
         interval={interval()}
         intervals={TRADING_INTERVALS}
-        onIntervalChange={setInterval}
+        onIntervalChange={setChartInterval}
         status={feed.status()}
         onRetry={feed.restart}
       />

@@ -7,11 +7,13 @@ See [showcase coverage](docs/showcase-coverage.md) for the public component inve
 Consumes published packages from GitHub Packages:
 
 - `@jankrajewskiit/ui`
-- `@jankrajewskiit/data` 3.4.2 (advanced data components and TradingView charts)
+- `@jankrajewskiit/data` (advanced data components and TradingView charts)
 - `lightweight-charts` 5.x (the optional VelvetData chart adapter)
 - `@jankrajewskiit/auth` (offline showcase sessions)
 - `@jankrajewskiit/i18n`
 - `@jankrajewskiit/configs` (dev)
+
+Required versions are recorded in `package.json` and resolved versions in `package-lock.json`. Ecosystem cards derive the minimum declared versions of direct packages from the manifest; VelvetReactive retains a reference version because it is not a demo dependency. Follow the [release order](../VelvetData/docs/migration.md#release-order) for later updates, then run `npm run verify` against the refreshed installation.
 
 ## Local development
 

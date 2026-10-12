@@ -1,3 +1,5 @@
+import { dependencies, devDependencies } from '../../../package.json';
+
 export const PACKAGE_IDS = ['ui', 'data', 'auth', 'reactive', 'i18n', 'configs'] as const;
 
 export type PackageId = (typeof PACKAGE_IDS)[number];
@@ -11,23 +13,25 @@ export interface PackageInfo {
   dependsOn: readonly EcosystemNodeId[];
 }
 
+const packageVersion = (range: string): string => range.replace(/^[~^]/u, '');
+
 export const PACKAGES: Readonly<Record<PackageId, PackageInfo>> = {
   ui: {
     name: 'VelvetUi',
     packageName: '@jankrajewskiit/ui',
-    version: '3.4.4',
-    dependsOn: ['i18n', 'solid', 'configs'],
+    version: packageVersion(dependencies['@jankrajewskiit/ui']),
+    dependsOn: ['auth', 'i18n', 'solid', 'configs'],
   },
   data: {
     name: 'VelvetData',
     packageName: '@jankrajewskiit/data',
-    version: '3.4.2',
+    version: packageVersion(dependencies['@jankrajewskiit/data']),
     dependsOn: ['ui', 'i18n', 'solid', 'configs'],
   },
   auth: {
     name: 'VelvetAuth',
     packageName: '@jankrajewskiit/auth',
-    version: '3.3.4',
+    version: packageVersion(dependencies['@jankrajewskiit/auth']),
     dependsOn: ['oidc', 'solid', 'configs'],
   },
   reactive: {
@@ -39,13 +43,13 @@ export const PACKAGES: Readonly<Record<PackageId, PackageInfo>> = {
   i18n: {
     name: 'VelvetI18n',
     packageName: '@jankrajewskiit/i18n',
-    version: '3.3.4',
+    version: packageVersion(dependencies['@jankrajewskiit/i18n']),
     dependsOn: ['solid', 'configs'],
   },
   configs: {
     name: 'VelvetConfigs',
     packageName: '@jankrajewskiit/configs',
-    version: '3.3.4',
+    version: packageVersion(devDependencies['@jankrajewskiit/configs']),
     dependsOn: [],
   },
 };

@@ -46,9 +46,9 @@ Updated on 2026-10-11 from the committed VelvetUi 3.4.4 source, within the prece
 
 New specimen `data-grid-server` uses the existing typed EN/PL registry, so search and counts include it automatically. New controls and specimen labels have EN/PL messages. The showcase continues to import the published UI package; no sibling source or copied library styles are used at runtime.
 
-The installed UI package and lockfile now resolve 3.4.4. The Data integration below uses the published package rather than linking sibling source into the showcase.
+Read-only inspection on 2026-10-12 confirmed installed and locked UI/Data 3.4.8 and I18n 3.4.3, including the public template formatters and UI's shared fallback correction. The Data integration below uses published packages rather than linking sibling source into the showcase. This confirms dependency installation, not the result of a new aggregate verification or browser interaction audit.
 
-## VelvetData 3.4.2 integration
+## VelvetData integration
 
 The existing DataGrid, ColumnManager, QueryBuilder, VirtualTable and VirtualList demos now consume `@jankrajewskiit/data`, including their public types and column/view helpers. They keep their current sections and interactive examples. Table and TableAddRowAction continue to come from Velvet UI. The entry loads Data styles after UI styles and composes the English/Polish `velvetDataMessages` into the existing provider.
 
@@ -63,7 +63,7 @@ The additional `trading` group demonstrates `TradingViewChart`, `TradingViewChar
 | `useTradingViewPollingFeed` | [TradingPollingDemo.tsx](../src/library/demos/trading/TradingPollingDemo.tsx)           |
 | `useTradingViewWsFeed`      | [TradingSubscriptionDemo.tsx](../src/library/demos/trading/TradingSubscriptionDemo.tsx) |
 
-The component map below retains the earlier UI audit inventory. The five transferred components now belong to VelvetData; it is not a new count of current UI exports. Dependency installation and `npm run verify` must confirm this integration against the published Data 3.4.2 package.
+The component map below retains the earlier UI audit inventory. The five transferred components now belong to VelvetData; it is not a new count of current UI exports. Ecosystem cards derive minimum declared package versions from the demo manifest and include UI's auth dependency. Follow the [release order](../../VelvetData/docs/migration.md#release-order), then run `npm run verify` and a browser pass against the refreshed installation.
 
 ## Component map
 
@@ -325,4 +325,4 @@ All approved checks ran on 2026-10-11 in VelvetDemo. The local UI package remain
 | `npm run lint`                                               | New helper and handler types cannot resolve through installed 3.4.3; unrelated import ordering and auth conditional findings were corrected |
 | `npm run format:check`                                       | Failed on 57 untouched files in `.agents` and `docs/contabo-deployment.md`; no changed source or coverage file was flagged                  |
 
-Compatibility of the new calls was checked statically against the 3.4.4 public source. This does not replace type checking and building with the installed release. After registry access is restored, repeat the approved install and checks. No application or browser interaction pass was run. The existing README and deployment-document edits were preserved.
+Compatibility of those calls was checked statically against the 3.4.4 public source. That historical result does not describe the current installation; see the later dependency inspection above. Run a fresh aggregate `npm run verify` against the installed releases. The user reported successful earlier manual execution; a complete browser interaction audit has not been recorded. The existing deployment-document edits were preserved.
