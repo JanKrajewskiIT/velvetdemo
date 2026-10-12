@@ -3,7 +3,7 @@ import { createSignal } from 'solid-js';
 
 import { cx } from '../../styles/cx';
 import { SectionHead } from '../SectionHead';
-import { type EcosystemNodeId, isLit, PACKAGES } from './ecosystemData';
+import { type EcosystemNodeId, isLit, PACKAGE_IDS, PACKAGES } from './ecosystemData';
 import styles from './EcosystemSection.module.css';
 import { PackageCard } from './PackageCard';
 
@@ -23,7 +23,10 @@ export const EcosystemSection = () => {
   return (
     <section class={styles.section} id="ecosystem">
       <div class={styles.container}>
-        <SectionHead overline={ts('showcase.ecosystem.overline')} title={ts('showcase.ecosystem.title')}>
+        <SectionHead
+          overline={ts('showcase.ecosystem.overline')}
+          title={ts('showcase.ecosystem.title', { count: PACKAGE_IDS.length })}
+        >
           {ts('showcase.ecosystem.lead')}
         </SectionHead>
         <div class={styles.ecosystem}>
@@ -60,7 +63,7 @@ export const EcosystemSection = () => {
               <span class={styles.mono}>oidc-client-ts</span>
               <small>{ts('showcase.ecosystem.external')}</small>
             </div>
-            <div />
+            <PackageCard id="data" active={active()} onActivate={setActive} />
           </div>
           <div class={cx(styles.solid, dim('solid') && styles.dim)}>
             <span class={styles.mono}>solid-js ≥ 1.9</span>

@@ -27,8 +27,10 @@
   },
   "dependencies": {
     "@jankrajewskiit/auth": "^3.4.1",
+    "@jankrajewskiit/data": "^3.4.2",
     "@jankrajewskiit/i18n": "^3.4.1",
     "@jankrajewskiit/ui": "^3.4.4",
+    "lightweight-charts": "^5.2.1",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {

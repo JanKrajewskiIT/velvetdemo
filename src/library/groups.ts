@@ -170,4 +170,10 @@ export const LIBRARY_GROUPS: readonly LibraryGroup<GroupSlug>[] = [
     kind: 'component',
     load: () => import('./specimens/patterns').then((module) => module.patternSpecimens),
   },
+  {
+    number: '29',
+    slug: 'trading',
+    kind: 'component',
+    load: () => import('./specimens/trading').then((module) => module.tradingSpecimens),
+  },
 ];

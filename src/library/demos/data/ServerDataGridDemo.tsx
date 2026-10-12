@@ -1,5 +1,6 @@
+import { DataGrid, defaultGridView, type GridColumn, type GridViewState } from '@jankrajewskiit/data';
 import { useI18n } from '@jankrajewskiit/i18n';
-import { Button, DataGrid, defaultGridView, type GridColumn, type GridViewState } from '@jankrajewskiit/ui';
+import { Button } from '@jankrajewskiit/ui';
 import { batch, createMemo, createSignal } from 'solid-js';
 
 import { type Member, MEMBERS } from './members';

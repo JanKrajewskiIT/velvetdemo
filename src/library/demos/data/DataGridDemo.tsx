@@ -1,6 +1,4 @@
-import { useI18n } from '@jankrajewskiit/i18n';
 import {
-  Button,
   DataGrid,
   defaultGridView,
   type GridColumn,
@@ -8,7 +6,9 @@ import {
   type QueryField,
   reconcileGridView,
   type RowKey,
-} from '@jankrajewskiit/ui';
+} from '@jankrajewskiit/data';
+import { useI18n } from '@jankrajewskiit/i18n';
+import { Button } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import { type Member, MEMBERS, ROLES } from './members';

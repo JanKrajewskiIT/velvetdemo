@@ -1,4 +1,4 @@
-export const PACKAGE_IDS = ['ui', 'auth', 'reactive', 'i18n', 'configs'] as const;
+export const PACKAGE_IDS = ['ui', 'data', 'auth', 'reactive', 'i18n', 'configs'] as const;
 
 export type PackageId = (typeof PACKAGE_IDS)[number];
 
@@ -15,8 +15,14 @@ export const PACKAGES: Readonly<Record<PackageId, PackageInfo>> = {
   ui: {
     name: 'VelvetUi',
     packageName: '@jankrajewskiit/ui',
-    version: '3.3.6',
+    version: '3.4.4',
     dependsOn: ['i18n', 'solid', 'configs'],
+  },
+  data: {
+    name: 'VelvetData',
+    packageName: '@jankrajewskiit/data',
+    version: '3.4.2',
+    dependsOn: ['ui', 'i18n', 'solid', 'configs'],
   },
   auth: {
     name: 'VelvetAuth',
@@ -44,7 +50,7 @@ export const PACKAGES: Readonly<Record<PackageId, PackageInfo>> = {
   },
 };
 
-const RUNTIME_PACKAGES: readonly EcosystemNodeId[] = ['ui', 'auth', 'reactive', 'i18n'];
+const RUNTIME_PACKAGES: readonly EcosystemNodeId[] = PACKAGE_IDS.filter((id) => id !== 'configs');
 
 const isPackage = (node: EcosystemNodeId): node is PackageId => node in PACKAGES;
 

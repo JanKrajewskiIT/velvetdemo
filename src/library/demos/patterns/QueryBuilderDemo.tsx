@@ -1,6 +1,6 @@
+import { QueryBuilder, type QueryGroup } from '@jankrajewskiit/data';
 import { useI18n } from '@jankrajewskiit/i18n';
-import type { QueryGroup } from '@jankrajewskiit/ui';
-import { Button, Checkbox, QueryBuilder, Stack, Text } from '@jankrajewskiit/ui';
+import { Button, Checkbox, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
 import { QUERY, QUERY_FIELDS } from './patternSamples';

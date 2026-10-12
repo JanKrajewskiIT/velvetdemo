@@ -1,4 +1,5 @@
 import '@jankrajewskiit/ui/styles';
+import '@jankrajewskiit/data/styles';
 import './styles/page.css';
 
 import { mountVelvetApp } from '@jankrajewskiit/ui';

@@ -1,12 +1,6 @@
+import { applyColumns, ColumnManager, type ColumnState, type ManagedColumn } from '@jankrajewskiit/data';
 import { useI18n } from '@jankrajewskiit/i18n';
-import {
-  applyColumns,
-  ColumnManager,
-  type ColumnState,
-  type ManagedColumn,
-  Table,
-  type TableColumn,
-} from '@jankrajewskiit/ui';
+import { Table, type TableColumn } from '@jankrajewskiit/ui';
 import { createMemo, createSignal } from 'solid-js';
 
 import styles from './ColumnManagerDemo.module.css';

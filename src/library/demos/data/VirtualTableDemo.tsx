@@ -1,4 +1,5 @@
-import { Badge, type VirtualColumn, VirtualTable } from '@jankrajewskiit/ui';
+import { type VirtualColumn, VirtualTable } from '@jankrajewskiit/data';
+import { Badge } from '@jankrajewskiit/ui';
 
 import { makeOrders, type Order, ORDER_STATUS_TONE } from './orders';
 import styles from './VirtualTableDemo.module.css';

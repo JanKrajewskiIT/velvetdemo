@@ -1,4 +1,5 @@
-import { Badge, DataGrid, type GridColumn } from '@jankrajewskiit/ui';
+import { DataGrid, type GridColumn } from '@jankrajewskiit/data';
+import { Badge } from '@jankrajewskiit/ui';
 
 import { makeOrders, type Order, ORDER_STATUS_TONE } from './orders';
 

@@ -27,6 +27,7 @@ import { selectionEn, selectionPl } from './selection';
 import { shapeEn, shapePl } from './shape';
 import { spaceLayoutEn, spaceLayoutPl } from './space-layout';
 import { stateEn, statePl } from './state';
+import { tradingEn, tradingPl } from './trading';
 import { typeEn, typePl } from './type';
 
 export const libraryEn = defineDictionary({
@@ -59,6 +60,7 @@ export const libraryEn = defineDictionary({
     data: dataEn,
     planning: planningEn,
     patterns: patternsEn,
+    trading: tradingEn,
   },
 });
 
@@ -92,6 +94,7 @@ export const libraryPl: TranslationOf<typeof libraryEn> = {
     data: dataPl,
     planning: planningPl,
     patterns: patternsPl,
+    trading: tradingPl,
   },
 };
 

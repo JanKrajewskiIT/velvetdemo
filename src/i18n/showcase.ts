@@ -98,7 +98,7 @@ export const showcaseEn = defineDictionary({
     },
     ecosystem: {
       overline: 'Ecosystem',
-      title: 'Five packages. One way of building.',
+      title: '{count} packages. One way of building.',
       lead: 'Everything ships for SolidJS from one scope. Install only what you need — the packages stay independent, and your app is where they meet. Hover a package to trace its connections.',
       yourApp: 'Your app',
       solidApp: 'SolidJS application',
@@ -111,7 +111,11 @@ export const showcaseEn = defineDictionary({
       packages: {
         ui: {
           description:
-            'The component library — tokens, light & dark themes and every component in the library below. mountVelvetApp wires theme, locale, toasts and an error boundary in one call.',
+            'Core components, tokens and light & dark themes. mountVelvetApp wires theme, locale, toasts and an error boundary in one call.',
+        },
+        data: {
+          description:
+            'Advanced data components composed from Velvet UI: editable grids, column management, nested queries, virtual collections and TradingView charts with polling and subscription feeds.',
         },
         auth: {
           description:
@@ -253,7 +257,7 @@ export const showcasePl: TranslationOf<typeof showcaseEn> = {
     },
     ecosystem: {
       overline: 'Ekosystem',
-      title: 'Pięć pakietów. Jeden sposób budowania.',
+      title: '{count} pakietów. Jeden sposób budowania.',
       lead: 'Wszystko jest dostępne dla SolidJS w jednym zakresie nazw. Instaluj tylko to, czego potrzebujesz — pakiety pozostają niezależne, a spotykają się w Twojej aplikacji. Najedź na pakiet, aby zobaczyć jego powiązania.',
       yourApp: 'Twoja aplikacja',
       solidApp: 'Aplikacja SolidJS',
@@ -266,7 +270,11 @@ export const showcasePl: TranslationOf<typeof showcaseEn> = {
       packages: {
         ui: {
           description:
-            'Biblioteka komponentów — tokeny, jasny i ciemny motyw oraz każdy komponent z biblioteki poniżej. mountVelvetApp jednym wywołaniem podłącza motyw, język, toasty i granicę błędów.',
+            'Podstawowe komponenty, tokeny oraz jasny i ciemny motyw. mountVelvetApp jednym wywołaniem podłącza motyw, język, toasty i granicę błędów.',
+        },
+        data: {
+          description:
+            'Zaawansowane komponenty danych złożone z Velvet UI: edytowalne siatki, zarządzanie kolumnami, zagnieżdżone zapytania, kolekcje wirtualne oraz wykresy TradingView z pollingiem i subskrypcjami.',
         },
         auth: {
           description:

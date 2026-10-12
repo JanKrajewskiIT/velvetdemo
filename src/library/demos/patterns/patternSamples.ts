@@ -1,4 +1,5 @@
-import type { AiSection, AiSource, QueryField, QueryGroup } from '@jankrajewskiit/ui';
+import type { QueryField, QueryGroup } from '@jankrajewskiit/data';
+import type { AiSection, AiSource } from '@jankrajewskiit/ui';
 
 export const QUERY_FIELDS: QueryField[] = [
   {

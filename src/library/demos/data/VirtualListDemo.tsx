@@ -1,4 +1,5 @@
-import { Glyph, type RowKey, VirtualList } from '@jankrajewskiit/ui';
+import { type RowKey, VirtualList } from '@jankrajewskiit/data';
+import { Glyph } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
 import styles from './VirtualListDemo.module.css';

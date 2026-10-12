@@ -46,7 +46,24 @@ Updated on 2026-10-11 from the committed VelvetUi 3.4.4 source, within the prece
 
 New specimen `data-grid-server` uses the existing typed EN/PL registry, so search and counts include it automatically. New controls and specimen labels have EN/PL messages. The showcase continues to import the published UI package; no sibling source or copied library styles are used at runtime.
 
-The approved UI installation returned GitHub Packages HTTP 401 twice. The user confirmed that 3.4.4 is deployed, but the local installed package and lockfile still resolve 3.4.3. Dependency metadata has not been fabricated. Run the approved `npm install @jankrajewskiit/ui@3.4.4 --ignore-scripts --no-audit --no-fund` after restoring local registry access to update the manifest and lockfile.
+The installed UI package and lockfile now resolve 3.4.4. The Data integration below uses the published package rather than linking sibling source into the showcase.
+
+## VelvetData 3.4.2 integration
+
+The existing DataGrid, ColumnManager, QueryBuilder, VirtualTable and VirtualList demos now consume `@jankrajewskiit/data`, including their public types and column/view helpers. They keep their current sections and interactive examples. Table and TableAddRowAction continue to come from Velvet UI. The entry loads Data styles after UI styles and composes the English/Polish `velvetDataMessages` into the existing provider.
+
+The additional `trading` group demonstrates `TradingViewChart`, `TradingViewChartToolbar`, `TradingViewChartMetrics` and `TradingViewChartData`, together with offline examples of `useTradingViewPollingFeed` and `useTradingViewWsFeed`. The group and its Lightweight Charts adapter load on demand. Specimen ids and English/Polish labels participate in the existing search/count registry.
+
+| Data API                    | Live example                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------- |
+| `TradingViewChart`          | [TradingChartDemo.tsx](../src/library/demos/trading/TradingChartDemo.tsx)               |
+| `TradingViewChartToolbar`   | [TradingToolbarDemo.tsx](../src/library/demos/trading/TradingToolbarDemo.tsx)           |
+| `TradingViewChartMetrics`   | [TradingMetricsDemo.tsx](../src/library/demos/trading/TradingMetricsDemo.tsx)           |
+| `TradingViewChartData`      | [TradingDataDemo.tsx](../src/library/demos/trading/TradingDataDemo.tsx)                 |
+| `useTradingViewPollingFeed` | [TradingPollingDemo.tsx](../src/library/demos/trading/TradingPollingDemo.tsx)           |
+| `useTradingViewWsFeed`      | [TradingSubscriptionDemo.tsx](../src/library/demos/trading/TradingSubscriptionDemo.tsx) |
+
+The component map below retains the earlier UI audit inventory. The five transferred components now belong to VelvetData; it is not a new count of current UI exports. Dependency installation and `npm run verify` must confirm this integration against the published Data 3.4.2 package.
 
 ## Component map
 
