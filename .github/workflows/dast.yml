@@ -1,0 +1,22 @@
+name: Staging DAST
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options:
+          - baseline
+          - full
+          - api
+        default: baseline
+        required: true
+        description: Scan the allowlisted staging host; full/api are active scans.
+permissions:
+  contents: read
+jobs:
+  scan:
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-dast.yml@9d7851722b143c4d8aaf7ca0f2058f5ae149fe44 # v3.5.3
+    with:
+      mode: ${{ inputs.mode }}
+    secrets:
+      CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
