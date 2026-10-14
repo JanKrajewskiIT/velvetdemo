@@ -3,7 +3,7 @@ import { For } from 'solid-js';
 import { cx } from '../../styles/cx';
 import styles from './TokenSwatches.module.css';
 
-export interface TokenSwatch {
+interface TokenSwatch {
   label: string;
   token: string;
   mono?: boolean;

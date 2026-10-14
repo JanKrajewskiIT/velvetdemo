@@ -11,6 +11,7 @@ import { DEMO_SYMBOL, FEED_POINT_LIMIT, FEED_UPDATE_MS, INITIAL_INTERVAL, TRADIN
 export const TradingSubscriptionDemo = () => {
   const { ts } = useI18n();
   const [enabled, setEnabled] = createSignal(true);
+  const [holdingUpdates, setHoldingUpdates] = createSignal(false);
   const [interval, setChartInterval] = createSignal<string>(INITIAL_INTERVAL);
   let failNext = false;
   const sequence = createOfflineTradingSequence();
@@ -18,6 +19,8 @@ export const TradingSubscriptionDemo = () => {
     context: () => ({ symbol: DEMO_SYMBOL, interval: interval() }),
     enabled,
     maxPoints: FEED_POINT_LIMIT,
+    staleAfterMs: 4500,
+    retry: { maxAttempts: 3, delayMs: 600, maxDelayMs: 2400 },
     initialData: sequence.initialData,
     subscribe: ({ signal, onData, onOpen, onError }) => {
       const stop = () => {
@@ -26,6 +29,7 @@ export const TradingSubscriptionDemo = () => {
       };
       const timer = window.setInterval(() => {
         if (signal.aborted) return;
+        if (holdingUpdates()) return;
         if (failNext) {
           failNext = false;
           stop();
@@ -50,6 +54,8 @@ export const TradingSubscriptionDemo = () => {
         enabled={enabled()}
         onToggle={() => setEnabled((current) => !current)}
         onFail={fail}
+        holding={holdingUpdates()}
+        onHoldUpdates={() => setHoldingUpdates((current) => !current)}
       />
       <TradingViewChart
         symbol={DEMO_SYMBOL}
@@ -60,6 +66,7 @@ export const TradingSubscriptionDemo = () => {
         intervals={TRADING_INTERVALS}
         onIntervalChange={setChartInterval}
         status={feed.status()}
+        stale={feed.stale()}
         onRetry={feed.restart}
       />
     </Stack>

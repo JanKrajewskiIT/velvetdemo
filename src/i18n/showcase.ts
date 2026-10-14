@@ -2,6 +2,12 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 
 export const showcaseEn = defineDictionary({
   showcase: {
+    update: {
+      title: 'A new showcase version is available',
+      description: 'Reload the page to load the current component examples.',
+      blocked: 'Wait a moment before trying to reload again.',
+      reload: 'Reload showcase',
+    },
     meta: {
       title: 'Velvet UI — Showcase',
     },
@@ -150,6 +156,7 @@ export const showcaseEn = defineDictionary({
       sectionLabel: 'Section',
       empty: 'Nothing matches “{query}”. Try a component name like “table” or “picker”.',
       loading: 'Loading specimens…',
+      loadFailed: 'Could not load this component group',
       specimenCount: '{count, plural, one {# specimen} other {# specimens}}',
     },
     footer: {
@@ -161,6 +168,12 @@ export const showcaseEn = defineDictionary({
 
 export const showcasePl: TranslationOf<typeof showcaseEn> = {
   showcase: {
+    update: {
+      title: 'Dostępna jest nowa wersja prezentacji',
+      description: 'Odśwież stronę, aby załadować aktualne przykłady komponentów.',
+      blocked: 'Odczekaj chwilę przed kolejnym odświeżeniem.',
+      reload: 'Odśwież prezentację',
+    },
     meta: {
       title: 'Velvet UI — Prezentacja',
     },
@@ -310,6 +323,7 @@ export const showcasePl: TranslationOf<typeof showcaseEn> = {
       sectionLabel: 'Sekcja',
       empty: 'Brak wyników dla „{query}”. Spróbuj nazwy komponentu, np. „tabela” lub „selektor”.',
       loading: 'Ładowanie przykładów…',
+      loadFailed: 'Nie udało się załadować tej grupy komponentów',
       specimenCount: '{count, plural, one {# przykład} few {# przykłady} many {# przykładów} other {# przykładu}}',
     },
     footer: {

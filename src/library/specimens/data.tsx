@@ -4,6 +4,7 @@ import type { dataEn } from '../../i18n/library/data';
 import { FAQ_ITEMS, STATUS_ITEMS } from '../demos/data/accordionItems';
 import { ColumnManagerDemo } from '../demos/data/ColumnManagerDemo';
 import { DataGridDemo } from '../demos/data/DataGridDemo';
+import { DataGridStatesDemo } from '../demos/data/DataGridStatesDemo';
 import { DiffViewerDemo } from '../demos/data/DiffViewerDemo';
 import { LogViewerDemo } from '../demos/data/LogViewerDemo';
 import { PeopleListDemo } from '../demos/data/PeopleListDemo';
@@ -50,6 +51,11 @@ export const dataSpecimens: readonly Specimen<SpecimenIdOf<typeof dataEn>>[] = [
     id: 'data-grid',
     span: 12,
     render: () => <DataGridDemo />,
+  },
+  {
+    id: 'data-grid-states',
+    span: 12,
+    render: () => <DataGridStatesDemo />,
   },
   {
     id: 'data-grid-server',

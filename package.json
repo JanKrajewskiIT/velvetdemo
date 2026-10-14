@@ -13,9 +13,10 @@
   },
   "scripts": {
     "dev": "vite --force",
-    "build": "tsc -b && vite build && npm run build:spa",
+    "build": "tsc -b && vite build && npm run performance:report && npm run build:spa",
+    "performance:report": "configs-bundle-report",
     "preview": "vite preview",
-    "verify": "npm run toolchain && npm run editor:check && npm run format:check && npm run lint && npm run lint:css && npm run build",
+    "verify": "npm run toolchain && npm run editor:check && npm run format:check && npm run lint && npm run quality:check && npm run lint:css && npm run build",
     "typecheck": "tsc -b",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
@@ -34,19 +35,23 @@
     "predev": "npm run toolchain",
     "prepreview": "npm run toolchain",
     "deps:check": "knip --no-exit-code --reporter json",
-    "deps:strict": "knip"
+    "deps:strict": "configs-unused",
+    "architecture:check": "configs-architecture",
+    "duplicates:report": "configs-duplicates",
+    "quality:check": "npm run architecture:check && npm run duplicates:report && npm run deps:strict"
   },
   "dependencies": {
-    "@jankrajewskiit/auth": "^3.5.4",
-    "@jankrajewskiit/data": "^3.5.3",
-    "@jankrajewskiit/i18n": "^3.5.3",
-    "@jankrajewskiit/ui": "^3.5.4",
+    "@jankrajewskiit/auth": "^3.7.0",
+    "@jankrajewskiit/data": "^3.7.0",
+    "@jankrajewskiit/i18n": "^3.7.0",
+    "@jankrajewskiit/ui": "^3.7.0",
     "lightweight-charts": "^5.2.1",
     "oidc-client-ts": "^3.5.0",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {
-    "@jankrajewskiit/configs": "^3.5.3",
+    "web-vitals": "^6.2.3",
+    "@jankrajewskiit/configs": "^3.7.0",
     "@types/node": "^26.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.12.0",
@@ -57,7 +62,9 @@
     "stylelint": "^17.16.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript": "npm:@typescript/typescript6@~6.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "dependency-cruiser": "^18.6.0",
+    "jscpd": "~5.4.1"
   },
   "packageManager": "npm@12.2.0",
   "overrides": {

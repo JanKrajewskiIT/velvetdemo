@@ -1,7 +1,14 @@
-import { DataGrid, defaultGridView, type GridColumn, type GridViewState } from '@jankrajewskiit/data';
+import {
+  DataGrid,
+  defaultGridView,
+  type GridBulkSelection,
+  type GridColumn,
+  type GridViewState,
+  type RowKey,
+} from '@jankrajewskiit/data';
 import { useI18n } from '@jankrajewskiit/i18n';
 import { Button } from '@jankrajewskiit/ui';
-import { batch, createMemo, createSignal } from 'solid-js';
+import { batch, createMemo, createSignal, Show } from 'solid-js';
 
 import { type Member, MEMBERS } from './members';
 
@@ -18,6 +25,8 @@ export const ServerDataGridDemo = () => {
   const initial = defaultGridView(COLUMNS);
   const [view, setView] = createSignal(initial);
   const [page, setPage] = createSignal(0);
+  const [selected, setSelected] = createSignal<RowKey[]>([]);
+  const [bulkMessage, setBulkMessage] = createSignal('');
   const result = createMemo(() => {
     const needle = view().search.trim().toLowerCase();
     const filtered = MEMBERS.filter((member) =>
@@ -39,38 +48,55 @@ export const ServerDataGridDemo = () => {
       setPage(0);
       setView(next);
     });
+  const processSelection = ({ keys, loadedRows }: GridBulkSelection<Member>) => {
+    setBulkMessage(ts('library.data.server.bulkResult', { selected: keys.length, loaded: loadedRows.length }));
+    setSelected([]);
+  };
 
   return (
-    <DataGrid
-      label={ts('library.data.server.label')}
-      columns={COLUMNS}
-      rows={rows()}
-      rowCount={result().length}
-      view={view()}
-      defaultView={initial}
-      onViewChange={changeView}
-      manualFiltering
-      manualSorting
-      searchable
-      searchPlaceholder={ts('library.data.server.search')}
-      viewSettings
-      height={240}
-      toolbarEnd={
-        <>
-          <Button size="sm" variant="secondary" disabled={page() === 0} onClick={() => setPage((value) => value - 1)}>
-            {ts('library.data.server.previous')}
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            disabled={page() + 1 >= pageCount()}
-            onClick={() => setPage((value) => value + 1)}
-          >
-            {ts('library.data.server.next')}
-          </Button>
-        </>
-      }
-      footer={ts('library.data.server.page', { page: page() + 1, count: pageCount() })}
-    />
+    <>
+      <Show when={bulkMessage()}>
+        {(message) => (
+          <p role="status" aria-live="polite">
+            {message()}
+          </p>
+        )}
+      </Show>
+      <DataGrid
+        label={ts('library.data.server.label')}
+        columns={COLUMNS}
+        rows={rows()}
+        rowCount={result().length}
+        view={view()}
+        defaultView={initial}
+        onViewChange={changeView}
+        manualFiltering
+        manualSorting
+        searchable
+        searchPlaceholder={ts('library.data.server.search')}
+        selectable
+        selected={selected()}
+        onSelectionChange={setSelected}
+        bulkSelectionActions={processSelection}
+        viewSettings
+        height={240}
+        toolbarEnd={
+          <>
+            <Button size="sm" variant="secondary" disabled={page() === 0} onClick={() => setPage((value) => value - 1)}>
+              {ts('library.data.server.previous')}
+            </Button>
+            <Button
+              size="sm"
+              variant="secondary"
+              disabled={page() + 1 >= pageCount()}
+              onClick={() => setPage((value) => value + 1)}
+            >
+              {ts('library.data.server.next')}
+            </Button>
+          </>
+        }
+        footer={ts('library.data.server.page', { page: page() + 1, count: pageCount() })}
+      />
+    </>
   );
 };

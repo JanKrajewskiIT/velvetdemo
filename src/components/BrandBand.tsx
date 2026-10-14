@@ -2,6 +2,7 @@ import { useI18n } from '@jankrajewskiit/i18n';
 import { VisuallyHidden } from '@jankrajewskiit/ui';
 import { createSignal, For, onCleanup } from 'solid-js';
 
+import { reportAsyncError } from '../browserDiagnostics';
 import { cx } from '../styles/cx';
 import styles from './BrandBand.module.css';
 
@@ -79,7 +80,7 @@ export const BrandBand = () => {
                 isLightStep(swatch.step) && styles.light,
               )}
               style={{ background: `var(--velvet-${swatch.step})` }}
-              onClick={() => void copy(swatch.hex)}
+              onClick={() => void copy(swatch.hex).catch(reportAsyncError)}
               aria-label={ts('showcase.brand.copy', { step: swatch.step, hex: swatch.hex })}
             >
               <b>{swatch.step}</b>

@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   source:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-source.yml@9d7851722b143c4d8aaf7ca0f2058f5ae149fe44 # v3.5.3
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-source.yml@e9100fa7ea7797669afeb410b644cd46ff9c8064 # v3.7.0
     secrets: &a1
       CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
   dependencies:
@@ -42,7 +42,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN || secrets.GHCR_TOKEN || github.token }}
           GHCR_TOKEN: ${{ secrets.NPM_READ_TOKEN || secrets.GHCR_TOKEN || github.token }}
   images:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-images.yml@9d7851722b143c4d8aaf7ca0f2058f5ae149fe44 # v3.5.3
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-images.yml@e9100fa7ea7797669afeb410b644cd46ff9c8064 # v3.7.0
     secrets: *a1
     with:
       images: '["ghcr.io/jankrajewskiit/velvet-demo:latest","docker.io/owasp/modsecurity-crs:nginx@sha256:133267aa811e1a57a23b52ef04b3c30e802bcbe5454588f6d6af1f69f4b2b667"]'

@@ -1,6 +1,8 @@
 import { useI18n } from '@jankrajewskiit/i18n';
+import { ErrorState } from '@jankrajewskiit/ui';
 import { createMemo, createResource, For, Show } from 'solid-js';
 
+import { browserDiagnostics } from '../../browserDiagnostics';
 import type { LibraryGroup } from '../../library/types';
 import { useLibraryText } from '../../library/useLibraryText';
 import { groupAnchor, specimenIdsMatching } from './filterGroups';
@@ -17,11 +19,12 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
   const text = useLibraryText();
   const anchor = () => groupAnchor(props.group);
   const ids = createMemo(() => new Set(specimenIdsMatching(text, props.group, props.query)));
-  const [loaded] = createResource(
+  const [loaded, { refetch }] = createResource(
     () => props.group,
     (group) => group.load(),
   );
-  const specimens = () => loaded()?.filter((specimen) => ids().has(specimen.id));
+  const hasError = (): boolean => loaded.state === 'errored';
+  const specimens = () => (hasError() ? undefined : loaded()?.filter((specimen) => ids().has(specimen.id)));
 
   return (
     <section class={styles.group} id={anchor()} aria-labelledby={`${anchor()}-title`}>
@@ -35,12 +38,22 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
         </div>
         <span class={styles.count}>{ts('showcase.library.specimenCount', { count: ids().size })}</span>
       </header>
+      <Show when={hasError()}>
+        <ErrorState
+          title={ts('showcase.library.loadFailed')}
+          onRetry={() => {
+            void Promise.resolve(refetch()).catch(() => browserDiagnostics.reportError('chunk'));
+          }}
+        />
+      </Show>
       <Show
         when={specimens()}
         fallback={
-          <p class={styles.loading} role="status">
-            {ts('showcase.library.loading')}
-          </p>
+          <Show when={!hasError()}>
+            <p class={styles.loading} role="status">
+              {ts('showcase.library.loading')}
+            </p>
+          </Show>
         }
       >
         {(items) => (

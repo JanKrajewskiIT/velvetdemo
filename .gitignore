@@ -2,6 +2,7 @@ node_modules/
 .husky/_/
 coverage/
 dist/
+reports/
 build/
 .vscode/
 .idea/

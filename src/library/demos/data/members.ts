@@ -1,4 +1,4 @@
-export type MemberStatus = 'Active' | 'Invited' | 'Suspended';
+type MemberStatus = 'Active' | 'Invited' | 'Suspended';
 
 export interface Member {
   id: number;

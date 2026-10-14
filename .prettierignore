@@ -6,3 +6,5 @@ package-lock.json
 .artifacts/
 
 .deployment/
+
+reports/

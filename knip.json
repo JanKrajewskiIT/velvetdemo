@@ -1,8 +1,16 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": ["src/index.ts!", "src/index.tsx!", "src/main.tsx!", "vite.config.ts", "spa.config.ts", "env.config.ts"],
+  "entry": [
+    "src/index.ts!",
+    "src/index.tsx!",
+    "src/main.tsx!",
+    "src/i18n/i18n.d.ts",
+    "vite.config.ts",
+    "spa.config.ts",
+    "env.config.ts"
+  ],
   "project": ["src/**/*.{ts,tsx}", "*.{ts,mjs}", "scripts/*.mjs"],
   "ignore": [".agents/**", "dist/**", ".deployment/**"],
-  "ignoreDependencies": ["@typescript/native"],
+  "ignoreDependencies": ["@typescript/native", "dependency-cruiser", "jscpd"],
   "includeEntryExports": false
 }

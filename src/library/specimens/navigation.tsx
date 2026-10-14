@@ -1,13 +1,4 @@
-import {
-  BottomNav,
-  Breadcrumb,
-  HierarchyNavigator,
-  Link,
-  LoadMore,
-  Pagination,
-  Tabs,
-  TreeView,
-} from '@jankrajewskiit/ui';
+import { BottomNav, Breadcrumb, HierarchyNavigator, Link, LoadMore, Pagination, TreeView } from '@jankrajewskiit/ui';
 
 import type { navigationEn } from '../../i18n/library/navigation';
 import { cx } from '../../styles/cx';
@@ -19,6 +10,7 @@ import { NavbarDemo } from '../demos/navigation/NavbarDemo';
 import { BOTTOM_ITEMS, PERMISSIONS, TAXONOMY } from '../demos/navigation/navigationData';
 import { PaginationDemo } from '../demos/navigation/PaginationDemo';
 import { StepperDemo } from '../demos/navigation/StepperDemo';
+import { TabsDemo } from '../demos/navigation/TabsDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './navigation.module.css';
 
@@ -28,56 +20,7 @@ export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigati
   {
     id: 'navigation-tabs',
     span: 12,
-    render: () => (
-      <div class={styles.grid}>
-        <div class={styles.group}>
-          <p class={styles.caption}>Underline with counts</p>
-          <Tabs
-            aria-label="Applications"
-            items={[
-              { value: 'all', label: 'All', count: 24 },
-              { value: 'active', label: 'Active', count: 8 },
-              { value: 'archived', label: 'Archived' },
-              { value: 'drafts', label: 'Drafts', disabled: true },
-            ]}
-          />
-          <p class={styles.caption}>Segmented view toggles</p>
-          <div class={styles.row}>
-            <Tabs
-              variant="segmented"
-              aria-label="Layout"
-              items={[
-                { value: 'grid', label: 'Grid', icon: 'layout-grid' },
-                { value: 'list', label: 'List', icon: 'list' },
-              ]}
-            />
-            <Tabs
-              variant="segmented"
-              aria-label="Range"
-              defaultValue="week"
-              items={[
-                { value: 'day', label: 'Day' },
-                { value: 'week', label: 'Week' },
-                { value: 'month', label: 'Month' },
-              ]}
-            />
-          </div>
-        </div>
-        <div class={styles.group}>
-          <p class={styles.caption}>Vertical, settings style</p>
-          <Tabs
-            orientation="vertical"
-            aria-label="Account settings"
-            items={[
-              { value: 'profile', label: 'Profile' },
-              { value: 'security', label: 'Security' },
-              { value: 'billing', label: 'Billing' },
-              { value: 'notifications', label: 'Notifications' },
-            ]}
-          />
-        </div>
-      </div>
-    ),
+    render: () => <TabsDemo />,
   },
   {
     id: 'navigation-breadcrumb-link',

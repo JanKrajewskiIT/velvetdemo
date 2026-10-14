@@ -2,6 +2,7 @@ import type { AtsResult } from '@jankrajewskiit/ui';
 import { AnalysisRequest, AtsAnalysisPanel } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup } from 'solid-js';
 
+import { reportAsyncError } from '../../../browserDiagnostics';
 import styles from './AnalysisFlowDemo.module.css';
 import { ANALYSIS_SOURCES, ANALYSIS_STEPS, ANALYSIS_TYPES, ATS_RESULT } from './analysisSamples';
 import { createSimulatedDelay } from './createSimulatedDelay';
@@ -71,7 +72,7 @@ export const AnalysisFlowDemo = () => {
         generatedAt="just now"
         steps={ANALYSIS_STEPS}
         step={step()}
-        onRerun={() => void run()}
+        onRerun={() => void run().catch(reportAsyncError)}
       />
     </div>
   );

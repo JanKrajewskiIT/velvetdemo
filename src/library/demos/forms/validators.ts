@@ -3,7 +3,7 @@ const POSTAL_CODE_PATTERN = /^\d{2}-\d{3}$/u;
 
 export type Problem = (value: string) => string | undefined;
 
-export const requiredProblem =
+const requiredProblem =
   (message: string): Problem =>
   (value) =>
     value.trim() ? undefined : message;

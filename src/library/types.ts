@@ -1,8 +1,8 @@
 import type { JSX } from 'solid-js';
 
-export const SPECIMEN_SPANS = [4, 6, 8, 12] as const;
+const _SPECIMEN_SPANS = [4, 6, 8, 12] as const;
 
-export type SpecimenSpan = (typeof SPECIMEN_SPANS)[number];
+export type SpecimenSpan = (typeof _SPECIMEN_SPANS)[number];
 
 export interface Specimen<Id extends string = string> {
   /** Key of the specimen's `name` and `subtitle` in its group dictionary. */
@@ -14,9 +14,9 @@ export interface Specimen<Id extends string = string> {
 
 export type SpecimenIdOf<Messages extends { specimens: object }> = keyof Messages['specimens'] & string;
 
-export const GROUP_KINDS = ['foundation', 'component'] as const;
+const _GROUP_KINDS = ['foundation', 'component'] as const;
 
-export type GroupKind = (typeof GROUP_KINDS)[number];
+export type GroupKind = (typeof _GROUP_KINDS)[number];
 
 export interface LibraryGroup<Slug extends string = string> {
   /** Two-digit ordinal, e.g. `'11'`. */

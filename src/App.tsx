@@ -26,7 +26,7 @@ export const App = () => {
     <>
       <SkipLink href="#main" />
       <ShowcaseNav />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero groupCount={LIBRARY_GROUPS.length} specimenCount={SPECIMEN_COUNT} />
         <BrandBand />
         <FoundationsSection />

@@ -1,0 +1,8 @@
+.detail {
+  display: grid;
+  min-height: 1.5rem;
+}
+
+.detail[data-expanded='true'] {
+  min-height: 5rem;
+}

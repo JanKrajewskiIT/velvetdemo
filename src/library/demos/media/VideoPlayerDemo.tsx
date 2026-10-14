@@ -19,10 +19,17 @@ export const VideoPlayerDemo = () => {
 
   onMount(() => {
     const controller = new AbortController();
-    void createDemoVideo(controller.signal).then((url) => {
-      if (controller.signal.aborted) return;
-      setClip(url ? { kind: 'ready', url } : { kind: 'unsupported' });
-    });
+    void createDemoVideo(controller.signal)
+      .then((url) => {
+        if (controller.signal.aborted) return;
+        setClip(url ? { kind: 'ready', url } : { kind: 'unsupported' });
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setClip({ kind: 'unsupported' });
+          setFailed(true);
+        }
+      });
     onCleanup(() => {
       controller.abort();
       const url = readyUrl();
