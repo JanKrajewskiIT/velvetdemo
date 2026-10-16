@@ -1,5 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { Button } from '@jankrajewskiit/ui';
+import { Button, Heading, Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
 import styles from './Hero.module.css';
@@ -27,9 +27,15 @@ export const Hero = (props: HeroProps) => {
     <section class={styles.hero} id="top">
       <div class={styles.layout}>
         <div>
-          <div class={styles.eyebrow}>{ts('showcase.hero.eyebrow')}</div>
-          <h1 class={styles.title}>{tx('showcase.hero.title', { em: (children) => <em>{children}</em> })}</h1>
-          <p class={styles.lead}>{ts('showcase.hero.lead')}</p>
+          <Text variant="overline" tone="tertiary">
+            {ts('showcase.hero.eyebrow')}
+          </Text>
+          <Heading level={1} variant="display-lg" class={styles.title}>
+            {tx('showcase.hero.title', { em: (children) => <em class={styles.highlight}>{children}</em> })}
+          </Heading>
+          <Text as="p" variant="body-lg" tone="secondary" class={styles.lead}>
+            {ts('showcase.hero.lead')}
+          </Text>
           <div class={styles.actions}>
             <Button size="lg" iconRight="arrow-right" onClick={() => goTo('library')}>
               {ts('showcase.hero.browse')}
@@ -42,8 +48,12 @@ export const Hero = (props: HeroProps) => {
             <For each={facts()}>
               {(fact) => (
                 <div>
-                  <dt>{fact.label}</dt>
-                  <dd>{fact.value}</dd>
+                  <Text as="dt" variant="caption" tone="tertiary">
+                    {fact.label}
+                  </Text>
+                  <Text as="dd" variant="kpi" class={styles.factValue}>
+                    {fact.value}
+                  </Text>
                 </div>
               )}
             </For>

@@ -1,3 +1,4 @@
+import { Text } from '@jankrajewskiit/ui';
 import { createSignal, For, onCleanup, onMount } from 'solid-js';
 
 import { cx } from '../../styles/cx';
@@ -19,7 +20,9 @@ export const MotionTile = () => {
       <For each={EASINGS}>
         {(easing) => (
           <div class={styles.row}>
-            <span>{easing}</span>
+            <Text as="span" variant="code" tone="secondary">
+              {easing}
+            </Text>
             <div class={styles.track}>
               <b style={{ 'transition-timing-function': `var(--ease-${easing})` }} />
             </div>

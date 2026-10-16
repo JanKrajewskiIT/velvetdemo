@@ -1,4 +1,4 @@
-import { Button, Checkbox, Chip, Input, Switch, ToggleButton } from '@jankrajewskiit/ui';
+import { Button, Checkbox, Chip, Input, Switch, Text, ToggleButton } from '@jankrajewskiit/ui';
 import { For, type JSX } from 'solid-js';
 
 import styles from './StateLanguageDemo.module.css';
@@ -12,10 +12,12 @@ interface StateRowProps {
 const StateRow = (props: StateRowProps) => (
   <li class={styles.row}>
     <div class={styles.head}>
-      <h4 class={styles.name}>{props.name}</h4>
-      <p class={styles.signals}>
+      <Text as="h4" variant="label" class={styles.name}>
+        {props.name}
+      </Text>
+      <Text as="div" variant="caption" tone="secondary" class={styles.signals}>
         <For each={props.signals}>{(signal) => <code>{signal}</code>}</For>
-      </p>
+      </Text>
     </div>
     <div class={styles.samples}>{props.children}</div>
   </li>

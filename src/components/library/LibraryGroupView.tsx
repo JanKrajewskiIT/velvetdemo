@@ -1,5 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { ErrorState } from '@jankrajewskiit/ui';
+import { ErrorState, Heading, Text } from '@jankrajewskiit/ui';
 import { createMemo, createResource, For, Show } from 'solid-js';
 
 import { browserDiagnostics } from '../../browserDiagnostics';
@@ -29,14 +29,20 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
   return (
     <section class={styles.group} id={anchor()} aria-labelledby={`${anchor()}-title`}>
       <header class={styles.header}>
-        <span class={styles.number} aria-hidden="true">
+        <Text as="span" variant="display-lg" tone="brand" aria-hidden="true">
           {props.group.number}
-        </span>
-        <div>
-          <h3 id={`${anchor()}-title`}>{text.groupTitle(props.group)}</h3>
-          <p>{text.groupBlurb(props.group)}</p>
+        </Text>
+        <div class={styles.heading}>
+          <Heading level={3} variant="display-sm" id={`${anchor()}-title`} class={styles.title}>
+            {text.groupTitle(props.group)}
+          </Heading>
+          <Text as="p" variant="body" tone="secondary" class={styles.blurb}>
+            {text.groupBlurb(props.group)}
+          </Text>
         </div>
-        <span class={styles.count}>{ts('showcase.library.specimenCount', { count: ids().size })}</span>
+        <Text variant="caption" mono tone="tertiary">
+          {ts('showcase.library.specimenCount', { count: ids().size })}
+        </Text>
       </header>
       <Show when={hasError()}>
         <ErrorState
@@ -50,9 +56,9 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
         when={specimens()}
         fallback={
           <Show when={!hasError()}>
-            <p class={styles.loading} role="status">
+            <Text as="p" variant="caption" mono tone="tertiary" class={styles.loading} role="status">
               {ts('showcase.library.loading')}
-            </p>
+            </Text>
           </Show>
         }
       >

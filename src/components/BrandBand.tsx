@@ -1,6 +1,6 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { VisuallyHidden } from '@jankrajewskiit/ui';
-import { createSignal, For, onCleanup } from 'solid-js';
+import { Text, VisuallyHidden } from '@jankrajewskiit/ui';
+import { createSignal, For, onCleanup, Show } from 'solid-js';
 
 import { reportAsyncError } from '../browserDiagnostics';
 import { cx } from '../styles/cx';
@@ -64,10 +64,16 @@ export const BrandBand = () => {
     <section class={styles.band} id="brand">
       <div class={styles.top}>
         <div>
-          <div class={styles.overline}>{ts('showcase.brand.overline')}</div>
-          <div class={styles.hex}>{BRAND_HEX}</div>
+          <Text variant="overline" class={styles.overline}>
+            {ts('showcase.brand.overline')}
+          </Text>
+          <Text as="div" variant="display-lg" class={styles.hex}>
+            {BRAND_HEX}
+          </Text>
         </div>
-        <p>{ts('showcase.brand.description')}</p>
+        <Text as="p" variant="body-lg" class={styles.description}>
+          {ts('showcase.brand.description')}
+        </Text>
       </div>
       <div class={styles.ramp}>
         <For each={RAMP}>
@@ -83,8 +89,17 @@ export const BrandBand = () => {
               onClick={() => void copy(swatch.hex).catch(reportAsyncError)}
               aria-label={ts('showcase.brand.copy', { step: swatch.step, hex: swatch.hex })}
             >
-              <b>{swatch.step}</b>
-              <span>{caption(swatch.hex)}</span>
+              <Text as="span" variant="label" class={styles.stepValue}>
+                {swatch.step}
+              </Text>
+              <Text as="span" variant="micro" class={styles.stepCaption}>
+                {caption(swatch.hex)}
+              </Text>
+              <Show when={swatch.step === BRAND_STEP}>
+                <Text as="span" variant="overline" class={styles.brandTag}>
+                  {ts('showcase.nav.brand')}
+                </Text>
+              </Show>
             </button>
           )}
         </For>

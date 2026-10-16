@@ -13,31 +13,17 @@
   border-bottom: 1px solid var(--border-default);
 }
 
-.number {
-  font: 600 64px/0.8 var(--font-display);
-  letter-spacing: -0.04em;
-  color: var(--fg-brand);
+.heading {
+  min-width: 0;
 }
 
-.header h3 {
+.title {
   margin: 0 0 6px;
-  font: 600 32px/1 var(--font-display);
-  letter-spacing: -0.02em;
 }
 
-.header p {
+.blurb {
   margin: 0;
-  color: var(--fg-secondary);
-  font-size: 15px;
-  line-height: 1.5;
   text-wrap: pretty;
-}
-
-.count {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.02em;
-  color: var(--fg-tertiary);
 }
 
 .cards {
@@ -49,7 +35,4 @@
 
 .loading {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--fg-tertiary);
 }

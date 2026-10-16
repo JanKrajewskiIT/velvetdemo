@@ -1,4 +1,4 @@
-import { Anchor, type AnchorItem, BackToTop } from '@jankrajewskiit/ui';
+import { Anchor, type AnchorItem, BackToTop, Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
 import styles from './AnchorScrollDemo.module.css';
@@ -22,10 +22,12 @@ export const AnchorScrollDemo = () => (
         <For each={SECTIONS}>
           {(section) => (
             <section id={section.id} class={styles.section}>
-              <h4 class={styles.heading}>{section.label}</h4>
-              <p class={styles.copy}>
+              <Text as="h4" variant="title" class={styles.heading}>
+                {section.label}
+              </Text>
+              <Text as="p" variant="body-sm" tone="secondary" class={styles.copy}>
                 Section content for {section.label}. Scroll this area and the contents list follows the section in view.
-              </p>
+              </Text>
             </section>
           )}
         </For>

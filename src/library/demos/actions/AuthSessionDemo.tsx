@@ -1,8 +1,8 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { AuthActionButton, AuthButton, Checkbox, useAuth } from '@jankrajewskiit/ui';
+import { AuthActionButton, AuthButton, Checkbox, Text, useAuth } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
-import styles from './AuthButtonDemo.module.css';
+import styles from './AuthSessionDemo.module.css';
 
 interface AuthSessionDemoProps {
   onFailureChange: (failure: boolean) => void;
@@ -32,14 +32,14 @@ export const AuthSessionDemo = (props: AuthSessionDemoProps) => {
         disabled={auth.isAuthenticated()}
         label={ts('library.actions.auth.failure')}
       />
-      <p class={styles.status} role="status">
+      <Text as="p" variant="caption" tone="secondary" class={styles.status} role="status">
         <Show when={!auth.isLoading()} fallback={ts('library.actions.auth.loading')}>
           <Show when={auth.isAuthenticated()} fallback={ts('library.actions.auth.signedOut')}>
             {ts('library.actions.auth.signedIn', { email: auth.email() })}
           </Show>
         </Show>
         <Show when={auth.error()}> {ts('library.actions.auth.failed')}</Show>
-      </p>
+      </Text>
     </div>
   );
 };

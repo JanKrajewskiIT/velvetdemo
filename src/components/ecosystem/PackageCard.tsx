@@ -1,4 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
+import { Heading, Text } from '@jankrajewskiit/ui';
 
 import { cx } from '../../styles/cx';
 import { type EcosystemNodeId, isLit, type PackageId, PACKAGES } from './ecosystemData';
@@ -25,11 +26,19 @@ export const PackageCard = (props: PackageCardProps) => {
       onBlur={() => props.onActivate(null)}
     >
       <header class={styles.header}>
-        <h3>{info().name}</h3>
-        <span class={styles.version}>v{info().version}</span>
+        <Heading level={3} variant="title" class={styles.title}>
+          {info().name}
+        </Heading>
+        <Text variant="code" tone="tertiary">
+          v{info().version}
+        </Text>
       </header>
-      <span class={styles.packageName}>{info().packageName}</span>
-      <p>{ts(`showcase.ecosystem.packages.${props.id}.description`)}</p>
+      <Text variant="code" tone="brand" class={styles.packageName}>
+        {info().packageName}
+      </Text>
+      <Text as="p" variant="body" tone="secondary" class={styles.description}>
+        {ts(`showcase.ecosystem.packages.${props.id}.description`)}
+      </Text>
     </article>
   );
 };

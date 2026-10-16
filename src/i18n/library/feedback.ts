@@ -16,7 +16,10 @@ export const feedbackEn = defineDictionary({
       subtitle: 'Contained live region, dismissal and a bounded queue',
     },
     'feedback-progress': { name: 'Progress', subtitle: 'Bars, sizes, indeterminate and rings' },
-    'feedback-loading': { name: 'Spinner and Skeleton', subtitle: 'Unknown waits versus known content shapes' },
+    'feedback-loading': {
+      name: 'Spinner, robot indicator and Skeleton',
+      subtitle: 'Inline processing, overlays and known content shapes',
+    },
     'feedback-loaders': { name: 'Loader and PageLoader', subtitle: 'Decorative brand loaders, every variant' },
     'feedback-empty-error': { name: 'EmptyState and ErrorState', subtitle: 'No data yet, and a section that failed' },
     'feedback-countdown': { name: 'Countdown', subtitle: 'Live boxes and an inline timer' },
@@ -45,7 +48,10 @@ export const feedbackPl: TranslationOf<typeof feedbackEn> = {
       subtitle: 'Region na żywo w ramce, zamykanie i ograniczona kolejka',
     },
     'feedback-progress': { name: 'Progress', subtitle: 'Paski, rozmiary, stan nieokreślony i pierścienie' },
-    'feedback-loading': { name: 'Spinner i Skeleton', subtitle: 'Nieznany czas oczekiwania a znane kształty treści' },
+    'feedback-loading': {
+      name: 'Spinner, wskaźnik robota i Skeleton',
+      subtitle: 'Oczekiwanie w linii, nakładki i znane kształty treści',
+    },
     'feedback-loaders': { name: 'Loader i PageLoader', subtitle: 'Dekoracyjne loadery marki, każdy wariant' },
     'feedback-empty-error': { name: 'EmptyState i ErrorState', subtitle: 'Brak danych oraz sekcja, która zawiodła' },
     'feedback-countdown': { name: 'Countdown', subtitle: 'Żywe pola i licznik w linii' },

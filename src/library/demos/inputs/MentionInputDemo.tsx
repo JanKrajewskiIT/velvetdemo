@@ -1,7 +1,7 @@
-import { MentionInput, type MentionOption } from '@jankrajewskiit/ui';
+import { MentionInput, type MentionOption, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
-import styles from './InputStatus.module.css';
+import styles from './MentionInputDemo.module.css';
 
 const PEOPLE: readonly MentionOption[] = [
   { id: 'anna', label: 'Anna Kowalska', description: 'Design lead' },
@@ -33,14 +33,14 @@ export const MentionInputDemo = () => {
         onValueChange={setValue}
         onMention={(option, trigger) => setLastMention(`${trigger}${option.label}`)}
       />
-      <p class={styles.status} aria-live="polite">
+      <Text as="p" variant="caption" tone="secondary" class={styles.status} aria-live="polite">
         Value: {value()}
-      </p>
-      <p class={styles.status}>
+      </Text>
+      <Text as="p" variant="caption" tone="secondary" class={styles.status}>
         <Show when={lastMention()} fallback="No mention inserted yet">
           Last mention: {lastMention()}
         </Show>
-      </p>
+      </Text>
     </div>
   );
 };

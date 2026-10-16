@@ -12,6 +12,7 @@ import {
   PageLoader,
   Progress,
   ProgressRing,
+  RobotProcessingIndicator,
   Skeleton,
   SkeletonText,
   Spinner,
@@ -191,6 +192,12 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
           </CaptionedRow>
           <CaptionedRow caption="Sizes">
             <For each={SPINNER_SIZES}>{(size) => <Spinner size={size} label={size} />}</For>
+          </CaptionedRow>
+          <CaptionedRow caption="Robot processing indicator">
+            <div class={styles.list}>
+              <RobotProcessingIndicator label="Reading the job listing from its link" />
+              <RobotProcessingIndicator label="Drafting a cover letter" />
+            </div>
           </CaptionedRow>
           <CaptionedRow caption="Loading overlay">
             <LoadingOverlay class={styles.overlay}>

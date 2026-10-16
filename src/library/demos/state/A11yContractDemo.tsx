@@ -1,4 +1,4 @@
-import { Button, Chip, Count, Input, LiveRegion, VisuallyHidden } from '@jankrajewskiit/ui';
+import { Button, Chip, Count, Input, LiveRegion, Text, VisuallyHidden } from '@jankrajewskiit/ui';
 import { createSignal, type JSX } from 'solid-js';
 
 import styles from './A11yContractDemo.module.css';
@@ -18,8 +18,12 @@ const LIVE_REGION_CLEAR_MS = 3000;
 
 const Rule = (props: RuleProps) => (
   <li class={styles.rule}>
-    <h4 class={styles.title}>{props.title}</h4>
-    <p class={styles.text}>{props.rule}</p>
+    <Text as="h4" variant="label" class={styles.title}>
+      {props.title}
+    </Text>
+    <Text as="p" variant="body-sm" tone="secondary" class={styles.text}>
+      {props.rule}
+    </Text>
     <div class={styles.proof}>{props.children}</div>
   </li>
 );

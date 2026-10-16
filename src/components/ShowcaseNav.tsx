@@ -1,5 +1,5 @@
 import { isSupportedLocale, useI18n } from '@jankrajewskiit/i18n';
-import { LocaleSwitcher, ThemeToggle } from '@jankrajewskiit/ui';
+import { LocaleSwitcher, Text, ThemeToggle } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
 import styles from './ShowcaseNav.module.css';
@@ -22,11 +22,23 @@ export const ShowcaseNav = () => {
     <header class={styles.nav}>
       <div class={styles.inner}>
         <a class={styles.brand} href="#top">
-          <i aria-hidden="true">V</i>
-          Velvet UI
+          <Text as="i" variant="label" class={styles.mark} aria-hidden="true">
+            V
+          </Text>
+          <Text as="span" variant="title">
+            Velvet UI
+          </Text>
         </a>
         <nav class={styles.links} aria-label={ts('showcase.nav.sections')}>
-          <For each={LINKS}>{(link) => <a href={link.href}>{ts(`showcase.nav.${link.id}`)}</a>}</For>
+          <For each={LINKS}>
+            {(link) => (
+              <a href={link.href}>
+                <Text as="span" variant="label">
+                  {ts(`showcase.nav.${link.id}`)}
+                </Text>
+              </a>
+            )}
+          </For>
         </nav>
         <div class={styles.controls}>
           <LocaleSwitcher value={locale()} onChange={changeLocale} />

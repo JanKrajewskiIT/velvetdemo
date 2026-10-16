@@ -1,3 +1,4 @@
+import { Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
 import styles from './PolishDemo.module.css';
@@ -27,12 +28,16 @@ export const PolishDemo = () => (
       </For>
     </ul>
     <article class={styles.context}>
-      <h4 class={styles.heading}>Ustawienia konta</h4>
-      <p class={styles.body}>
+      <Text as="h4" variant="h3" class={styles.heading}>
+        Ustawienia konta
+      </Text>
+      <Text as="p" variant="body" tone="secondary" class={styles.body}>
         Zmiany zapisują się automatycznie. Pola oznaczone gwiazdką są wymagane, a powiadomienia możesz wyłączyć w
         dowolnej chwili.
-      </p>
-      <span class={styles.caption}>Ostatnia zmiana: dziś, 14:32 · zażółć gęślą jaźń</span>
+      </Text>
+      <Text as="span" variant="caption" tone="tertiary">
+        Ostatnia zmiana: dziś, 14:32 · zażółć gęślą jaźń
+      </Text>
     </article>
   </div>
 );

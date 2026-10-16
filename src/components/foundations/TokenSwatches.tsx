@@ -1,6 +1,6 @@
+import { Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
-import { cx } from '../../styles/cx';
 import styles from './TokenSwatches.module.css';
 
 interface TokenSwatch {
@@ -19,7 +19,9 @@ export const TokenSwatches = (props: TokenSwatchesProps) => (
       {(item) => (
         <li class={styles.item}>
           <i style={{ background: `var(${item.token})` }} aria-hidden="true" />
-          <span class={cx(item.mono && styles.mono)}>{item.label}</span>
+          <Text as="span" variant={item.mono ? 'code' : 'caption'} tone="secondary">
+            {item.label}
+          </Text>
         </li>
       )}
     </For>

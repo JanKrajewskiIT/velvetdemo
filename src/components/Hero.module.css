@@ -4,10 +4,6 @@
   overflow: hidden;
 }
 
-.eyebrow {
-  composes: overline from '../styles/shared.module.css';
-}
-
 .layout {
   composes: wrap from '../styles/shared.module.css';
   display: grid;
@@ -17,24 +13,16 @@
 }
 
 .title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(48px, 6.2vw, 92px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
   margin: 20px 0 24px;
   text-wrap: balance;
 }
 
-.title em {
+.highlight {
   font-style: normal;
   color: var(--fg-brand);
 }
 
 .lead {
-  font-size: 19px;
-  line-height: 1.55;
-  color: var(--fg-secondary);
   max-width: 30em;
   margin: 0 0 36px;
   text-wrap: pretty;
@@ -61,15 +49,8 @@
   flex-direction: column-reverse;
 }
 
-.facts dd {
+.factValue {
   margin: 0 0 6px;
-  font: 600 34px/1 var(--font-display);
-  letter-spacing: -0.02em;
-}
-
-.facts dt {
-  font-size: 13px;
-  color: var(--fg-tertiary);
 }
 
 @media (width <= 1100px) {

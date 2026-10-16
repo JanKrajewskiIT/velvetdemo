@@ -27,12 +27,8 @@
 
 .title {
   margin: 0;
-  color: var(--fg-primary);
-  font: var(--type-label);
 }
 
 .body {
   margin: 0;
-  color: var(--fg-secondary);
-  font: var(--type-caption);
 }

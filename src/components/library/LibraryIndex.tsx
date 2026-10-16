@@ -1,4 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
+import { Text } from '@jankrajewskiit/ui';
 import { For, Show } from 'solid-js';
 
 import type { LibraryGroup } from '../../library/types';
@@ -29,6 +30,7 @@ export const LibraryIndex = (props: LibraryIndexProps) => {
               <hr />
             </Show>
             <a
+              class={styles.link}
               href={`#${groupAnchor(group)}`}
               aria-current={groupAnchor(group) === props.currentId ? 'true' : undefined}
               onClick={(event) => {
@@ -36,9 +38,15 @@ export const LibraryIndex = (props: LibraryIndexProps) => {
                 props.onPick(groupAnchor(group));
               }}
             >
-              <span>{group.number}</span>
-              <span>{text.groupTitle(group)}</span>
-              <span>{specimenIdsMatching(text, group, props.query).length}</span>
+              <Text as="span" variant="micro" mono tone="tertiary">
+                {group.number}
+              </Text>
+              <Text as="span" variant="label" class={styles.label}>
+                {text.groupTitle(group)}
+              </Text>
+              <Text as="span" variant="micro" mono tone="tertiary">
+                {specimenIdsMatching(text, group, props.query).length}
+              </Text>
             </a>
           </>
         )}

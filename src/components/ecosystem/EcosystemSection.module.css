@@ -7,12 +7,20 @@
   composes: wrap from '../../styles/shared.module.css';
 }
 
-.mono {
-  composes: mono from '../../styles/shared.module.css';
+.appOverline,
+.appCode {
+  color: inherit;
+  opacity: 0.7;
 }
 
-.overline {
-  composes: overline from '../../styles/shared.module.css';
+.appCode,
+.linkLabel,
+.wireLabel,
+.externalName,
+.solidName,
+.buildVersion,
+.packageName {
+  display: block;
 }
 
 .ecosystem {
@@ -23,7 +31,7 @@
 .row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-5);
 }
 
 .ecosystem > *,
@@ -48,23 +56,13 @@
 .app {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-1-5);
   align-items: center;
   text-align: center;
-  padding: 24px;
-  border-radius: 20px;
+  padding: var(--space-6);
+  border-radius: var(--radius-2xl);
   background: var(--bg-inverse);
   color: var(--fg-inverse);
-}
-
-.app b {
-  font: 600 24px/1.2 var(--font-display);
-  letter-spacing: -0.01em;
-}
-
-.app span {
-  color: inherit;
-  opacity: 0.7;
 }
 
 .link {
@@ -84,12 +82,10 @@
   border-left: 1.5px solid var(--border-strong);
 }
 
-.link span {
+.linkLabel {
   position: relative;
   background: var(--bg-page);
-  padding: 2px 8px;
-  color: var(--fg-tertiary);
-  font-size: 11px;
+  padding: var(--space-0-5) var(--space-2);
 }
 
 .wire {
@@ -97,67 +93,49 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   height: 56px;
   text-align: center;
 }
 
-.wire span {
-  color: var(--fg-secondary);
-  font-size: 11px;
+.wireLabel {
   border: 1.5px dashed var(--border-default);
   border-radius: var(--radius-full);
-  padding: 4px 10px;
+  padding: var(--space-1) var(--space-2-5);
   background: var(--bg-page);
-}
-
-.wire small,
-.external small,
-.solid small {
-  font-size: 12px;
-  color: var(--fg-tertiary);
 }
 
 .external {
   border: 1.5px dashed var(--border-default);
-  border-radius: 20px;
-  padding: 20px 24px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-1);
   justify-content: center;
 }
 
-.external span {
-  font-size: 14px;
-  color: var(--fg-primary);
-}
-
 .solid {
-  margin-top: 20px;
+  margin-top: var(--space-5);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
   flex-wrap: wrap;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-6);
   border-radius: var(--radius-xl);
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
 }
 
-.solid span {
-  font-size: 14px;
-}
-
 .build {
-  margin-top: 20px;
+  margin-top: var(--space-5);
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: 40px;
+  gap: var(--space-10);
   align-items: center;
-  padding: 28px;
-  border-radius: 20px;
+  padding: var(--space-7);
+  border-radius: var(--radius-2xl);
   border: 1.5px dashed var(--border-default);
   background: repeating-linear-gradient(
     135deg,
@@ -171,11 +149,8 @@
   outline-offset: 2px;
 }
 
-.build p {
-  margin: 6px 0 0;
-  color: var(--fg-secondary);
-  font-size: 15px;
-  line-height: 1.55;
+.buildDescription {
+  margin: var(--space-1-5) 0 0;
   text-wrap: pretty;
 }
 
@@ -183,26 +158,19 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
 }
 
-.buildHeader h3 {
+.buildTitle {
   margin: 0;
-  font: 600 22px/1.2 var(--font-display);
-  letter-spacing: -0.01em;
-}
-
-.packageName {
-  composes: mono from '../../styles/shared.module.css';
-  color: var(--fg-brand);
 }
 
 @media (width <= 900px) {
   .row {
     grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-    margin-top: 16px;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
   }
 
   .row:has(.link),
@@ -213,7 +181,7 @@
 
   .build {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    gap: var(--space-3);
   }
 }
 

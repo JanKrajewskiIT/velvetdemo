@@ -1,5 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { Button, Input } from '@jankrajewskiit/ui';
+import { Button, Input, Select, Text } from '@jankrajewskiit/ui';
 import { createMemo, createSignal, For, onCleanup, onMount, Show } from 'solid-js';
 
 import { countSpecimens } from '../../library/countSpecimens';
@@ -96,26 +96,24 @@ export const LibrarySection = (props: LibrarySectionProps) => {
               </div>
             </div>
             <Show when={groups().length > 0}>
-              <select
+              <Select
                 class={styles.mobileSelect}
                 aria-label={ts('showcase.library.sectionLabel')}
-                onChange={(event) => pick(event.currentTarget.value)}
-              >
-                <For each={groups()}>
-                  {(group) => (
-                    <option value={groupAnchor(group)} selected={groupAnchor(group) === currentId()}>
-                      {group.number} {text.groupTitle(group)} ({specimenIdsMatching(text, group, query()).length})
-                    </option>
-                  )}
-                </For>
-              </select>
+                placeholder={ts('showcase.library.sectionLabel')}
+                value={currentId()}
+                onValueChange={pick}
+                options={groups().map((group) => ({
+                  value: groupAnchor(group),
+                  label: `${group.number} ${text.groupTitle(group)} (${specimenIdsMatching(text, group, query()).length})`,
+                }))}
+              />
             </Show>
             <Show
               when={groups().length > 0}
               fallback={
-                <p class={styles.empty} role="status">
+                <Text as="p" variant="body" tone="tertiary" class={styles.empty} role="status">
                   {ts('showcase.library.empty', { query: query() })}
-                </p>
+                </Text>
               }
             >
               <For each={shown()}>{(group) => <LibraryGroupView group={group} query={query()} />}</For>

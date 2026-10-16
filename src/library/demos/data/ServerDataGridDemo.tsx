@@ -7,7 +7,7 @@ import {
   type RowKey,
 } from '@jankrajewskiit/data';
 import { useI18n } from '@jankrajewskiit/i18n';
-import { Button } from '@jankrajewskiit/ui';
+import { Button, Text } from '@jankrajewskiit/ui';
 import { batch, createMemo, createSignal, Show } from 'solid-js';
 
 import { type Member, MEMBERS } from './members';
@@ -57,9 +57,9 @@ export const ServerDataGridDemo = () => {
     <>
       <Show when={bulkMessage()}>
         {(message) => (
-          <p role="status" aria-live="polite">
+          <Text as="p" variant="body-sm" role="status" aria-live="polite">
             {message()}
-          </p>
+          </Text>
         )}
       </Show>
       <DataGrid

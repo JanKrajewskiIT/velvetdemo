@@ -15,6 +15,4 @@
 
 .status {
   margin: 0;
-  color: var(--fg-secondary);
-  font: var(--type-caption);
 }

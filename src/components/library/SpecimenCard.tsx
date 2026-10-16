@@ -1,3 +1,5 @@
+import { Heading, Text } from '@jankrajewskiit/ui';
+
 import type { LibraryGroup, Specimen, SpecimenSpan } from '../../library/types';
 import { useLibraryText } from '../../library/useLibraryText';
 import { cx } from '../../styles/cx';
@@ -21,8 +23,12 @@ export const SpecimenCard = (props: SpecimenCardProps) => {
   return (
     <article class={cx(styles.card, SPAN_CLASS[props.specimen.span])}>
       <header class={styles.header}>
-        <h4>{text.specimenName(props.group, props.specimen.id)}</h4>
-        <span>{text.specimenSubtitle(props.group, props.specimen.id)}</span>
+        <Heading level={4} variant="h4" class={styles.title}>
+          {text.specimenName(props.group, props.specimen.id)}
+        </Heading>
+        <Text as="span" variant="caption" tone="tertiary" class={styles.subtitle}>
+          {text.specimenSubtitle(props.group, props.specimen.id)}
+        </Text>
       </header>
       <div class={styles.frame}>{props.specimen.render()}</div>
     </article>

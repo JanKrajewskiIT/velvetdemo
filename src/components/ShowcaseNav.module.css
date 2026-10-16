@@ -21,11 +21,10 @@
   gap: 12px;
   text-decoration: none;
   color: var(--fg-primary);
-  font: 600 17px/1 var(--font-display);
   letter-spacing: -0.01em;
 }
 
-.brand i {
+.mark {
   width: 28px;
   height: 28px;
   border-radius: var(--radius-md);
@@ -33,7 +32,6 @@
   display: grid;
   place-items: center;
   color: var(--on-color-fg);
-  font: 700 15px/1 var(--font-display);
   font-style: normal;
 }
 
@@ -52,8 +50,6 @@
 .links a {
   color: var(--fg-secondary);
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
   padding: 8px 12px;
   border-radius: var(--radius-md);
 }

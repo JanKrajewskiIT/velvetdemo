@@ -1,4 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
+import { Text } from '@jankrajewskiit/ui';
 
 import styles from './SiteFooter.module.css';
 
@@ -8,8 +9,8 @@ export const SiteFooter = () => {
   return (
     <footer class={styles.footer}>
       <div class={styles.inner}>
-        <span>{ts('showcase.footer.title')}</span>
-        <span class={styles.note}>{ts('showcase.footer.note')}</span>
+        <Text variant="body-sm">{ts('showcase.footer.title')}</Text>
+        <Text variant="code">{ts('showcase.footer.note')}</Text>
       </div>
     </footer>
   );

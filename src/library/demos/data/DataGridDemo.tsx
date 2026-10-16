@@ -12,6 +12,7 @@ import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
+import { MemberNameEditor } from './MemberNameEditor';
 import { type Member, MEMBERS, ROLES } from './members';
 
 interface EditableMember extends Member {
@@ -29,32 +30,7 @@ const DEMO_LATENCY_MS = 300;
 const waitForDemoLatency = (): Promise<void> =>
   new Promise<void>((resolve) => globalThis.setTimeout(resolve, DEMO_LATENCY_MS));
 
-const renderNameEditor = (context: GridEditorContext<EditableMember>) => (
-  <input
-    ref={(element) => {
-      queueMicrotask(() => {
-        if (element.isConnected) element.focus({ preventScroll: true });
-      });
-    }}
-    class="vui-grid__input"
-    aria-label="Member name"
-    aria-invalid={context.error ? 'true' : undefined}
-    aria-describedby={context.error ? context.errorId : undefined}
-    readOnly={context.pending}
-    value={context.draft}
-    onInput={(event) => context.setDraft(event.currentTarget.value)}
-    onBlur={() => context.commit()}
-    onKeyDown={(event) => {
-      if (event.key === 'Enter' || event.key === 'Tab') {
-        event.preventDefault();
-        context.commit(event.key === 'Enter' ? 'down' : event.shiftKey ? 'left' : 'right');
-      } else if (event.key === 'Escape') {
-        event.preventDefault();
-        context.cancel();
-      }
-    }}
-  />
-);
+const renderNameEditor = (context: GridEditorContext<EditableMember>) => <MemberNameEditor context={context} />;
 
 const COLUMNS: GridColumn<EditableMember>[] = [
   {
@@ -152,9 +128,9 @@ export const DataGridDemo = () => {
       </Text>
       <Show when={saveMessage()}>
         {(message) => (
-          <p role="status" aria-live="polite">
+          <Text as="p" variant="body-sm" role="status" aria-live="polite">
             {message()}
-          </p>
+          </Text>
         )}
       </Show>
       <DataGrid
@@ -196,9 +172,9 @@ export const DataGridDemo = () => {
           </>
         }
         renderDetail={(row) => (
-          <p>
+          <Text as="p" variant="body-sm">
             {row.name} · {row.email}
-          </p>
+          </Text>
         )}
         columnManager
         filterFields={FILTER_FIELDS}

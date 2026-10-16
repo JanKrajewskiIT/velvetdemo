@@ -1,3 +1,4 @@
+import { Heading, Text } from '@jankrajewskiit/ui';
 import type { JSX } from 'solid-js';
 
 import styles from './SectionHead.module.css';
@@ -11,9 +12,15 @@ export interface SectionHeadProps {
 export const SectionHead = (props: SectionHeadProps) => (
   <div class={styles.head}>
     <div>
-      <div class={styles.overline}>{props.overline}</div>
-      <h2 class={styles.title}>{props.title}</h2>
+      <Text variant="overline" tone="tertiary">
+        {props.overline}
+      </Text>
+      <Heading level={2} variant="display-sm" class={styles.title}>
+        {props.title}
+      </Heading>
     </div>
-    <p>{props.children}</p>
+    <Text as="p" variant="body-lg" tone="secondary" class={styles.lead}>
+      {props.children}
+    </Text>
   </div>
 );

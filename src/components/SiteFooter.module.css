@@ -2,11 +2,6 @@
   border-top: 1px solid var(--border-subtle);
   padding: 48px 0 64px;
   color: var(--fg-tertiary);
-  font-size: 14px;
-}
-
-.note {
-  composes: mono from '../styles/shared.module.css';
 }
 
 .inner {

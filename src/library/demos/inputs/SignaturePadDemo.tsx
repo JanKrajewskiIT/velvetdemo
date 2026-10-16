@@ -1,7 +1,7 @@
-import { SignaturePad } from '@jankrajewskiit/ui';
+import { SignaturePad, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
-import styles from './InputStatus.module.css';
+import styles from './SignaturePadDemo.module.css';
 
 const PAD_HEIGHT_PX = 160;
 
@@ -16,11 +16,11 @@ export const SignaturePadDemo = () => {
         height={PAD_HEIGHT_PX}
         onValueChange={(dataUrl, strokes) => setStrokeCount(dataUrl === null ? 0 : strokes.length)}
       />
-      <p class={styles.status} aria-live="polite">
+      <Text as="p" variant="caption" tone="secondary" class={styles.status} aria-live="polite">
         <Show when={strokeCount() > 0} fallback="Signature is empty">
           Signed, strokes: {strokeCount()}
         </Show>
-      </p>
+      </Text>
     </div>
   );
 };

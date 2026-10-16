@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js';
-import { Show } from 'solid-js';
+import { Heading, Text } from '@jankrajewskiit/ui';
+import { type JSX, Show } from 'solid-js';
 
 import { cx } from '../../styles/cx';
 import styles from './FoundationTile.module.css';
@@ -17,8 +17,16 @@ const SPAN_CLASS = { 5: styles.span5, 6: styles.span6, 7: styles.span7, 12: styl
 export const FoundationTile = (props: FoundationTileProps) => (
   <section class={cx(styles.tile, SPAN_CLASS[props.span])}>
     <header class={styles.header}>
-      <h3>{props.title}</h3>
-      <Show when={props.meta}>{(meta) => <span class={styles.meta}>{meta()}</span>}</Show>
+      <Heading level={3} variant="title" class={styles.title}>
+        {props.title}
+      </Heading>
+      <Show when={props.meta}>
+        {(meta) => (
+          <Text variant="code" tone="tertiary">
+            {meta()}
+          </Text>
+        )}
+      </Show>
     </header>
     {props.children}
   </section>

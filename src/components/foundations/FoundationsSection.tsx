@@ -1,4 +1,5 @@
 import { useI18n } from '@jankrajewskiit/i18n';
+import { Heading, Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
 import { cx } from '../../styles/cx';
@@ -34,12 +35,18 @@ export const FoundationsSection = () => {
               <For each={FONT_FAMILIES}>
                 {(family) => (
                   <div class={cx(styles.family, FAMILY_CLASS[family.id])}>
-                    <span class={styles.eyebrow}>{ts(`showcase.foundations.families.${family.id}.label`)}</span>
+                    <Text variant="overline" tone="tertiary">
+                      {ts(`showcase.foundations.families.${family.id}.label`)}
+                    </Text>
                     <span class={styles.aa} aria-hidden="true">
                       Aa
                     </span>
-                    <b>{family.name}</b>
-                    <p>{ts(`showcase.foundations.families.${family.id}.description`)}</p>
+                    <Text as="span" variant="label" class={styles.familyName}>
+                      {family.name}
+                    </Text>
+                    <Text as="p" variant="body-sm" tone="secondary" class={styles.familyDescription}>
+                      {ts(`showcase.foundations.families.${family.id}.description`)}
+                    </Text>
                   </div>
                 )}
               </For>
@@ -50,10 +57,12 @@ export const FoundationsSection = () => {
               <For each={TYPE_ROLES}>
                 {(role) => (
                   <div>
-                    <span class={styles.token}>{role}</span>
-                    <p style={{ font: `var(--type-${role})` }}>
+                    <Text as="span" variant="code" tone="tertiary">
+                      {role}
+                    </Text>
+                    <Text as="span" variant={role} class={styles.roleSample}>
                       {ts(`showcase.foundations.roles.${role}`)} — {ts('showcase.foundations.typeRoles.sample')}
-                    </p>
+                    </Text>
                   </div>
                 )}
               </For>
@@ -61,7 +70,9 @@ export const FoundationsSection = () => {
           </FoundationTile>
           <FoundationTile title={ts('showcase.foundations.status.title')} span={5}>
             <TokenSwatches items={statusItems()} />
-            <h4 class={styles.subtitle}>{ts('showcase.foundations.status.surfacesAndInk')}</h4>
+            <Heading level={4} variant="h4" class={styles.subtitle}>
+              {ts('showcase.foundations.status.surfacesAndInk')}
+            </Heading>
             <TokenSwatches items={NEUTRAL_ITEMS} />
           </FoundationTile>
           <FoundationTile title={ts('showcase.foundations.shape.title')} span={6} meta="--radius-*">
@@ -70,7 +81,9 @@ export const FoundationsSection = () => {
                 {(radius) => (
                   <div>
                     <i style={{ 'border-radius': `var(--radius-${radius})` }} />
-                    <span class={styles.token}>{radius}</span>
+                    <Text as="span" variant="code" tone="tertiary">
+                      {radius}
+                    </Text>
                   </div>
                 )}
               </For>
@@ -88,7 +101,9 @@ export const FoundationsSection = () => {
               <For each={ELEVATIONS}>
                 {(elevation) => (
                   <div style={{ 'box-shadow': `var(--elevation-${elevation})` }}>
-                    <span class={styles.token}>{elevation}</span>
+                    <Text as="span" variant="code" tone="tertiary">
+                      {elevation}
+                    </Text>
                   </div>
                 )}
               </For>

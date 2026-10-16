@@ -7,14 +7,6 @@
   composes: wrap from '../../styles/shared.module.css';
 }
 
-.eyebrow {
-  composes: overline from '../../styles/shared.module.css';
-}
-
-.token {
-  composes: mono from '../../styles/shared.module.css';
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -35,15 +27,8 @@
   padding-top: 20px;
 }
 
-.family b {
-  font-size: 20px;
-}
-
-.family p {
+.familyDescription {
   margin: 0;
-  color: var(--fg-secondary);
-  font-size: 14px;
-  line-height: 1.5;
 }
 
 .aa {
@@ -53,7 +38,7 @@
 }
 
 .display .aa,
-.display b {
+.display .familyName {
   font-family: var(--font-display);
 }
 
@@ -62,7 +47,7 @@
 }
 
 .text .aa,
-.text b {
+.text .familyName {
   font-family: var(--font-sans);
 }
 
@@ -71,16 +56,12 @@
 }
 
 .mono .aa,
-.mono b {
+.mono .familyName {
   font-family: var(--font-mono);
 }
 
 .mono .aa {
   letter-spacing: -0.06em;
-}
-
-.mono b {
-  font-size: 18px;
 }
 
 .scale {
@@ -103,11 +84,7 @@
   padding: 0;
 }
 
-.scale span {
-  color: var(--fg-tertiary);
-}
-
-.scale p {
+.roleSample {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -116,8 +93,6 @@
 
 .subtitle {
   margin: 0;
-  font: 600 20px/1.2 var(--font-display);
-  letter-spacing: -0.01em;
 }
 
 .radii {

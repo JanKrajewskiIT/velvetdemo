@@ -12,6 +12,7 @@ import {
   startOfDay,
   Stat,
   Switch,
+  Text,
   Toast,
 } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
@@ -56,9 +57,14 @@ export const HeroStage = () => {
             <Sparkline data={REVENUE_TREND} area height={56} label={ts('showcase.hero.stage.revenue')} />
           </div>
           <div class={styles.panel}>
-            <h4 class={styles.panelTitle}>
-              {ts('showcase.hero.stage.workspace')} <small>{ts('showcase.hero.stage.autosaved')}</small>
-            </h4>
+            <div class={styles.panelTitle}>
+              <Text as="h4" variant="label">
+                {ts('showcase.hero.stage.workspace')}
+              </Text>
+              <Text as="small" variant="caption" tone="tertiary">
+                {ts('showcase.hero.stage.autosaved')}
+              </Text>
+            </div>
             <Switch label={ts('showcase.hero.stage.emailNotifications')} checked />
             <Switch label={ts('showcase.hero.stage.compactDensity')} />
             <Slider
@@ -101,15 +107,17 @@ export const HeroStage = () => {
             />
           </div>
           <div class={styles.panel}>
-            <h4 class={styles.panelTitle}>
-              {ts('showcase.hero.stage.launch')}
+            <div class={styles.panelTitle}>
+              <Text as="h4" variant="label">
+                {ts('showcase.hero.stage.launch')}
+              </Text>
               <AvatarGroup>
                 <Avatar name="Anna Kowalska" size="sm" />
                 <Avatar name="Marek Nowak" size="sm" tone="neutral" />
                 <Avatar name="Ola Lis" size="sm" />
                 <Avatar initials="+5" size="sm" tone="neutral" />
               </AvatarGroup>
-            </h4>
+            </div>
             <Progress
               label={ts('showcase.hero.stage.onboarding')}
               value={3}

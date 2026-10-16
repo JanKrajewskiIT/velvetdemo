@@ -1,4 +1,4 @@
-import { Badge, Watermark } from '@jankrajewskiit/ui';
+import { Badge, Text, Watermark } from '@jankrajewskiit/ui';
 
 import styles from './WatermarkDemo.module.css';
 
@@ -9,21 +9,27 @@ export const WatermarkDemo = () => (
     <Watermark text="Confidential" class={styles.frame}>
       <article class={styles.document}>
         <header class={styles.header}>
-          <h3 class={styles.title}>Q3 budget review</h3>
+          <Text as="h3" variant="title" class={styles.title}>
+            Q3 budget review
+          </Text>
           <Badge tone="warning" variant="soft">
             Internal
           </Badge>
         </header>
-        <p class={styles.body}>
+        <Text as="p" variant="caption" tone="secondary" class={styles.body}>
           Headcount stays flat, design tooling spend rises by 8 percent and the contractor budget is frozen until
           November.
-        </p>
+        </Text>
       </article>
     </Watermark>
     <Watermark lines={VIEWER_LINES} rotate={-18} gap={[72, 56]} fontSize={12} class={styles.frame}>
       <article class={styles.document}>
-        <h3 class={styles.title}>Shared with the viewer's details</h3>
-        <p class={styles.body}>Multi-line stamps identify who opened a shared document.</p>
+        <Text as="h3" variant="title" class={styles.title}>
+          Shared with the viewer's details
+        </Text>
+        <Text as="p" variant="caption" tone="secondary" class={styles.body}>
+          Multi-line stamps identify who opened a shared document.
+        </Text>
       </article>
     </Watermark>
   </div>
