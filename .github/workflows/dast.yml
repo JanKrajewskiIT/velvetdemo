@@ -15,7 +15,7 @@ permissions:
   contents: read
 jobs:
   scan:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-dast.yml@b3237eb74b340e5d039a3383361d683d04629028 # v3.7.10
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-dast.yml@0cdf78e693ab2d8b1cf5104872cbc4970fc2deb2 # v3.7.12
     with:
       mode: ${{ inputs.mode }}
     secrets:

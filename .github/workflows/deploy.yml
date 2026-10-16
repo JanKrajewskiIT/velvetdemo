@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: JanKrajewskiIT/velvetconfigs
-          ref: b3237eb74b340e5d039a3383361d683d04629028 # v3.7.10
+          ref: 0cdf78e693ab2d8b1cf5104872cbc4970fc2deb2 # v3.7.12
           path: tooling
           persist-credentials: false
           token: ${{ secrets.CONFIGS_READ_TOKEN || github.token }}
@@ -87,7 +87,7 @@ jobs:
         id: security
         run: |
           mkdir -p .artifacts/deployment
-          cp images.txt tooling/security/verify-release.sh tooling/security/waf.compose.yml .artifacts/deployment/
+          cp images.txt tooling/security/verify-release.sh .artifacts/deployment/
           node --input-type=module <<'NODE'
           import { readFileSync, appendFileSync } from 'node:fs';
           const tool = JSON.parse(readFileSync('tooling/security/tools.json', 'utf8')).binaries.cosign;
@@ -113,7 +113,6 @@ jobs:
       COSIGN_URL: ${{ needs.publish.outputs.cosign_url }}
       COSIGN_SHA256: ${{ needs.publish.outputs.cosign_sha256 }}
       SIGNING_IDENTITY: https://github.com/${{ github.repository }}/.github/workflows/deploy.yml@refs/heads/main
-      WAF_MODE: ${{ vars.WAF_MODE || 'DetectionOnly' }}
       EXPECTED_IMAGES: VELVET_DEMO_IMAGE
     steps:
       - name: Require SSH host identity
@@ -133,7 +132,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: deploy/docker-compose.yml,signed-deployment/images.txt,signed-deployment/verify-release.sh,signed-deployment/waf.compose.yml
+          source: deploy/docker-compose.yml,signed-deployment/images.txt,signed-deployment/verify-release.sh
           target: /opt/velvet
           strip_components: 0
           timeout: 60s
@@ -148,20 +147,18 @@ jobs:
           COSIGN_URL: ${{ env.COSIGN_URL }}
           COSIGN_SHA256: ${{ env.COSIGN_SHA256 }}
           SIGNING_IDENTITY: ${{ env.SIGNING_IDENTITY }}
-          WAF_MODE: ${{ env.WAF_MODE }}
           REGISTRY_READ_TOKEN: ${{ secrets.REGISTRY_READ_TOKEN || secrets.GHCR_TOKEN }}
           EXPECTED_IMAGES: ${{ env.EXPECTED_IMAGES }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          envs: REGISTRY,OWNER_LC,IMAGE_TAG,IMAGE_NAME,REGISTRY_READ_TOKEN,COSIGN_URL,COSIGN_SHA256,SIGNING_IDENTITY,WAF_MODE,EXPECTED_IMAGES
+          envs: REGISTRY,OWNER_LC,IMAGE_TAG,IMAGE_NAME,REGISTRY_READ_TOKEN,COSIGN_URL,COSIGN_SHA256,SIGNING_IDENTITY,EXPECTED_IMAGES
           script: |
             set -euo pipefail
             umask 077
             cd /opt/velvet
-            case "$WAF_MODE" in On|DetectionOnly) ;; *) echo "Invalid WAF_MODE" >&2; exit 1 ;; esac
-            cp -f signed-deployment/images.txt signed-deployment/verify-release.sh signed-deployment/waf.compose.yml .
+            cp -f signed-deployment/images.txt signed-deployment/verify-release.sh .
 
             cp -f deploy/docker-compose.yml .
 
@@ -172,7 +169,6 @@ jobs:
             echo "${REGISTRY_READ_TOKEN}" | docker login ghcr.io -u "${OWNER_LC}" --password-stdin
             sh verify-release.sh
             cat images.txt >> .env
-            printf 'WAF_MODE=%s\n' "$WAF_MODE" >> .env
             docker compose pull
             docker compose up -d --remove-orphans
 

@@ -3,10 +3,6 @@ services:
     image: ${VELVET_DEMO_IMAGE:-ghcr.io/jankrajewskiit/velvet-demo:latest}
     container_name: velvet-demo
     restart: unless-stopped
-    labels:
-      - traefik.enable=false
-    networks:
-      - default
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
@@ -14,17 +10,12 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
-  velvet-waf:
-    environment:
-      BACKEND: http://velvet-demo:3000
-    depends_on:
-      - velvet-demo
     labels:
       - traefik.enable=true
       - traefik.http.routers.velvet-demo.rule=Host(`velvet.bluebraces.online`)
       - traefik.http.routers.velvet-demo.entrypoints=websecure
       - traefik.http.routers.velvet-demo.tls.certresolver=letsencrypt
-      - traefik.http.services.velvet-demo.loadbalancer.server.port=8080
+      - traefik.http.services.velvet-demo.loadbalancer.server.port=3000
       - traefik.http.routers.velvet-demo.middlewares=velvet-headers
       - traefik.http.middlewares.velvet-headers.headers.stsSeconds=31536000
       - traefik.http.middlewares.velvet-headers.headers.stsIncludeSubdomains=true
@@ -35,12 +26,7 @@ services:
       - traefik.http.middlewares.velvet-headers.headers.permissionsPolicy=camera=(), microphone=(), geolocation=()
       - traefik.docker.network=proxy
     networks:
-      - default
       - proxy
-    extends:
-      file: waf.compose.yml
-      service: waf
 networks:
   proxy:
     external: true
-  default: {}
