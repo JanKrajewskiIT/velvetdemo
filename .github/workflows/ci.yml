@@ -13,7 +13,7 @@ on:
         required: false
 jobs:
   verify:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/verify-package.yml@e9100fa7ea7797669afeb410b644cd46ff9c8064 # v3.7.0
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/verify-package.yml@b3237eb74b340e5d039a3383361d683d04629028 # v3.7.10
     with:
       spa-artifact: velvet-spa
       dockerfile-check: true
@@ -25,7 +25,7 @@ jobs:
       CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
   image:
     needs: verify
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/verify-spa.yml@e9100fa7ea7797669afeb410b644cd46ff9c8064 # v3.7.0
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/verify-spa.yml@b3237eb74b340e5d039a3383361d683d04629028 # v3.7.10
     permissions:
       contents: read
 permissions:

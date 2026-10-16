@@ -1,4 +1,4 @@
-FROM node:26-alpine@sha256:143494b1da2945f061539253adc65e4f1569ddf07da2d384c022c791a9d90a4a AS builder
+FROM node:26-alpine@sha256:6f08a523443ddedf52941874c203475b0ad503e859ad70cb26ab8be9a517dbd5 AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --global "$(node -p "require('./package.json').packageManager")" --ignore-scripts --registry https://registry.npmjs.org
@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2 AS runner
+FROM nginx:alpine@sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d AS runner
 COPY --from=builder /app/.deployment/spa/prepare-runtime.sh /tmp/prepare-runtime.sh
 RUN sh /tmp/prepare-runtime.sh && rm /tmp/prepare-runtime.sh
 COPY --from=builder /app/.deployment/spa/nginx.conf /etc/nginx/conf.d/default.conf
