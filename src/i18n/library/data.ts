@@ -32,6 +32,7 @@ export const dataEn = defineDictionary({
     previous: 'Previous page',
     next: 'Next page',
     page: 'Page {page} of {count} · offline server example',
+    processSelection: 'Process selection',
     bulkResult: 'Processed {selected} selected records; {loaded} were loaded on this page.',
   },
   virtualList: {
@@ -124,6 +125,7 @@ export const dataPl: TranslationOf<typeof dataEn> = {
     previous: 'Poprzednia strona',
     next: 'Następna strona',
     page: 'Strona {page} z {count} · przykład serwera offline',
+    processSelection: 'Przetwórz zaznaczenie',
     bulkResult: 'Przetworzono {selected} zaznaczonych rekordów; {loaded} było wczytanych na tej stronie.',
   },
   virtualList: {

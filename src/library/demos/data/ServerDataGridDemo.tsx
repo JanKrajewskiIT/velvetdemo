@@ -48,10 +48,18 @@ export const ServerDataGridDemo = () => {
       setPage(0);
       setView(next);
     });
-  const processSelection = ({ keys, loadedRows }: GridBulkSelection<Member>) => {
-    setBulkMessage(ts('library.data.server.bulkResult', { selected: keys.length, loaded: loadedRows.length }));
-    setSelected([]);
-  };
+  const processSelection = ({ keys, loadedRows }: GridBulkSelection<Member>) => (
+    <Button
+      size="sm"
+      variant="secondary"
+      onClick={() => {
+        setBulkMessage(ts('library.data.server.bulkResult', { selected: keys.length, loaded: loadedRows.length }));
+        setSelected([]);
+      }}
+    >
+      {ts('library.data.server.processSelection')}
+    </Button>
+  );
 
   return (
     <>
