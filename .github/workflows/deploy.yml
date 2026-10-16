@@ -10,6 +10,9 @@ env:
 jobs:
   verify:
     uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      packages: read
     secrets:
       NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN || secrets.GHCR_TOKEN }}
       CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
