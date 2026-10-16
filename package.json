@@ -41,10 +41,10 @@
     "quality:check": "npm run architecture:check && npm run duplicates:report && npm run deps:strict"
   },
   "dependencies": {
-    "@jankrajewskiit/auth": "^3.7.5",
-    "@jankrajewskiit/data": "^3.7.5",
-    "@jankrajewskiit/i18n": "^3.7.5",
-    "@jankrajewskiit/ui": "^3.7.5",
+    "@jankrajewskiit/auth": "^3.7.10",
+    "@jankrajewskiit/data": "^3.7.10",
+    "@jankrajewskiit/i18n": "^3.7.10",
+    "@jankrajewskiit/ui": "^3.7.10",
     "lightweight-charts": "^5.2.1",
     "oidc-client-ts": "^3.5.0",
     "solid-js": "^1.9.17"
