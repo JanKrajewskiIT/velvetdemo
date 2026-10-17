@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   Control,
+  ControlInput,
   Count,
   Dot,
   FeatureCard,
@@ -73,12 +74,7 @@ export const overviewSpecimens: readonly Specimen<SpecimenIdOf<typeof overviewEn
           <Field class={styles.fill} label="Email" hint="Used for invoices only.">
             {(control) => (
               <Control iconLeft="mail">
-                <input
-                  class="vui-control__input"
-                  id={control.id}
-                  aria-describedby={control.describedBy}
-                  placeholder="you@example.com"
-                />
+                <ControlInput id={control.id} aria-describedby={control.describedBy} placeholder="you@example.com" />
               </Control>
             )}
           </Field>

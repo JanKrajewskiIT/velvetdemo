@@ -4,6 +4,7 @@ import {
   Chevron,
   CloseButton,
   Control,
+  ControlInput,
   Handle,
   SectionLabel,
   Stack,
@@ -43,8 +44,7 @@ export const DisclosureDismissDemo = () => {
               <CloseButton variant="field" label="Clear search" disabled={!search()} onClick={() => setSearch('')} />
             }
           >
-            <input
-              class="vui-control__input"
+            <ControlInput
               aria-label="Search"
               value={search()}
               onInput={(event) => setSearch(event.currentTarget.value)}

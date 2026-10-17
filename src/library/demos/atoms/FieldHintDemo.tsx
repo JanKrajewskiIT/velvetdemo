@@ -1,4 +1,4 @@
-import { Button, Control, FieldHint, FieldLabel, Stack, Text } from '@jankrajewskiit/ui';
+import { Button, Control, ControlInput, FieldHint, FieldLabel, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, createUniqueId, Show } from 'solid-js';
 
 export const FieldHintDemo = () => {
@@ -19,8 +19,7 @@ export const FieldHintDemo = () => {
           Project name
         </FieldLabel>
         <Control invalid={invalid()}>
-          <input
-            class="vui-control__input"
+          <ControlInput
             id={id}
             value={value()}
             required

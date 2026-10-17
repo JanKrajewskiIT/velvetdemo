@@ -37,6 +37,10 @@
   color: var(--fg-primary);
 }
 
+.label {
+  animation: riseIn var(--motion-enter) both;
+}
+
 .row + .row {
   border-top: var(--border-width) solid var(--border-subtle);
 }
@@ -80,7 +84,18 @@
 
 @media (prefers-reduced-motion: reduce) {
   .label {
-    /* Inline animation shorthand would otherwise win. */
-    animation: none !important;
+    animation: none;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(0px - var(--space-1)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

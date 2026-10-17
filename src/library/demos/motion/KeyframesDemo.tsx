@@ -8,36 +8,41 @@ import styles from './KeyframesDemo.module.css';
 interface SharedKeyframes {
   name: string;
   from: string;
-  timing: string;
   timingLabel: string;
+  className: string;
   repeats?: boolean;
 }
 
 const KEYFRAMES: readonly SharedKeyframes[] = [
-  { name: 'vui-fade-in', from: 'From opacity 0', timing: 'var(--motion-base)', timingLabel: '--motion-base' },
   {
-    name: 'vui-rise-in',
+    name: 'fadeIn',
+    from: 'From opacity 0',
+    timingLabel: '--motion-base',
+    className: styles.fadeIn,
+  },
+  {
+    name: 'riseIn',
     from: 'From opacity 0, 4px above',
-    timing: 'var(--motion-enter)',
     timingLabel: '--motion-enter',
+    className: styles.riseIn,
   },
   {
-    name: 'vui-pop-in',
+    name: 'popIn',
     from: 'From opacity 0, scale 60%',
-    timing: 'var(--motion-pop)',
     timingLabel: '--motion-pop',
+    className: styles.popIn,
   },
   {
-    name: 'vui-sheet-in',
+    name: 'sheetIn',
     from: 'From one height below',
-    timing: 'var(--motion-slide)',
     timingLabel: '--motion-slide',
+    className: styles.sheetIn,
   },
   {
-    name: 'vui-spin',
+    name: 'spin',
     from: 'To a full turn',
-    timing: '700ms linear infinite',
     timingLabel: 'loops, linear',
+    className: styles.spin,
     repeats: true,
   },
 ];
@@ -48,7 +53,7 @@ export const KeyframesDemo = () => {
   return (
     <div class={styles.root}>
       <div class={styles.bar}>
-        <p class={styles.note}>Defined once in the base layer and shared by every component.</p>
+        <p class={styles.note}>Each keyframe is scoped to this demo&apos;s CSS module.</p>
         <Button size="sm" variant="secondary" iconLeft="play" disabled={reduced()} onClick={restart}>
           Replay
         </Button>
@@ -60,9 +65,8 @@ export const KeyframesDemo = () => {
               <div class={styles.well}>
                 <Show when={mounted()}>
                   <span
-                    class={styles.sample}
+                    class={`${styles.sample} ${keyframes.className}`}
                     data-kind={keyframes.repeats ? 'ring' : 'tile'}
-                    style={{ animation: `${keyframes.name} ${keyframes.timing} both` }}
                     aria-hidden="true"
                   />
                 </Show>

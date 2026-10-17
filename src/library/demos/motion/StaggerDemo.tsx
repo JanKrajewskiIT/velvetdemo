@@ -14,8 +14,6 @@ const DISTANCES = [
   { token: '--motion-nudge', use: 'Press shift' },
 ] as const;
 
-const ENTER_ANIMATION = 'vui-rise-in var(--motion-enter) both';
-
 export const StaggerDemo = () => {
   const reduced = createReducedMotion();
   const { mounted, restart } = createRestart();
@@ -35,7 +33,6 @@ export const StaggerDemo = () => {
                 <span
                   class={styles.label}
                   style={{
-                    animation: ENTER_ANIMATION,
                     'animation-delay': `calc(var(--motion-stagger) * ${index()})`,
                   }}
                 >
