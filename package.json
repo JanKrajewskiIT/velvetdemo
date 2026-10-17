@@ -41,20 +41,20 @@
     "quality:check": "npm run architecture:check && npm run duplicates:report && npm run deps:strict"
   },
   "dependencies": {
-    "@jankrajewskiit/auth": "^3.7.10",
-    "@jankrajewskiit/data": "^3.7.10",
-    "@jankrajewskiit/i18n": "^3.7.10",
-    "@jankrajewskiit/ui": "^3.7.10",
+    "@jankrajewskiit/auth": "^3.8.0",
+    "@jankrajewskiit/data": "^3.8.0",
+    "@jankrajewskiit/i18n": "^3.8.0",
+    "@jankrajewskiit/ui": "^3.8.0",
     "lightweight-charts": "^5.2.1",
     "oidc-client-ts": "^3.5.0",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {
     "web-vitals": "^6.2.3",
-    "@jankrajewskiit/configs": "^3.7.13",
+    "@jankrajewskiit/configs": "^3.8.0",
     "@types/node": "^26.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "husky": "^9.1.7",
     "knip": "^6.41.0",
     "lint-staged": "^17.6.0",
