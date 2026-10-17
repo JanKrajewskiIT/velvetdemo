@@ -1,6 +1,7 @@
 import { Button } from '@jankrajewskiit/ui';
 import { For, Show } from 'solid-js';
 
+import { type ClassPart, cx } from '../../../styles/cx';
 import { createReducedMotion } from './createReducedMotion';
 import { createRestart } from './createRestart';
 import styles from './KeyframesDemo.module.css';
@@ -9,7 +10,7 @@ interface SharedKeyframes {
   name: string;
   from: string;
   timingLabel: string;
-  className: string;
+  className: ClassPart;
   repeats?: boolean;
 }
 
@@ -65,7 +66,7 @@ export const KeyframesDemo = () => {
               <div class={styles.well}>
                 <Show when={mounted()}>
                   <span
-                    class={`${styles.sample} ${keyframes.className}`}
+                    class={cx(styles.sample, keyframes.className)}
                     data-kind={keyframes.repeats ? 'ring' : 'tile'}
                     aria-hidden="true"
                   />
