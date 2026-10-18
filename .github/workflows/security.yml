@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   source:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-source.yml@0cdf78e693ab2d8b1cf5104872cbc4970fc2deb2 # v3.7.12
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-source.yml@6b71917b7609caae9b1b0e14dd90968108aa563f # v3.12.1
     secrets:
       CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
   dependencies:
@@ -42,7 +42,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN || secrets.GHCR_TOKEN || github.token }}
           GHCR_TOKEN: ${{ secrets.NPM_READ_TOKEN || secrets.GHCR_TOKEN || github.token }}
   images:
-    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-images.yml@0cdf78e693ab2d8b1cf5104872cbc4970fc2deb2 # v3.7.12
+    uses: JanKrajewskiIT/velvetconfigs/.github/workflows/security-images.yml@6b71917b7609caae9b1b0e14dd90968108aa563f # v3.12.1
     secrets:
       CONFIGS_READ_TOKEN: ${{ secrets.CONFIGS_READ_TOKEN }}
     with:
