@@ -4,6 +4,14 @@ Showcase application for the VelvetUi and VelvetData component libraries.
 
 Documentation: [Recron project docs](https://docs.bluebraces.online/projects/velvet-demo/).
 
+The catalogue includes a Finance group with money privacy, market direction,
+instrument labels, contribution bars, environment controls, news and range-band
+charts. Data, feedback, input, navigation and brand groups also demonstrate
+CellStack, MetricGroup, UsageMeter, GateList, CodeEditor, NavbarChip and QuantCore
+branding. The line-chart examples cover fitted axes, missing observations and
+constant or negative values. These examples use the public VelvetUi package API
+and its main stylesheet, with English and Polish messages.
+
 The static demo is served through Traefik directly to the unprivileged Nginx
 container on port 3000. It does not deploy a WAF. CI still requires the SPA image
 scan and SBOM, ZAP baseline, signed image verification and the HTTPS smoke test.

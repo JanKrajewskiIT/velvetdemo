@@ -3,6 +3,34 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const dataEn = defineDictionary({
   title: 'Data',
   blurb: 'Tables, grids, lists, timelines and logs.',
+  cellStack: {
+    customer: 'Customer and invoice',
+    total: 'Total',
+    paid: 'Paid',
+    taxIncluded: 'Tax included',
+    plain: 'Primary text only, regular weight',
+  },
+  metrics: {
+    ordersUp: 'Orders · increasing',
+    returnsDown: 'Returns · decreasing',
+    regionsFlat: 'Regions · unchanged',
+    responsive: 'Responsive columns · medium',
+    subtle: 'Three columns · small · subtle',
+    large: 'Responsive columns · large',
+  },
+  usage: {
+    defaultThresholds: 'Warning at 70%, danger at 90%',
+    storage: 'Storage below warning',
+    warning: 'At the warning threshold',
+    danger: 'At the danger threshold',
+    custom: 'Custom thresholds',
+    customHint: 'Warning at 50%, danger at 80%.',
+    complete: 'Import complete · small · success tone',
+    completeValue: 'All records imported',
+    unknown: 'Usage reading',
+    unknownHint: 'A null reading shows a dash and an empty meter until the value is available.',
+    toggle: 'Toggle missing reading',
+  },
   grid: { loadSavedView: 'Load saved view' },
   editing: {
     instructions:
@@ -56,6 +84,15 @@ export const dataEn = defineDictionary({
     detailNote: 'Current order value: {amount}. Expanded details change the virtual row height.',
   },
   specimens: {
+    'data-cell-stack': {
+      name: 'CellStack',
+      subtitle: 'Table cells with identity, secondary text and aligned values',
+    },
+    'data-metric-group': {
+      name: 'MetricGroup',
+      subtitle: 'Responsive metrics, sizes, subtle surface and directions',
+    },
+    'data-usage-meter': { name: 'UsageMeter', subtitle: 'Threshold boundaries, custom tones and missing readings' },
     'data-table': { name: 'Table', subtitle: 'Fixed or automatic layout, pinned columns, resizing and bulk actions' },
     'data-grid': {
       name: 'DataGrid',
@@ -96,6 +133,34 @@ export const dataEn = defineDictionary({
 export const dataPl: TranslationOf<typeof dataEn> = {
   title: 'Dane',
   blurb: 'Tabele, siatki, listy, osie czasu i logi.',
+  cellStack: {
+    customer: 'Klient i faktura',
+    total: 'Razem',
+    paid: 'Opłacona',
+    taxIncluded: 'Z podatkiem',
+    plain: 'Tylko tekst główny, bez pogrubienia',
+  },
+  metrics: {
+    ordersUp: 'Zamówienia · wzrost',
+    returnsDown: 'Zwroty · spadek',
+    regionsFlat: 'Regiony · bez zmian',
+    responsive: 'Kolumny responsywne · średni rozmiar',
+    subtle: 'Trzy kolumny · mały rozmiar · delikatne tło',
+    large: 'Kolumny responsywne · duży rozmiar',
+  },
+  usage: {
+    defaultThresholds: 'Ostrzeżenie przy 70%, zagrożenie przy 90%',
+    storage: 'Pamięć poniżej progu ostrzeżenia',
+    warning: 'Na progu ostrzeżenia',
+    danger: 'Na progu zagrożenia',
+    custom: 'Własne progi',
+    customHint: 'Ostrzeżenie przy 50%, zagrożenie przy 80%.',
+    complete: 'Import ukończony · mały rozmiar · ton sukcesu',
+    completeValue: 'Zaimportowano wszystkie rekordy',
+    unknown: 'Odczyt wykorzystania',
+    unknownHint: 'Wartość null wyświetla kreskę i pusty miernik do czasu uzyskania odczytu.',
+    toggle: 'Przełącz brak odczytu',
+  },
   grid: { loadSavedView: 'Wczytaj zapisany widok' },
   editing: {
     instructions:
@@ -149,6 +214,15 @@ export const dataPl: TranslationOf<typeof dataEn> = {
     detailNote: 'Wartość zamówienia: {amount}. Rozwinięte szczegóły zmieniają wysokość wiersza.',
   },
   specimens: {
+    'data-cell-stack': {
+      name: 'CellStack',
+      subtitle: 'Komórki tabeli z tożsamością, opisem i wyrównanymi wartościami',
+    },
+    'data-metric-group': {
+      name: 'MetricGroup',
+      subtitle: 'Responsywne metryki, rozmiary, delikatne tło i kierunki zmian',
+    },
+    'data-usage-meter': { name: 'UsageMeter', subtitle: 'Granice progów, własne tony i brakujące odczyty' },
     'data-table': {
       name: 'Table',
       subtitle: 'Stały lub automatyczny układ, przypinanie kolumn, zmiana szerokości i akcje zbiorcze',

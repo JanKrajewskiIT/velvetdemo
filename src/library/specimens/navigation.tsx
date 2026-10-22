@@ -6,6 +6,7 @@ import { AnchorScrollDemo } from '../demos/navigation/AnchorScrollDemo';
 import { LazyTreeDemo } from '../demos/navigation/LazyTreeDemo';
 import { LoadMoreDemo } from '../demos/navigation/LoadMoreDemo';
 import { MovableTreeDemo } from '../demos/navigation/MovableTreeDemo';
+import { NavbarChipDemo } from '../demos/navigation/NavbarChipDemo';
 import { NavbarDemo } from '../demos/navigation/NavbarDemo';
 import { BOTTOM_ITEMS, PERMISSIONS, TAXONOMY } from '../demos/navigation/navigationData';
 import { PaginationDemo } from '../demos/navigation/PaginationDemo';
@@ -125,6 +126,11 @@ export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigati
     id: 'navigation-navbar',
     span: 12,
     render: () => <NavbarDemo />,
+  },
+  {
+    id: 'navigation-navbar-chip',
+    span: 12,
+    render: () => <NavbarChipDemo />,
   },
   {
     id: 'navigation-bottom-nav',

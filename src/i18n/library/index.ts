@@ -10,6 +10,7 @@ import { dataVizEn, dataVizPl } from './data-viz';
 import { depthEn, depthPl } from './depth';
 import { displayEn, displayPl } from './display';
 import { feedbackEn, feedbackPl } from './feedback';
+import { financeEn, financePl } from './finance';
 import { formsEn, formsPl } from './forms';
 import { iconsEn, iconsPl } from './icons';
 import { inputsEn, inputsPl } from './inputs';
@@ -61,6 +62,7 @@ export const libraryEn = defineDictionary({
     planning: planningEn,
     patterns: patternsEn,
     trading: tradingEn,
+    finance: financeEn,
   },
 });
 
@@ -95,6 +97,7 @@ export const libraryPl: TranslationOf<typeof libraryEn> = {
     planning: planningPl,
     patterns: patternsPl,
     trading: tradingPl,
+    finance: financePl,
   },
 };
 

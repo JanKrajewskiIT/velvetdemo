@@ -44,7 +44,7 @@
     "@jankrajewskiit/auth": "^3.19.0",
     "@jankrajewskiit/data": "^3.19.0",
     "@jankrajewskiit/i18n": "^3.19.0",
-    "@jankrajewskiit/ui": "^3.19.0",
+    "@jankrajewskiit/ui": "^3.19.3",
     "lightweight-charts": "^5.2.1",
     "oidc-client-ts": "^3.5.0",
     "solid-js": "^1.9.17"

@@ -43,6 +43,17 @@ export const navigationEn = defineDictionary({
     signedOut: 'Sign-out action received in this offline demo. No session was changed.',
     plan: 'Team plan · administrator',
   },
+  chips: {
+    surface: 'Surface actions',
+    brand: 'Brand actions, collapsible navigation',
+    condensed: 'Condensed navigation',
+    navigation: 'Navigation',
+    search: 'Search the project',
+    searchSelected: 'Search action received in this offline demo.',
+    home: 'QuantCore home',
+    homeSelected: 'Home action received in this offline demo.',
+    hint: 'Condensed navigation shows the burger menu. The search label collapses on narrow screens.',
+  },
   move: {
     instructions:
       'Drag to the top or bottom edge to reorder, or onto a folder centre to move inside. Alt+Up/Down reorders, Alt+Right moves into the previous folder and Alt+Left moves out. README.md cannot be moved directly.',
@@ -67,6 +78,10 @@ export const navigationEn = defineDictionary({
     'navigation-navbar': {
       name: 'Navbar',
       subtitle: 'Links, menubar, account pill and compact account panel with theme controls',
+    },
+    'navigation-navbar-chip': {
+      name: 'NavbarChip',
+      subtitle: 'Surface and brand actions, pressed toggle, link and responsive icon label',
     },
     'navigation-tree-move': {
       name: 'TreeView · moving nodes',
@@ -120,6 +135,17 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
     signedOut: 'Odebrano akcję wylogowania w demonstracji offline. Sesja nie została zmieniona.',
     plan: 'Plan zespołowy · administrator',
   },
+  chips: {
+    surface: 'Akcje na powierzchni',
+    brand: 'Akcje na tle marki i zwijana nawigacja',
+    condensed: 'Zwinięta nawigacja',
+    navigation: 'Nawigacja',
+    search: 'Szukaj w projekcie',
+    searchSelected: 'Odebrano akcję wyszukiwania w demonstracji offline.',
+    home: 'Strona główna QuantCore',
+    homeSelected: 'Odebrano akcję strony głównej w demonstracji offline.',
+    hint: 'Zwinięta nawigacja pokazuje menu hamburgerowe. Etykieta wyszukiwania znika na wąskich ekranach.',
+  },
   move: {
     instructions:
       'Przeciągnij na górną lub dolną krawędź, aby zmienić kolejność, albo na środek folderu, aby przenieść do środka. Alt+góra/dół zmienia kolejność, Alt+prawo przenosi do poprzedniego folderu, a Alt+lewo przenosi na zewnątrz. README.md nie można przenosić bezpośrednio.',
@@ -153,6 +179,10 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
     'navigation-navbar': {
       name: 'Navbar',
       subtitle: 'Linki, pasek menu, pigułka i kompaktowy panel konta z wyborem motywu',
+    },
+    'navigation-navbar-chip': {
+      name: 'NavbarChip',
+      subtitle: 'Akcje na powierzchni i tle marki, przełącznik, link i responsywna etykieta ikony',
     },
     'navigation-tree-move': {
       name: 'TreeView · przenoszenie węzłów',

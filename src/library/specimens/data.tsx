@@ -2,16 +2,19 @@ import { Accordion, CodeSnippet, DescriptionList, Divider, SkillBar, Timeline } 
 
 import type { dataEn } from '../../i18n/library/data';
 import { FAQ_ITEMS, STATUS_ITEMS } from '../demos/data/accordionItems';
+import { CellStackDemo } from '../demos/data/CellStackDemo';
 import { ColumnManagerDemo } from '../demos/data/ColumnManagerDemo';
 import { DataGridDemo } from '../demos/data/DataGridDemo';
 import { DataGridStatesDemo } from '../demos/data/DataGridStatesDemo';
 import { DiffViewerDemo } from '../demos/data/DiffViewerDemo';
 import { LogViewerDemo } from '../demos/data/LogViewerDemo';
+import { MetricGroupDemo } from '../demos/data/MetricGroupDemo';
 import { PeopleListDemo } from '../demos/data/PeopleListDemo';
 import { ServerDataGridDemo } from '../demos/data/ServerDataGridDemo';
 import { TableAddRowDemo } from '../demos/data/TableAddRowDemo';
 import { TableDemo } from '../demos/data/TableDemo';
 import { makeFeedItems, makeHistoryItems, makePipelineItems } from '../demos/data/timelines';
+import { UsageMeterDemo } from '../demos/data/UsageMeterDemo';
 import { VirtualDataGridDemo } from '../demos/data/VirtualDataGridDemo';
 import { VirtualListDemo } from '../demos/data/VirtualListDemo';
 import { VirtualTableDemo } from '../demos/data/VirtualTableDemo';
@@ -42,6 +45,21 @@ const INSTALL_TABS = [
 ];
 
 export const dataSpecimens: readonly Specimen<SpecimenIdOf<typeof dataEn>>[] = [
+  {
+    id: 'data-cell-stack',
+    span: 12,
+    render: () => <CellStackDemo />,
+  },
+  {
+    id: 'data-metric-group',
+    span: 6,
+    render: () => <MetricGroupDemo />,
+  },
+  {
+    id: 'data-usage-meter',
+    span: 6,
+    render: () => <UsageMeterDemo />,
+  },
   {
     id: 'data-table',
     span: 12,

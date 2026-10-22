@@ -24,6 +24,7 @@ import { For } from 'solid-js';
 import type { feedbackEn } from '../../i18n/library/feedback';
 import { CaptionedRow } from '../demos/display/CaptionedRow';
 import { DismissibleAlertDemo } from '../demos/feedback/DismissibleAlertDemo';
+import { GateListDemo } from '../demos/feedback/GateListDemo';
 import { NotificationsDemo } from '../demos/feedback/NotificationsDemo';
 import { PreviewTile } from '../demos/feedback/PreviewTile';
 import { SetupChecklistDemo } from '../demos/feedback/SetupChecklistDemo';
@@ -325,5 +326,10 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
         <SetupChecklistDemo />
       </div>
     ),
+  },
+  {
+    id: 'feedback-gate-list',
+    span: 6,
+    render: () => <GateListDemo />,
   },
 ];

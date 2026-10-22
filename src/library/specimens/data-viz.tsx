@@ -14,6 +14,7 @@ import {
 } from '../demos/data-viz/datasets';
 import { GanttDemo } from '../demos/data-viz/GanttDemo';
 import { HeatmapDemo } from '../demos/data-viz/HeatmapDemo';
+import { LineScaleDemo } from '../demos/data-viz/LineScaleDemo';
 import { SeriesPaletteDemo } from '../demos/data-viz/SeriesPaletteDemo';
 import { SparklineStatsDemo } from '../demos/data-viz/SparklineStatsDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
@@ -50,6 +51,11 @@ export const dataVizSpecimens: readonly Specimen<SpecimenIdOf<typeof dataVizEn>>
         label="Monthly revenue"
       />
     ),
+  },
+  {
+    id: 'data-viz-line-scale',
+    span: 12,
+    render: () => <LineScaleDemo />,
   },
   {
     id: 'data-viz-sparkline',

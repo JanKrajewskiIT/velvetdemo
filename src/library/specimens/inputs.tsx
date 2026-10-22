@@ -12,6 +12,7 @@ import {
 } from '@jankrajewskiit/ui';
 
 import type { inputsEn } from '../../i18n/library/inputs';
+import { CodeEditorDemo } from '../demos/inputs/CodeEditorDemo';
 import { FileUploadDemo } from '../demos/inputs/FileUploadDemo';
 import { MentionInputDemo } from '../demos/inputs/MentionInputDemo';
 import { SearchSuggestionsDemo } from '../demos/inputs/SearchSuggestionsDemo';
@@ -141,6 +142,11 @@ export const inputSpecimens: readonly Specimen<SpecimenIdOf<typeof inputsEn>>[] 
         </div>
       </div>
     ),
+  },
+  {
+    id: 'inputs-code-editor',
+    span: 12,
+    render: () => <CodeEditorDemo />,
   },
   {
     id: 'inputs-mention-input',

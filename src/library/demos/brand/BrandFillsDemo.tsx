@@ -17,6 +17,7 @@ export const BrandFillsDemo = () => (
           <div class={styles.stage} style={{ '--ground': `var(${ground.token})` }}>
             <BrandLogo tone={ground.tone} />
             <BrandLogo brand="recron" tone={ground.tone} />
+            <BrandLogo brand="quantcore" tone={ground.tone} size="sm" />
           </div>
           <figcaption class={styles.caption}>
             tone="{ground.tone}" on {ground.token}
