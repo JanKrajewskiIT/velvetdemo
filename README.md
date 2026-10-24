@@ -13,8 +13,9 @@ constant or negative values. These examples use the public VelvetUi package API
 and its main stylesheet, with English and Polish messages.
 
 The static demo is served through Traefik directly to the unprivileged Nginx
-container on port 3000. It does not deploy a WAF. CI still requires the SPA image
-scan and SBOM, ZAP baseline, signed image verification and the HTTPS smoke test.
+container on port 3000. It does not deploy a WAF. Delivery retains the SBOM,
+signed image verification and the HTTPS smoke test. Image scans and the ZAP
+baseline run in the independent weekly security workflow. See [CI pipelines](CI-PIPELINES.md).
 
 The demo selects `waf-enabled: false` in the shared image verification workflow.
 The workflow must support the `spa` security profile (Configs 3.7.12 or later).

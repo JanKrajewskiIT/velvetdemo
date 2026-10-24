@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: JanKrajewskiIT/velvetconfigs
-          ref: 4fd5cec48d9007aee67644ce29fdedef392f1dea # v3.20.0
+          ref: ad587f572dab1149288acf3f8001a7ea6ea9e225 # v3.21.0
           path: tooling
           persist-credentials: false
           token: ${{ secrets.CONFIGS_READ_TOKEN || github.token }}
@@ -45,8 +45,8 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: '26'
-      - name: Install checksum-pinned security tools
-        run: node tooling/scripts/security-tools.mjs trivy cosign
+      - name: Install checksum-pinned release tools
+        run: node tooling/scripts/security-tools.mjs cosign
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
       - name: Set variables
         id: vars
@@ -63,7 +63,7 @@ jobs:
           path: .artifacts
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
-          name: spa-security
+          name: spa-sbom
           path: .artifacts/security
       - name: Push and sign verified frontend image
         env:

@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "vite --force",
     "build": "tsc -b && vite build && npm run performance:report && npm run build:spa",
+    "build:release": "tsc -b && vite build && npm run build:spa",
     "performance:report": "configs-bundle-report",
     "preview": "vite preview",
     "verify": "npm run toolchain && npm run editor:check && npm run format:check && npm run lint && npm run quality:check && npm run lint:css && npm run build",
@@ -41,17 +42,17 @@
     "quality:check": "npm run architecture:check && npm run duplicates:report && npm run deps:strict"
   },
   "dependencies": {
-    "@jankrajewskiit/auth": "^3.20.0",
-    "@jankrajewskiit/data": "^3.20.2",
-    "@jankrajewskiit/i18n": "^3.20.0",
-    "@jankrajewskiit/ui": "^3.20.2",
+    "@jankrajewskiit/auth": "^3.21.0",
+    "@jankrajewskiit/data": "^3.21.0",
+    "@jankrajewskiit/i18n": "^3.21.0",
+    "@jankrajewskiit/ui": "^3.21.0",
     "lightweight-charts": "^5.2.1",
     "oidc-client-ts": "^3.5.0",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {
     "web-vitals": "^6.2.3",
-    "@jankrajewskiit/configs": "^3.20.0",
+    "@jankrajewskiit/configs": "^3.21.0",
     "@types/node": "^26.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.13.0",
