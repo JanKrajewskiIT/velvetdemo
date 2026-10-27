@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine@sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d AS runner
+FROM nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11cfd17417 AS runner
 COPY --from=builder /app/.deployment/spa/prepare-runtime.sh /tmp/prepare-runtime.sh
 RUN sh /tmp/prepare-runtime.sh && rm /tmp/prepare-runtime.sh
 COPY --from=builder /app/.deployment/spa/nginx.conf /etc/nginx/conf.d/default.conf
