@@ -52,6 +52,7 @@ export const atomsEn = defineDictionary({
     hidden: 'Results count is announced to screen readers',
   },
   specimens: {
+    'atoms-surface': { name: 'Surface', subtitle: 'Twelve fills plus hover, selected and tone states' },
     'atoms-text': { name: 'Text', subtitle: 'Type roles, tone and numeric modifiers' },
     'atoms-status-marks': { name: 'Status marks', subtitle: 'Dot, count, swatch and glyph scale' },
     'atoms-rows': { name: 'Options and tiles', subtitle: 'Option and icon tile' },
