@@ -42,6 +42,13 @@ values, and a keyboard-controlled ChartTooltip read-out. The Listbox example
 supports arrows, Home/End, typeahead and Enter/Space, skips its disabled option,
 and keeps actionable retry controls outside option content.
 
+Examples added to close the reference variant gaps: Timeline actions (confirm,
+tones and async action), FlipCard, MediaFrame (still images stand in for the
+reference video frames), EventCalendar (stacked and split layouts), ChartTooltip
+edge and grid placements, Divider, VisuallyHidden, OrderTicket paper and LIVE
+tickets, TextOnBackgrounds contrast matrix, shape samples, and input variants
+for Textarea, PhoneInput, OtpInput and async MultiSelect.
+
 Foundation coverage follows the reference topics rather than its iframe names:
 
 | Reference group | Live demo coverage                                                                                       |

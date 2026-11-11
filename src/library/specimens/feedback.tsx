@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { LoaderShape, SpinnerVariant, StatusPageCode } from '@jankrajewskiit/ui';
 import {
   Alert,
@@ -46,96 +47,122 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
   {
     id: 'feedback-messages',
     span: 12,
-    render: () => (
-      <div class={styles.stack}>
-        <CaptionedRow caption="Alert">
-          <div class={styles.alertGrid}>
-            <Alert tone="info" title="Import scheduled">
-              The CSV import starts tonight at 02:00.
-            </Alert>
-            <Alert tone="success" title="Invoice sent">
-              INV-1042 was delivered to the billing contact.
-            </Alert>
-            <Alert tone="warning" title="Storage almost full">
-              You have used 92% of your quota.
-            </Alert>
-            <Alert tone="danger" title="Payment failed">
-              The card ending in 4242 was declined.
-            </Alert>
-            <Alert tone="info" variant="outline" title="Outline">
-              Border and raised surface, no tint.
-            </Alert>
-            <Alert tone="brand" variant="solid" title="Solid">
-              Strong fill for the one message that must be seen.
-            </Alert>
-            <DismissibleAlertDemo />
-          </div>
-        </CaptionedRow>
-        <CaptionedRow caption="Banner">
-          <div class={styles.banners}>
-            <Banner
-              tone="brand"
-              action={
-                <Button size="sm" variant="ghost">
-                  What’s new
-                </Button>
-              }
-            >
-              Version 3.1 adds dark-mode charts and a faster table.
-            </Banner>
-            <Banner
-              tone="info"
-              action={
-                <Button size="sm" variant="ghost">
-                  Details
-                </Button>
-              }
-            >
-              Scheduled maintenance on Sunday, 02:00–04:00 UTC.
-            </Banner>
-            <Banner
-              tone="warning"
-              action={
-                <Button size="sm" variant="ghost">
-                  Add card
-                </Button>
-              }
-            >
-              Your trial ends in 3 days.
-            </Banner>
-            <Banner
-              tone="danger"
-              action={
-                <Button size="sm" variant="ghost">
-                  Status page
-                </Button>
-              }
-            >
-              Exports are delayed. We are investigating.
-            </Banner>
-          </div>
-        </CaptionedRow>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <CaptionedRow caption="Alert">
+            <div class={styles.alertGrid}>
+              <Alert tone="info" title={t('library.feedback.specimens.feedback-messages.importTitle')}>
+                {t('library.feedback.specimens.feedback-messages.importBody')}
+              </Alert>
+              <Alert tone="success" title={t('library.feedback.specimens.feedback-messages.invoiceTitle')}>
+                {t('library.feedback.specimens.feedback-messages.invoiceBody')}
+              </Alert>
+              <Alert tone="warning" title={t('library.feedback.specimens.feedback-messages.storageTitle')}>
+                {t('library.feedback.specimens.feedback-messages.storageBody')}
+              </Alert>
+              <Alert tone="danger" title={t('library.feedback.specimens.feedback-messages.paymentTitle')}>
+                {t('library.feedback.specimens.feedback-messages.paymentBody')}
+              </Alert>
+              <Alert
+                tone="info"
+                variant="outline"
+                title={t('library.feedback.specimens.feedback-messages.outlineTitle')}
+              >
+                {t('library.feedback.specimens.feedback-messages.outlineBody')}
+              </Alert>
+              <Alert tone="brand" variant="solid" title={t('library.feedback.specimens.feedback-messages.solidTitle')}>
+                {t('library.feedback.specimens.feedback-messages.solidBody')}
+              </Alert>
+              <DismissibleAlertDemo />
+            </div>
+          </CaptionedRow>
+          <CaptionedRow caption="Banner">
+            <div class={styles.banners}>
+              <Banner
+                tone="brand"
+                action={
+                  <Button size="sm" variant="ghost">
+                    {t('library.feedback.specimens.feedback-messages.whatsNew')}
+                  </Button>
+                }
+              >
+                {t('library.feedback.specimens.feedback-messages.versionBanner')}
+              </Banner>
+              <Banner
+                tone="info"
+                action={
+                  <Button size="sm" variant="ghost">
+                    {t('library.feedback.specimens.feedback-messages.details')}
+                  </Button>
+                }
+              >
+                {t('library.feedback.specimens.feedback-messages.maintenanceBanner')}
+              </Banner>
+              <Banner
+                tone="warning"
+                action={
+                  <Button size="sm" variant="ghost">
+                    {t('library.feedback.specimens.feedback-messages.addCard')}
+                  </Button>
+                }
+              >
+                {t('library.feedback.specimens.feedback-messages.trialBanner')}
+              </Banner>
+              <Banner
+                tone="danger"
+                action={
+                  <Button size="sm" variant="ghost">
+                    {t('library.feedback.specimens.feedback-messages.statusPage')}
+                  </Button>
+                }
+              >
+                {t('library.feedback.specimens.feedback-messages.exportsBanner')}
+              </Banner>
+            </div>
+          </CaptionedRow>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-toasts',
     span: 6,
-    render: () => (
-      <div class={styles.stack}>
-        <CaptionedRow caption="Tones">
-          <div class={styles.list}>
-            <Toast tone="neutral" title="Link copied" description="Share it with your team." />
-            <Toast tone="success" title="Changes saved" description="Your draft is up to date." />
-            <Toast tone="warning" title="Connection unstable" description="Retrying in a few seconds." />
-            <Toast tone="danger" title="Upload failed" description="The file is larger than 25 MB." />
-          </div>
-        </CaptionedRow>
-        <CaptionedRow caption="Live — bottom-right of the viewport">
-          <ToastLiveDemo />
-        </CaptionedRow>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-toasts.tonesCaption')}>
+            <div class={styles.list}>
+              <Toast
+                tone="neutral"
+                title={t('library.feedback.specimens.feedback-toasts.linkCopied')}
+                description={t('library.feedback.specimens.feedback-toasts.linkCopiedBody')}
+              />
+              <Toast
+                tone="success"
+                title={t('library.feedback.specimens.feedback-toasts.changesSaved')}
+                description={t('library.feedback.specimens.feedback-toasts.changesSavedBody')}
+              />
+              <Toast
+                tone="warning"
+                title={t('library.feedback.specimens.feedback-toasts.connectionUnstable')}
+                description={t('library.feedback.specimens.feedback-toasts.connectionUnstableBody')}
+              />
+              <Toast
+                tone="danger"
+                title={t('library.feedback.specimens.feedback-toasts.uploadFailed')}
+                description={t('library.feedback.specimens.feedback-toasts.uploadFailedBody')}
+              />
+            </div>
+          </CaptionedRow>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-toasts.liveCaption')}>
+            <ToastLiveDemo />
+          </CaptionedRow>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-toast-region',
@@ -145,61 +172,94 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
   {
     id: 'feedback-progress',
     span: 6,
-    render: () => (
-      <div class={styles.stack}>
-        <CaptionedRow caption="Tones">
-          <div class={styles.list}>
-            <Progress value={64} label="Uploading report-q3.pdf" showValue />
-            <Progress value={100} tone="success" label="Import complete" showValue />
-            <Progress value={86} tone="warning" label="Storage" showValue />
-            <Progress
-              value={970}
-              max={1000}
-              tone="danger"
-              label="API quota"
-              showValue
-              format={(value, max) => `${value} of ${max}`}
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-progress.tonesCaption')}>
+            <div class={styles.list}>
+              <Progress value={64} label={t('library.feedback.specimens.feedback-progress.uploading')} showValue />
+              <Progress
+                value={100}
+                tone="success"
+                label={t('library.feedback.specimens.feedback-progress.importComplete')}
+                showValue
+              />
+              <Progress
+                value={86}
+                tone="warning"
+                label={t('library.feedback.specimens.feedback-progress.storage')}
+                showValue
+              />
+              <Progress
+                value={970}
+                max={1000}
+                tone="danger"
+                label={t('library.feedback.specimens.feedback-progress.apiQuota')}
+                showValue
+                format={(value, max) => t('library.feedback.specimens.feedback-progress.formatValue', { value, max })}
+              />
+            </div>
+          </CaptionedRow>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-progress.sizesCaption')}>
+            <div class={styles.list}>
+              <Progress value={30} size="sm" label={t('library.feedback.specimens.feedback-progress.small')} />
+              <Progress value={50} size="md" label={t('library.feedback.specimens.feedback-progress.medium')} />
+              <Progress value={70} size="lg" label={t('library.feedback.specimens.feedback-progress.large')} />
+              <Progress indeterminate label={t('library.feedback.specimens.feedback-progress.syncing')} />
+            </div>
+          </CaptionedRow>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-progress.ringCaption')}>
+            <ProgressRing value={72} label={t('library.feedback.specimens.feedback-progress.uploadRing')} />
+            <ProgressRing
+              value={100}
+              tone="success"
+              label={t('library.feedback.specimens.feedback-progress.importRing')}
             />
-          </div>
-        </CaptionedRow>
-        <CaptionedRow caption="Sizes and indeterminate">
-          <div class={styles.list}>
-            <Progress value={30} size="sm" label="Small" />
-            <Progress value={50} size="md" label="Medium" />
-            <Progress value={70} size="lg" label="Large" />
-            <Progress indeterminate label="Syncing" />
-          </div>
-        </CaptionedRow>
-        <CaptionedRow caption="Ring">
-          <ProgressRing value={72} label="Upload 72%" />
-          <ProgressRing value={100} tone="success" label="Import 100%" />
-          <ProgressRing value={86} tone="warning" label="Storage 86%" />
-          <ProgressRing value={97} tone="danger" label="Quota 97%" />
-          <ProgressRing value={82} size={72} role="meter" label="Score 82 of 100">
-            82/100
-          </ProgressRing>
-        </CaptionedRow>
-      </div>
-    ),
+            <ProgressRing
+              value={86}
+              tone="warning"
+              label={t('library.feedback.specimens.feedback-progress.storageRing')}
+            />
+            <ProgressRing
+              value={97}
+              tone="danger"
+              label={t('library.feedback.specimens.feedback-progress.quotaRing')}
+            />
+            <ProgressRing
+              value={82}
+              size={72}
+              role="meter"
+              label={t('library.feedback.specimens.feedback-progress.scoreRing')}
+            >
+              82/100
+            </ProgressRing>
+          </CaptionedRow>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-loading',
     span: 6,
-    render: () => (
-      <div class={styles.stack}>
-        <CaptionedRow caption="RobotProcessingIndicator">
-          <div class={styles.list}>
-            <RobotProcessingIndicator label="Reading the job listing from its link" />
-            <RobotProcessingIndicator label="Drafting a cover letter" />
-          </div>
-        </CaptionedRow>
-        <CaptionedRow caption="LoadingOverlay">
-          <LoadingOverlay class={styles.overlay}>
-            <p class={styles.overlayBody}>Quarterly figures are being refreshed from the ledger.</p>
-          </LoadingOverlay>
-        </CaptionedRow>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <CaptionedRow caption="RobotProcessingIndicator">
+            <div class={styles.list}>
+              <RobotProcessingIndicator label={t('library.feedback.specimens.feedback-loading.processingLink')} />
+              <RobotProcessingIndicator label={t('library.feedback.specimens.feedback-loading.coverLetter')} />
+            </div>
+          </CaptionedRow>
+          <CaptionedRow caption="LoadingOverlay">
+            <LoadingOverlay class={styles.overlay}>
+              <p class={styles.overlayBody}>{t('library.feedback.specimens.feedback-loading.overlayBody')}</p>
+            </LoadingOverlay>
+          </CaptionedRow>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-skeleton',
@@ -229,76 +289,91 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
   {
     id: 'feedback-loaders',
     span: 12,
-    render: () => (
-      <div class={styles.tileGrid}>
-        <For each={LOADER_VARIANTS}>
-          {(variant) => (
-            <PreviewTile caption={variant}>
-              <Loader variant={variant} scale={0.6} decorative />
-            </PreviewTile>
-          )}
-        </For>
-        <For each={LOADER_SHAPES}>
-          {(shape) => (
-            <PreviewTile caption={`shape-trail · ${shape}`}>
-              <Loader variant="shape-trail" shape={shape} scale={0.6} decorative />
-            </PreviewTile>
-          )}
-        </For>
-        <PreviewTile caption="PageLoader · contained" class={styles.wide}>
-          <div class={styles.pageLoaderBox}>
-            <PageLoader fullScreen={false} />
-          </div>
-        </PreviewTile>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.tileGrid}>
+          <For each={LOADER_VARIANTS}>
+            {(variant) => (
+              <PreviewTile caption={variant}>
+                <Loader variant={variant} scale={0.6} decorative />
+              </PreviewTile>
+            )}
+          </For>
+          <For each={LOADER_SHAPES}>
+            {(shape) => (
+              <PreviewTile caption={`shape-trail · ${shape}`}>
+                <Loader variant="shape-trail" shape={shape} scale={0.6} decorative />
+              </PreviewTile>
+            )}
+          </For>
+          <PreviewTile caption={t('library.feedback.specimens.feedback-loaders.pageLoaderCaption')} class={styles.wide}>
+            <div class={styles.pageLoaderBox}>
+              <PageLoader fullScreen={false} />
+            </div>
+          </PreviewTile>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-empty-error',
     span: 8,
-    render: () => (
-      <div class={styles.tileGrid}>
-        <PreviewTile caption="EmptyState · md">
-          <EmptyState
-            title="No projects yet"
-            description="Create your first project to get started."
-            actions={
-              <Button size="sm" iconLeft="plus">
-                New project
-              </Button>
-            }
-          />
-        </PreviewTile>
-        <PreviewTile caption="EmptyState · sm">
-          <EmptyState size="sm" icon="search" tone="info" title="No results" description="Try a different filter." />
-        </PreviewTile>
-        <PreviewTile caption="ErrorState · md">
-          <ErrorState details="TypeError: Failed to fetch" />
-        </PreviewTile>
-        <PreviewTile caption="ErrorState · sm">
-          <ErrorState size="sm" title="Couldn’t load activity" />
-        </PreviewTile>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.tileGrid}>
+          <PreviewTile caption="EmptyState · md">
+            <EmptyState
+              title={t('library.feedback.specimens.feedback-empty-error.noProjects')}
+              description={t('library.feedback.specimens.feedback-empty-error.noProjectsBody')}
+              actions={
+                <Button size="sm" iconLeft="plus">
+                  {t('library.feedback.specimens.feedback-empty-error.newProject')}
+                </Button>
+              }
+            />
+          </PreviewTile>
+          <PreviewTile caption="EmptyState · sm">
+            <EmptyState
+              size="sm"
+              icon="search"
+              tone="info"
+              title={t('library.feedback.specimens.feedback-empty-error.noResults')}
+              description={t('library.feedback.specimens.feedback-empty-error.noResultsBody')}
+            />
+          </PreviewTile>
+          <PreviewTile caption="ErrorState · md">
+            <ErrorState details="TypeError: Failed to fetch" />
+          </PreviewTile>
+          <PreviewTile caption="ErrorState · sm">
+            <ErrorState size="sm" title={t('library.feedback.specimens.feedback-empty-error.couldNotLoad')} />
+          </PreviewTile>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-countdown',
     span: 4,
-    render: () => (
-      <div class={styles.stack}>
-        <CaptionedRow caption="Boxes">
-          <Countdown to={inFuture(3 * DAY_MS + 4 * HOUR_MS)} size="sm" />
-        </CaptionedRow>
-        <CaptionedRow caption="Inline">
-          <Countdown
-            to={inFuture(2 * HOUR_MS + 14 * 60_000)}
-            variant="inline"
-            size="lg"
-            units={['hours', 'minutes', 'seconds']}
-          />
-        </CaptionedRow>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-countdown.boxesCaption')}>
+            <Countdown to={inFuture(3 * DAY_MS + 4 * HOUR_MS)} size="sm" />
+          </CaptionedRow>
+          <CaptionedRow caption={t('library.feedback.specimens.feedback-countdown.inlineCaption')}>
+            <Countdown
+              to={inFuture(2 * HOUR_MS + 14 * 60_000)}
+              variant="inline"
+              size="lg"
+              units={['hours', 'minutes', 'seconds']}
+            />
+          </CaptionedRow>
+        </div>
+      );
+    },
   },
   {
     id: 'feedback-status-pages',

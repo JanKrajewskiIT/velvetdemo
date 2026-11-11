@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { SchedulerEvent } from '@jankrajewskiit/ui';
 import { Scheduler } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
@@ -7,14 +8,20 @@ import styles from './SchedulerDayDemo.module.css';
 
 const TIME_FORMAT: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-const formatRange = (start: Date, end: Date): string =>
-  `${start.toLocaleTimeString('en-GB', TIME_FORMAT)} to ${end.toLocaleTimeString('en-GB', TIME_FORMAT)}`;
+const formatTime = (date: Date): string => date.toLocaleTimeString('en-GB', TIME_FORMAT);
 
 export const SchedulerDayDemo = () => {
-  const events = createDayEvents();
-  const [status, setStatus] = createSignal('Select an event or an empty slot.');
-  const select = (event: SchedulerEvent) => setStatus(`${event.title}, ${formatRange(event.start, event.end)}.`);
-  const pickSlot = (start: Date, end: Date) => setStatus(`Empty slot, ${formatRange(start, end)}.`);
+  const { ts } = useI18n();
+  const events = createDayEvents(ts);
+  const formatRange = (start: Date, end: Date): string =>
+    ts('library.planning.scheduler.range', { start: formatTime(start), end: formatTime(end) });
+  const [status, setStatus] = createSignal(ts('library.planning.scheduler.idle'));
+  const select = (event: SchedulerEvent) =>
+    setStatus(
+      ts('library.planning.scheduler.event', { title: event.title, range: formatRange(event.start, event.end) }),
+    );
+  const pickSlot = (start: Date, end: Date) =>
+    setStatus(ts('library.planning.scheduler.emptySlot', { range: formatRange(start, end) }));
 
   return (
     <div class={styles.root}>

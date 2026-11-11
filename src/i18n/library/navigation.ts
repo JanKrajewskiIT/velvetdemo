@@ -3,6 +3,25 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const navigationEn = defineDictionary({
   title: 'Navigation',
   blurb: 'App chrome — navbar, sidebar, bottom bar, page header and footer.',
+  demos: {
+    anchor: {
+      region: 'Sample article',
+      overview: 'Overview',
+      install: 'Installation',
+      config: 'Configuration',
+      env: 'Environment',
+      trouble: 'Troubleshooting',
+      copy: 'Section content for {label}. Scroll this area and the contents list follows the section in view.',
+    },
+    lazyTree: {
+      label: 'Project files',
+    },
+    stepper: {
+      back: 'Back',
+      next: 'Next',
+      caption: 'Vertical, with a step that failed validation',
+    },
+  },
   period: {
     previous: 'Previous month',
     next: 'Next month',
@@ -71,18 +90,55 @@ export const navigationEn = defineDictionary({
       'Legacy parent-only moves: drag onto a folder, or press Space, choose a folder with the arrow keys and press Enter. Escape cancels the move.',
     legacyLabel: 'Move project files into folders',
   },
+  data: {
+    bottomNav: {
+      home: 'Home',
+      search: 'Search',
+      alerts: 'Alerts',
+      profile: 'Profile',
+    },
+  },
   specimens: {
     'navigation-period': { name: 'PeriodNav', subtitle: 'Live month navigation, Today, attached and ghost buttons' },
     'navigation-tabs': { name: 'Tabs', subtitle: 'Underline, segmented and vertical peer views' },
     'navigation-breadcrumb-link': {
       name: 'Breadcrumb and Link',
       subtitle: 'Collapsing trails and every link variant',
+      shortTrail: 'Short trail',
+      collapsedHint: 'Collapsed when the trail exceeds four items',
+      home: 'Home',
+      offers: 'Offers',
+      warsaw: 'Warsaw',
+      engineering: 'Engineering',
+      frontend: 'Frontend',
+      seniorDeveloper: 'Senior developer',
+      links: 'Links',
+      proseRead: 'Read the',
+      releaseNotes: 'release notes',
+      proseBrowse: ', browse the',
+      changelog: 'changelog',
+      proseOr: 'or check the',
+      statusHistory: 'status history',
+      viewAll: 'View all',
+      external: 'External',
+      disabled: 'Disabled',
     },
     'navigation-stepper': { name: 'Stepper', subtitle: 'Ordered steps: done, current, upcoming, error' },
-    'navigation-paging': { name: 'Pagination and LoadMore', subtitle: 'Jump to a page, or reveal more in place' },
+    'navigation-paging': {
+      name: 'Pagination and LoadMore',
+      subtitle: 'Jump to a page, or reveal more in place',
+      fullCaption: 'Full, with range and rows per page',
+      compact: 'Compact',
+      incremental: 'Incremental loading',
+      everythingShown: 'Everything shown',
+    },
     'navigation-trees': {
       name: 'TreeView and HierarchyNavigator',
       subtitle: 'Lazy and checkable trees, drill-down picker',
+      lazyCaption: 'Selectable, one node loads on expand',
+      checkableCaption: 'Checkable with tri-state parents',
+      drillCaption: 'Drill-down, one level at a time',
+      permissionsLabel: 'Permissions',
     },
     'navigation-navbar': {
       name: 'Navbar',
@@ -96,7 +152,13 @@ export const navigationEn = defineDictionary({
       name: 'TreeView · moving nodes',
       subtitle: 'Positional moves, drop restrictions and legacy parent-only moves',
     },
-    'navigation-bottom-nav': { name: 'BottomNav', subtitle: 'Mobile tab bar in a phone-width frame' },
+    'navigation-bottom-nav': {
+      name: 'BottomNav',
+      subtitle: 'Mobile tab bar in a phone-width frame',
+      primaryBadges: 'Primary, badges',
+      primaryCentreAction: 'Primary, centre action',
+      create: 'Create',
+    },
     'navigation-anchor': { name: 'Anchor and BackToTop', subtitle: 'Contents list that follows a scrolling region' },
   },
 });
@@ -104,6 +166,25 @@ export const navigationEn = defineDictionary({
 export const navigationPl: TranslationOf<typeof navigationEn> = {
   title: 'Nawigacja',
   blurb: 'Szkielet aplikacji — pasek nawigacji, panel boczny, pasek dolny, nagłówek i stopka.',
+  demos: {
+    anchor: {
+      region: 'Przykładowy artykuł',
+      overview: 'Przegląd',
+      install: 'Instalacja',
+      config: 'Konfiguracja',
+      env: 'Środowisko',
+      trouble: 'Rozwiązywanie problemów',
+      copy: 'Treść sekcji: {label}. Przewiń ten obszar, a spis treści podąży za sekcją w widoku.',
+    },
+    lazyTree: {
+      label: 'Pliki projektu',
+    },
+    stepper: {
+      back: 'Wstecz',
+      next: 'Dalej',
+      caption: 'Pionowo, z krokiem, który nie przeszedł walidacji',
+    },
+  },
   period: {
     previous: 'Poprzedni miesiąc',
     next: 'Następny miesiąc',
@@ -172,6 +253,14 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
       'Dotychczasowe przenoszenie do folderu: przeciągnij węzeł na folder albo naciśnij Spację, wybierz folder strzałkami i naciśnij Enter. Escape anuluje przenoszenie.',
     legacyLabel: 'Przenoszenie plików projektu do folderów',
   },
+  data: {
+    bottomNav: {
+      home: 'Start',
+      search: 'Szukaj',
+      alerts: 'Alerty',
+      profile: 'Profil',
+    },
+  },
   specimens: {
     'navigation-period': { name: 'PeriodNav', subtitle: 'Zmiana miesiąca, dzisiaj, przyciski połączone i bez tła' },
     'navigation-tabs': {
@@ -181,6 +270,24 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
     'navigation-breadcrumb-link': {
       name: 'Breadcrumb i Link',
       subtitle: 'Zwijane ścieżki i wszystkie warianty linków',
+      shortTrail: 'Krótka ścieżka',
+      collapsedHint: 'Zwijana, gdy ścieżka ma więcej niż cztery elementy',
+      home: 'Strona główna',
+      offers: 'Oferty',
+      warsaw: 'Warszawa',
+      engineering: 'Inżynieria',
+      frontend: 'Frontend',
+      seniorDeveloper: 'Starszy programista',
+      links: 'Linki',
+      proseRead: 'Przeczytaj',
+      releaseNotes: 'informacje o wydaniu',
+      proseBrowse: ', przejrzyj',
+      changelog: 'dziennik zmian',
+      proseOr: 'lub sprawdź',
+      statusHistory: 'historię statusów',
+      viewAll: 'Zobacz wszystkie',
+      external: 'Zewnętrzny',
+      disabled: 'Nieaktywny',
     },
     'navigation-stepper': {
       name: 'Stepper',
@@ -189,10 +296,18 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
     'navigation-paging': {
       name: 'Pagination i LoadMore',
       subtitle: 'Przejście do strony lub wczytanie kolejnych pozycji w miejscu',
+      fullCaption: 'Pełna, z zakresem i liczbą wierszy na stronę',
+      compact: 'Kompaktowa',
+      incremental: 'Ładowanie przyrostowe',
+      everythingShown: 'Wszystko wyświetlone',
     },
     'navigation-trees': {
       name: 'TreeView i HierarchyNavigator',
       subtitle: 'Drzewa ładowane na żądanie i z polami wyboru, selektor drill-down',
+      lazyCaption: 'Z wyborem, jeden węzeł ładowany przy rozwinięciu',
+      checkableCaption: 'Z polami wyboru i stanem częściowym rodziców',
+      drillCaption: 'Zagnieżdżona, jeden poziom naraz',
+      permissionsLabel: 'Uprawnienia',
     },
     'navigation-navbar': {
       name: 'Navbar',
@@ -206,7 +321,13 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
       name: 'TreeView · przenoszenie węzłów',
       subtitle: 'Przenoszenie pozycyjne, ograniczenia celu i dotychczasowe przenoszenie do folderu',
     },
-    'navigation-bottom-nav': { name: 'BottomNav', subtitle: 'Mobilny pasek kart w ramce o szerokości telefonu' },
+    'navigation-bottom-nav': {
+      name: 'BottomNav',
+      subtitle: 'Mobilny pasek kart w ramce o szerokości telefonu',
+      primaryBadges: 'Główna, z odznakami',
+      primaryCentreAction: 'Główna, akcja centralna',
+      create: 'Utwórz',
+    },
     'navigation-anchor': {
       name: 'Anchor i BackToTop',
       subtitle: 'Spis treści podążający za przewijanym obszarem',

@@ -1,8 +1,9 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { PromptAttachment } from '@jankrajewskiit/ui';
 import { PromptInput } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup, Show } from 'solid-js';
 
-import { PROMPT_ATTACHMENTS, PROMPT_REPLY_DELAY_MS, PROMPT_SUGGESTIONS } from './chatSamples';
+import { createPromptSuggestions, PROMPT_ATTACHMENTS, PROMPT_REPLY_DELAY_MS } from './chatSamples';
 import styles from './PromptInputDemo.module.css';
 
 interface SentPrompt {
@@ -10,9 +11,9 @@ interface SentPrompt {
   attachmentCount: number;
 }
 
-const SUGGESTIONS = [...PROMPT_SUGGESTIONS];
-
 export const PromptInputDemo = () => {
+  const { ts } = useI18n();
+  const suggestions = createPromptSuggestions(ts);
   const [attachments, setAttachments] = createSignal<PromptAttachment[]>([]);
   const [sent, setSent] = createSignal<SentPrompt | null>(null);
   const [generating, setGenerating] = createSignal(false);
@@ -54,10 +55,10 @@ export const PromptInputDemo = () => {
   return (
     <div class={styles.root}>
       <PromptInput
-        label="Prompt for Velvet Assistant"
-        placeholder="Describe what you need…"
+        label={ts('library.patterns.promptInput.label')}
+        placeholder={ts('library.patterns.promptInput.placeholder')}
         maxRows={5}
-        suggestions={SUGGESTIONS}
+        suggestions={suggestions}
         attachments={attachments()}
         onAttach={attach}
         onRemoveAttachment={remove}
@@ -66,14 +67,16 @@ export const PromptInputDemo = () => {
         onStop={stop}
       />
       <p class={styles.status} role="status">
-        <Show when={sent()} fallback="Nothing sent yet. Press Enter to send, Shift+Enter for a new line.">
+        <Show when={sent()} fallback={ts('library.patterns.promptInput.idle')}>
           {(prompt) => (
             <>
-              <Show when={generating()}>Generating a reply to: </Show>
-              <Show when={stopped()}>Stopped. Last prompt: </Show>
-              <Show when={!generating() && !stopped()}>Sent: </Show>
+              <Show when={generating()}>{ts('library.patterns.promptInput.generating')}</Show>
+              <Show when={stopped()}>{ts('library.patterns.promptInput.stopped')}</Show>
+              <Show when={!generating() && !stopped()}>{ts('library.patterns.promptInput.sent')}</Show>
               <q>{prompt().text}</q>
-              <Show when={prompt().attachmentCount > 0}> with {prompt().attachmentCount} attachment(s)</Show>
+              <Show when={prompt().attachmentCount > 0}>
+                {ts('library.patterns.promptInput.attachments', { count: prompt().attachmentCount })}
+              </Show>
             </>
           )}
         </Show>

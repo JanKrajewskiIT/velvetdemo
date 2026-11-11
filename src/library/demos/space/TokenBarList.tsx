@@ -3,7 +3,7 @@ import { createSignal, For, onMount } from 'solid-js';
 import styles from './TokenBarList.module.css';
 import { formatPx, measureToken, readTokenValue } from './tokenValues';
 
-interface Measured {
+export interface Measured {
   token: string;
   px: number;
   label: string;
@@ -15,7 +15,7 @@ export interface TokenBarListProps {
   viewport?: number;
 }
 
-const measure = (token: string): Measured => {
+export const measure = (token: string): Measured => {
   const px = measureToken(token);
   const raw = readTokenValue(token);
   return { token, px, label: raw.endsWith('ch') ? `${raw} ≈ ${formatPx(px)}` : formatPx(px) };

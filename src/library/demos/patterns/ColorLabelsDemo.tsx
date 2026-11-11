@@ -1,20 +1,24 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { ColorLabel } from '@jankrajewskiit/ui';
 import { Button, ColorLabelManager, ColorLabelSelectionDialog } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import { createSimulatedDelay } from './createSimulatedDelay';
 
+type Ts = ReturnType<typeof useI18n>['ts'];
+
 const SAVE_DELAY_MS = 600;
 
-const INITIAL_LABELS: ColorLabel[] = [
-  { id: 'urgent', name: 'Urgent', color: 'var(--dv-1)', count: 4 },
-  { id: 'follow-up', name: 'Follow up', color: 'var(--dv-2)', count: 2 },
-  { id: 'remote', name: 'Remote', color: 'var(--dv-3)', count: 0 },
+const createInitialLabels = (ts: Ts): ColorLabel[] => [
+  { id: 'urgent', name: ts('library.patterns.colorLabels.labels.urgent'), color: 'var(--dv-1)', count: 4 },
+  { id: 'follow-up', name: ts('library.patterns.colorLabels.labels.followUp'), color: 'var(--dv-2)', count: 2 },
+  { id: 'remote', name: ts('library.patterns.colorLabels.labels.remote'), color: 'var(--dv-3)', count: 0 },
 ];
 
 export const ColorLabelsDemo = () => {
+  const { ts } = useI18n();
   const delay = createSimulatedDelay(SAVE_DELAY_MS);
-  const [labels, setLabels] = createSignal<ColorLabel[]>(INITIAL_LABELS);
+  const [labels, setLabels] = createSignal<ColorLabel[]>(createInitialLabels(ts));
   const [assigned, setAssigned] = createSignal<string[]>(['urgent']);
   const [managing, setManaging] = createSignal(false);
   const [selecting, setSelecting] = createSignal(false);
@@ -39,10 +43,10 @@ export const ColorLabelsDemo = () => {
   return (
     <>
       <Button variant="secondary" onClick={() => setSelecting(true)}>
-        {`Assign labels (${assigned().length})`}
+        {ts('library.patterns.colorLabels.assign', { count: assigned().length })}
       </Button>
       <Button variant="secondary" onClick={() => setManaging(true)}>
-        Manage labels
+        {ts('library.patterns.colorLabels.manage')}
       </Button>
       <ColorLabelSelectionDialog
         open={selecting()}
@@ -55,7 +59,7 @@ export const ColorLabelsDemo = () => {
           setSelecting(false);
           setManaging(true);
         }}
-        description="Choose the labels that apply to this candidate."
+        description={ts('library.patterns.colorLabels.description')}
       />
       <ColorLabelManager open={managing()} onClose={() => setManaging(false)} labels={labels()} onChange={save} />
     </>

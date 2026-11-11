@@ -10,18 +10,24 @@ import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Text } from '@jankrajewskiit/ui';
 import { batch, createMemo, createSignal, Show } from 'solid-js';
 
-import { type Member, MEMBERS } from './members';
+import { type Member, MEMBERS, ROLE_LABEL_KEY } from './members';
 
 const PAGE_SIZE = 3;
-const COLUMNS: GridColumn<Member>[] = [
-  { key: 'name', label: 'Member', width: 220, locked: true },
-  { key: 'role', label: 'Role', width: 140, sortable: false },
-  { key: 'seats', label: 'Seats', type: 'number', width: 100 },
-  { key: 'email', label: 'Email', width: 260, sortable: false },
-];
 
 export const ServerDataGridDemo = () => {
   const { ts } = useI18n();
+  const COLUMNS: GridColumn<Member>[] = [
+    { key: 'name', label: ts('library.data.columns.member'), width: 220, locked: true },
+    {
+      key: 'role',
+      label: ts('library.data.columns.role'),
+      width: 140,
+      sortable: false,
+      render: (row) => ts(ROLE_LABEL_KEY[row.role]),
+    },
+    { key: 'seats', label: ts('library.data.columns.seats'), type: 'number', width: 100 },
+    { key: 'email', label: ts('library.data.columns.email'), width: 260, sortable: false },
+  ];
   const initial = defaultGridView(COLUMNS);
   const [view, setView] = createSignal(initial);
   const [page, setPage] = createSignal(0);
@@ -30,7 +36,7 @@ export const ServerDataGridDemo = () => {
   const result = createMemo(() => {
     const needle = view().search.trim().toLowerCase();
     const filtered = MEMBERS.filter((member) =>
-      [member.name, member.role, member.email, String(member.seats)].some((value) =>
+      [member.name, ts(ROLE_LABEL_KEY[member.role]), member.email, String(member.seats)].some((value) =>
         value.toLowerCase().includes(needle),
       ),
     );

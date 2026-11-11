@@ -1,30 +1,32 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { ChatFeedback } from '@jankrajewskiit/ui';
 import { ChatMessage, ChatThread, PromptInput } from '@jankrajewskiit/ui';
 import { createSignal, For, onCleanup, Show } from 'solid-js';
 
 import {
   CHAT_ASSISTANT_NAME,
-  CHAT_REPLIES,
   CHAT_REPLY_DELAY_MS,
-  CHAT_SEED,
-  CHAT_USER_NAME,
   type ChatEntry,
+  createChatReplies,
+  createChatSeed,
 } from './chatSamples';
 import styles from './ChatThreadDemo.module.css';
 
 const formatTime = (): string => new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 const HISTORY_LIMIT = 50;
 
-const authorOf = (entry: ChatEntry): string | undefined => {
-  if (entry.role === 'assistant') return CHAT_ASSISTANT_NAME;
-  if (entry.role === 'user') return CHAT_USER_NAME;
-  return undefined;
-};
-
 export const ChatThreadDemo = () => {
-  const [entries, setEntries] = createSignal<readonly ChatEntry[]>(CHAT_SEED);
+  const { ts } = useI18n();
+  const seed = createChatSeed(ts);
+  const replies = createChatReplies(ts);
+  const authorOf = (entry: ChatEntry): string | undefined => {
+    if (entry.role === 'assistant') return CHAT_ASSISTANT_NAME;
+    if (entry.role === 'user') return ts('library.patterns.chat.userName');
+    return undefined;
+  };
+  const [entries, setEntries] = createSignal<readonly ChatEntry[]>(seed);
   const [replying, setReplying] = createSignal(false);
-  let nextId = CHAT_SEED.length + 1;
+  let nextId = seed.length + 1;
   let replyIndex = 0;
   let timer: number | undefined;
 
@@ -44,7 +46,7 @@ export const ChatThreadDemo = () => {
     append({ role: 'user', content: text });
     setReplying(true);
     timer = window.setTimeout(() => {
-      const reply = CHAT_REPLIES[replyIndex % CHAT_REPLIES.length];
+      const reply = replies[replyIndex % replies.length];
       replyIndex += 1;
       if (reply) append({ role: 'assistant', content: reply.content, sources: reply.sources });
       stopReply();
@@ -62,7 +64,7 @@ export const ChatThreadDemo = () => {
 
   return (
     <div class={styles.root}>
-      <ChatThread height={360} label="Design review conversation">
+      <ChatThread height={360} label={ts('library.patterns.chat.label')}>
         <For each={entries()}>
           {(entry) => (
             <ChatMessage
@@ -81,8 +83,8 @@ export const ChatThreadDemo = () => {
         </Show>
       </ChatThread>
       <PromptInput
-        label="Message to Velvet Assistant"
-        placeholder="Ask about the design review…"
+        label={ts('library.patterns.chat.promptLabel')}
+        placeholder={ts('library.patterns.chat.promptPlaceholder')}
         maxRows={4}
         loading={replying()}
         onSubmit={submit}

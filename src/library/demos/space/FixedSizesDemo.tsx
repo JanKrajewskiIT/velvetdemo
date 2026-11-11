@@ -2,50 +2,50 @@ import { useI18n } from '@jankrajewskiit/i18n';
 import { Grid, SectionLabel, Stack } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
-import { TokenBarList } from './TokenBarList';
+import { type TokenSampleItem, TokenSampleList } from './TokenSampleList';
 
-const GROUPS = [
+const GROUPS: readonly { id: 'icons' | 'avatars' | 'targets'; items: readonly TokenSampleItem[] }[] = [
   {
     id: 'icons',
-    tokens: [
-      '--size-icon-xs',
-      '--size-icon-sm',
-      '--size-icon-md',
-      '--size-icon-lg',
-      '--size-icon-xl',
-      '--size-icon-2xl',
+    items: [
+      { token: '--size-icon-xs', shape: 'square' },
+      { token: '--size-icon-sm', shape: 'square' },
+      { token: '--size-icon-md', shape: 'square' },
+      { token: '--size-icon-lg', shape: 'square' },
+      { token: '--size-icon-xl', shape: 'square' },
+      { token: '--size-icon-2xl', shape: 'square' },
     ],
   },
   {
     id: 'avatars',
-    tokens: [
-      '--size-avatar-xs',
-      '--size-avatar-sm',
-      '--size-avatar-md',
-      '--size-avatar-lg',
-      '--size-avatar-xl',
-      '--size-icon-tile-sm',
-      '--size-icon-tile-md',
-      '--size-icon-tile-lg',
-      '--size-icon-tile-xl',
-      '--size-icon-tile-2xl',
-      '--size-icon-tile-3xl',
+    items: [
+      { token: '--size-avatar-xs', shape: 'circle' },
+      { token: '--size-avatar-sm', shape: 'circle' },
+      { token: '--size-avatar-md', shape: 'circle' },
+      { token: '--size-avatar-lg', shape: 'circle' },
+      { token: '--size-avatar-xl', shape: 'circle' },
+      { token: '--size-icon-tile-sm', shape: 'tile' },
+      { token: '--size-icon-tile-md', shape: 'tile' },
+      { token: '--size-icon-tile-lg', shape: 'tile' },
+      { token: '--size-icon-tile-xl', shape: 'tile' },
+      { token: '--size-icon-tile-2xl', shape: 'tile' },
+      { token: '--size-icon-tile-3xl', shape: 'tile' },
     ],
   },
   {
     id: 'targets',
-    tokens: [
-      '--size-dot-sm',
-      '--size-dot',
-      '--size-dot-lg',
-      '--size-check',
-      '--size-check-sm',
-      '--size-swatch',
-      '--hit-target-sm',
-      '--hit-target-min',
+    items: [
+      { token: '--size-dot-sm', shape: 'dashed' },
+      { token: '--size-dot', shape: 'dashed' },
+      { token: '--size-dot-lg', shape: 'dashed' },
+      { token: '--size-check', shape: 'dashed' },
+      { token: '--size-check-sm', shape: 'dashed' },
+      { token: '--size-swatch', shape: 'dashed' },
+      { token: '--hit-target-sm', shape: 'dashed' },
+      { token: '--hit-target-min', shape: 'dashed' },
     ],
   },
-] as const;
+];
 
 export const FixedSizesDemo = () => {
   const { ts } = useI18n();
@@ -56,7 +56,7 @@ export const FixedSizesDemo = () => {
         {(group) => (
           <Stack gap={3}>
             <SectionLabel>{ts(`library.spaceLayout.sizes.${group.id}`)}</SectionLabel>
-            <TokenBarList tokens={group.tokens} />
+            <TokenSampleList items={group.items} />
           </Stack>
         )}
       </For>

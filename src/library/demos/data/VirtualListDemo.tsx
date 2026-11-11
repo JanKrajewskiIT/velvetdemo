@@ -18,9 +18,9 @@ const SIZE_SPREAD = 900;
 const SIZE_STRIDE = 37;
 
 const INTERACTIONS = [
-  { value: 'list', key: 'list' },
-  { value: 'listbox', key: 'listbox' },
-  { value: 'grid', key: 'grid' },
+  { value: 'list', labelKey: 'library.data.virtualList.list' },
+  { value: 'listbox', labelKey: 'library.data.virtualList.listbox' },
+  { value: 'grid', labelKey: 'library.data.virtualList.grid' },
 ] as const;
 
 type Interaction = (typeof INTERACTIONS)[number]['value'];
@@ -51,7 +51,7 @@ const waitForLoad = (signal: AbortSignal): Promise<void> =>
   });
 
 export const VirtualListDemo = () => {
-  const { ts } = useI18n();
+  const { ts, locale } = useI18n();
   const [files, setFiles] = createSignal(makeFiles(0, INITIAL_FILE_COUNT));
   const [selected, setSelected] = createSignal<RowKey[]>([1]);
   const [interaction, setInteraction] = createSignal<Interaction>('listbox');
@@ -98,7 +98,7 @@ export const VirtualListDemo = () => {
                   setSelected([]);
                 }}
               >
-                {ts(`library.data.virtualList.${item.key}`)}
+                {ts(item.labelKey)}
               </SegmentedItem>
             )}
           </For>
@@ -117,7 +117,7 @@ export const VirtualListDemo = () => {
       </div>
       <p class={styles.caption} aria-live="polite">
         {ts('library.data.virtualList.summary', {
-          count: files().length.toLocaleString('en'),
+          count: files().length.toLocaleString(locale()),
           selected: selected().length,
         })}
       </p>

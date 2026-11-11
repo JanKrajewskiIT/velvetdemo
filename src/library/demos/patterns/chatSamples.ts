@@ -1,4 +1,7 @@
+import type { useI18n } from '@jankrajewskiit/i18n';
 import type { ChatFeedback, ChatRole, ChatSource, PromptAttachment } from '@jankrajewskiit/ui';
+
+type Ts = ReturnType<typeof useI18n>['ts'];
 
 export interface ChatEntry {
   id: number;
@@ -10,25 +13,32 @@ export interface ChatEntry {
 }
 
 export const CHAT_ASSISTANT_NAME = 'Velvet Assistant';
-export const CHAT_USER_NAME = 'You';
 export const CHAT_REPLY_DELAY_MS = 1200;
 
-export const CHAT_SEED: readonly ChatEntry[] = [
-  { id: 1, role: 'system', content: 'Design review · Checkout redesign', time: '10:02', feedback: null },
+export const createChatSeed = (ts: Ts): readonly ChatEntry[] => [
+  {
+    id: 1,
+    role: 'system',
+    content: ts('library.patterns.chat.seed.system'),
+    time: '10:02',
+    feedback: null,
+  },
   {
     id: 2,
     role: 'user',
-    content: 'Can you summarise the open points from today’s design review?',
+    content: ts('library.patterns.chat.seed.question'),
     time: '10:03',
     feedback: null,
   },
   {
     id: 3,
     role: 'assistant',
-    content:
-      'Three points are still open: the contrast of the disabled button, the focus order in the address step, and the empty state of the order summary.',
+    content: ts('library.patterns.chat.seed.answer'),
     time: '10:03',
-    sources: [{ title: 'Review notes, 12 Oct' }, { title: 'Accessibility checklist' }],
+    sources: [
+      { title: ts('library.patterns.chat.sources.reviewNotes') },
+      { title: ts('library.patterns.chat.sources.accessibility') },
+    ],
     feedback: null,
   },
 ];
@@ -38,27 +48,27 @@ export interface ChatReply {
   sources?: ChatSource[];
 }
 
-export const CHAT_REPLIES: readonly ChatReply[] = [
+export const createChatReplies = (ts: Ts): readonly ChatReply[] => [
   {
-    content:
-      'I would start with the focus order: it blocks keyboard users, while the other two points are visual polish.',
-    sources: [{ title: 'Review notes, 12 Oct' }],
+    content: ts('library.patterns.chat.replies.focusOrder'),
+    sources: [{ title: ts('library.patterns.chat.sources.reviewNotes') }],
   },
   {
-    content:
-      'The disabled button currently reaches a contrast ratio of 2.8:1. Raising the text token one step gets it above 4.5:1.',
-    sources: [{ title: 'Accessibility checklist' }, { title: 'Colour tokens' }],
+    content: ts('library.patterns.chat.replies.contrast'),
+    sources: [
+      { title: ts('library.patterns.chat.sources.accessibility') },
+      { title: ts('library.patterns.chat.sources.colourTokens') },
+    ],
   },
   {
-    content:
-      'For the empty summary, a short message with a link back to the catalogue is enough. No illustration is needed.',
+    content: ts('library.patterns.chat.replies.emptySummary'),
   },
 ];
 
-export const PROMPT_SUGGESTIONS: readonly string[] = [
-  'Summarise the review',
-  'List accessibility risks',
-  'Draft a follow-up message',
+export const createPromptSuggestions = (ts: Ts): string[] => [
+  ts('library.patterns.promptInput.suggestions.summarise'),
+  ts('library.patterns.promptInput.suggestions.accessibility'),
+  ts('library.patterns.promptInput.suggestions.followUp'),
 ];
 
 export const PROMPT_ATTACHMENTS: readonly PromptAttachment[] = [

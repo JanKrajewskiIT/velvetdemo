@@ -4,8 +4,9 @@ import { addDays, Button, CalendarOrganizer, Checkbox, Stack, startOfDay } from 
 import { createSignal } from 'solid-js';
 
 type EventDetails = Omit<OrganizerEvent, 'date' | 'endDate'>;
+type Ts = ReturnType<typeof useI18n>['ts'];
 
-const createEvents = (): OrganizerEvent[] => {
+const createEvents = (ts: Ts): OrganizerEvent[] => {
   const today = startOfDay(new Date());
   const on = (offset: number, details: EventDetails, lengthDays = 0): OrganizerEvent => ({
     ...details,
@@ -14,18 +15,37 @@ const createEvents = (): OrganizerEvent[] => {
   });
 
   return [
-    on(0, { id: 1, title: 'Stand-up', time: '09:30', location: 'Room 4' }),
-    on(0, { id: 2, title: 'Design review', time: '14:00', color: 'var(--dv-3)' }),
-    on(0, { id: 3, title: 'Release notes', color: 'var(--dv-5)' }),
-    on(2, { id: 4, title: 'Interview with Anna K.', time: '11:00', color: 'var(--dv-2)' }),
-    on(5, { id: 5, title: 'Planning', time: '10:00' }),
-    on(7, { id: 6, title: 'Team offsite', location: 'Gdansk', color: 'var(--dv-6)' }, 2),
+    on(0, {
+      id: 1,
+      title: ts('library.patterns.organizer.events.standUp'),
+      time: '09:30',
+      location: ts('library.patterns.organizer.events.room'),
+    }),
+    on(0, {
+      id: 2,
+      title: ts('library.patterns.organizer.events.designReview'),
+      time: '14:00',
+      color: 'var(--dv-3)',
+    }),
+    on(0, { id: 3, title: ts('library.patterns.organizer.events.releaseNotes'), color: 'var(--dv-5)' }),
+    on(2, { id: 4, title: ts('library.patterns.organizer.events.interview'), time: '11:00', color: 'var(--dv-2)' }),
+    on(5, { id: 5, title: ts('library.patterns.organizer.events.planning'), time: '10:00' }),
+    on(
+      7,
+      {
+        id: 6,
+        title: ts('library.patterns.organizer.events.offsite'),
+        location: ts('library.patterns.organizer.events.city'),
+        color: 'var(--dv-6)',
+      },
+      2,
+    ),
   ];
 };
 
 export const CalendarOrganizerDemo = () => {
   const { ts } = useI18n();
-  const [events, setEvents] = createSignal<OrganizerEvent[]>(createEvents());
+  const [events, setEvents] = createSignal<OrganizerEvent[]>(createEvents(ts));
   const [selected, setSelected] = createSignal(startOfDay(new Date()));
   const [confirmDelete, setConfirmDelete] = createSignal(true);
 

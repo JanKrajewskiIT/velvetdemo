@@ -11,6 +11,14 @@ import { LibraryGroupView } from './LibraryGroupView';
 import { LibraryIndex } from './LibraryIndex';
 import styles from './LibrarySection.module.css';
 
+const SCOPE_LABEL_KEYS = {
+  all: 'showcase.library.scopes.all',
+  found: 'showcase.library.scopes.found',
+  icons: 'showcase.library.scopes.icons',
+  atoms: 'showcase.library.scopes.atoms',
+  comp: 'showcase.library.scopes.comp',
+} as const satisfies Record<Scope, string>;
+
 export interface LibrarySectionProps {
   groups: readonly LibraryGroup[];
 }
@@ -92,7 +100,7 @@ export const LibrarySection = (props: LibrarySectionProps) => {
                       aria-pressed={scope() === item}
                       onClick={() => setScope(item)}
                     >
-                      {ts(`showcase.library.scopes.${item}`)}
+                      {ts(SCOPE_LABEL_KEYS[item])}
                     </Button>
                   )}
                 </For>

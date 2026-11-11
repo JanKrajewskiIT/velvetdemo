@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import {
   ActionRow,
   Alert,
@@ -13,7 +14,7 @@ import {
 import { createSignal, onCleanup, Show } from 'solid-js';
 
 import styles from './AccountSettingsDemo.module.css';
-import { emailProblem, nameProblem } from './validators';
+import { makeProblems } from './validators';
 
 const SAVE_DELAY_MS = 1100;
 const LANGUAGES = ['English', 'Polski', 'Deutsch'];
@@ -22,6 +23,8 @@ const TIME_ZONES = ['Europe/Warsaw', 'Europe/London', 'America/New_York'];
 type SaveStatus = 'idle' | 'saving' | 'failed' | 'saved';
 
 export const AccountSettingsDemo = () => {
+  const { ts } = useI18n();
+  const problems = makeProblems(ts);
   const [status, setStatus] = createSignal<SaveStatus>('idle');
   const [email, setEmail] = createSignal('anna.kowalska@velvet.example');
   const [attempted, setAttempted] = createSignal(false);
@@ -33,7 +36,7 @@ export const AccountSettingsDemo = () => {
   const submit = () => {
     if (status() === 'saving') return;
     setAttempted(true);
-    if (emailProblem(email())) return;
+    if (problems.email(email())) return;
     attempts += 1;
     setStatus('saving');
     timer = setTimeout(() => setStatus(attempts === 1 ? 'failed' : 'saved'), SAVE_DELAY_MS);
@@ -42,41 +45,67 @@ export const AccountSettingsDemo = () => {
   return (
     <FormLayout onSubmit={submit}>
       <Show when={status() === 'failed'}>
-        <Alert tone="danger" title="Changes were not saved">
-          The server did not respond. Save again to retry.
+        <Alert tone="danger" title={ts('library.forms.demos.accountSettings.failedTitle')}>
+          {ts('library.forms.demos.accountSettings.failedBody')}
         </Alert>
       </Show>
-      <FormSection title="Profile" description="How you appear to teammates and in notifications.">
+      <FormSection
+        title={ts('library.forms.demos.accountSettings.profileTitle')}
+        description={ts('library.forms.demos.accountSettings.profileDescription')}
+      >
         <FormGrid columns={2}>
-          <Input label="Display name" defaultValue="Anna Kowalska" validate={nameProblem} />
           <Input
-            label="Email"
+            label={ts('library.forms.demos.accountSettings.displayName')}
+            defaultValue="Anna Kowalska"
+            validate={problems.name}
+          />
+          <Input
+            label={ts('library.forms.demos.accountSettings.email')}
             type="email"
             value={email()}
             onInput={(event) => setEmail(event.currentTarget.value)}
-            validate={emailProblem}
-            error={attempted() ? emailProblem(email()) : undefined}
+            validate={problems.email}
+            error={attempted() ? problems.email(email()) : undefined}
           />
-          <Select label="Language" options={LANGUAGES} defaultValue="English" />
-          <Select label="Time zone" options={TIME_ZONES} defaultValue="Europe/Warsaw" />
+          <Select
+            label={ts('library.forms.demos.accountSettings.language')}
+            options={LANGUAGES}
+            defaultValue="English"
+          />
+          <Select
+            label={ts('library.forms.demos.accountSettings.timeZone')}
+            options={TIME_ZONES}
+            defaultValue="Europe/Warsaw"
+          />
         </FormGrid>
       </FormSection>
-      <FormSection divider title="Notifications" description="Sent to the email address above.">
+      <FormSection
+        divider
+        title={ts('library.forms.demos.accountSettings.notificationsTitle')}
+        description={ts('library.forms.demos.accountSettings.notificationsDescription')}
+      >
         <div class={styles.switches}>
-          <Switch label="Product updates" description="New features and release notes" checked />
-          <Switch label="Weekly digest" description="A summary of activity every Monday morning" />
+          <Switch
+            label={ts('library.forms.demos.accountSettings.productUpdates')}
+            description={ts('library.forms.demos.accountSettings.productUpdatesDescription')}
+            checked
+          />
+          <Switch
+            label={ts('library.forms.demos.accountSettings.weeklyDigest')}
+            description={ts('library.forms.demos.accountSettings.weeklyDigestDescription')}
+          />
         </div>
       </FormSection>
       <ActionRow
         divider
         start={
           <Text variant="caption" tone="secondary" role="status">
-            <Show when={status() === 'saved'}>All changes saved</Show>
+            <Show when={status() === 'saved'}>{ts('library.forms.demos.accountSettings.saved')}</Show>
           </Text>
         }
       >
         <Button type="submit" loading={status() === 'saving'}>
-          Save changes
+          {ts('library.forms.demos.accountSettings.save')}
         </Button>
       </ActionRow>
     </FormLayout>

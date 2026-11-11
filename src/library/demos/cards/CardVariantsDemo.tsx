@@ -1,34 +1,36 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Card, Grid, type SurfaceVariant } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
-interface VariantNote {
-  variant: SurfaceVariant;
-  note: string;
-}
+const VARIANT_NOTES = {
+  default: 'library.cards.demo.variantNotes.default',
+  low: 'library.cards.demo.variantNotes.low',
+  flat: 'library.cards.demo.variantNotes.flat',
+  raised: 'library.cards.demo.variantNotes.raised',
+  subtle: 'library.cards.demo.variantNotes.subtle',
+  sunken: 'library.cards.demo.variantNotes.sunken',
+  brand: 'library.cards.demo.variantNotes.brand',
+  'brand-solid': 'library.cards.demo.variantNotes.brandSolid',
+  inverse: 'library.cards.demo.variantNotes.inverse',
+  overlay: 'library.cards.demo.variantNotes.overlay',
+  dialog: 'library.cards.demo.variantNotes.dialog',
+  glass: 'library.cards.demo.variantNotes.glass',
+} as const satisfies Record<SurfaceVariant, string>;
 
-const VARIANTS: readonly VariantNote[] = [
-  { variant: 'default', note: 'Resting surface with a hairline border.' },
-  { variant: 'low', note: 'Control-level elevation for dense toolbars.' },
-  { variant: 'flat', note: 'No shadow, a stronger border.' },
-  { variant: 'raised', note: 'Shadow instead of a border.' },
-  { variant: 'subtle', note: 'Quiet fill to group content.' },
-  { variant: 'sunken', note: 'Inset well for secondary areas.' },
-  { variant: 'brand', note: 'Brand-tinted fill and border.' },
-  { variant: 'brand-solid', note: 'Full brand fill for one focal card.' },
-  { variant: 'inverse', note: 'Opposite theme for contrast.' },
-  { variant: 'overlay', note: 'Elevated paint for floating content.' },
-  { variant: 'dialog', note: 'Modal surface with dialog elevation.' },
-  { variant: 'glass', note: 'Translucent surface with backdrop blur.' },
-];
+const VARIANTS = Object.keys(VARIANT_NOTES) as SurfaceVariant[];
 
-export const CardVariantsDemo = () => (
-  <Grid min={176} gap={3}>
-    <For each={VARIANTS}>
-      {(item) => (
-        <Card variant={item.variant} padding="sm" title={item.variant}>
-          {item.note}
-        </Card>
-      )}
-    </For>
-  </Grid>
-);
+export const CardVariantsDemo = () => {
+  const { ts } = useI18n();
+
+  return (
+    <Grid min={176} gap={3}>
+      <For each={VARIANTS}>
+        {(variant) => (
+          <Card variant={variant} padding="sm" title={variant}>
+            {ts(VARIANT_NOTES[variant])}
+          </Card>
+        )}
+      </For>
+    </Grid>
+  );
+};

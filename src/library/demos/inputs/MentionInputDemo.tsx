@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { MentionInput, type MentionOption, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
@@ -18,15 +19,16 @@ const TAGS: readonly MentionOption[] = [
 ];
 
 export const MentionInputDemo = () => {
+  const { ts } = useI18n();
   const [value, setValue] = createSignal('Thanks @Anna Kowalska, please review #release');
   const [lastMention, setLastMention] = createSignal('');
 
   return (
     <div class={styles.root}>
       <MentionInput
-        label="Comment"
-        hint="Type @ for people or # for tags"
-        placeholder="Write a comment"
+        label={ts('library.inputs.demos.mention.label')}
+        hint={ts('library.inputs.demos.mention.hint')}
+        placeholder={ts('library.inputs.demos.mention.placeholder')}
         users={PEOPLE}
         tags={TAGS}
         value={value()}
@@ -34,11 +36,11 @@ export const MentionInputDemo = () => {
         onMention={(option, trigger) => setLastMention(`${trigger}${option.label}`)}
       />
       <Text as="p" variant="caption" tone="secondary" class={styles.status} aria-live="polite">
-        Value: {value()}
+        {ts('library.inputs.demos.mention.value', { value: value() })}
       </Text>
       <Text as="p" variant="caption" tone="secondary" class={styles.status}>
-        <Show when={lastMention()} fallback="No mention inserted yet">
-          Last mention: {lastMention()}
+        <Show when={lastMention()} fallback={ts('library.inputs.demos.mention.noMention')}>
+          {ts('library.inputs.demos.mention.lastMention', { mention: lastMention() })}
         </Show>
       </Text>
     </div>

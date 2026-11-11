@@ -6,6 +6,12 @@
   background: var(--bg-subtle);
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
 .tooltip {
   max-width: calc(100% - var(--space-4));
   white-space: normal;

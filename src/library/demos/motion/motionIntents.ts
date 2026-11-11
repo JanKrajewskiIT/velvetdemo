@@ -17,22 +17,21 @@ export type IntentKind =
 export interface MotionIntent {
   token: string;
   kind: IntentKind;
-  use: string;
 }
 
 export const MOTION_INTENTS: readonly MotionIntent[] = [
-  { token: '--motion-instant', kind: 'press', use: 'Press feedback' },
-  { token: '--motion-fast', kind: 'colour', use: 'Hover and colour' },
-  { token: '--motion-base', kind: 'select', use: 'State change' },
-  { token: '--motion-move', kind: 'resize', use: 'Position and size' },
-  { token: '--motion-reveal', kind: 'chevron', use: 'Chevrons and small popups' },
-  { token: '--motion-enter', kind: 'enter', use: 'Overlays arriving' },
-  { token: '--motion-exit', kind: 'exit', use: 'Overlays leaving' },
-  { token: '--motion-spring', kind: 'switch', use: 'Thumbs and checks' },
-  { token: '--motion-bounce', kind: 'bounce', use: 'Quick pops' },
-  { token: '--motion-pop', kind: 'pop', use: 'Things appearing' },
-  { token: '--motion-lift', kind: 'lift', use: 'Card hover' },
-  { token: '--motion-slide', kind: 'slide', use: 'Carousels and drawers' },
-  { token: '--motion-travel', kind: 'travel', use: 'Navigation indicator travel' },
-  { token: '--motion-progress', kind: 'progress', use: 'Bars and meters' },
+  { token: '--motion-instant', kind: 'press' },
+  { token: '--motion-fast', kind: 'colour' },
+  { token: '--motion-base', kind: 'select' },
+  { token: '--motion-move', kind: 'resize' },
+  { token: '--motion-reveal', kind: 'chevron' },
+  { token: '--motion-enter', kind: 'enter' },
+  { token: '--motion-exit', kind: 'exit' },
+  { token: '--motion-spring', kind: 'switch' },
+  { token: '--motion-bounce', kind: 'bounce' },
+  { token: '--motion-pop', kind: 'pop' },
+  { token: '--motion-lift', kind: 'lift' },
+  { token: '--motion-slide', kind: 'slide' },
+  { token: '--motion-travel', kind: 'travel' },
+  { token: '--motion-progress', kind: 'progress' },
 ];

@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Markdown, MarkdownEditDialog, MarkdownEditor, SectionLabel } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
@@ -22,6 +23,7 @@ const EDITOR_HEIGHT_PX = 220;
 const DIALOG_HEIGHT_PX = 260;
 
 export const MarkdownEditorDemo = () => {
+  const { ts } = useI18n();
   const [draft, setDraft] = createSignal(DRAFT);
   const [notes, setNotes] = createSignal(NOTES);
   const [dialogOpen, setDialogOpen] = createSignal(false);
@@ -34,25 +36,25 @@ export const MarkdownEditorDemo = () => {
   return (
     <div class={styles.root}>
       <MarkdownEditor
-        label="Sprint plan"
-        hint="Write, split or preview. Enter continues a list."
+        label={ts('library.display.markdownEditor.label')}
+        hint={ts('library.display.markdownEditor.hint')}
         value={draft()}
         onValueChange={setDraft}
         height={EDITOR_HEIGHT_PX}
       />
       <section class={styles.dialogRow}>
         <div class={styles.notes}>
-          <SectionLabel>Saved notes</SectionLabel>
+          <SectionLabel>{ts('library.display.markdownEditor.saved')}</SectionLabel>
           <Markdown source={notes()} size="sm" />
         </div>
         <Button variant="secondary" onClick={() => setDialogOpen(true)}>
-          Edit notes in a dialog
+          {ts('library.display.markdownEditor.edit')}
         </Button>
       </section>
       <MarkdownEditDialog
         open={dialogOpen()}
-        title="Edit meeting notes"
-        description="Save stays disabled until the draft changes."
+        title={ts('library.display.markdownEditor.dialogTitle')}
+        description={ts('library.display.markdownEditor.dialogDescription')}
         value={notes()}
         height={DIALOG_HEIGHT_PX}
         onSave={saveNotes}

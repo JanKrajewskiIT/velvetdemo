@@ -1,21 +1,28 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { KanbanCard } from '@jankrajewskiit/ui';
 import { Avatar, Kanban } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import styles from './KanbanBoardDemo.module.css';
-import { createKanbanCards, KANBAN_COLUMNS } from './planningSamples';
+import { createKanbanCards, createKanbanColumns } from './planningSamples';
 
 const withAssignee = (card: KanbanCard): KanbanCard =>
   typeof card.owner === 'string' ? { ...card, assignee: <Avatar name={card.owner} size="xs" color="auto" /> } : card;
 
 export const KanbanBoardDemo = () => {
-  const [cards, setCards] = createSignal<KanbanCard[]>(createKanbanCards().map(withAssignee));
+  const { ts } = useI18n();
+  const [cards, setCards] = createSignal<KanbanCard[]>(createKanbanCards(ts).map(withAssignee));
 
   return (
     <div class={styles.root}>
-      <p class={styles.hint}>Drag a card between columns, or focus it and press Ctrl with an arrow key to move it.</p>
+      <p class={styles.hint}>{ts('library.planning.kanban.hint')}</p>
       <div class={styles.board}>
-        <Kanban columns={KANBAN_COLUMNS} cards={cards()} onCardsChange={setCards} onAddCard={() => undefined} />
+        <Kanban
+          columns={createKanbanColumns(ts)}
+          cards={cards()}
+          onCardsChange={setCards}
+          onAddCard={() => undefined}
+        />
       </div>
     </div>
   );

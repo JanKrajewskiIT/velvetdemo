@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { UnauthorizedBehavior } from '@jankrajewskiit/ui';
 import { AuthButton, AuthGuard, Checkbox, OptionSwitcher, useAuth } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
@@ -9,18 +10,18 @@ interface AuthGuardSessionDemoProps {
   onFailureChange: (failure: boolean) => void;
 }
 
-const ROLES = [
-  { value: 'member', label: 'Member' },
-  { value: 'admin', label: 'Administrator' },
-  { value: 'moderator', label: 'Moderator' },
-];
-const BEHAVIORS: readonly { value: UnauthorizedBehavior; label: string }[] = [
-  { value: 'access-denied', label: 'Require sign-in' },
-  { value: 'redirect', label: 'Sign in automatically' },
-];
-
 export const AuthGuardSessionDemo = (props: AuthGuardSessionDemoProps) => {
+  const { ts } = useI18n();
   const auth = useAuth();
+  const roles = [
+    { value: 'member', label: ts('library.patterns.authGuard.roleMember') },
+    { value: 'admin', label: ts('library.patterns.authGuard.roleAdministrator') },
+    { value: 'moderator', label: ts('library.patterns.authGuard.roleModerator') },
+  ];
+  const behaviors: readonly { value: UnauthorizedBehavior; label: string }[] = [
+    { value: 'access-denied', label: ts('library.patterns.authGuard.behaviorDeny') },
+    { value: 'redirect', label: ts('library.patterns.authGuard.behaviorRedirect') },
+  ];
   const [role, setRole] = createSignal('member');
   const [failure, setFailure] = createSignal(false);
   const [behavior, setBehavior] = createSignal<UnauthorizedBehavior>('access-denied');
@@ -33,7 +34,7 @@ export const AuthGuardSessionDemo = (props: AuthGuardSessionDemoProps) => {
     props.onFailureChange(next);
   };
   const selectBehavior = (next: string) => {
-    const selected = BEHAVIORS.find((option) => option.value === next);
+    const selected = behaviors.find((option) => option.value === next);
     if (selected) setBehavior(selected.value);
   };
 
@@ -41,34 +42,40 @@ export const AuthGuardSessionDemo = (props: AuthGuardSessionDemoProps) => {
     <div class={styles.root}>
       <div class={styles.toolbar}>
         <AuthButton returnUrl="/" size="sm" />
-        <OptionSwitcher options={ROLES} value={role()} onValueChange={selectRole} label="Demo session role" size="sm" />
+        <OptionSwitcher
+          options={roles}
+          value={role()}
+          onValueChange={selectRole}
+          label={ts('library.patterns.authGuard.sessionRole')}
+          size="sm"
+        />
       </div>
       <OptionSwitcher
-        options={BEHAVIORS}
+        options={behaviors}
         value={behavior()}
         onValueChange={selectBehavior}
-        label="Unauthenticated session behavior"
+        label={ts('library.patterns.authGuard.unauthenticatedBehavior')}
         size="sm"
       />
       <Checkbox
         checked={failure()}
         onChange={(event) => changeFailure(event.currentTarget.checked)}
         disabled={auth.isAuthenticated()}
-        label="Simulate a sign-in failure"
+        label={ts('library.patterns.authGuard.simulateFailure')}
       />
-      <p class={styles.caption}>Sign in, then choose Administrator to reveal the protected content.</p>
+      <p class={styles.caption}>{ts('library.patterns.authGuard.caption')}</p>
       <div class={styles.stage}>
         <AuthGuard
           roles="admin"
           unauthorizedBehavior={behavior()}
           returnUrl="/"
           onGoHome={() => selectRole('admin')}
-          goHomeLabel="Switch to administrator"
+          goHomeLabel={ts('library.patterns.authGuard.switchToAdmin')}
         >
           <div class={styles.content}>
-            <strong>Workspace administration</strong>
-            <p>This content is visible to the local administrator session.</p>
-            <p class={styles.caption}>The session and role changes stay inside this offline showcase.</p>
+            <strong>{ts('library.patterns.authGuard.contentTitle')}</strong>
+            <p>{ts('library.patterns.authGuard.contentBody')}</p>
+            <p class={styles.caption}>{ts('library.patterns.authGuard.contentNote')}</p>
           </div>
         </AuthGuard>
       </div>

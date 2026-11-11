@@ -1,23 +1,25 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { BarChart, Segmented, SegmentedItem } from '@jankrajewskiit/ui';
 import { createSignal, For } from 'solid-js';
 
 import styles from './BarChartDemo.module.css';
-import { PLAN_SERIES, weekdayData } from './datasets';
+import { createPlanSeries, weekdayData } from './datasets';
 
-const LAYOUTS = [
-  { id: 'grouped', label: 'Grouped' },
-  { id: 'stacked', label: 'Stacked' },
-] as const;
-
-type Layout = (typeof LAYOUTS)[number]['id'];
+type Layout = 'grouped' | 'stacked';
 
 export const BarChartDemo = () => {
-  const data = weekdayData();
+  const { ts } = useI18n();
+  const layouts = (): { id: Layout; label: string }[] => [
+    { id: 'grouped', label: ts('library.dataViz.demo.grouped') },
+    { id: 'stacked', label: ts('library.dataViz.demo.stacked') },
+  ];
+  const data = weekdayData(ts);
+  const series = createPlanSeries(ts);
   const [layout, setLayout] = createSignal<Layout>('grouped');
   return (
     <div class={styles.root}>
-      <Segmented size="sm" role="group" aria-label="Bar layout" class={styles.toggle}>
-        <For each={LAYOUTS}>
+      <Segmented size="sm" role="group" aria-label={ts('library.dataViz.demo.barLayout')} class={styles.toggle}>
+        <For each={layouts()}>
           {(item) => (
             <SegmentedItem selected={layout() === item.id} onClick={() => setLayout(item.id)}>
               {item.label}
@@ -27,9 +29,9 @@ export const BarChartDemo = () => {
       </Segmented>
       <BarChart
         data={data}
-        series={PLAN_SERIES}
+        series={series}
         stacked={layout() === 'stacked'}
-        label="Sessions per weekday by plan"
+        label={ts('library.dataViz.demo.weekdayChart')}
       />
     </div>
   );

@@ -1,8 +1,10 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { PracticeCard, PracticeCollection, PracticeConfig, PracticeResult } from '@jankrajewskiit/ui';
 import { PracticeSession, PracticeSetup, PracticeSummary } from '@jankrajewskiit/ui';
 import { createSignal, Match, Switch } from 'solid-js';
 
 type Stage = 'setup' | 'session' | 'summary';
+type Ts = ReturnType<typeof useI18n>['ts'];
 
 interface StudyCollection {
   id: string;
@@ -11,55 +13,60 @@ interface StudyCollection {
   cards: PracticeCard[];
 }
 
-const STUDY_COLLECTIONS: readonly StudyCollection[] = [
+const createStudyCollections = (ts: Ts): readonly StudyCollection[] => [
   {
     id: 'es4',
-    name: 'Spanish, around the home',
+    name: ts('library.patterns.practice.collections.home'),
     due: 3,
     cards: [
-      { id: 'es4-1', front: 'la estantería', back: 'the bookshelf', example: 'Los libros están en la estantería.' },
-      { id: 'es4-2', front: 'el cajón', back: 'the drawer' },
-      { id: 'es4-3', front: 'la almohada', back: 'the pillow' },
-      { id: 'es4-4', front: 'el grifo', back: 'the tap' },
-      { id: 'es4-5', front: 'la bombilla', back: 'the light bulb' },
+      {
+        id: 'es4-1',
+        front: 'la estantería',
+        back: ts('library.patterns.practice.back.shelf'),
+        example: 'Los libros están en la estantería.',
+      },
+      { id: 'es4-2', front: 'el cajón', back: ts('library.patterns.practice.back.drawer') },
+      { id: 'es4-3', front: 'la almohada', back: ts('library.patterns.practice.back.pillow') },
+      { id: 'es4-4', front: 'el grifo', back: ts('library.patterns.practice.back.tap') },
+      { id: 'es4-5', front: 'la bombilla', back: ts('library.patterns.practice.back.bulb') },
     ],
   },
   {
     id: 'es3',
-    name: 'Spanish, in the city',
+    name: ts('library.patterns.practice.collections.city'),
     due: 2,
     cards: [
-      { id: 'es3-1', front: 'la plaza', back: 'the square' },
-      { id: 'es3-2', front: 'la calle', back: 'the street' },
-      { id: 'es3-3', front: 'el puente', back: 'the bridge' },
-      { id: 'es3-4', front: 'la estación', back: 'the station' },
-      { id: 'es3-5', front: 'el parque', back: 'the park' },
+      { id: 'es3-1', front: 'la plaza', back: ts('library.patterns.practice.back.square') },
+      { id: 'es3-2', front: 'la calle', back: ts('library.patterns.practice.back.street') },
+      { id: 'es3-3', front: 'el puente', back: ts('library.patterns.practice.back.bridge') },
+      { id: 'es3-4', front: 'la estación', back: ts('library.patterns.practice.back.station') },
+      { id: 'es3-5', front: 'el parque', back: ts('library.patterns.practice.back.park') },
     ],
   },
   {
     id: 'de1',
-    name: 'German basics',
+    name: ts('library.patterns.practice.collections.german'),
     due: 4,
     cards: [
-      { id: 'de1-1', front: 'das Haus', back: 'the house' },
-      { id: 'de1-2', front: 'die Tür', back: 'the door' },
-      { id: 'de1-3', front: 'das Fenster', back: 'the window' },
-      { id: 'de1-4', front: 'der Tisch', back: 'the table' },
-      { id: 'de1-5', front: 'der Stuhl', back: 'the chair' },
+      { id: 'de1-1', front: 'das Haus', back: ts('library.patterns.practice.back.house') },
+      { id: 'de1-2', front: 'die Tür', back: ts('library.patterns.practice.back.door') },
+      { id: 'de1-3', front: 'das Fenster', back: ts('library.patterns.practice.back.window') },
+      { id: 'de1-4', front: 'der Tisch', back: ts('library.patterns.practice.back.table') },
+      { id: 'de1-5', front: 'der Stuhl', back: ts('library.patterns.practice.back.chair') },
     ],
   },
 ];
 
-const COLLECTIONS: PracticeCollection[] = STUDY_COLLECTIONS.map((collection) => ({
-  id: collection.id,
-  name: collection.name,
-  total: collection.cards.length,
-  due: collection.due,
-}));
-const MAX_CARDS = Math.max(...COLLECTIONS.map((collection) => collection.total));
+const toPracticeCollections = (studyCollections: readonly StudyCollection[]): PracticeCollection[] =>
+  studyCollections.map((collection) => ({
+    id: collection.id,
+    name: collection.name,
+    total: collection.cards.length,
+    due: collection.due,
+  }));
 
-const sessionCards = (config: PracticeConfig): PracticeCard[] => {
-  const collection = STUDY_COLLECTIONS.find((candidate) => candidate.id === config.collection);
+const sessionCards = (studyCollections: readonly StudyCollection[], config: PracticeConfig): PracticeCard[] => {
+  const collection = studyCollections.find((candidate) => candidate.id === config.collection);
   if (!collection) throw new Error(`Unknown practice collection "${config.collection}".`);
   let cards = [...collection.cards];
   if (config.order === 'due') cards = cards.slice(0, collection.due);
@@ -79,6 +86,10 @@ const sessionCards = (config: PracticeConfig): PracticeCard[] => {
 };
 
 export const PracticeFlowDemo = () => {
+  const { ts } = useI18n();
+  const studyCollections = createStudyCollections(ts);
+  const collections = toPracticeCollections(studyCollections);
+  const maxCards = Math.max(...collections.map((collection) => collection.total));
   const [stage, setStage] = createSignal<Stage>('setup');
   const [results, setResults] = createSignal<PracticeResult[]>([]);
   const [cards, setCards] = createSignal<PracticeCard[]>([]);
@@ -86,7 +97,7 @@ export const PracticeFlowDemo = () => {
   const [reverse, setReverse] = createSignal(false);
 
   const start = (config: PracticeConfig) => {
-    const next = sessionCards(config);
+    const next = sessionCards(studyCollections, config);
     if (next.length === 0) return;
     setCards(next);
     setInitialCards(next);
@@ -115,7 +126,7 @@ export const PracticeFlowDemo = () => {
   return (
     <Switch>
       <Match when={stage() === 'setup'}>
-        <PracticeSetup collections={COLLECTIONS} onStart={start} maxCards={MAX_CARDS} />
+        <PracticeSetup collections={collections} onStart={start} maxCards={maxCards} />
       </Match>
       <Match when={stage() === 'session'}>
         <PracticeSession cards={cards()} reverse={reverse()} onExit={() => setStage('setup')} onFinish={finish} />

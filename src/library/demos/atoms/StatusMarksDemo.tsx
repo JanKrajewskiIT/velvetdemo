@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Count, Dot, Glyph, SectionLabel, Stack, Swatch, Text, TONES } from '@jankrajewskiit/ui';
 import { createSignal, For } from 'solid-js';
 
@@ -5,6 +6,7 @@ const SWATCH_TONES = ['brand', 'blue', 'teal', 'violet', 'magenta', 'slate'] as 
 const GLYPH_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
 export const StatusMarksDemo = () => {
+  const { ts } = useI18n();
   const [swatch, setSwatch] = createSignal<(typeof SWATCH_TONES)[number]>('brand');
 
   return (
@@ -25,7 +27,7 @@ export const StatusMarksDemo = () => {
           <Stack direction="row" gap={2} align="center">
             <Dot tone="success" pulse />
             <Text variant="caption" as="span">
-              live
+              {ts('library.atoms.statusMarks.live')}
             </Text>
           </Stack>
         </Stack>
@@ -33,13 +35,13 @@ export const StatusMarksDemo = () => {
       <Stack gap={2}>
         <SectionLabel>Count</SectionLabel>
         <Stack direction="row" gap={3} align="center" wrap>
-          <Count value={3} label="3 unread" />
-          <Count value={120} label="More than 99" />
-          <Count value={0} showZero label="None" />
-          <Count value={7} tone="danger" label="7 failed" />
-          <Count value={7} tone="success" label="7 passed" />
-          <Count value={7} tone="soft" label="7 drafts" />
-          <Count value={7} tone="neutral" size="lg" label="7 archived" />
+          <Count value={3} label={ts('library.atoms.statusMarks.unread')} />
+          <Count value={120} label={ts('library.atoms.statusMarks.moreThan99')} />
+          <Count value={0} showZero label={ts('library.atoms.statusMarks.none')} />
+          <Count value={7} tone="danger" label={ts('library.atoms.statusMarks.failed')} />
+          <Count value={7} tone="success" label={ts('library.atoms.statusMarks.passed')} />
+          <Count value={7} tone="soft" label={ts('library.atoms.statusMarks.drafts')} />
+          <Count value={7} tone="neutral" size="lg" label={ts('library.atoms.statusMarks.archived')} />
         </Stack>
       </Stack>
       <Stack gap={2}>
@@ -65,7 +67,7 @@ export const StatusMarksDemo = () => {
               </Stack>
             )}
           </For>
-          <Glyph name="heart-filled" size={32} label="Liked" />
+          <Glyph name="heart-filled" size={32} label={ts('library.atoms.statusMarks.liked')} />
         </Stack>
       </Stack>
     </Stack>

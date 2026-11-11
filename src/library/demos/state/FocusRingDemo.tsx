@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Checkbox, Input } from '@jankrajewskiit/ui';
 import type { JSX } from 'solid-js';
 
@@ -21,41 +22,48 @@ const RingFigure = (props: RingFigureProps) => (
   </figure>
 );
 
-export const FocusRingDemo = () => (
-  <div class={styles.root}>
-    <div class={styles.grid}>
-      <RingFigure token="--focus-ring" use="Buttons, fields and cards">
-        <span class={styles.button}>Save</span>
-      </RingFigure>
-      <RingFigure token="--focus-ring-danger" use="Invalid fields">
-        <span class={styles.field} />
-      </RingFigure>
-      <RingFigure token="--focus-ring-inset" use="Rows inside clipped containers">
-        <span class={styles.list}>
-          <span class={styles.row}>Inbox</span>
-          <span class={styles.focusedRow}>Archive</span>
-        </span>
-      </RingFigure>
-      <RingFigure token="--focus-outline" use="Swatches, media and free-form targets">
-        <span class={styles.free} />
-      </RingFigure>
-    </div>
-    <p class={styles.note}>
-      Forced-colors mode paints no box-shadow, so a ring disappears there. A custom control that must stay visible adds{' '}
-      <code>--focus-outline</code>.
-    </p>
-    <div class={styles.live}>
-      <p class={styles.liveLabel}>Live. Press Tab to move through.</p>
-      <div class={styles.liveRow}>
-        <Button size="sm">Save</Button>
-        <Button size="sm" variant="secondary">
-          Cancel
-        </Button>
-        <Checkbox label="Subscribe" />
-        <div class={styles.input}>
-          <Input size="sm" aria-label="Search" placeholder="Search" />
+export const FocusRingDemo = () => {
+  const { ts } = useI18n();
+
+  return (
+    <div class={styles.root}>
+      <div class={styles.grid}>
+        <RingFigure token="--focus-ring" use={ts('library.state.focus.buttons')}>
+          <span class={styles.button}>{ts('library.state.focus.save')}</span>
+        </RingFigure>
+        <RingFigure token="--focus-ring-danger" use={ts('library.state.focus.invalidFields')}>
+          <span class={styles.field} />
+        </RingFigure>
+        <RingFigure token="--focus-ring-inset" use={ts('library.state.focus.clippedRows')}>
+          <span class={styles.list}>
+            <span class={styles.row}>{ts('library.state.focus.inbox')}</span>
+            <span class={styles.focusedRow}>{ts('library.state.focus.archive')}</span>
+          </span>
+        </RingFigure>
+        <RingFigure token="--focus-outline" use={ts('library.state.focus.freeForm')}>
+          <span class={styles.free} />
+        </RingFigure>
+      </div>
+      <p class={styles.note}>
+        {ts('library.state.focus.forcedColors')} <code>--focus-outline</code>.
+      </p>
+      <div class={styles.live}>
+        <p class={styles.liveLabel}>{ts('library.state.focus.liveLabel')}</p>
+        <div class={styles.liveRow}>
+          <Button size="sm">{ts('library.state.focus.save')}</Button>
+          <Button size="sm" variant="secondary">
+            {ts('library.state.focus.cancel')}
+          </Button>
+          <Checkbox label={ts('library.state.focus.subscribe')} />
+          <div class={styles.input}>
+            <Input
+              size="sm"
+              aria-label={ts('library.state.focus.search')}
+              placeholder={ts('library.state.focus.search')}
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

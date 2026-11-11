@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { BottomNav, Breadcrumb, HierarchyNavigator, Link, LoadMore, Pagination, TreeView } from '@jankrajewskiit/ui';
 
 import type { navigationEn } from '../../i18n/library/navigation';
@@ -8,7 +9,7 @@ import { LoadMoreDemo } from '../demos/navigation/LoadMoreDemo';
 import { MovableTreeDemo } from '../demos/navigation/MovableTreeDemo';
 import { NavbarChipDemo } from '../demos/navigation/NavbarChipDemo';
 import { NavbarDemo } from '../demos/navigation/NavbarDemo';
-import { BOTTOM_ITEMS, PERMISSIONS, TAXONOMY } from '../demos/navigation/navigationData';
+import { bottomItems, PERMISSIONS, TAXONOMY } from '../demos/navigation/navigationData';
 import { PaginationDemo } from '../demos/navigation/PaginationDemo';
 import { PeriodNavDemo } from '../demos/navigation/PeriodNavDemo';
 import { StepperDemo } from '../demos/navigation/StepperDemo';
@@ -32,51 +33,60 @@ export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigati
   {
     id: 'navigation-breadcrumb-link',
     span: 6,
-    render: () => (
-      <div class={styles.group}>
-        <p class={styles.caption}>Short trail</p>
-        <Breadcrumb
-          items={[
-            { label: 'Home', href: DEMO_HREF, icon: 'home' },
-            { label: 'Offers', href: DEMO_HREF },
-            { label: 'Warsaw' },
-          ]}
-        />
-        <p class={styles.caption}>Collapsed when the trail exceeds four items</p>
-        <Breadcrumb
-          items={[
-            { label: 'Home', href: DEMO_HREF },
-            { label: 'Offers', href: DEMO_HREF },
-            { label: 'Engineering', href: DEMO_HREF },
-            { label: 'Frontend', href: DEMO_HREF },
-            { label: 'Senior developer' },
-          ]}
-        />
-        <p class={styles.caption}>Links</p>
-        <p class={styles.prose}>
-          Read the <Link href={DEMO_HREF}>release notes</Link>, browse the{' '}
-          <Link href={DEMO_HREF} variant="plain">
-            changelog
-          </Link>{' '}
-          or check the{' '}
-          <Link href={DEMO_HREF} variant="quiet">
-            status history
-          </Link>
-          .
-        </p>
-        <div class={styles.row}>
-          <Link href={DEMO_HREF} standalone>
-            View all
-          </Link>
-          <Link href="https://example.com" external>
-            External
-          </Link>
-          <Link href={DEMO_HREF} disabled>
-            Disabled
-          </Link>
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.group}>
+          <p class={styles.caption}>{t('library.navigation.specimens.navigation-breadcrumb-link.shortTrail')}</p>
+          <Breadcrumb
+            items={[
+              {
+                label: t('library.navigation.specimens.navigation-breadcrumb-link.home'),
+                href: DEMO_HREF,
+                icon: 'home',
+              },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.offers'), href: DEMO_HREF },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.warsaw') },
+            ]}
+          />
+          <p class={styles.caption}>{t('library.navigation.specimens.navigation-breadcrumb-link.collapsedHint')}</p>
+          <Breadcrumb
+            items={[
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.home'), href: DEMO_HREF },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.offers'), href: DEMO_HREF },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.engineering'), href: DEMO_HREF },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.frontend'), href: DEMO_HREF },
+              { label: t('library.navigation.specimens.navigation-breadcrumb-link.seniorDeveloper') },
+            ]}
+          />
+          <p class={styles.caption}>{t('library.navigation.specimens.navigation-breadcrumb-link.links')}</p>
+          <p class={styles.prose}>
+            {t('library.navigation.specimens.navigation-breadcrumb-link.proseRead')}{' '}
+            <Link href={DEMO_HREF}>{t('library.navigation.specimens.navigation-breadcrumb-link.releaseNotes')}</Link>
+            {t('library.navigation.specimens.navigation-breadcrumb-link.proseBrowse')}{' '}
+            <Link href={DEMO_HREF} variant="plain">
+              {t('library.navigation.specimens.navigation-breadcrumb-link.changelog')}
+            </Link>{' '}
+            {t('library.navigation.specimens.navigation-breadcrumb-link.proseOr')}{' '}
+            <Link href={DEMO_HREF} variant="quiet">
+              {t('library.navigation.specimens.navigation-breadcrumb-link.statusHistory')}
+            </Link>
+            .
+          </p>
+          <div class={styles.row}>
+            <Link href={DEMO_HREF} standalone>
+              {t('library.navigation.specimens.navigation-breadcrumb-link.viewAll')}
+            </Link>
+            <Link href="https://example.com" external>
+              {t('library.navigation.specimens.navigation-breadcrumb-link.external')}
+            </Link>
+            <Link href={DEMO_HREF} disabled>
+              {t('library.navigation.specimens.navigation-breadcrumb-link.disabled')}
+            </Link>
+          </div>
         </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'navigation-stepper',
@@ -86,42 +96,53 @@ export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigati
   {
     id: 'navigation-paging',
     span: 12,
-    render: () => (
-      <div class={styles.grid}>
-        <div class={styles.group}>
-          <p class={styles.caption}>Full, with range and rows per page</p>
-          <PaginationDemo />
-          <p class={styles.caption}>Compact</p>
-          <Pagination variant="compact" pageCount={12} defaultPage={3} />
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.grid}>
+          <div class={styles.group}>
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-paging.fullCaption')}</p>
+            <PaginationDemo />
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-paging.compact')}</p>
+            <Pagination variant="compact" pageCount={12} defaultPage={3} />
+          </div>
+          <div class={styles.group}>
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-paging.incremental')}</p>
+            <LoadMoreDemo />
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-paging.everythingShown')}</p>
+            <LoadMore shown={120} total={120} />
+          </div>
         </div>
-        <div class={styles.group}>
-          <p class={styles.caption}>Incremental loading</p>
-          <LoadMoreDemo />
-          <p class={styles.caption}>Everything shown</p>
-          <LoadMore shown={120} total={120} />
-        </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'navigation-trees',
     span: 12,
-    render: () => (
-      <div class={styles.grid}>
-        <div class={styles.group}>
-          <p class={styles.caption}>Selectable, one node loads on expand</p>
-          <LazyTreeDemo />
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.grid}>
+          <div class={styles.group}>
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-trees.lazyCaption')}</p>
+            <LazyTreeDemo />
+          </div>
+          <div class={styles.group}>
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-trees.checkableCaption')}</p>
+            <TreeView
+              checkable
+              data={PERMISSIONS}
+              defaultExpanded={['reports']}
+              label={t('library.navigation.specimens.navigation-trees.permissionsLabel')}
+            />
+          </div>
+          <div class={styles.group}>
+            <p class={styles.caption}>{t('library.navigation.specimens.navigation-trees.drillCaption')}</p>
+            <HierarchyNavigator data={TAXONOMY} />
+          </div>
         </div>
-        <div class={styles.group}>
-          <p class={styles.caption}>Checkable with tri-state parents</p>
-          <TreeView checkable data={PERMISSIONS} defaultExpanded={['reports']} label="Permissions" />
-        </div>
-        <div class={styles.group}>
-          <p class={styles.caption}>Drill-down, one level at a time</p>
-          <HierarchyNavigator data={TAXONOMY} />
-        </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'navigation-tree-move',
@@ -141,16 +162,29 @@ export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigati
   {
     id: 'navigation-bottom-nav',
     span: 6,
-    render: () => (
-      <div class={styles.phones}>
-        <div class={styles.phone}>
-          <BottomNav fixed={false} items={BOTTOM_ITEMS} label="Primary, badges" />
+    render: () => {
+      const { t } = useI18n();
+      const items = bottomItems(t);
+      return (
+        <div class={styles.phones}>
+          <div class={styles.phone}>
+            <BottomNav
+              fixed={false}
+              items={items}
+              label={t('library.navigation.specimens.navigation-bottom-nav.primaryBadges')}
+            />
+          </div>
+          <div class={cx(styles.phone, styles.phoneWithAction)}>
+            <BottomNav
+              fixed={false}
+              items={items}
+              action={{ label: t('library.navigation.specimens.navigation-bottom-nav.create') }}
+              label={t('library.navigation.specimens.navigation-bottom-nav.primaryCentreAction')}
+            />
+          </div>
         </div>
-        <div class={cx(styles.phone, styles.phoneWithAction)}>
-          <BottomNav fixed={false} items={BOTTOM_ITEMS} action={{ label: 'Create' }} label="Primary, centre action" />
-        </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'navigation-anchor',

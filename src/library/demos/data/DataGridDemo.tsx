@@ -13,7 +13,7 @@ import { Button, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
 import { MemberNameEditor } from './MemberNameEditor';
-import { type Member, MEMBERS, ROLES } from './members';
+import { type Member, MEMBER_STATUS_LABEL_KEY, MEMBERS, ROLE_LABEL_KEY, ROLES } from './members';
 
 interface EditableMember extends Member {
   joinedAt: string;
@@ -24,7 +24,6 @@ const INITIAL_ROWS: EditableMember[] = MEMBERS.map((member) => ({
   joinedAt: new Date(Date.UTC(2025, 0, member.id)).toISOString().slice(0, 10),
 }));
 
-const DATE_FORMATTER = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' });
 const DEMO_LATENCY_MS = 300;
 
 const waitForDemoLatency = (): Promise<void> =>
@@ -32,55 +31,75 @@ const waitForDemoLatency = (): Promise<void> =>
 
 const renderNameEditor = (context: GridEditorContext<EditableMember>) => <MemberNameEditor context={context} />;
 
-const COLUMNS: GridColumn<EditableMember>[] = [
-  {
-    key: 'name',
-    label: 'Member',
-    editable: true,
-    editor: renderNameEditor,
-    validate: async (value) => {
-      await waitForDemoLatency();
-      return typeof value === 'string' && value.trim() ? undefined : 'Enter a member name.';
-    },
-    width: 200,
-    pin: 'left',
-    canHide: false,
-    hideable: true,
-  },
-  { key: 'role', label: 'Role', editable: true, options: ROLES, width: 140 },
-  {
-    key: 'seats',
-    label: 'Seats',
-    type: 'number',
-    editable: true,
-    validate: async (value) => {
-      await waitForDemoLatency();
-      return typeof value === 'number' && value >= 0 && value <= 100 ? undefined : 'Use 0–100 seats.';
-    },
-    width: 120,
-    minWidth: 80,
-    maxWidth: 240,
-  },
-  { key: 'email', label: 'Email', width: 280 },
-  { key: 'status', label: 'Status', width: 140 },
-  {
-    key: 'joinedAt',
-    label: 'Joined',
-    width: 150,
-    filterAccessor: (row) => row.joinedAt,
-    render: (row) => DATE_FORMATTER.format(new Date(`${row.joinedAt}T00:00:00Z`)),
-  },
-];
-
-const FILTER_FIELDS: QueryField[] = [
-  { key: 'name', label: 'Member' },
-  { key: 'role', label: 'Role', type: 'select', options: ROLES.map((role) => ({ value: role, label: role })) },
-  { key: 'seats', label: 'Seats', type: 'number' },
-  { key: 'joinedAt', label: 'Joined', type: 'date' },
-];
-
 export const DataGridDemo = () => {
-  const { ts } = useI18n();
+  const { ts, locale } = useI18n();
+  const dateFormatter = new Intl.DateTimeFormat(locale(), { dateStyle: 'medium', timeZone: 'UTC' });
+  const COLUMNS: GridColumn<EditableMember>[] = [
+    {
+      key: 'name',
+      label: ts('library.data.columns.member'),
+      editable: true,
+      editor: renderNameEditor,
+      validate: async (value) => {
+        await waitForDemoLatency();
+        return typeof value === 'string' && value.trim() ? undefined : ts('library.data.validation.memberName');
+      },
+      width: 200,
+      pin: 'left',
+      canHide: false,
+      hideable: true,
+    },
+    {
+      key: 'role',
+      label: ts('library.data.columns.role'),
+      editable: true,
+      options: ROLES,
+      render: (row) => ts(ROLE_LABEL_KEY[row.role]),
+      width: 140,
+    },
+    {
+      key: 'seats',
+      label: ts('library.data.columns.seats'),
+      type: 'number',
+      editable: true,
+      validate: async (value) => {
+        await waitForDemoLatency();
+        return typeof value === 'number' && value >= 0 && value <= 100
+          ? undefined
+          : ts('library.data.validation.seats');
+      },
+      width: 120,
+      minWidth: 80,
+      maxWidth: 240,
+    },
+    { key: 'email', label: ts('library.data.columns.email'), width: 280 },
+    {
+      key: 'status',
+      label: ts('library.data.columns.status'),
+      render: (row) => ts(MEMBER_STATUS_LABEL_KEY[row.status]),
+      width: 140,
+    },
+    {
+      key: 'joinedAt',
+      label: ts('library.data.columns.joined'),
+      width: 150,
+      filterAccessor: (row) => row.joinedAt,
+      render: (row) => dateFormatter.format(new Date(`${row.joinedAt}T00:00:00Z`)),
+    },
+  ];
+
+  const FILTER_FIELDS: QueryField[] = [
+    { key: 'name', label: ts('library.data.columns.member') },
+    {
+      key: 'role',
+      label: ts('library.data.columns.role'),
+      type: 'select',
+      options: ROLES.map((role) => ({ value: role, label: ts(ROLE_LABEL_KEY[role]) })),
+    },
+    { key: 'seats', label: ts('library.data.columns.seats'), type: 'number' },
+    { key: 'joinedAt', label: ts('library.data.columns.joined'), type: 'date' },
+  ];
+
   const [rows, setRows] = createSignal(INITIAL_ROWS);
   const [selected, setSelected] = createSignal<RowKey[]>([]);
   const [failNextSave, setFailNextSave] = createSignal(false);
@@ -134,7 +153,7 @@ export const DataGridDemo = () => {
         )}
       </Show>
       <DataGrid
-        label="Editable team members"
+        label={ts('library.data.editing.label')}
         columns={COLUMNS}
         rows={rows()}
         onRowsChange={saveRows}
@@ -149,7 +168,7 @@ export const DataGridDemo = () => {
         onSelectionChange={setSelected}
         bulkActions={(members) => (
           <Button size="sm" variant="secondary" onClick={() => suspendMembers(members)}>
-            Suspend
+            {ts('library.data.actions.suspend')}
           </Button>
         )}
         view={view()}

@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Kbd, Popover, Switch, Text, Tooltip } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
@@ -9,13 +10,6 @@ import { DrawerDemo } from '../demos/overlays/DrawerDemo';
 import { TourDemo } from '../demos/overlays/TourDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './overlays.module.css';
-
-const TOOLTIP_SIDES = [
-  { side: 'top', label: 'Top' },
-  { side: 'bottom', label: 'Bottom' },
-  { side: 'left', label: 'Left' },
-  { side: 'right', label: 'Right' },
-] as const;
 
 export const overlaySpecimens: readonly Specimen<SpecimenIdOf<typeof overlaysEn>>[] = [
   {
@@ -41,84 +35,100 @@ export const overlaySpecimens: readonly Specimen<SpecimenIdOf<typeof overlaysEn>
   {
     id: 'overlays-popover',
     span: 6,
-    render: () => (
-      <div class={styles.stack}>
-        <div class={styles.row}>
-          <Popover
-            title="Display"
-            trigger={(trigger) => (
-              <Button variant="secondary" size="sm" {...trigger}>
-                Display
-              </Button>
-            )}
-          >
-            <div class={styles.panel}>
-              <Switch label="Compact rows" size="sm" />
-              <Switch label="Show badges" size="sm" checked />
-            </div>
-          </Popover>
-          <Popover
-            title="Aligned to the end"
-            side="top"
-            align="end"
-            trigger={(trigger) => (
-              <Button variant="secondary" size="sm" {...trigger}>
-                Above, end
-              </Button>
-            )}
-          >
-            <p class={styles.detail}>Opens above and aligns to the end edge of its trigger.</p>
-          </Popover>
-          <Popover
-            openOn="hover"
-            title="Anna Kowalska"
-            trigger={(trigger) => (
-              <Button variant="link" size="sm" {...trigger}>
-                @anna
-              </Button>
-            )}
-          >
-            <p class={styles.detail}>Product designer, Warsaw</p>
-          </Popover>
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.stack}>
+          <div class={styles.row}>
+            <Popover
+              title={t('library.overlays.specimens.overlays-popover.display')}
+              trigger={(trigger) => (
+                <Button variant="secondary" size="sm" {...trigger}>
+                  {t('library.overlays.specimens.overlays-popover.display')}
+                </Button>
+              )}
+            >
+              <div class={styles.panel}>
+                <Switch label={t('library.overlays.specimens.overlays-popover.compactRows')} size="sm" />
+                <Switch label={t('library.overlays.specimens.overlays-popover.showBadges')} size="sm" checked />
+              </div>
+            </Popover>
+            <Popover
+              title={t('library.overlays.specimens.overlays-popover.alignedToEnd')}
+              side="top"
+              align="end"
+              trigger={(trigger) => (
+                <Button variant="secondary" size="sm" {...trigger}>
+                  {t('library.overlays.specimens.overlays-popover.aboveEnd')}
+                </Button>
+              )}
+            >
+              <p class={styles.detail}>{t('library.overlays.specimens.overlays-popover.aboveEndDescription')}</p>
+            </Popover>
+            <Popover
+              openOn="hover"
+              title="Anna Kowalska"
+              trigger={(trigger) => (
+                <Button variant="link" size="sm" {...trigger}>
+                  @anna
+                </Button>
+              )}
+            >
+              <p class={styles.detail}>{t('library.overlays.specimens.overlays-popover.productDesignerWarsaw')}</p>
+            </Popover>
+          </div>
+          <Text variant="caption" tone="secondary">
+            {t('library.overlays.specimens.overlays-popover.hoverHint')}
+          </Text>
         </div>
-        <Text variant="caption" tone="secondary">
-          Outside click and Esc close a panel; the hover card also opens on focus.
-        </Text>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'overlays-tooltip',
     span: 6,
-    render: () => (
-      <div class={styles.stack}>
-        <div class={styles.row}>
-          <For each={TOOLTIP_SIDES}>
-            {(item) => (
-              <Tooltip content={`${item.label} tooltip`} side={item.side}>
-                <Button variant="secondary" size="sm">
-                  {item.label}
-                </Button>
-              </Tooltip>
-            )}
-          </For>
-        </div>
-        <div class={styles.row}>
-          <Tooltip content="Open search" shortcut="Ctrl K">
-            <Button variant="secondary" size="sm" iconLeft="search">
-              Search
-            </Button>
-          </Tooltip>
+    render: () => {
+      const { t } = useI18n();
+      const sides = [
+        { side: 'top', label: t('library.overlays.specimens.overlays-tooltip.top') },
+        { side: 'bottom', label: t('library.overlays.specimens.overlays-tooltip.bottom') },
+        { side: 'left', label: t('library.overlays.specimens.overlays-tooltip.left') },
+        { side: 'right', label: t('library.overlays.specimens.overlays-tooltip.right') },
+      ] as const;
+      return (
+        <div class={styles.stack}>
+          <div class={styles.row}>
+            <For each={sides}>
+              {(item) => (
+                <Tooltip
+                  content={t('library.overlays.specimens.overlays-tooltip.sideTooltip', { side: item.label })}
+                  side={item.side}
+                >
+                  <Button variant="secondary" size="sm">
+                    {item.label}
+                  </Button>
+                </Tooltip>
+              )}
+            </For>
+          </div>
+          <div class={styles.row}>
+            <Tooltip content={t('library.overlays.specimens.overlays-tooltip.openSearch')} shortcut="Ctrl K">
+              <Button variant="secondary" size="sm" iconLeft="search">
+                {t('library.overlays.specimens.overlays-tooltip.search')}
+              </Button>
+            </Tooltip>
+            <Text variant="caption" tone="secondary">
+              {t('library.overlays.specimens.overlays-tooltip.platformKeys')} <Kbd keys="mod+k" />
+            </Text>
+          </div>
           <Text variant="caption" tone="secondary">
-            Platform-aware keys: <Kbd keys="mod+k" />
+            {t('library.overlays.specimens.overlays-tooltip.hoverHint')}
           </Text>
         </div>
-        <Text variant="caption" tone="secondary">
-          Hover or focus a button; Esc dismisses the hint.
-        </Text>
-      </div>
-    ),
+      );
+    },
   },
+
   {
     id: 'overlays-tour',
     span: 6,

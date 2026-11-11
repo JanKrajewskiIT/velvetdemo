@@ -54,12 +54,10 @@ export const financeEn = defineDictionary({
     allocation: 'Allocation change',
   },
   specimens: {
-    money: { name: 'Money', subtitle: 'Currency symbols and codes, compact values and missing amounts' },
     'money-privacy': {
       name: 'MoneyPrivacy and useMoneyHidden',
       subtitle: 'Shared reactive privacy with an explicit public amount',
     },
-    'price-change': { name: 'Delta', subtitle: 'Signed changes, custom units and a flat threshold' },
     'direction-badge': {
       name: 'DirectionBadge',
       subtitle: 'Up, down, flat and muted directions with icons and three visual variants',
@@ -67,10 +65,6 @@ export const financeEn = defineDictionary({
     'instrument-label': {
       name: 'CodeLabel',
       subtitle: 'Selectable codes with a tag and descriptive metadata',
-    },
-    'contribution-bar': {
-      name: 'ContributionBar',
-      subtitle: 'Positive and negative contributions with optional sorting',
     },
     'data-state': {
       name: 'DataState',
@@ -84,10 +78,6 @@ export const financeEn = defineDictionary({
     'range-band-chart': {
       name: 'RangeBandChart',
       subtitle: 'Expected range, median and observed values with keyboard inspection',
-    },
-    'value-shift': {
-      name: 'ValueShift',
-      subtitle: 'Numeric and custom-formatted changes with domain-specific direction',
     },
   },
 });
@@ -136,7 +126,7 @@ export const financePl: TranslationOf<typeof financeEn> = {
     band: 'Oczekiwany przedział',
     median: 'Mediana',
     actual: 'Zaobserwowany zwrot',
-    chartHelp: 'Ustaw fokus na wykresie i użyj strzałek, aby przeglądać obserwacje.',
+    chartHelp: 'Przejdź do wykresu i użyj strzałek, aby sprawdzić każdą obserwację.',
     step: 'Próbka {number}',
     expectedReturn: 'Oczekiwany zwrot',
     executionCost: 'Koszt realizacji',
@@ -146,12 +136,10 @@ export const financePl: TranslationOf<typeof financeEn> = {
     allocation: 'Zmiana alokacji',
   },
   specimens: {
-    money: { name: 'Money', subtitle: 'Symbole i kody walut, skrócone wartości oraz brakujące kwoty' },
     'money-privacy': {
       name: 'MoneyPrivacy i useMoneyHidden',
       subtitle: 'Wspólna reaktywna prywatność i jawnie publiczna kwota',
     },
-    'price-change': { name: 'Delta', subtitle: 'Zmiany ze znakiem, własne jednostki i próg neutralności' },
     'direction-badge': {
       name: 'DirectionBadge',
       subtitle: 'Kierunki wzrostu, spadku, neutralny i wyciszony z ikonami i trzema wariantami wyglądu',
@@ -159,10 +147,6 @@ export const financePl: TranslationOf<typeof financeEn> = {
     'instrument-label': {
       name: 'CodeLabel',
       subtitle: 'Wybór kodu z tagiem i opisowymi metadanymi',
-    },
-    'contribution-bar': {
-      name: 'ContributionBar',
-      subtitle: 'Dodatnie i ujemne wkłady z opcjonalnym sortowaniem',
     },
     'data-state': {
       name: 'DataState',
@@ -176,10 +160,6 @@ export const financePl: TranslationOf<typeof financeEn> = {
     'range-band-chart': {
       name: 'RangeBandChart',
       subtitle: 'Oczekiwany przedział, mediana i obserwacje dostępne z klawiatury',
-    },
-    'value-shift': {
-      name: 'ValueShift',
-      subtitle: 'Zmiany liczb i własnego formatu z kierunkiem zależnym od znaczenia',
     },
   },
 };

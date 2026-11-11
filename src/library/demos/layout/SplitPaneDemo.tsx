@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, SplitPane, Stack, Surface, Text } from '@jankrajewskiit/ui';
 import { createSignal, For } from 'solid-js';
 
@@ -17,6 +18,7 @@ const DETAIL_PERCENT = 62;
 const DETAIL_MIN_PX = 60;
 
 export const SplitPaneDemo = () => {
+  const { ts } = useI18n();
   const [selected, setSelected] = createSignal(0);
   const [size, setSize] = createSignal(DEFAULT_PERCENT);
   const message = () => MESSAGES[selected()];
@@ -30,7 +32,7 @@ export const SplitPaneDemo = () => {
           min={MIN_PERCENT}
           max={MAX_PERCENT}
           collapsible
-          label="Resize message list"
+          label={ts('library.layout.splitPane.resizeMessages')}
         >
           <Stack gap={1} class={styles.list}>
             <For each={MESSAGES}>
@@ -49,7 +51,7 @@ export const SplitPaneDemo = () => {
             direction="vertical"
             defaultSize={DETAIL_PERCENT}
             minPx={DETAIL_MIN_PX}
-            label="Resize activity log"
+            label={ts('library.layout.splitPane.resizeActivity')}
           >
             <Stack gap={1} class={styles.detail}>
               <Text variant="title" as="p">
@@ -60,14 +62,13 @@ export const SplitPaneDemo = () => {
               </Text>
             </Stack>
             <Surface variant="subtle" padding="md">
-              <Text variant="caption">Activity log</Text>
+              <Text variant="caption">{ts('library.layout.splitPane.activity')}</Text>
             </Surface>
           </SplitPane>
         </SplitPane>
       </Surface>
       <Text variant="caption" tone="tertiary" tabular>
-        List pane {Math.round(size())}% — drag a handle, or focus it and use the arrow keys. Drag the left handle fully
-        left to collapse; Enter restores.
+        {ts('library.layout.splitPane.status', { percent: Math.round(size()) })}
       </Text>
     </Stack>
   );

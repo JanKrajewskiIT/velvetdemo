@@ -1,18 +1,18 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { DonutChart, FunnelChart, Gauge, type GaugeThreshold, LineChart, RadarChart } from '@jankrajewskiit/ui';
 
 import type { dataVizEn } from '../../i18n/library/data-viz';
 import { BarChartDemo } from '../demos/data-viz/BarChartDemo';
 import { ChartLegendDemo } from '../demos/data-viz/ChartLegendDemo';
 import { ChartTooltipDemo } from '../demos/data-viz/ChartTooltipDemo';
-import { ComparisonDemo } from '../demos/data-viz/ComparisonDemo';
 import {
   ACCOUNTS_BY_PLAN,
+  createHiringFunnel,
+  createRevenueSeries,
+  createSkillAxes,
+  createSkillProfiles,
   formatEuroThousands,
-  HIRING_FUNNEL,
-  REVENUE_SERIES,
   revenueData,
-  SKILL_AXES,
-  SKILL_PROFILES,
 } from '../demos/data-viz/datasets';
 import { GanttDemo } from '../demos/data-viz/GanttDemo';
 import { HeatmapDemo } from '../demos/data-viz/HeatmapDemo';
@@ -46,23 +46,34 @@ export const dataVizSpecimens: readonly Specimen<SpecimenIdOf<typeof dataVizEn>>
   {
     id: 'data-viz-donut-chart',
     span: 6,
-    render: () => (
-      <div class={styles.centred}>
-        <DonutChart data={ACCOUNTS_BY_PLAN} size={200} centerLabel="Accounts" label="Accounts by plan" />
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.centred}>
+          <DonutChart
+            data={ACCOUNTS_BY_PLAN}
+            size={200}
+            centerLabel={t('library.dataViz.specimens.data-viz-donut-chart.centerLabel')}
+            label={t('library.dataViz.specimens.data-viz-donut-chart.label')}
+          />
+        </div>
+      );
+    },
   },
   {
     id: 'data-viz-line-chart',
     span: 8,
-    render: () => (
-      <LineChart
-        data={revenueData(new Date())}
-        series={REVENUE_SERIES}
-        format={formatEuroThousands}
-        label="Monthly revenue"
-      />
-    ),
+    render: () => {
+      const { t, ts, locale } = useI18n();
+      return (
+        <LineChart
+          data={revenueData(new Date(), locale())}
+          series={createRevenueSeries(ts)}
+          format={formatEuroThousands}
+          label={t('library.dataViz.specimens.data-viz-line-chart.label')}
+        />
+      );
+    },
   },
   {
     id: 'data-viz-line-scale',
@@ -82,40 +93,64 @@ export const dataVizSpecimens: readonly Specimen<SpecimenIdOf<typeof dataVizEn>>
   {
     id: 'data-viz-radar-chart',
     span: 4,
-    render: () => (
-      <RadarChart
-        axes={SKILL_AXES}
-        series={SKILL_PROFILES}
-        max={5}
-        size={280}
-        label="Skill profile against role target"
-      />
-    ),
+    render: () => {
+      const { t, ts } = useI18n();
+      return (
+        <RadarChart
+          axes={createSkillAxes(ts)}
+          series={createSkillProfiles(ts)}
+          max={5}
+          size={280}
+          label={t('library.dataViz.specimens.data-viz-radar-chart.label')}
+        />
+      );
+    },
   },
   {
     id: 'data-viz-funnel-chart',
     span: 6,
-    render: () => <FunnelChart data={HIRING_FUNNEL} label="Hiring funnel" />,
+    render: () => {
+      const { t, ts } = useI18n();
+      return (
+        <FunnelChart data={createHiringFunnel(ts)} label={t('library.dataViz.specimens.data-viz-funnel-chart.label')} />
+      );
+    },
   },
   {
     id: 'data-viz-gauge',
     span: 6,
-    render: () => (
-      <div class={styles.gauges}>
-        <Gauge value={42} unit="%" label="Disk" caption="420 of 1,000 GB" thresholds={UTILISATION_THRESHOLDS} />
-        <Gauge value={78} unit="%" label="Memory" caption="12.5 of 16 GB" thresholds={UTILISATION_THRESHOLDS} />
-        <Gauge value={94} unit="%" label="Error budget used" caption="this month" thresholds={UTILISATION_THRESHOLDS} />
-      </div>
-    ),
-  },
-  {
-    id: 'data-viz-comparison',
-    span: 8,
-    render: () => <ComparisonDemo />,
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.gauges}>
+          <Gauge
+            value={42}
+            unit="%"
+            label={t('library.dataViz.specimens.data-viz-gauge.diskLabel')}
+            caption={t('library.dataViz.specimens.data-viz-gauge.diskCaption')}
+            thresholds={UTILISATION_THRESHOLDS}
+          />
+          <Gauge
+            value={78}
+            unit="%"
+            label={t('library.dataViz.specimens.data-viz-gauge.memoryLabel')}
+            caption={t('library.dataViz.specimens.data-viz-gauge.memoryCaption')}
+            thresholds={UTILISATION_THRESHOLDS}
+          />
+          <Gauge
+            value={94}
+            unit="%"
+            label={t('library.dataViz.specimens.data-viz-gauge.errorBudgetLabel')}
+            caption={t('library.dataViz.specimens.data-viz-gauge.errorBudgetCaption')}
+            thresholds={UTILISATION_THRESHOLDS}
+          />
+        </div>
+      );
+    },
   },
   {
     id: 'data-viz-series-palette',
-    span: 4,
+    span: 6,
     render: () => <SeriesPaletteDemo />,
   },
   {

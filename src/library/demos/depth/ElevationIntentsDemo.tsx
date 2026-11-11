@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { For } from 'solid-js';
 
 import styles from './ElevationIntentsDemo.module.css';
@@ -11,33 +12,37 @@ interface ElevationIntent {
   lifted?: boolean;
 }
 
-const INTENTS: readonly ElevationIntent[] = [
-  { token: '--elevation-flat', use: 'Inline, bordered content', surface: 'raised' },
-  { token: '--elevation-control', use: 'Buttons and fields', surface: 'field' },
-  { token: '--elevation-card', use: 'Resting cards', surface: 'raised' },
-  { token: '--elevation-card-hover', use: 'Hovered cards, lifted', surface: 'raised', lifted: true },
-  { token: '--elevation-raised', use: 'Panels above the page', surface: 'raised' },
-  { token: '--elevation-popover', use: 'Menus and popovers', surface: 'overlay' },
-  { token: '--elevation-dialog', use: 'Dialogs and sheets', surface: 'overlay' },
-  { token: '--elevation-brand', use: 'Brand hero surface', surface: 'brand' },
-  { token: '--elevation-media', use: 'Imagery and lightboxes', surface: 'media' },
-];
+export const ElevationIntentsDemo = () => {
+  const { ts } = useI18n();
 
-export const ElevationIntentsDemo = () => (
-  <ul class={styles.stage}>
-    <For each={INTENTS}>
-      {(intent) => (
-        <li class={styles.item}>
-          <div
-            class={styles.surface}
-            data-surface={intent.surface}
-            data-lifted={intent.lifted ? '' : undefined}
-            style={{ '--intent-shadow': `var(${intent.token})` }}
-          />
-          <code class={styles.token}>{intent.token}</code>
-          <span class={styles.use}>{intent.use}</span>
-        </li>
-      )}
-    </For>
-  </ul>
-);
+  const INTENTS: readonly ElevationIntent[] = [
+    { token: '--elevation-flat', use: ts('library.depth.elevation.flat'), surface: 'raised' },
+    { token: '--elevation-control', use: ts('library.depth.elevation.control'), surface: 'field' },
+    { token: '--elevation-card', use: ts('library.depth.elevation.card'), surface: 'raised' },
+    { token: '--elevation-card-hover', use: ts('library.depth.elevation.cardHover'), surface: 'raised', lifted: true },
+    { token: '--elevation-raised', use: ts('library.depth.elevation.raised'), surface: 'raised' },
+    { token: '--elevation-popover', use: ts('library.depth.elevation.popover'), surface: 'overlay' },
+    { token: '--elevation-dialog', use: ts('library.depth.elevation.dialog'), surface: 'overlay' },
+    { token: '--elevation-brand', use: ts('library.depth.elevation.brand'), surface: 'brand' },
+    { token: '--elevation-media', use: ts('library.depth.elevation.media'), surface: 'media' },
+  ];
+
+  return (
+    <ul class={styles.stage}>
+      <For each={INTENTS}>
+        {(intent) => (
+          <li class={styles.item}>
+            <div
+              class={styles.surface}
+              data-surface={intent.surface}
+              data-lifted={intent.lifted ? '' : undefined}
+              style={{ '--intent-shadow': `var(${intent.token})` }}
+            />
+            <code class={styles.token}>{intent.token}</code>
+            <span class={styles.use}>{intent.use}</span>
+          </li>
+        )}
+      </For>
+    </ul>
+  );
+};

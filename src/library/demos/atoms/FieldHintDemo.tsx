@@ -1,7 +1,9 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Control, ControlInput, FieldHint, FieldLabel, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, createUniqueId, Show } from 'solid-js';
 
 export const FieldHintDemo = () => {
+  const { ts } = useI18n();
   const id = createUniqueId();
   const hintId = `${id}-hint`;
   const [value, setValue] = createSignal('');
@@ -11,12 +13,12 @@ export const FieldHintDemo = () => {
   return (
     <Stack gap={3}>
       <Text variant="body-sm" tone="secondary">
-        A standalone label and hint can compose a control without the Field wrapper.
+        {ts('library.atoms.fieldHint.lead')}
       </Text>
       <Stack gap={2}>
         {/* eslint-disable-next-line solid/no-react-specific-props -- FieldLabel requires htmlFor to render an associated label. */}
         <FieldLabel htmlFor={id} required>
-          Project name
+          {ts('library.atoms.fieldHint.projectName')}
         </FieldLabel>
         <Control invalid={invalid()}>
           <ControlInput
@@ -29,14 +31,14 @@ export const FieldHintDemo = () => {
           />
         </Control>
         <FieldHint id={hintId} lane error={invalid()}>
-          <Show when={invalid()} fallback="Use at least three characters.">
-            Project name is too short.
+          <Show when={invalid()} fallback={ts('library.atoms.fieldHint.useThreeCharacters')}>
+            {ts('library.atoms.fieldHint.projectNameTooShort')}
           </Show>
         </FieldHint>
       </Stack>
       <Stack direction="row" gap={2} wrap>
         <Button size="sm" onClick={() => setSubmitted(true)}>
-          Check name
+          {ts('library.atoms.fieldHint.checkName')}
         </Button>
         <Button
           size="sm"
@@ -46,11 +48,11 @@ export const FieldHintDemo = () => {
             setSubmitted(false);
           }}
         >
-          Reset
+          {ts('library.atoms.fieldHint.reset')}
         </Button>
       </Stack>
-      <FieldHint>Default hint keeps its natural height.</FieldHint>
-      <FieldHint error>Error hint uses the error appearance.</FieldHint>
+      <FieldHint>{ts('library.atoms.fieldHint.defaultHint')}</FieldHint>
+      <FieldHint error>{ts('library.atoms.fieldHint.errorHint')}</FieldHint>
     </Stack>
   );
 };

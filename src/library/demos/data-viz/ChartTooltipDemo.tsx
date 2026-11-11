@@ -1,6 +1,6 @@
 import { useI18n } from '@jankrajewskiit/i18n';
 import { ChartTooltip, SectionLabel, Select, Stack, Text } from '@jankrajewskiit/ui';
-import { createMemo, createSignal } from 'solid-js';
+import { createMemo, createSignal, For } from 'solid-js';
 
 import styles from './ChartTooltipDemo.module.css';
 
@@ -73,6 +73,37 @@ export const ChartTooltipDemo = () => {
           title={ts(`library.dataViz.parts.${observation().id}`)}
           rows={rows()}
         />
+      </div>
+      <Text variant="caption" tone="secondary">
+        {ts('library.dataViz.parts.grid')}
+      </Text>
+      <div class={styles.grid}>
+        <For each={OBSERVATIONS}>
+          {(item) => (
+            <div class={styles.plot}>
+              <ChartTooltip
+                x="50%"
+                y={140}
+                class={styles.tooltip}
+                title={ts(`library.dataViz.parts.${item.id}`)}
+                rows={[
+                  {
+                    key: 'value',
+                    label: ts('library.dataViz.parts.value'),
+                    value: formatNumber(item.value),
+                    color: 'var(--dv-1)',
+                  },
+                  {
+                    key: 'band',
+                    label: ts('library.dataViz.parts.band'),
+                    value: `${formatNumber(item.low)} – ${formatNumber(item.high)}`,
+                    swatch: 'band' as const,
+                  },
+                ]}
+              />
+            </div>
+          )}
+        </For>
       </div>
     </Stack>
   );

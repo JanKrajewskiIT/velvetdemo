@@ -1,26 +1,25 @@
+import type { useI18n } from '@jankrajewskiit/i18n';
 import type { ChartDatum, ChartSeries, DonutDatum, HeatmapPoint, RadarAxis, RadarSeries } from '@jankrajewskiit/ui';
+
+type Ts = ReturnType<typeof useI18n>['ts'];
 
 const MS_PER_DAY = 86_400_000;
 const MONTH_COUNT = 12;
 const SUNDAY = 0;
 const SATURDAY = 6;
-const monthFormat = new Intl.DateTimeFormat('en', { month: 'short' });
-const dayFormat = new Intl.DateTimeFormat('en', { weekday: 'short', day: 'numeric', month: 'short' });
-
-const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const;
 const FREE_SESSIONS = [12, 18, 15, 22, 28, 9, 6] as const;
 const PAID_SESSIONS = [4, 7, 6, 9, 12, 3, 2] as const;
 const REVENUE_CURRENT = [12400, 13100, 12900, 15200, 16800, 16100, 18400, 19900, 21300, 22800, 23600, 25100] as const;
 const REVENUE_PREVIOUS = [9800, 10400, 11200, 11000, 12600, 13300, 13900, 14100, 15800, 16400, 17200, 17900] as const;
 
-export const PLAN_SERIES: ChartSeries[] = [
-  { key: 'free', label: 'Free' },
-  { key: 'paid', label: 'Paid' },
+export const createPlanSeries = (ts: Ts): ChartSeries[] => [
+  { key: 'free', label: ts('library.dataViz.demo.planFree') },
+  { key: 'paid', label: ts('library.dataViz.demo.planPaid') },
 ];
 
-export const REVENUE_SERIES: ChartSeries[] = [
-  { key: 'current', label: 'Last 12 months' },
-  { key: 'previous', label: 'Previous 12 months' },
+export const createRevenueSeries = (ts: Ts): ChartSeries[] => [
+  { key: 'current', label: ts('library.dataViz.demo.last12Months') },
+  { key: 'previous', label: ts('library.dataViz.demo.previous12Months') },
 ];
 
 export const ACCOUNTS_BY_PLAN: DonutDatum[] = [
@@ -30,26 +29,29 @@ export const ACCOUNTS_BY_PLAN: DonutDatum[] = [
   { label: 'Enterprise', value: 210 },
 ];
 
-export const SKILL_AXES: RadarAxis[] = [
-  { key: 'craft', label: 'Craft' },
-  { key: 'systems', label: 'Systems' },
-  { key: 'research', label: 'Research' },
-  { key: 'writing', label: 'Writing' },
-  { key: 'lead', label: 'Leadership' },
-  { key: 'delivery', label: 'Delivery' },
+export const createSkillAxes = (ts: Ts): RadarAxis[] => [
+  { key: 'craft', label: ts('library.dataViz.demo.skills.craft') },
+  { key: 'systems', label: ts('library.dataViz.demo.skills.systems') },
+  { key: 'research', label: ts('library.dataViz.demo.skills.research') },
+  { key: 'writing', label: ts('library.dataViz.demo.skills.writing') },
+  { key: 'lead', label: ts('library.dataViz.demo.skills.lead') },
+  { key: 'delivery', label: ts('library.dataViz.demo.skills.delivery') },
 ];
 
-export const SKILL_PROFILES: RadarSeries[] = [
+export const createSkillProfiles = (ts: Ts): RadarSeries[] => [
   { label: 'Anna', values: { craft: 5, systems: 4.5, research: 3, writing: 4, lead: 3.5, delivery: 4 } },
-  { label: 'Role target', values: { craft: 4, systems: 4, research: 4, writing: 3.5, lead: 4, delivery: 4 } },
+  {
+    label: ts('library.dataViz.demo.roleTarget'),
+    values: { craft: 4, systems: 4, research: 4, writing: 3.5, lead: 4, delivery: 4 },
+  },
 ];
 
-export const HIRING_FUNNEL = [
-  { label: 'Applied', value: 1840 },
-  { label: 'Screened', value: 920 },
-  { label: 'Interviewed', value: 310 },
-  { label: 'Offered', value: 84 },
-  { label: 'Hired', value: 61 },
+export const createHiringFunnel = (ts: Ts) => [
+  { label: ts('library.dataViz.demo.funnel.applied'), value: 1840 },
+  { label: ts('library.dataViz.demo.funnel.screened'), value: 920 },
+  { label: ts('library.dataViz.demo.funnel.interviewed'), value: 310 },
+  { label: ts('library.dataViz.demo.funnel.offered'), value: 84 },
+  { label: ts('library.dataViz.demo.funnel.hired'), value: 61 },
 ];
 
 export const formatEuroThousands = (value: number): string => `€${(value / 1000).toFixed(1)}k`;
@@ -57,18 +59,33 @@ export const formatEuroThousands = (value: number): string => `€${(value / 100
 export const isoDay = (date: Date): string =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
-export const formatDay = (isoDate: string): string => dayFormat.format(new Date(`${isoDate}T00:00:00`));
-
-export const recentMonths = (now: Date): string[] =>
-  Array.from({ length: MONTH_COUNT }, (_, i) =>
-    monthFormat.format(new Date(now.getFullYear(), now.getMonth() - (MONTH_COUNT - 1 - i), 1)),
+export const formatDay = (isoDate: string, locale: string): string =>
+  new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short' }).format(
+    new Date(`${isoDate}T00:00:00`),
   );
 
-export const weekdayData = (): ChartDatum[] =>
-  WEEKDAYS.map((label, i) => ({ label, free: FREE_SESSIONS[i] ?? 0, paid: PAID_SESSIONS[i] ?? 0 }));
+export const recentMonths = (now: Date, locale: string): string[] => {
+  const monthFormat = new Intl.DateTimeFormat(locale, { month: 'short' });
+  return Array.from({ length: MONTH_COUNT }, (_, i) =>
+    monthFormat.format(new Date(now.getFullYear(), now.getMonth() - (MONTH_COUNT - 1 - i), 1)),
+  );
+};
 
-export const revenueData = (now: Date): ChartDatum[] =>
-  recentMonths(now).map((label, i) => ({
+const weekdayLabels = (ts: Ts): string[] => [
+  ts('library.dataViz.demo.weekdays.mon'),
+  ts('library.dataViz.demo.weekdays.tue'),
+  ts('library.dataViz.demo.weekdays.wed'),
+  ts('library.dataViz.demo.weekdays.thu'),
+  ts('library.dataViz.demo.weekdays.fri'),
+  ts('library.dataViz.demo.weekdays.sat'),
+  ts('library.dataViz.demo.weekdays.sun'),
+];
+
+export const weekdayData = (ts: Ts): ChartDatum[] =>
+  weekdayLabels(ts).map((label, i) => ({ label, free: FREE_SESSIONS[i] ?? 0, paid: PAID_SESSIONS[i] ?? 0 }));
+
+export const revenueData = (now: Date, locale: string): ChartDatum[] =>
+  recentMonths(now, locale).map((label, i) => ({
     label,
     current: REVENUE_CURRENT[i] ?? 0,
     previous: REVENUE_PREVIOUS[i] ?? 0,

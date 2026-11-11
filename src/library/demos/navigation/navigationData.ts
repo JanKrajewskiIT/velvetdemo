@@ -1,4 +1,7 @@
+import type { useI18n } from '@jankrajewskiit/i18n';
 import type { BottomNavItem, HierarchyNode, NavbarItem, StepItem, TreeNode } from '@jankrajewskiit/ui';
+
+type T = ReturnType<typeof useI18n>['t'];
 
 export const FILE_TREE: TreeNode[] = [
   {
@@ -78,11 +81,11 @@ export const NAV_ITEMS: NavbarItem[] = [
   { id: 'team', label: 'Team', icon: 'users' },
 ];
 
-export const BOTTOM_ITEMS: BottomNavItem[] = [
-  { value: 'home', label: 'Home', icon: 'home' },
-  { value: 'search', label: 'Search', icon: 'search' },
-  { value: 'alerts', label: 'Alerts', icon: 'bell', badge: 3 },
-  { value: 'profile', label: 'Profile', icon: 'user', badge: true },
+export const bottomItems = (t: T): BottomNavItem[] => [
+  { value: 'home', label: t('library.navigation.data.bottomNav.home'), icon: 'home' },
+  { value: 'search', label: t('library.navigation.data.bottomNav.search'), icon: 'search' },
+  { value: 'alerts', label: t('library.navigation.data.bottomNav.alerts'), icon: 'bell', badge: 3 },
+  { value: 'profile', label: t('library.navigation.data.bottomNav.profile'), icon: 'user', badge: true },
 ];
 
 export const STEPS: StepItem[] = [

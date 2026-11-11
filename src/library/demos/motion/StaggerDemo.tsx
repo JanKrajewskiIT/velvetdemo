@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button } from '@jankrajewskiit/ui';
 import { For, Show } from 'solid-js';
 
@@ -8,21 +9,21 @@ import styles from './StaggerDemo.module.css';
 
 const ROWS = ['Inbox', 'Drafts', 'Sent', 'Archive', 'Trash'] as const;
 
-const DISTANCES = [
-  { token: '--motion-stagger', use: 'Delay between siblings' },
-  { token: '--motion-rise', use: 'Entry offset' },
-  { token: '--motion-nudge', use: 'Press shift' },
-] as const;
-
 export const StaggerDemo = () => {
+  const { ts } = useI18n();
+  const DISTANCES = [
+    { token: '--motion-stagger', use: ts('library.motion.stagger.delay') },
+    { token: '--motion-rise', use: ts('library.motion.stagger.rise') },
+    { token: '--motion-nudge', use: ts('library.motion.stagger.nudge') },
+  ];
   const reduced = createReducedMotion();
   const { mounted, restart } = createRestart();
   return (
     <div class={styles.root}>
       <div class={styles.bar}>
-        <p class={styles.note}>Siblings enter one stagger step apart.</p>
+        <p class={styles.note}>{ts('library.motion.stagger.note')}</p>
         <Button size="sm" variant="secondary" iconLeft="play" disabled={reduced()} onClick={restart}>
-          Replay
+          {ts('library.motion.replay')}
         </Button>
       </div>
       <ul class={styles.list}>

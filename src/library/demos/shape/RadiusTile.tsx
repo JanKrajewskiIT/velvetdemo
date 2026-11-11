@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { createSignal, onMount } from 'solid-js';
 
 import { formatPx, measureToken } from '../space/tokenValues';
@@ -11,10 +12,11 @@ export interface RadiusTileProps {
 }
 
 export const RadiusTile = (props: RadiusTileProps) => {
+  const { ts } = useI18n();
   const [value, setValue] = createSignal('');
   onMount(() => {
     const px = measureToken(props.token);
-    setValue(px >= PILL_THRESHOLD_PX ? 'Pill' : formatPx(px));
+    setValue(px >= PILL_THRESHOLD_PX ? ts('library.shape.radiusScale.pill') : formatPx(px));
   });
 
   return (

@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Autocomplete } from '@jankrajewskiit/ui';
 import { onCleanup } from 'solid-js';
 
@@ -8,6 +9,7 @@ const LOAD_DELAY_MS = 400;
 const FAILING_QUERY = 'fail';
 
 export const AutocompleteDemo = () => {
+  const { ts } = useI18n();
   const pending = new Set<number>();
   onCleanup(() => {
     for (const timer of pending) window.clearTimeout(timer);
@@ -30,19 +32,24 @@ export const AutocompleteDemo = () => {
 
   return (
     <div class={styles.root}>
-      <Autocomplete label="Country" options={COUNTRIES} placeholder="Start typing" hint="Filters a local list" />
       <Autocomplete
-        label="City"
-        loadOptions={searchCities}
-        placeholder="Search cities"
-        hint="Loads after a short delay; type “fail” to see retry"
+        label={ts('library.selection.demos.autocomplete.countryLabel')}
+        options={COUNTRIES}
+        placeholder={ts('library.selection.demos.autocomplete.countryPlaceholder')}
+        hint={ts('library.selection.demos.autocomplete.countryHint')}
       />
       <Autocomplete
-        label="Department"
+        label={ts('library.selection.demos.autocomplete.cityLabel')}
+        loadOptions={searchCities}
+        placeholder={ts('library.selection.demos.autocomplete.cityPlaceholder')}
+        hint={ts('library.selection.demos.autocomplete.cityHint')}
+      />
+      <Autocomplete
+        label={ts('library.selection.demos.autocomplete.departmentLabel')}
         options={DEPARTMENTS}
         allowCustom
-        placeholder="Pick or type"
-        hint="Free text is accepted"
+        placeholder={ts('library.selection.demos.autocomplete.departmentPlaceholder')}
+        hint={ts('library.selection.demos.autocomplete.departmentHint')}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { AiResultPanel, TypingIndicator } from '@jankrajewskiit/ui';
 
 import type { patternsEn } from '../../i18n/library/patterns';
@@ -11,7 +12,7 @@ import { DualFilterBarDemo } from '../demos/patterns/DualFilterBarDemo';
 import { FileUrlImportDemo } from '../demos/patterns/FileUrlImportDemo';
 import { FilterBarDemo } from '../demos/patterns/FilterBarDemo';
 import { ImportSourcesDemo } from '../demos/patterns/ImportSourcesDemo';
-import { AI_SECTIONS, AI_SOURCES } from '../demos/patterns/patternSamples';
+import { createAiSections, createAiSources } from '../demos/patterns/patternSamples';
 import { PracticeFlowDemo } from '../demos/patterns/PracticeFlowDemo';
 import { PricingDemo } from '../demos/patterns/PricingDemo';
 import { PromptInputDemo } from '../demos/patterns/PromptInputDemo';
@@ -54,13 +55,16 @@ export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>
   {
     id: 'patterns-typing-indicator',
     span: 6,
-    render: () => (
-      <div class={styles.actions}>
-        <TypingIndicator />
-        <TypingIndicator label="Velvet Assistant is preparing a reply" />
-        <span class={styles.caption}>Preparing a reply</span>
-      </div>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={styles.actions}>
+          <TypingIndicator />
+          <TypingIndicator label={t('library.patterns.specimens.patterns-typing-indicator.label')} />
+          <span class={styles.caption}>{t('library.patterns.specimens.patterns-typing-indicator.caption')}</span>
+        </div>
+      );
+    },
   },
   {
     id: 'patterns-flashcards',
@@ -80,21 +84,24 @@ export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>
   {
     id: 'patterns-ai-result',
     span: 6,
-    render: () => (
-      <AiResultPanel
-        model="claude-haiku-4.5"
-        elapsed="1.2s"
-        score={92}
-        headline="Match: very high"
-        subline="Ada Kowalska for Senior Frontend"
-        summary="A well-rounded frontend profile with strong React depth."
-        sections={AI_SECTIONS}
-        sources={AI_SOURCES}
-        tokens={1284}
-        cost="$0.0021"
-        onFeedback={() => undefined}
-      />
-    ),
+    render: () => {
+      const { t, ts } = useI18n();
+      return (
+        <AiResultPanel
+          model="claude-haiku-4.5"
+          elapsed="1.2s"
+          score={92}
+          headline={t('library.patterns.specimens.patterns-ai-result.headline')}
+          subline={t('library.patterns.specimens.patterns-ai-result.subline')}
+          summary={t('library.patterns.specimens.patterns-ai-result.summary')}
+          sections={createAiSections(ts)}
+          sources={createAiSources(ts)}
+          tokens={1284}
+          cost="$0.0021"
+          onFeedback={() => undefined}
+        />
+      );
+    },
   },
   {
     id: 'patterns-analysis-flow',

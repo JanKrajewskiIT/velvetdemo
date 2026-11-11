@@ -1,61 +1,103 @@
+import type { useI18n } from '@jankrajewskiit/i18n';
 import type { AnalysisSource, AnalysisType, ReportResult } from '@jankrajewskiit/ui';
 
-export const ANALYSIS_STEPS: string[] = ['Reading CV', 'Matching requirements', 'Scoring'];
+type Ts = ReturnType<typeof useI18n>['ts'];
 
-export const ANALYSIS_SOURCES: AnalysisSource[] = [
-  { id: 'cv', label: 'CV', kind: 'document', detail: 'Anna_Kowalska_CV.pdf, 2 pages' },
-  { id: 'job', label: 'Job offer', kind: 'document', detail: 'Senior Frontend Engineer, 1 page' },
-  { id: 'notes', label: 'Recruiter notes', kind: 'notes', detail: '3 notes' },
+export const createAnalysisSteps = (ts: Ts): string[] => [
+  ts('library.patterns.analysisFlow.steps.reading'),
+  ts('library.patterns.analysisFlow.steps.matching'),
+  ts('library.patterns.analysisFlow.steps.scoring'),
+];
+
+export const createAnalysisSources = (ts: Ts): AnalysisSource[] => [
+  {
+    id: 'cv',
+    label: ts('library.patterns.analysisFlow.sources.cv'),
+    kind: 'document',
+    detail: ts('library.patterns.analysisFlow.sources.cvDetail'),
+  },
+  {
+    id: 'job',
+    label: ts('library.patterns.analysisFlow.sources.job'),
+    kind: 'document',
+    detail: ts('library.patterns.analysisFlow.sources.jobDetail'),
+  },
+  {
+    id: 'notes',
+    label: ts('library.patterns.analysisFlow.sources.notes'),
+    kind: 'notes',
+    detail: ts('library.patterns.analysisFlow.sources.notesDetail'),
+  },
   {
     id: 'call',
-    label: 'Interview transcript',
+    label: ts('library.patterns.analysisFlow.sources.call'),
     kind: 'transcript',
     status: 'error',
-    error: 'The file is password protected',
+    error: ts('library.patterns.analysisFlow.sources.callError'),
   },
 ];
 
-export const ANALYSIS_TYPES: AnalysisType[] = [
+export const createAnalysisTypes = (ts: Ts): AnalysisType[] => [
   {
     id: 'match',
-    label: 'Candidate and role match',
-    description: 'Score the CV against the job offer',
+    label: ts('library.patterns.analysisFlow.types.match.label'),
+    description: ts('library.patterns.analysisFlow.types.match.description'),
     icon: 'target',
     requires: ['cv', 'job'],
   },
   {
     id: 'summary',
-    label: 'Candidate summary',
-    description: 'Short profile from all context',
+    label: ts('library.patterns.analysisFlow.types.summary.label'),
+    description: ts('library.patterns.analysisFlow.types.summary.description'),
     icon: 'file-text',
     requires: ['cv'],
   },
 ];
 
-export const REPORT_RESULT: ReportResult = {
+export const createReportResult = (ts: Ts): ReportResult => ({
   score: 78,
-  verdict: 'Strong on systems work, light on people leadership',
-  summary: 'The CV covers most hard requirements. Management scope is implied rather than stated.',
+  verdict: ts('library.patterns.analysisFlow.report.verdict'),
+  summary: ts('library.patterns.analysisFlow.report.summary'),
   categories: [
-    { label: 'Skills', score: 88, weight: 3, note: 'React, TypeScript and testing are all present.' },
-    { label: 'Experience', score: 72, weight: 2 },
-    { label: 'Leadership', score: 45, weight: 1, note: 'No team size or hiring mentioned.' },
+    {
+      label: ts('library.patterns.analysisFlow.report.skills'),
+      score: 88,
+      weight: 3,
+      note: ts('library.patterns.analysisFlow.report.skillsNote'),
+    },
+    { label: ts('library.patterns.analysisFlow.report.experience'), score: 72, weight: 2 },
+    {
+      label: ts('library.patterns.analysisFlow.report.leadership'),
+      score: 45,
+      weight: 1,
+      note: ts('library.patterns.analysisFlow.report.leadershipNote'),
+    },
   ],
   keywords: { matched: ['React', 'TypeScript', 'Vite'], partial: ['GraphQL'], missing: ['Kubernetes', 'Terraform'] },
-  strengths: ['Shipped a design system used by 6 teams', 'Strong testing habits'],
-  gaps: ['No people-management evidence'],
+  strengths: [
+    ts('library.patterns.analysisFlow.report.strengthShipped'),
+    ts('library.patterns.analysisFlow.report.strengthTesting'),
+  ],
+  gaps: [ts('library.patterns.analysisFlow.report.gapManagement')],
   recommendations: [
     {
       severity: 'critical',
-      title: 'State your team size',
-      message: 'Add how many people you led and for how long.',
-      evidence: { quote: 'Coordinated the frontend guild', source: 'CV, page 1' },
+      title: ts('library.patterns.analysisFlow.report.teamSizeTitle'),
+      message: ts('library.patterns.analysisFlow.report.teamSizeMessage'),
+      evidence: {
+        quote: 'Coordinated the frontend guild',
+        source: ts('library.patterns.analysisFlow.report.evidenceSource'),
+      },
     },
     {
       severity: 'warning',
-      title: 'Quantify outcomes',
-      message: 'Replace "improved performance" with a measured result.',
+      title: ts('library.patterns.analysisFlow.report.outcomesTitle'),
+      message: ts('library.patterns.analysisFlow.report.outcomesMessage'),
     },
-    { severity: 'suggestion', title: 'Add a short summary', message: 'Two lines at the top help scanners.' },
+    {
+      severity: 'suggestion',
+      title: ts('library.patterns.analysisFlow.report.summaryTitle'),
+      message: ts('library.patterns.analysisFlow.report.summaryMessage'),
+    },
   ],
-};
+});

@@ -4,22 +4,31 @@ import { Button } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import styles from './DataGridStatesDemo.module.css';
-import type { Member } from './members';
-import { MEMBERS } from './members';
+import { type Member, MEMBER_STATUS_LABEL_KEY, MEMBERS, ROLE_LABEL_KEY } from './members';
 
 type GridStatus = 'ready' | 'loading' | 'error';
 
-const COLUMNS: GridColumn<Member>[] = [
-  { key: 'name', label: 'Member', width: 220 },
-  { key: 'role', label: 'Role', width: 140 },
-  { key: 'status', label: 'Status', width: 140 },
-];
+const STATUS_LABEL_KEYS = {
+  ready: 'library.data.states.ready',
+  loading: 'library.data.states.loading',
+  error: 'library.data.states.error',
+} as const satisfies Record<GridStatus, string>;
 
 const ROWS = MEMBERS.slice(0, 5);
 const RETRY_DELAY_MS = 600;
 
 export const DataGridStatesDemo = () => {
   const { ts } = useI18n();
+  const COLUMNS: GridColumn<Member>[] = [
+    { key: 'name', label: ts('library.data.columns.member'), width: 220 },
+    { key: 'role', label: ts('library.data.columns.role'), width: 140, render: (row) => ts(ROLE_LABEL_KEY[row.role]) },
+    {
+      key: 'status',
+      label: ts('library.data.columns.status'),
+      width: 140,
+      render: (row) => ts(MEMBER_STATUS_LABEL_KEY[row.status]),
+    },
+  ];
   const [status, setStatus] = createSignal<GridStatus>('ready');
   const setReadyAfterRetry = () => {
     setStatus('loading');
@@ -44,7 +53,7 @@ export const DataGridStatesDemo = () => {
           {ts('library.data.states.reset')}
         </Button>
         <span class={styles.status} role="status" aria-live="polite">
-          {ts(`library.data.states.${status()}`)}
+          {ts(STATUS_LABEL_KEYS[status()])}
         </span>
       </div>
       <DataGrid

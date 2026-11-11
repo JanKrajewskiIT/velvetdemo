@@ -1,4 +1,5 @@
-import { Grid, ImageGrid, MediaFrame, Stack } from '@jankrajewskiit/ui';
+import { useI18n } from '@jankrajewskiit/i18n';
+import { ImageGrid } from '@jankrajewskiit/ui';
 
 import type { mediaEn } from '../../i18n/library/media';
 import { AudioPlayerDemo } from '../demos/media/AudioPlayerDemo';
@@ -6,16 +7,14 @@ import { CarouselDemo } from '../demos/media/CarouselDemo';
 import { ImageCropperDemo } from '../demos/media/ImageCropperDemo';
 import { LightboxDemo } from '../demos/media/LightboxDemo';
 import { MarqueeDemo } from '../demos/media/MarqueeDemo';
+import { MediaFrameDemo } from '../demos/media/MediaFrameDemo';
 import { PlayerButtonDemo } from '../demos/media/PlayerButtonDemo';
-import { sampleImage, sampleImages } from '../demos/media/sampleImages';
+import { sampleImages } from '../demos/media/sampleImages';
 import { VideoPlayerDemo } from '../demos/media/VideoPlayerDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 
-const FRAME_IMAGE = sampleImage();
-
-const COVER_GRID_IMAGES = sampleImages(6).map((image, index) =>
-  index === 0 ? { ...image, span: 2, badge: 'Cover' } : image,
-);
+const coverGridImages = (coverBadge: string) =>
+  sampleImages(6).map((image, index) => (index === 0 ? { ...image, span: 2, badge: coverBadge } : image));
 
 const FEATURE_GRID_IMAGES = sampleImages(5);
 const MASONRY_IMAGES = sampleImages(5).map((image, index) => ({
@@ -31,28 +30,16 @@ export const mediaSpecimens: readonly Specimen<SpecimenIdOf<typeof mediaEn>>[] =
   },
   {
     id: 'media-frame',
-    span: 4,
-    render: () => (
-      <Stack gap={3}>
-        <MediaFrame
-          src={FRAME_IMAGE.src}
-          alt={FRAME_IMAGE.alt}
-          ratio="photo"
-          caption="Dune ridge at dawn"
-          credit="Generated sample"
-          badge="New"
-        />
-        <Grid columns={2} gap={3}>
-          <MediaFrame loading ratio="square" />
-          <MediaFrame showRatio ratio="square" />
-        </Grid>
-      </Stack>
-    ),
+    span: 12,
+    render: () => <MediaFrameDemo />,
   },
   {
     id: 'media-image-grid',
     span: 6,
-    render: () => <ImageGrid images={COVER_GRID_IMAGES} />,
+    render: () => {
+      const { t } = useI18n();
+      return <ImageGrid images={coverGridImages(t('library.media.specimens.media-image-grid.coverBadge'))} />;
+    },
   },
   {
     id: 'media-image-grid-feature',

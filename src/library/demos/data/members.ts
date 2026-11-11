@@ -1,16 +1,30 @@
 type MemberStatus = 'Active' | 'Invited' | 'Suspended';
 
+export const MEMBER_STATUS_LABEL_KEY = {
+  Active: 'library.data.memberStatus.active',
+  Invited: 'library.data.memberStatus.invited',
+  Suspended: 'library.data.memberStatus.suspended',
+} as const;
+
+export const ROLE_LABEL_KEY = {
+  Admin: 'library.data.roles.admin',
+  Editor: 'library.data.roles.editor',
+  Viewer: 'library.data.roles.viewer',
+} as const;
+
+export type Role = keyof typeof ROLE_LABEL_KEY;
+
 export interface Member {
   id: number;
   name: string;
-  role: string;
+  role: Role;
   status: MemberStatus;
   seats: number;
   email: string;
   lastActiveDays: number;
 }
 
-export const ROLES: string[] = ['Admin', 'Editor', 'Viewer'];
+export const ROLES: Role[] = ['Admin', 'Editor', 'Viewer'];
 
 export const STATUS_TONE = { Active: 'success', Invited: 'info', Suspended: 'danger' } as const;
 
@@ -18,7 +32,7 @@ const member = (
   id: number,
   name: string,
   handle: string,
-  role: string,
+  role: Role,
   status: MemberStatus,
   seats: number,
   lastActiveDays: number,

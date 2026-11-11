@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { JSX } from 'solid-js';
 
 import styles from './CompositionRow.module.css';
@@ -9,17 +10,21 @@ export interface CompositionRowProps {
   children: JSX.Element;
 }
 
-export const CompositionRow = (props: CompositionRowProps) => (
-  <li class={styles.item}>
-    <div class={styles.row}>
-      <div class={styles.live}>{props.children}</div>
-      <div class={styles.copy}>
-        <span class={styles.need}>{props.need}</span>
-        <code class={styles.compose}>{props.compose}</code>
-        <span class={styles.avoid}>
-          Never <s>{props.avoid}</s>
-        </span>
+export const CompositionRow = (props: CompositionRowProps) => {
+  const { ts } = useI18n();
+
+  return (
+    <li class={styles.item}>
+      <div class={styles.row}>
+        <div class={styles.live}>{props.children}</div>
+        <div class={styles.copy}>
+          <span class={styles.need}>{props.need}</span>
+          <code class={styles.compose}>{props.compose}</code>
+          <span class={styles.avoid}>
+            {ts('library.overview.never')} <s>{props.avoid}</s>
+          </span>
+        </div>
       </div>
-    </div>
-  </li>
-);
+    </li>
+  );
+};

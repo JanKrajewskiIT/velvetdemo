@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Segmented, SegmentedItem, Text } from '@jankrajewskiit/ui';
 import { createSignal, For, onMount } from 'solid-js';
 
@@ -5,18 +6,30 @@ import styles from './ShellAnatomyDemo.module.css';
 import { formatPx, measureToken } from './tokenValues';
 
 const MEASURES = [
-  { name: 'Topbar height', token: '--topbar-height' },
-  { name: 'Sidebar width', token: '--sidebar-width' },
-  { name: 'Sidebar collapsed', token: '--sidebar-width-collapsed' },
-  { name: 'Gutter', token: '--gutter' },
-  { name: 'Grid gap', token: '--grid-gap' },
+  { labelKey: 'library.spaceLayout.shell.measures.topbarHeight', token: '--topbar-height' },
+  { labelKey: 'library.spaceLayout.shell.measures.sidebarWidth', token: '--sidebar-width' },
+  { labelKey: 'library.spaceLayout.shell.measures.sidebarCollapsed', token: '--sidebar-width-collapsed' },
+  { labelKey: 'library.spaceLayout.shell.measures.gutter', token: '--gutter' },
+  { labelKey: 'library.spaceLayout.shell.measures.gridGap', token: '--grid-gap' },
 ] as const;
 
-const NAV_ROWS = ['Overview', 'Projects', 'Reports', 'Settings'] as const;
-const SIDEBAR_STATES = ['Expanded', 'Collapsed'] as const;
+const NAV_ROWS = [
+  { labelKey: 'library.spaceLayout.shell.nav.overview' },
+  { labelKey: 'library.spaceLayout.shell.nav.projects' },
+  { labelKey: 'library.spaceLayout.shell.nav.reports' },
+  { labelKey: 'library.spaceLayout.shell.nav.settings' },
+] as const;
+
+const SIDEBAR_STATES = [
+  { id: 'expanded', labelKey: 'library.spaceLayout.shell.states.expanded' },
+  { id: 'collapsed', labelKey: 'library.spaceLayout.shell.states.collapsed' },
+] as const;
+
+type SidebarState = (typeof SIDEBAR_STATES)[number]['id'];
 
 export const ShellAnatomyDemo = () => {
-  const [sidebar, setSidebar] = createSignal<(typeof SIDEBAR_STATES)[number]>('Expanded');
+  const { ts } = useI18n();
+  const [sidebar, setSidebar] = createSignal<SidebarState>('expanded');
   const [measures, setMeasures] = createSignal<Readonly<Record<string, string>>>({});
 
   onMount(() => {
@@ -25,11 +38,11 @@ export const ShellAnatomyDemo = () => {
 
   return (
     <div class={styles.root}>
-      <Segmented role="radiogroup" aria-label="Sidebar state" size="sm">
+      <Segmented role="radiogroup" aria-label={ts('library.spaceLayout.shell.sidebarState')} size="sm">
         <For each={SIDEBAR_STATES}>
           {(state) => (
-            <SegmentedItem role="radio" selected={sidebar() === state} onClick={() => setSidebar(state)}>
-              {state}
+            <SegmentedItem role="radio" selected={sidebar() === state.id} onClick={() => setSidebar(state.id)}>
+              {ts(state.labelKey)}
             </SegmentedItem>
           )}
         </For>
@@ -37,16 +50,16 @@ export const ShellAnatomyDemo = () => {
       <div class={styles.shell} aria-hidden="true">
         <div class={styles.topbar}>
           <span class={styles.mark} />
-          <span class={styles.title}>Topbar</span>
+          <span class={styles.title}>{ts('library.spaceLayout.shell.topbar')}</span>
           <span class={styles.avatar} />
         </div>
-        <div class={styles.body} data-collapsed={sidebar() === 'Collapsed' ? '' : undefined}>
+        <div class={styles.body} data-collapsed={sidebar() === 'collapsed' ? '' : undefined}>
           <div class={styles.sidebar}>
             <For each={NAV_ROWS}>
               {(row, index) => (
                 <span class={styles.nav} data-current={index() === 0 ? '' : undefined}>
                   <span class={styles.navIcon} />
-                  <span class={styles.navLabel}>{row}</span>
+                  <span class={styles.navLabel}>{ts(row.labelKey)}</span>
                 </span>
               )}
             </For>
@@ -54,13 +67,13 @@ export const ShellAnatomyDemo = () => {
           <div class={styles.content}>
             <div class={styles.grid}>
               <span class={styles.tile} data-span="8">
-                Main · 8 columns
+                {ts('library.spaceLayout.shell.main')}
               </span>
               <span class={styles.tile} data-span="4">
-                Aside · 4
+                {ts('library.spaceLayout.shell.aside')}
               </span>
               <span class={styles.tile} data-span="12">
-                Full width · 12
+                {ts('library.spaceLayout.shell.fullWidth')}
               </span>
             </div>
           </div>
@@ -70,7 +83,7 @@ export const ShellAnatomyDemo = () => {
         <For each={MEASURES}>
           {(entry) => (
             <div class={styles.measure}>
-              <dt>{entry.name}</dt>
+              <dt>{ts(entry.labelKey)}</dt>
               <dd>{measures()[entry.token] ?? ''}</dd>
               <dd>
                 <code>{entry.token}</code>
@@ -80,7 +93,7 @@ export const ShellAnatomyDemo = () => {
         </For>
       </dl>
       <Text variant="caption" tone="tertiary">
-        Proportions are true to the tokens; the schematic is scaled down to fit.
+        {ts('library.spaceLayout.shell.note')}
       </Text>
     </div>
   );

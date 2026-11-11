@@ -4,28 +4,31 @@ import { Table, type TableColumn } from '@jankrajewskiit/ui';
 import { createMemo, createSignal } from 'solid-js';
 
 import styles from './ColumnManagerDemo.module.css';
-import { type Member, MEMBERS } from './members';
-
-const COLUMNS: TableColumn<Member>[] = [
-  { key: 'name', label: 'Member', width: 200, pin: 'left' },
-  { key: 'role', label: 'Role', width: 120 },
-  { key: 'email', label: 'Email', width: 240 },
-  { key: 'status', label: 'Status', width: 120 },
-  { key: 'seats', label: 'Seats', width: 80, align: 'right', pin: 'right' },
-];
-
-const MANAGED_COLUMNS: ManagedColumn[] = COLUMNS.map((column) => ({
-  key: column.key,
-  label: column.label,
-  pin: column.pin,
-  locked: column.key === 'name',
-  pinnable: column.key !== 'role',
-  movable: column.key !== 'status',
-  hideable: column.key !== 'seats',
-}));
+import { type Member, MEMBER_STATUS_LABEL_KEY, MEMBERS, ROLE_LABEL_KEY } from './members';
 
 export const ColumnManagerDemo = () => {
   const { ts } = useI18n();
+  const COLUMNS: TableColumn<Member>[] = [
+    { key: 'name', label: ts('library.data.columns.member'), width: 200, pin: 'left' },
+    { key: 'role', label: ts('library.data.columns.role'), width: 120, render: (row) => ts(ROLE_LABEL_KEY[row.role]) },
+    { key: 'email', label: ts('library.data.columns.email'), width: 240 },
+    {
+      key: 'status',
+      label: ts('library.data.columns.status'),
+      width: 120,
+      render: (row) => ts(MEMBER_STATUS_LABEL_KEY[row.status]),
+    },
+    { key: 'seats', label: ts('library.data.columns.seats'), width: 80, align: 'right', pin: 'right' },
+  ];
+  const MANAGED_COLUMNS: ManagedColumn[] = COLUMNS.map((column) => ({
+    key: column.key,
+    label: column.label,
+    pin: column.pin,
+    locked: column.key === 'name',
+    pinnable: column.key !== 'role',
+    movable: column.key !== 'status',
+    hideable: column.key !== 'seats',
+  }));
   const initial: ColumnState[] = COLUMNS.map((column) => ({
     key: column.key,
     visible: column.key !== 'email',
@@ -49,7 +52,12 @@ export const ColumnManagerDemo = () => {
           maxPinned={3}
         />
       </div>
-      <Table title="Preview" columns={visibleColumns()} rows={MEMBERS.slice(0, 4)} maxHeight={280} />
+      <Table
+        title={ts('library.data.table.preview')}
+        columns={visibleColumns()}
+        rows={MEMBERS.slice(0, 4)}
+        maxHeight={280}
+      />
     </div>
   );
 };

@@ -1,9 +1,30 @@
-.tile {
-  display: grid;
-  gap: var(--space-4);
-  min-width: 0;
-  padding: var(--space-4);
+.scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.matrix {
+  width: 100%;
+  min-width: 960px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.matrix th,
+.matrix td {
+  padding: var(--space-3);
   border: var(--border-width) solid var(--border-subtle);
-  border-radius: var(--radius-md);
+  text-align: start;
+  vertical-align: top;
+}
+
+.matrix td {
   background: var(--sample-bg);
+}
+
+.sample {
+  display: block;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-tight);
 }

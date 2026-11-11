@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Chip, Count, Input, LiveRegion, Text, VisuallyHidden } from '@jankrajewskiit/ui';
 import { createSignal, type JSX } from 'solid-js';
 
@@ -29,40 +30,48 @@ const Rule = (props: RuleProps) => (
 );
 
 export const A11yContractDemo = () => {
+  const { ts } = useI18n();
   const [announcement, setAnnouncement] = createSignal<Announcement>();
   const announce = (text: string) => setAnnouncement({ text, id: Date.now() });
 
   return (
     <ul class={styles.list}>
-      <Rule title="Focus is always visible" rule="Every interactive element shows a 3px ring from --focus-ring.">
-        <Button size="sm">Tab to me</Button>
+      <Rule title={ts('library.state.a11y.focusAlwaysVisible')} rule={ts('library.state.a11y.focusRule')}>
+        <Button size="sm">{ts('library.state.a11y.tabToMe')}</Button>
         <Button size="sm" variant="secondary">
-          Then me
+          {ts('library.state.a11y.thenMe')}
         </Button>
       </Rule>
-      <Rule title="State is never colour alone" rule="Selection adds a check and invalid fields add a message.">
-        <Chip selected>Design</Chip>
+      <Rule title={ts('library.state.a11y.colourNotAlone')} rule={ts('library.state.a11y.colourRule')}>
+        <Chip selected>{ts('library.state.a11y.design')}</Chip>
         <div class={styles.field}>
-          <Input size="sm" label="Email" defaultValue="name@" error="Enter a full address." />
+          <Input
+            size="sm"
+            label={ts('library.state.a11y.email')}
+            defaultValue="name@"
+            error={ts('library.state.a11y.enterFullAddress')}
+          />
         </div>
       </Rule>
-      <Rule
-        title="Hidden context for screen readers"
-        rule="Counts and icon-only controls carry text that is not drawn."
-      >
+      <Rule title={ts('library.state.a11y.hiddenContext')} rule={ts('library.state.a11y.hiddenRule')}>
         <span class={styles.inbox}>
-          Inbox
+          {ts('library.state.a11y.inbox')}
           <Count value={3} />
-          <VisuallyHidden>3 unread messages</VisuallyHidden>
+          <VisuallyHidden>{ts('library.state.a11y.unreadMessages')}</VisuallyHidden>
         </span>
-        <span class={styles.hint}>Reads as “Inbox 3 unread messages”.</span>
+        <span class={styles.hint}>
+          {ts('library.state.a11y.readsAs', {
+            inbox: ts('library.state.a11y.inbox'),
+            unread: ts('library.state.a11y.unreadMessages'),
+          })}
+        </span>
       </Rule>
-      <Rule title="Changes are announced" rule="A live region mounts once and speaks when its message changes.">
-        <Button size="sm" variant="secondary" onClick={() => announce('Changes saved')}>
-          Save
+      <Rule title={ts('library.state.a11y.changesAnnounced')} rule={ts('library.state.a11y.announceRule')}>
+        <Button size="sm" variant="secondary" onClick={() => announce(ts('library.state.a11y.changesSaved'))}>
+          {ts('library.state.a11y.save')}
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => announce('12 results')}>
-          Search
+        <Button size="sm" variant="ghost" onClick={() => announce(ts('library.state.a11y.results'))}>
+          {ts('library.state.a11y.search')}
         </Button>
         <LiveRegion message={announcement()} visible clearAfter={LIVE_REGION_CLEAR_MS} />
       </Rule>

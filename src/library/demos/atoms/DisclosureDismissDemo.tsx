@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import {
   Button,
   Checkmark,
@@ -13,6 +14,7 @@ import {
 import { createSignal, createUniqueId } from 'solid-js';
 
 export const DisclosureDismissDemo = () => {
+  const { ts } = useI18n();
   const [open, setOpen] = createSignal(false);
   const [search, setSearch] = createSignal('velvet');
   const panelId = createUniqueId();
@@ -28,24 +30,29 @@ export const DisclosureDismissDemo = () => {
           iconRight={<Chevron open={open()} />}
           onClick={() => setOpen(!open())}
         >
-          Shipping details
+          {ts('library.atoms.disclosureDismiss.shippingDetails')}
         </Button>
         <Text id={panelId} variant="body-sm" tone="secondary" hidden={!open()}>
-          Orders leave the warehouse within two working days.
+          {ts('library.atoms.disclosureDismiss.shippingText')}
         </Text>
       </Stack>
       <Stack gap={2}>
         <SectionLabel>Close button</SectionLabel>
         <Stack direction="row" gap={3} align="center" wrap>
-          <CloseButton label="Close panel" />
-          <CloseButton size="xs" label="Dismiss notice" />
+          <CloseButton label={ts('library.atoms.disclosureDismiss.closePanel')} />
+          <CloseButton size="xs" label={ts('library.atoms.disclosureDismiss.dismissNotice')} />
           <Control
             end={
-              <CloseButton variant="field" label="Clear search" disabled={!search()} onClick={() => setSearch('')} />
+              <CloseButton
+                variant="field"
+                label={ts('library.atoms.disclosureDismiss.clearSearch')}
+                disabled={!search()}
+                onClick={() => setSearch('')}
+              />
             }
           >
             <ControlInput
-              aria-label="Search"
+              aria-label={ts('library.atoms.disclosureDismiss.search')}
               value={search()}
               onInput={(event) => setSearch(event.currentTarget.value)}
             />
@@ -55,9 +62,9 @@ export const DisclosureDismissDemo = () => {
       <Stack gap={2}>
         <SectionLabel>Handle</SectionLabel>
         <Stack direction="row" gap={3} align="center" wrap>
-          <Handle label="Reorder Design (up or down)" />
+          <Handle label={ts('library.atoms.disclosureDismiss.reorderDesign')} />
           <Handle decorative />
-          <Handle icon="lock" label="Locked" disabled />
+          <Handle icon="lock" label={ts('library.atoms.disclosureDismiss.locked')} disabled />
         </Stack>
       </Stack>
       <Stack gap={2}>

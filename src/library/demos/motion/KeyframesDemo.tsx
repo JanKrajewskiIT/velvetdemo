@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button } from '@jankrajewskiit/ui';
 import { For, Show } from 'solid-js';
 
@@ -14,49 +15,49 @@ interface SharedKeyframes {
   repeats?: boolean;
 }
 
-const KEYFRAMES: readonly SharedKeyframes[] = [
-  {
-    name: 'fadeIn',
-    from: 'From opacity 0',
-    timingLabel: '--motion-base',
-    className: styles.fadeIn,
-  },
-  {
-    name: 'riseIn',
-    from: 'From opacity 0, 4px above',
-    timingLabel: '--motion-enter',
-    className: styles.riseIn,
-  },
-  {
-    name: 'popIn',
-    from: 'From opacity 0, scale 60%',
-    timingLabel: '--motion-pop',
-    className: styles.popIn,
-  },
-  {
-    name: 'sheetIn',
-    from: 'From one height below',
-    timingLabel: '--motion-slide',
-    className: styles.sheetIn,
-  },
-  {
-    name: 'spin',
-    from: 'To a full turn',
-    timingLabel: 'loops, linear',
-    className: styles.spin,
-    repeats: true,
-  },
-];
-
 export const KeyframesDemo = () => {
+  const { ts } = useI18n();
+  const KEYFRAMES: readonly SharedKeyframes[] = [
+    {
+      name: 'fadeIn',
+      from: ts('library.motion.keyframes.fadeIn'),
+      timingLabel: '--motion-base',
+      className: styles.fadeIn,
+    },
+    {
+      name: 'riseIn',
+      from: ts('library.motion.keyframes.riseIn'),
+      timingLabel: '--motion-enter',
+      className: styles.riseIn,
+    },
+    {
+      name: 'popIn',
+      from: ts('library.motion.keyframes.popIn'),
+      timingLabel: '--motion-pop',
+      className: styles.popIn,
+    },
+    {
+      name: 'sheetIn',
+      from: ts('library.motion.keyframes.sheetIn'),
+      timingLabel: '--motion-slide',
+      className: styles.sheetIn,
+    },
+    {
+      name: 'spin',
+      from: ts('library.motion.keyframes.spin'),
+      timingLabel: ts('library.motion.keyframes.loops'),
+      className: styles.spin,
+      repeats: true,
+    },
+  ];
   const reduced = createReducedMotion();
   const { mounted, restart } = createRestart();
   return (
     <div class={styles.root}>
       <div class={styles.bar}>
-        <p class={styles.note}>Each keyframe is scoped to this demo&apos;s CSS module.</p>
+        <p class={styles.note}>{ts('library.motion.keyframes.note')}</p>
         <Button size="sm" variant="secondary" iconLeft="play" disabled={reduced()} onClick={restart}>
-          Replay
+          {ts('library.motion.replay')}
         </Button>
       </div>
       <ul class={styles.grid}>

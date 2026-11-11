@@ -1,7 +1,8 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Alert, Button, FormGrid, Input, Select, Switch, Wizard, type WizardStep } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup, Show } from 'solid-js';
 
-import { emailProblem, workspaceNameProblem } from './validators';
+import { makeProblems } from './validators';
 import styles from './WizardDemo.module.css';
 
 const CREATE_DELAY_MS = 1000;
@@ -9,6 +10,8 @@ const REGIONS = ['Frankfurt', 'Warsaw', 'Dublin'];
 const PLANS = ['Free', 'Team', 'Business'];
 
 export const WizardDemo = () => {
+  const { ts } = useI18n();
+  const problems = makeProblems(ts);
   const [workspace, setWorkspace] = createSignal('');
   const [region, setRegion] = createSignal('Frankfurt');
   const [ownerEmail, setOwnerEmail] = createSignal('');
@@ -36,37 +39,47 @@ export const WizardDemo = () => {
 
   const buildSteps = (): WizardStep[] => [
     {
-      label: 'Workspace',
-      description: 'Name and region',
-      validate: () => workspaceNameProblem(workspace()),
+      label: ts('library.forms.demos.wizard.workspaceStep'),
+      description: ts('library.forms.demos.wizard.workspaceStepDescription'),
+      validate: () => problems.workspaceName(workspace()),
       content: (
         <FormGrid columns={2}>
           <Input
-            label="Workspace name"
+            label={ts('library.forms.demos.wizard.workspaceName')}
             value={workspace()}
             onInput={(event) => setWorkspace(event.currentTarget.value)}
-            validate={workspaceNameProblem}
+            validate={problems.workspaceName}
           />
-          <Select label="Data region" options={REGIONS} value={region()} onValueChange={(value) => setRegion(value)} />
+          <Select
+            label={ts('library.forms.demos.wizard.dataRegion')}
+            options={REGIONS}
+            value={region()}
+            onValueChange={(value) => setRegion(value)}
+          />
         </FormGrid>
       ),
     },
     {
-      label: 'Owner',
-      description: 'Contact and plan',
-      validate: () => emailProblem(ownerEmail()),
+      label: ts('library.forms.demos.wizard.ownerStep'),
+      description: ts('library.forms.demos.wizard.ownerStepDescription'),
+      validate: () => problems.email(ownerEmail()),
       content: (
         <FormGrid columns={2}>
           <Input
-            label="Owner email"
+            label={ts('library.forms.demos.wizard.ownerEmail')}
             type="email"
             value={ownerEmail()}
             onInput={(event) => setOwnerEmail(event.currentTarget.value)}
-            validate={emailProblem}
+            validate={problems.email}
           />
-          <Select label="Plan" options={PLANS} value={plan()} onValueChange={(value) => setPlan(value)} />
+          <Select
+            label={ts('library.forms.demos.wizard.plan')}
+            options={PLANS}
+            value={plan()}
+            onValueChange={(value) => setPlan(value)}
+          />
           <Switch
-            label="Invite teammates later"
+            label={ts('library.forms.demos.wizard.inviteLater')}
             checked={inviteLater()}
             onChange={(event) => setInviteLater(event.currentTarget.checked)}
           />
@@ -74,20 +87,24 @@ export const WizardDemo = () => {
       ),
     },
     {
-      label: 'Review',
-      description: 'Confirm and create',
+      label: ts('library.forms.demos.wizard.reviewStep'),
+      description: ts('library.forms.demos.wizard.reviewStepDescription'),
       content: (
         <dl class={styles.summary}>
-          <dt>Workspace</dt>
+          <dt>{ts('library.forms.demos.wizard.reviewWorkspace')}</dt>
           <dd>{workspace()}</dd>
-          <dt>Data region</dt>
+          <dt>{ts('library.forms.demos.wizard.reviewDataRegion')}</dt>
           <dd>{region()}</dd>
-          <dt>Owner</dt>
+          <dt>{ts('library.forms.demos.wizard.reviewOwner')}</dt>
           <dd>{ownerEmail()}</dd>
-          <dt>Plan</dt>
+          <dt>{ts('library.forms.demos.wizard.reviewPlan')}</dt>
           <dd>{plan()}</dd>
-          <dt>Invitations</dt>
-          <dd>{inviteLater() ? 'Later' : 'On creation'}</dd>
+          <dt>{ts('library.forms.demos.wizard.reviewInvitations')}</dt>
+          <dd>
+            {inviteLater()
+              ? ts('library.forms.demos.wizard.invitesLater')
+              : ts('library.forms.demos.wizard.invitesOnCreation')}
+          </dd>
         </dl>
       ),
     },
@@ -96,18 +113,20 @@ export const WizardDemo = () => {
   return (
     <Show
       when={created()}
-      fallback={<Wizard steps={buildSteps()} finishLabel="Create workspace" onFinish={createWorkspace} />}
+      fallback={
+        <Wizard steps={buildSteps()} finishLabel={ts('library.forms.demos.wizard.create')} onFinish={createWorkspace} />
+      }
     >
       <Alert
         tone="success"
-        title={`${workspace()} is ready`}
+        title={ts('library.forms.demos.wizard.ready', { workspace: workspace() })}
         action={
           <Button variant="secondary" size="sm" onClick={restart}>
-            Start over
+            {ts('library.forms.demos.wizard.startOver')}
           </Button>
         }
       >
-        The workspace was created in {region()} on the {plan()} plan.
+        {ts('library.forms.demos.wizard.createdBody', { region: region(), plan: plan() })}
       </Alert>
     </Show>
   );

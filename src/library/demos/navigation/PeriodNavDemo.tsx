@@ -8,6 +8,12 @@ const VARIANTS = [
   { id: 'arrows', attached: true, variant: 'secondary', today: false },
 ] as const;
 
+const PERIOD_LABEL_KEYS = {
+  attached: 'library.navigation.period.attached',
+  ghost: 'library.navigation.period.ghost',
+  arrows: 'library.navigation.period.arrows',
+} as const;
+
 const currentMonth = () => {
   const now = new Date();
   return new Date(now.getFullYear(), now.getMonth(), 1);
@@ -27,7 +33,7 @@ export const PeriodNavDemo = () => {
       <For each={VARIANTS}>
         {(item) => (
           <Stack gap={2}>
-            <SectionLabel>{ts(`library.navigation.period.${item.id}`)}</SectionLabel>
+            <SectionLabel>{ts(PERIOD_LABEL_KEYS[item.id])}</SectionLabel>
             <PeriodNav
               attached={item.attached}
               variant={item.variant}

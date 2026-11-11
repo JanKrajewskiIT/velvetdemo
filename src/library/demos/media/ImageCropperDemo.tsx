@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { CropArea, ImageCropperProps } from '@jankrajewskiit/ui';
 import { ImageCropper, Segmented, SegmentedItem, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
@@ -6,23 +7,29 @@ import { sampleImage } from './sampleImages';
 
 const IMAGE = sampleImage();
 
-const describeCrop = (area: CropArea): string =>
-  `x ${Math.round(area.x)}, y ${Math.round(area.y)}, ${Math.round(area.width)} × ${Math.round(area.height)} px, ` +
-  `zoom ${area.zoom.toFixed(2)}×, rotation ${Math.round(area.rotation)}°`;
-
 export const ImageCropperDemo = () => {
+  const { ts } = useI18n();
   const [area, setArea] = createSignal<CropArea>();
+  const describeCrop = (crop: CropArea): string =>
+    ts('library.media.demo.cropReadout', {
+      x: Math.round(crop.x),
+      y: Math.round(crop.y),
+      width: Math.round(crop.width),
+      height: Math.round(crop.height),
+      zoom: crop.zoom.toFixed(2),
+      rotation: Math.round(crop.rotation),
+    });
   const [shape, setShape] = createSignal<NonNullable<ImageCropperProps['shape']>>('rect');
   const [zoom, setZoom] = createSignal(1);
 
   return (
     <Stack gap={3}>
-      <Segmented role="group" aria-label="Crop shape">
+      <Segmented role="group" aria-label={ts('library.media.demo.cropShape')}>
         <SegmentedItem selected={shape() === 'rect'} onClick={() => setShape('rect')}>
-          Cover
+          {ts('library.media.demo.cropCover')}
         </SegmentedItem>
         <SegmentedItem selected={shape() === 'circle'} onClick={() => setShape('circle')}>
-          Avatar
+          {ts('library.media.demo.cropAvatar')}
         </SegmentedItem>
       </Segmented>
       <ImageCropper
@@ -36,10 +43,10 @@ export const ImageCropperDemo = () => {
         onCropChange={setArea}
       />
       <div>
-        <Show when={area()} fallback={<Text variant="caption">Drag, zoom or rotate to change the crop</Text>}>
+        <Show when={area()} fallback={<Text variant="caption">{ts('library.media.demo.cropHint')}</Text>}>
           {(current) => (
             <Text variant="caption" tone="secondary" tabular>
-              Crop: {describeCrop(current())}
+              {describeCrop(current())}
             </Text>
           )}
         </Show>

@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { IconCategories, Input, Text } from '@jankrajewskiit/ui';
 import { createMemo, createSignal, For, Show } from 'solid-js';
 
@@ -18,6 +19,7 @@ const TOTAL = GROUPS.reduce((sum, group) => sum + group.names.length, 0);
 const INITIAL_GLYPH = 'search';
 
 export const IconSetDemo = () => {
+  const { ts } = useI18n();
   const [query, setQuery] = createSignal('');
   const [selected, setSelected] = createSignal(INITIAL_GLYPH);
 
@@ -36,21 +38,21 @@ export const IconSetDemo = () => {
       <div class={styles.toolbar}>
         <div class={styles.search}>
           <Input
-            label="Search glyphs"
+            label={ts('library.icons.set.search')}
             iconLeft="search"
-            placeholder="Name, for example chevron"
+            placeholder={ts('library.icons.set.placeholder')}
             onInput={(event) => setQuery(event.currentTarget.value)}
           />
         </div>
         <Text variant="caption" tone="tertiary" tabular role="status">
-          {matchCount()} of {TOTAL} glyphs
+          {ts('library.icons.set.count', { shown: matchCount(), total: TOTAL })}
         </Text>
       </div>
       <Show
         when={visible().length > 0}
         fallback={
           <Text variant="body-sm" tone="secondary">
-            No glyph matches “{query().trim()}”.
+            {ts('library.icons.set.empty', { query: query().trim() })}
           </Text>
         }
       >

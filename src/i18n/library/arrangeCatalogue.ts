@@ -78,14 +78,8 @@ export const arrangeCatalogue = <const T extends CatalogueSources>(source: T) =>
     'layout-footer': footer,
     ...layout
   } = source.layout.specimens;
-  const {
-    'data-metric-group': metricGroup,
-    'data-usage-meter': usageMeter,
-    'data-accordion': accordion,
-    'data-code-snippet': codeSnippet,
-    ...data
-  } = source.data.specimens;
-  const { 'data-viz-comparison': comparison, ...charts } = source.dataViz.specimens;
+  const { 'data-accordion': accordion, 'data-code-snippet': codeSnippet, ...data } = source.data.specimens;
+  const charts = source.dataViz.specimens;
   const {
     'patterns-filters': filters,
     'patterns-dialogs': dialogs,
@@ -175,20 +169,7 @@ export const arrangeCatalogue = <const T extends CatalogueSources>(source: T) =>
       ...source.dataViz,
       specimens: { ...charts, 'range-band-chart': source.finance.specimens['range-band-chart'] },
     },
-    metrics: {
-      ...source.metrics,
-      specimens: {
-        ...source.metrics.specimens,
-        'data-viz-comparison': comparison,
-        'contribution-bar': source.finance.specimens['contribution-bar'],
-        'price-change': source.finance.specimens['price-change'],
-        'data-metric-group': metricGroup,
-        money: source.finance.specimens.money,
-        'money-privacy': source.finance.specimens['money-privacy'],
-        'data-usage-meter': usageMeter,
-        'value-shift': source.finance.specimens['value-shift'],
-      },
-    },
+    metrics: source.metrics,
     data: { ...source.data, specimens: { 'atoms-column-resize': columnResize, ...data, 'patterns-filters': filters } },
     planning: {
       ...source.planning,

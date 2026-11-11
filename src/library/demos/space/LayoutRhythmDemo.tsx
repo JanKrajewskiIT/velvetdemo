@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Text } from '@jankrajewskiit/ui';
 import { createSignal, For, onMount } from 'solid-js';
 
@@ -16,6 +17,7 @@ const RHYTHM_TOKENS = [
 ] as const;
 
 export const LayoutRhythmDemo = () => {
+  const { ts } = useI18n();
   const [columns, setColumns] = createSignal<readonly number[]>([]);
 
   onMount(() => {
@@ -41,12 +43,12 @@ export const LayoutRhythmDemo = () => {
       </div>
       <div class={styles.section}>
         <Text variant="overline" tone="tertiary">
-          Gaps at the current viewport
+          {ts('library.spaceLayout.layoutRhythm.gapsCaption')}
         </Text>
         <TokenBarList tokens={RHYTHM_TOKENS} />
       </div>
       <Text variant="caption" tone="tertiary">
-        The gutter and section gap are fluid, so their measured size changes with the viewport.
+        {ts('library.spaceLayout.layoutRhythm.note')}
       </Text>
     </div>
   );

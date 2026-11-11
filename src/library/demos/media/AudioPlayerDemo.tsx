@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { AudioPlayer, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup, Show } from 'solid-js';
 
@@ -7,6 +8,7 @@ import { sampleImage } from './sampleImages';
 const COVER = sampleImage();
 
 export const AudioPlayerDemo = () => {
+  const { ts } = useI18n();
   const tone = createDemoTone();
   const [failed, setFailed] = createSignal(false);
 
@@ -25,7 +27,7 @@ export const AudioPlayerDemo = () => {
       <div role="status">
         <Show when={failed()}>
           <Text variant="caption" tone="danger">
-            Audio playback failed. Try playing the sample again.
+            {ts('library.media.demo.audioError')}
           </Text>
         </Show>
       </div>

@@ -22,6 +22,25 @@ export const OrderTicketDemo = () => {
         account="DEMO-042"
         envLabel={ts('library.trading.workspace.paper')}
         envTone="info"
+        maxRiskPct={1}
+        qtyUnit={ts('library.trading.workspace.qtyUnit')}
+        onSubmit={setSubmitted}
+      />
+      <Text variant="body-sm" tone="secondary">
+        {ts('library.trading.workspace.liveHint')}
+      </Text>
+      <OrderTicket
+        symbol="GLBX"
+        price={142.5}
+        currency="EUR"
+        defaultQty={10}
+        equity={100000}
+        buyingPower={25000}
+        account="DEMO-042"
+        envLabel={ts('library.trading.workspace.live')}
+        envTone="danger"
+        confirmTone="danger"
+        blocked={ts('library.trading.workspace.liveBlocked')}
         onSubmit={setSubmitted}
       />
       <div role="status">

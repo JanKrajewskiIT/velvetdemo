@@ -1,29 +1,37 @@
 import type { QueryField, QueryGroup } from '@jankrajewskiit/data';
+import type { useI18n } from '@jankrajewskiit/i18n';
 import type { AiSection, AiSource } from '@jankrajewskiit/ui';
 
-export const QUERY_FIELDS: QueryField[] = [
+type Ts = ReturnType<typeof useI18n>['ts'];
+
+export const createQueryFields = (ts: Ts): QueryField[] => [
   {
     key: 'status',
-    label: 'Status',
+    label: ts('library.patterns.filterBar.status'),
     type: 'select',
     options: [
-      { value: 'active', label: 'Active' },
-      { value: 'trial', label: 'Trial' },
-      { value: 'churned', label: 'Churned' },
+      { value: 'active', label: ts('library.patterns.filterBar.active') },
+      { value: 'trial', label: ts('library.patterns.filterBar.trial') },
+      { value: 'churned', label: ts('library.patterns.filterBar.churned') },
     ],
   },
   {
     key: 'plan',
-    label: 'Plan',
+    label: ts('library.patterns.filterBar.plan'),
     type: 'select',
     options: [
-      { value: 'pro', label: 'Pro' },
-      { value: 'team', label: 'Team' },
+      { value: 'pro', label: ts('library.patterns.filterBar.pro') },
+      { value: 'team', label: ts('library.patterns.filterBar.team') },
     ],
   },
-  { key: 'seats', label: 'Seats', type: 'number' },
-  { key: 'email', label: 'Email', type: 'text', operators: ['contains', 'eq', 'empty'] },
-  { key: 'signup', label: 'Signed up', type: 'date' },
+  { key: 'seats', label: ts('library.patterns.query.fields.seats'), type: 'number' },
+  {
+    key: 'email',
+    label: ts('library.patterns.query.fields.email'),
+    type: 'text',
+    operators: ['contains', 'eq', 'empty'],
+  },
+  { key: 'signup', label: ts('library.patterns.query.fields.signedUp'), type: 'date' },
 ];
 
 export const QUERY: QueryGroup = {
@@ -42,17 +50,22 @@ export const QUERY: QueryGroup = {
   ],
 };
 
-export const AI_SECTIONS: AiSection[] = [
+export const createAiSections = (ts: Ts): AiSection[] => [
   {
-    title: 'Strengths',
+    title: ts('library.patterns.aiSections.strengths'),
     icon: 'check',
     tone: 'success',
-    items: ['Four years of React and TypeScript', 'Led a design-system migration'],
+    items: [ts('library.patterns.aiSections.experienceYears'), ts('library.patterns.aiSections.designSystem')],
   },
-  { title: 'Gaps', icon: 'triangle-alert', tone: 'warning', items: ['No GraphQL experience'] },
+  {
+    title: ts('library.patterns.aiSections.gaps'),
+    icon: 'triangle-alert',
+    tone: 'warning',
+    items: [ts('library.patterns.aiSections.noGraphql')],
+  },
 ];
 
-export const AI_SOURCES: AiSource[] = [
-  { label: 'CV, page 1', detail: 'Anna_Kowalska_CV.pdf' },
-  { label: 'Job offer', detail: 'Senior Frontend Engineer' },
+export const createAiSources = (ts: Ts): AiSource[] => [
+  { label: ts('library.patterns.analysisFlow.report.evidenceSource'), detail: 'Anna_Kowalska_CV.pdf' },
+  { label: ts('library.patterns.analysisFlow.sources.job'), detail: 'Senior Frontend Engineer' },
 ];

@@ -1,0 +1,121 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chip,
+.chipInverse {
+  font: 600 9px/1 var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px var(--space-2-5);
+  border-radius: 999px;
+}
+
+.chip {
+  background: var(--bg-selected);
+  color: var(--fg-brand);
+}
+
+.chipInverse {
+  background: var(--on-color-pressed);
+  color: inherit;
+}
+
+.flipIcon {
+  color: var(--fg-tertiary);
+}
+
+.question,
+.questionLarge {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.question {
+  font-size: 18px;
+}
+
+.questionLarge {
+  font-size: 15px;
+}
+
+.code,
+.codeInverse {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 1px var(--space-1-5);
+  border-radius: 4px;
+}
+
+.code {
+  background: var(--bg-sunken);
+}
+
+.codeInverse {
+  background: var(--on-color-pressed);
+  color: inherit;
+}
+
+.foot,
+.footInverse {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.foot {
+  color: var(--fg-tertiary);
+}
+
+.footInverse {
+  color: inherit;
+}
+
+.answerLabel {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.answerBody {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.details {
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailRow span {
+  opacity: 0.7;
+}
+
+.detailRow b {
+  font-weight: 700;
+}

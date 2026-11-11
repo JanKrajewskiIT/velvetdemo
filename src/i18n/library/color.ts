@@ -4,8 +4,12 @@ export const colorEn = defineDictionary({
   title: 'Color',
   blurb: 'OKLCH ramps, semantic roles and contrast — every pairing checked.',
   contrast: { tinted: 'On tone background', raised: 'On raised background' },
+  contrastLevels: { aaa: 'AAA', aa: 'AA', aaLarge: 'AA large', fail: 'Fail' },
+  onColor: { on: 'On {panel}', primaryText: 'Primary text', mutedText: 'Muted text' },
+  statusRoles: { paid: 'Paid', dueSoon: 'Due soon', failed: 'Failed', new: 'New' },
   roles: {
     foreground: 'Foreground on --bg-raised',
+    grid: 'Foreground ↓ · background →',
     border: 'Border',
     exempt: 'Exempt (disabled)',
     report: 'Quarterly report',
@@ -14,6 +18,7 @@ export const colorEn = defineDictionary({
     workspace: 'Open in workspace',
     invoices: 'View all invoices',
     unavailable: 'Unavailable',
+    sample: 'Aa',
   },
   specimens: {
     'color-text-backgrounds': { name: 'Text on backgrounds', subtitle: 'Text-role contrast across neutral surfaces' },
@@ -33,8 +38,12 @@ export const colorPl: TranslationOf<typeof colorEn> = {
   title: 'Kolor',
   blurb: 'Skale OKLCH, role semantyczne i kontrast — każda para sprawdzona.',
   contrast: { tinted: 'Na tle tonu', raised: 'Na podniesionym tle' },
+  contrastLevels: { aaa: 'AAA', aa: 'AA', aaLarge: 'AA duży tekst', fail: 'Poniżej normy' },
+  onColor: { on: 'Na {panel}', primaryText: 'Tekst podstawowy', mutedText: 'Tekst pomocniczy' },
+  statusRoles: { paid: 'Opłacone', dueSoon: 'Wkrótce do zapłaty', failed: 'Nieudane', new: 'Nowe' },
   roles: {
     foreground: 'Pierwszy plan na --bg-raised',
+    grid: 'Pierwszy plan ↓ · tło →',
     border: 'Obramowanie',
     exempt: 'Zwolnione z wymogu (niedostępne)',
     report: 'Raport kwartalny',
@@ -43,6 +52,7 @@ export const colorPl: TranslationOf<typeof colorEn> = {
     workspace: 'Otwórz w obszarze roboczym',
     invoices: 'Zobacz wszystkie faktury',
     unavailable: 'Niedostępne',
+    sample: 'Aa',
   },
   specimens: {
     'color-text-backgrounds': { name: 'Tekst na tłach', subtitle: 'Kontrast ról tekstu na neutralnych powierzchniach' },

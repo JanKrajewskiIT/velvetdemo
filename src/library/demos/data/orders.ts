@@ -1,5 +1,12 @@
 type OrderStatus = 'Paid' | 'Pending' | 'Refunded' | 'Failed';
 
+export const ORDER_STATUS_LABEL_KEY = {
+  Paid: 'library.data.orderStatus.paid',
+  Pending: 'library.data.orderStatus.pending',
+  Refunded: 'library.data.orderStatus.refunded',
+  Failed: 'library.data.orderStatus.failed',
+} as const;
+
 export interface Order {
   id: number;
   reference: string;

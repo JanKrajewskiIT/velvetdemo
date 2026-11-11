@@ -25,12 +25,16 @@ export const tradingEn = defineDictionary({
     account: 'Account',
     orderHint: 'Orders are recorded only in this example. Nothing is sent to a broker.',
     orderSaved: 'Simulated order recorded',
+    liveHint: 'Live trading is shown as blocked. This demo never sends orders.',
+    liveBlocked: 'Live orders are disabled in this demo.',
+    live: 'LIVE',
     orderSummary: '{side}: {quantity} GLBX units.',
     buy: 'Buy',
     sell: 'Sell',
     quote: 'Quote',
     notes: 'Notes',
     editLayout: 'Edit dashboard layout',
+    qtyUnit: 'shares',
   },
   controls: {
     previous: 'Previous candle',
@@ -103,7 +107,7 @@ export const tradingEn = defineDictionary({
 
 export const tradingPl: TranslationOf<typeof tradingEn> = {
   title: 'Trading',
-  blurb: 'Przestrzeń tradingowa, zabezpieczenia, zlecenia oraz wykresy i strumienie offline z Velvet Data.',
+  blurb: 'Przestrzeń handlowa, zabezpieczenia, zlecenia oraz wykresy i strumienie offline z Velvet Data.',
   workspace: {
     connection: 'Symuluj połączony strumień',
     connected: 'Strumień offline gotowy',
@@ -126,12 +130,16 @@ export const tradingPl: TranslationOf<typeof tradingEn> = {
     account: 'Rachunek',
     orderHint: 'Zlecenia są zapisywane tylko w tym przykładzie. Nic nie jest wysyłane do brokera.',
     orderSaved: 'Zapisano symulowane zlecenie',
+    liveHint: 'Handel na żywo jest pokazany jako zablokowany. Ten przykład nigdy nie wysyła zleceń.',
+    liveBlocked: 'Zlecenia na żywo są wyłączone w tym demo.',
+    live: 'LIVE',
     orderSummary: '{side}: {quantity} jednostek GLBX.',
     buy: 'Kupno',
     sell: 'Sprzedaż',
     quote: 'Notowanie',
     notes: 'Notatki',
     editLayout: 'Edytuj układ pulpitu',
+    qtyUnit: 'akcje',
   },
   controls: {
     previous: 'Poprzednia świeca',
@@ -180,7 +188,10 @@ export const tradingPl: TranslationOf<typeof tradingEn> = {
       name: 'TradingViewChartToolbar',
       subtitle: 'Osobny pasek z działającym oknem świec, przełączaniem wskaźników i dopasowaniem',
     },
-    'trading-metrics': { name: 'TradingViewChartMetrics', subtitle: 'Lokalizowane OHLC i wolumen wybranej świecy' },
+    'trading-metrics': {
+      name: 'TradingViewChartMetrics',
+      subtitle: 'OHLC i wolumen wybranej świecy z lokalnym formatowaniem',
+    },
     'trading-data': { name: 'TradingViewChartData', subtitle: 'Dostępna tabela danych z kontrolowaną liczbą wierszy' },
     'trading-polling': {
       name: 'useTradingViewPollingFeed',
@@ -188,7 +199,7 @@ export const tradingPl: TranslationOf<typeof tradingEn> = {
     },
     'trading-subscription': {
       name: 'useTradingViewWsFeed',
-      subtitle: 'Symulowana subskrypcja push z wstrzymaniem, ponownym połączeniem i sprzątaniem',
+      subtitle: 'Symulowana subskrypcja strumienia z wstrzymaniem, ponownym połączeniem i zwalnianiem zasobów',
     },
   },
 };

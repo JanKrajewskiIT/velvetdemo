@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Badge, type StatusTone } from '@jankrajewskiit/ui';
 import { createSignal, mergeProps, onCleanup, onMount, Show } from 'solid-js';
 
@@ -12,6 +13,13 @@ const LEVEL_TONE: Record<ContrastLevel, StatusTone> = {
   Fail: 'danger',
 };
 
+const LEVEL_KEYS = {
+  AAA: 'library.color.contrastLevels.aaa',
+  AA: 'library.color.contrastLevels.aa',
+  'AA large': 'library.color.contrastLevels.aaLarge',
+  Fail: 'library.color.contrastLevels.fail',
+} as const satisfies Record<ContrastLevel, string>;
+
 export interface ContrastValueProps {
   foreground: string;
   background: string;
@@ -19,6 +27,7 @@ export interface ContrastValueProps {
 }
 
 export const ContrastValue = (props: ContrastValueProps) => {
+  const { ts } = useI18n();
   const merged = mergeProps({ over: '--bg-raised' } satisfies Partial<ContrastValueProps>, props);
   const [ratio, setRatio] = createSignal<number>();
   let probe: HTMLSpanElement | undefined;
@@ -46,7 +55,7 @@ export const ContrastValue = (props: ContrastValueProps) => {
           <>
             <span class={styles.ratio}>{formatRatio(value())}</span>
             <Badge size="sm" tone={LEVEL_TONE[contrastLevel(value())]}>
-              {contrastLevel(value())}
+              {ts(LEVEL_KEYS[contrastLevel(value())])}
             </Badge>
           </>
         )}

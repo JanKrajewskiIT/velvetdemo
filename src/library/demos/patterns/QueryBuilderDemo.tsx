@@ -3,7 +3,7 @@ import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Checkbox, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal, Show } from 'solid-js';
 
-import { QUERY, QUERY_FIELDS } from './patternSamples';
+import { createQueryFields, QUERY } from './patternSamples';
 
 export const QueryBuilderDemo = () => {
   const { ts } = useI18n();
@@ -23,7 +23,7 @@ export const QueryBuilderDemo = () => {
         label={ts('library.patterns.query.disabled')}
       />
       <QueryBuilder
-        fields={QUERY_FIELDS}
+        fields={createQueryFields(ts)}
         value={query()}
         onValueChange={changeQuery}
         clearable

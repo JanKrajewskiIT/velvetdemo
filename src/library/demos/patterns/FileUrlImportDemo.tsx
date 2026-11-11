@@ -1,40 +1,46 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { FileUrlImportPayload, FileUrlImportSource } from '@jankrajewskiit/ui';
 import { Button, FileUrlImportDialog } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import styles from './FileUrlImportDemo.module.css';
 
-const SOURCES: readonly FileUrlImportSource[] = [
-  {
-    value: 'document-url',
-    label: 'Document URL',
-    kind: 'url',
-    placeholder: 'https://velvet.example/brief',
-    hint: 'Use an HTTP or HTTPS URL. This demo only previews your selection.',
-  },
-  {
-    value: 'local-file',
-    label: 'Local file',
-    kind: 'file',
-    accept: '.pdf,.txt,.csv',
-    dropLabel: 'Choose a PDF, text file or CSV',
-    hint: 'The selected file stays on your device.',
-  },
-];
-
 export const FileUrlImportDemo = () => {
+  const { ts } = useI18n();
+  const sources: readonly FileUrlImportSource[] = [
+    {
+      value: 'document-url',
+      label: ts('library.patterns.fileUrlImport.urlLabel'),
+      kind: 'url',
+      placeholder: 'https://velvet.example/brief',
+      hint: ts('library.patterns.fileUrlImport.urlHint'),
+    },
+    {
+      value: 'local-file',
+      label: ts('library.patterns.fileUrlImport.fileLabel'),
+      kind: 'file',
+      accept: '.pdf,.txt,.csv',
+      dropLabel: ts('library.patterns.fileUrlImport.fileDropLabel'),
+      hint: ts('library.patterns.fileUrlImport.fileHint'),
+    },
+  ];
   const [open, setOpen] = createSignal(false);
-  const [selection, setSelection] = createSignal('No source selected yet.');
+  const [selection, setSelection] = createSignal(ts('library.patterns.fileUrlImport.noSelection'));
   const submit = (payload: FileUrlImportPayload) => {
-    if ('url' in payload) setSelection(`Selected URL: ${payload.url}`);
-    else setSelection(`Selected file: ${payload.file.name} (${payload.file.size} bytes)`);
+    if ('url' in payload) {
+      setSelection(ts('library.patterns.fileUrlImport.selectedUrl', { url: payload.url }));
+    } else {
+      setSelection(
+        ts('library.patterns.fileUrlImport.selectedFile', { name: payload.file.name, size: payload.file.size }),
+      );
+    }
     setOpen(false);
   };
 
   return (
     <div class={styles.root}>
       <Button variant="secondary" iconLeft="upload" onClick={() => setOpen(true)}>
-        Choose a file or URL
+        {ts('library.patterns.fileUrlImport.choose')}
       </Button>
       <p class={styles.status} role="status">
         {selection()}
@@ -42,10 +48,10 @@ export const FileUrlImportDemo = () => {
       <FileUrlImportDialog
         open={open()}
         onClose={() => setOpen(false)}
-        sources={SOURCES}
+        sources={sources}
         onSubmit={submit}
-        description="Preview a document source locally. No upload or download takes place."
-        submitLabel="Use this source"
+        description={ts('library.patterns.fileUrlImport.description')}
+        submitLabel={ts('library.patterns.fileUrlImport.submit')}
       />
     </div>
   );

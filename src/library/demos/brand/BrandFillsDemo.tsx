@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { BrandLogo } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
@@ -9,21 +10,25 @@ const GROUNDS = [
   { token: '--bg-media', tone: 'inverse' },
 ] as const;
 
-export const BrandFillsDemo = () => (
-  <div class={styles.grid}>
-    <For each={GROUNDS}>
-      {(ground) => (
-        <figure class={styles.figure}>
-          <div class={styles.stage} style={{ '--ground': `var(${ground.token})` }}>
-            <BrandLogo tone={ground.tone} />
-            <BrandLogo brand="recron" tone={ground.tone} />
-            <BrandLogo brand="quantcore" tone={ground.tone} size="sm" />
-          </div>
-          <figcaption class={styles.caption}>
-            tone="{ground.tone}" on {ground.token}
-          </figcaption>
-        </figure>
-      )}
-    </For>
-  </div>
-);
+export const BrandFillsDemo = () => {
+  const { ts } = useI18n();
+
+  return (
+    <div class={styles.grid}>
+      <For each={GROUNDS}>
+        {(ground) => (
+          <figure class={styles.figure}>
+            <div class={styles.stage} style={{ '--ground': `var(${ground.token})` }}>
+              <BrandLogo tone={ground.tone} />
+              <BrandLogo brand="recron" tone={ground.tone} />
+              <BrandLogo brand="quantcore" tone={ground.tone} size="sm" />
+            </div>
+            <figcaption class={styles.caption}>
+              {ts('library.brand.fills.caption', { tone: ground.tone, token: ground.token })}
+            </figcaption>
+          </figure>
+        )}
+      </For>
+    </div>
+  );
+};

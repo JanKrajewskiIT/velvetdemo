@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { MenuChip } from '@jankrajewskiit/ui';
 
 import type { menusEn } from '../../i18n/library/menus';
@@ -36,25 +37,40 @@ export const menuSpecimens: readonly Specimen<SpecimenIdOf<typeof menusEn>>[] = 
   {
     id: 'menus-dropdown-button',
     span: 6,
-    render: () => (
-      <div class={cx(styles.group, styles.room)}>
-        <DropdownButtonDemo />
-        <p class={styles.caption}>Filter chips</p>
-        <div class={styles.row}>
-          <MenuChip
-            label="Status"
-            defaultValue="open"
-            options={[
-              { value: 'open', label: 'Open' },
-              { value: 'review', label: 'In review' },
-              { value: 'closed', label: 'Closed' },
-            ]}
-          />
-          <MenuChip label="Owner" icon="user" options={['Anna', 'Marek', 'Julia']} />
-          <MenuChip label="Due" icon="calendar" options={['Today', 'This week', 'Overdue']} />
+    render: () => {
+      const { t } = useI18n();
+      return (
+        <div class={cx(styles.group, styles.room)}>
+          <DropdownButtonDemo />
+          <p class={styles.caption}>{t('library.menus.specimens.menus-dropdown-button.filterChips')}</p>
+          <div class={styles.row}>
+            <MenuChip
+              label={t('library.menus.specimens.menus-dropdown-button.statusLabel')}
+              defaultValue="open"
+              options={[
+                { value: 'open', label: t('library.menus.specimens.menus-dropdown-button.open') },
+                { value: 'review', label: t('library.menus.specimens.menus-dropdown-button.inReview') },
+                { value: 'closed', label: t('library.menus.specimens.menus-dropdown-button.closed') },
+              ]}
+            />
+            <MenuChip
+              label={t('library.menus.specimens.menus-dropdown-button.ownerLabel')}
+              icon="user"
+              options={['Anna', 'Marek', 'Julia']}
+            />
+            <MenuChip
+              label={t('library.menus.specimens.menus-dropdown-button.dueLabel')}
+              icon="calendar"
+              options={[
+                t('library.menus.specimens.menus-dropdown-button.today'),
+                t('library.menus.specimens.menus-dropdown-button.thisWeek'),
+                t('library.menus.specimens.menus-dropdown-button.overdue'),
+              ]}
+            />
+          </div>
         </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     id: 'menus-command-palette',

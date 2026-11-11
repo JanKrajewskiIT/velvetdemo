@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { type TreeNode, TreeView } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup } from 'solid-js';
 
@@ -6,6 +7,7 @@ import { FILE_TREE } from './navigationData';
 const LOAD_DELAY_MS = 700;
 
 export const LazyTreeDemo = () => {
+  const { ts } = useI18n();
   const [data, setData] = createSignal(FILE_TREE);
   const timers = new Set<ReturnType<typeof setTimeout>>();
   onCleanup(() => timers.forEach(clearTimeout));
@@ -32,5 +34,12 @@ export const LazyTreeDemo = () => {
       timers.add(timer);
     });
 
-  return <TreeView data={data()} label="Project files" defaultExpanded={['src']} onLoadChildren={loadChildren} />;
+  return (
+    <TreeView
+      data={data()}
+      label={ts('library.navigation.demos.lazyTree.label')}
+      defaultExpanded={['src']}
+      onLoadChildren={loadChildren}
+    />
+  );
 };

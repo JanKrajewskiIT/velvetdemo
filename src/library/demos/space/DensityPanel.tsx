@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Input, Text } from '@jankrajewskiit/ui';
 import { createSignal, For, onMount } from 'solid-js';
 
@@ -12,10 +13,20 @@ const CONTROLS = [
 ] as const;
 
 const ROWS = [
-  { label: 'Row · sm', token: '--row-height-sm' },
-  { label: 'Row · default', token: '--row-height' },
-  { label: 'Row · lg', token: '--row-height-lg' },
+  { labelKey: 'library.spaceLayout.density.rows.sm', token: '--row-height-sm' },
+  { labelKey: 'library.spaceLayout.density.rows.default', token: '--row-height' },
+  { labelKey: 'library.spaceLayout.density.rows.lg', token: '--row-height-lg' },
 ] as const;
+
+const NAME_KEYS = {
+  comfortable: 'library.spaceLayout.density.names.comfortable',
+  compact: 'library.spaceLayout.density.names.compact',
+} as const;
+
+const REGION_KEYS = {
+  comfortable: 'library.spaceLayout.density.regions.comfortable',
+  compact: 'library.spaceLayout.density.regions.compact',
+} as const;
 
 const TOKENS = [...CONTROLS, ...ROWS].map((entry) => entry.token);
 
@@ -24,6 +35,7 @@ export interface DensityPanelProps {
 }
 
 export const DensityPanel = (props: DensityPanelProps) => {
+  const { ts } = useI18n();
   let root: HTMLElement | undefined;
   const [heights, setHeights] = createSignal<Readonly<Record<string, string>>>({});
 
@@ -42,10 +54,10 @@ export const DensityPanel = (props: DensityPanelProps) => {
       }}
       class={styles.panel}
       data-density={props.density === 'compact' ? 'compact' : undefined}
-      aria-label={`${props.density} density`}
+      aria-label={ts(REGION_KEYS[props.density])}
     >
       <header class={styles.header}>
-        <Text variant="label">{props.density === 'compact' ? 'Compact' : 'Comfortable'}</Text>
+        <Text variant="label">{ts(NAME_KEYS[props.density])}</Text>
         <code class={styles.attribute}>{props.density === 'compact' ? 'data-density="compact"' : 'default'}</code>
       </header>
       <div class={styles.controls}>
@@ -57,12 +69,16 @@ export const DensityPanel = (props: DensityPanelProps) => {
           )}
         </For>
       </div>
-      <Input aria-label="Sample field" placeholder="Field at the default size" iconLeft="search" />
+      <Input
+        aria-label={ts('library.spaceLayout.density.sampleField')}
+        placeholder={ts('library.spaceLayout.density.placeholder')}
+        iconLeft="search"
+      />
       <ul class={styles.rows}>
         <For each={ROWS}>
           {(row) => (
             <li class={styles.row} style={{ '--row-size': `var(${row.token})` }}>
-              <span>{row.label}</span>
+              <span>{ts(row.labelKey)}</span>
               <code class={styles.token}>{row.token}</code>
               <span class={styles.height}>{heightOf(row.token)}</span>
             </li>

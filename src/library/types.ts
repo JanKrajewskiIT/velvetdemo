@@ -16,7 +16,7 @@ export type SpecimenIdOf<Messages extends { specimens: object }> = keyof Message
 
 const _GROUP_KINDS = ['foundation', 'component'] as const;
 
-export type GroupKind = (typeof _GROUP_KINDS)[number];
+type GroupKind = (typeof _GROUP_KINDS)[number];
 
 export interface LibraryGroup<Slug extends string = string> {
   /** Two-digit ordinal, e.g. `'11'`. */

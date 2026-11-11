@@ -1,15 +1,21 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import type { ReportResult } from '@jankrajewskiit/ui';
 import { AnalysisReport, AnalysisRequest } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup } from 'solid-js';
 
 import { reportAsyncError } from '../../../browserDiagnostics';
 import styles from './AnalysisFlowDemo.module.css';
-import { ANALYSIS_SOURCES, ANALYSIS_STEPS, ANALYSIS_TYPES, REPORT_RESULT } from './analysisSamples';
+import { createAnalysisSources, createAnalysisSteps, createAnalysisTypes, createReportResult } from './analysisSamples';
 import { createSimulatedDelay } from './createSimulatedDelay';
 
 const STEP_DELAY_MS = 800;
 
 export const AnalysisFlowDemo = () => {
+  const { ts } = useI18n();
+  const steps = createAnalysisSteps(ts);
+  const sources = createAnalysisSources(ts);
+  const analyses = createAnalysisTypes(ts);
+  const reportResult = createReportResult(ts);
   const delay = createSimulatedDelay(STEP_DELAY_MS);
   const [status, setStatus] = createSignal<'idle' | 'running'>('idle');
   const [step, setStep] = createSignal(0);
@@ -24,7 +30,7 @@ export const AnalysisFlowDemo = () => {
     const current = runId;
     setStatus('running');
     setResult(null);
-    for (let index = 0; index < ANALYSIS_STEPS.length; index += 1) {
+    for (let index = 0; index < steps.length; index += 1) {
       setStep(index);
       try {
         await delay();
@@ -34,7 +40,7 @@ export const AnalysisFlowDemo = () => {
       }
       if (current !== runId) return;
     }
-    setResult(REPORT_RESULT);
+    setResult(reportResult);
     setStatus('idle');
   };
 
@@ -51,14 +57,14 @@ export const AnalysisFlowDemo = () => {
   return (
     <div class={styles.root}>
       <AnalysisRequest
-        description="Combine the CV, job offer and notes."
-        model="Claude, EU region"
-        sources={ANALYSIS_SOURCES}
-        analyses={ANALYSIS_TYPES}
+        description={ts('library.patterns.analysisFlow.description')}
+        model={ts('library.patterns.analysisFlow.model')}
+        sources={sources}
+        analyses={analyses}
         defaultSelected={['cv', 'job']}
         defaultAnalysis="match"
         status={status()}
-        steps={ANALYSIS_STEPS}
+        steps={steps}
         step={step()}
         onRun={run}
         onCancel={cancel}
@@ -69,8 +75,8 @@ export const AnalysisFlowDemo = () => {
         subject="Anna Kowalska"
         target="Senior Frontend Engineer"
         model="Claude"
-        generatedAt="just now"
-        steps={ANALYSIS_STEPS}
+        generatedAt={ts('library.patterns.analysisFlow.generatedAt')}
+        steps={steps}
         step={step()}
         onRerun={() => void run().catch(reportAsyncError)}
       />

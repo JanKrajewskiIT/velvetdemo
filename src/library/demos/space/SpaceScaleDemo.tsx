@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Text } from '@jankrajewskiit/ui';
 import { For } from 'solid-js';
 
@@ -25,13 +26,17 @@ const SPACE_TOKENS = [
   '--space-24',
 ] as const;
 
-export const SpaceScaleDemo = () => (
-  <div class={styles.root}>
-    <ul class={styles.list}>
-      <For each={SPACE_TOKENS}>{(token) => <SpaceBar token={token} />}</For>
-    </ul>
-    <Text variant="caption" tone="tertiary">
-      Whole steps sit on the 4 px grid. The 1, 2, 6, 10 and 14 px steps fill in between.
-    </Text>
-  </div>
-);
+export const SpaceScaleDemo = () => {
+  const { ts } = useI18n();
+
+  return (
+    <div class={styles.root}>
+      <ul class={styles.list}>
+        <For each={SPACE_TOKENS}>{(token) => <SpaceBar token={token} />}</For>
+      </ul>
+      <Text variant="caption" tone="tertiary">
+        {ts('library.spaceLayout.scale.note')}
+      </Text>
+    </div>
+  );
+};

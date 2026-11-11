@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import {
   ActionRow,
   Button,
@@ -15,68 +16,103 @@ import {
 import type { formsEn } from '../../i18n/library/forms';
 import { AccountSettingsDemo } from '../demos/forms/AccountSettingsDemo';
 import { ErrorSummaryDemo } from '../demos/forms/ErrorSummaryDemo';
-import { emailProblem, postalCodeProblem } from '../demos/forms/validators';
+import { ValidationDemo } from '../demos/forms/ValidationDemo';
 import { WizardDemo } from '../demos/forms/WizardDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 
-const COUNTRIES = ['Poland', 'Germany', 'France', 'Spain'];
 const CURRENCIES = ['EUR', 'PLN', 'USD'];
-const PERIODS = ['Hourly', 'Monthly', 'Yearly'];
 
 export const formSpecimens: readonly Specimen<SpecimenIdOf<typeof formsEn>>[] = [
   {
     id: 'forms-layout',
     span: 8,
-    render: () => (
-      <FormLayout>
-        <FormSection title="Profile" description="Shown to teammates and in comments.">
-          <FormGrid columns={2}>
-            <Input label="First name" defaultValue="Anna" />
-            <Input label="Last name" defaultValue="Kowalska" />
-            <FormSpan>
-              <Textarea label="About" rows={3} hint="A line or two about your role." />
-            </FormSpan>
-            <Select label="Country" options={COUNTRIES} defaultValue="Poland" />
-            <Input label="Job title" defaultValue="Product designer" />
-          </FormGrid>
-        </FormSection>
-        <ActionRow
-          divider
-          start={
-            <Text variant="caption" tone="secondary">
-              Last saved 2 minutes ago
-            </Text>
-          }
-        >
-          <Button variant="secondary">Discard</Button>
-          <Button type="submit">Save changes</Button>
-        </ActionRow>
-      </FormLayout>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      const countries = [
+        t('library.forms.specimens.forms-layout.countryPoland'),
+        t('library.forms.specimens.forms-layout.countryGermany'),
+        t('library.forms.specimens.forms-layout.countryFrance'),
+        t('library.forms.specimens.forms-layout.countrySpain'),
+      ];
+      return (
+        <FormLayout>
+          <FormSection
+            title={t('library.forms.specimens.forms-layout.profileTitle')}
+            description={t('library.forms.specimens.forms-layout.profileDescription')}
+          >
+            <FormGrid columns={2}>
+              <Input label={t('library.forms.specimens.forms-layout.firstName')} defaultValue="Anna" />
+              <Input label={t('library.forms.specimens.forms-layout.lastName')} defaultValue="Kowalska" />
+
+              <FormSpan>
+                <Textarea
+                  label={t('library.forms.specimens.forms-layout.about')}
+                  rows={3}
+                  hint={t('library.forms.specimens.forms-layout.aboutHint')}
+                />
+              </FormSpan>
+              <Select
+                label={t('library.forms.specimens.forms-layout.country')}
+                options={countries}
+                defaultValue={countries[0]}
+              />
+              <Input
+                label={t('library.forms.specimens.forms-layout.jobTitle')}
+                defaultValue={t('library.forms.specimens.forms-layout.jobTitleValue')}
+              />
+            </FormGrid>
+          </FormSection>
+          <ActionRow
+            divider
+            start={
+              <Text variant="caption" tone="secondary">
+                {t('library.forms.specimens.forms-layout.lastSaved')}
+              </Text>
+            }
+          >
+            <Button variant="secondary">{t('library.forms.specimens.forms-layout.discard')}</Button>
+            <Button type="submit">{t('library.forms.specimens.forms-layout.saveChanges')}</Button>
+          </ActionRow>
+        </FormLayout>
+      );
+    },
   },
   {
     id: 'forms-range-input',
     span: 4,
-    render: () => (
-      <FormLayout as="div">
-        <RangeInput
-          label="Salary"
-          defaultValue={{ min: 6000, max: 9000 }}
-          unitOptions={CURRENCIES}
-          defaultUnit="EUR"
-          periodOptions={PERIODS}
-          defaultPeriod="Monthly"
-        />
-        <RangeInput
-          label="Floor area"
-          suffix="m²"
-          defaultValue={{ min: 40 }}
-          hint="Leave a bound empty for an open range."
-        />
-        <RangeInput label="Budget" prefix="€" defaultValue={{ min: 1200, max: 800 }} />
-      </FormLayout>
-    ),
+    render: () => {
+      const { t } = useI18n();
+      const periods = [
+        t('library.forms.specimens.forms-range-input.periodHourly'),
+        t('library.forms.specimens.forms-range-input.periodMonthly'),
+        t('library.forms.specimens.forms-range-input.periodYearly'),
+      ];
+      return (
+        <FormLayout as="div">
+          <RangeInput
+            label={t('library.forms.specimens.forms-range-input.salary')}
+            defaultValue={{ min: 6000, max: 9000 }}
+            unitOptions={CURRENCIES}
+            defaultUnit="EUR"
+            periodOptions={periods}
+            defaultPeriod={periods[1]}
+          />
+          <RangeInput
+            label={t('library.forms.specimens.forms-range-input.floorArea')}
+            suffix="m²"
+            defaultValue={{ min: 40 }}
+            hint={t('library.forms.specimens.forms-range-input.floorAreaHint')}
+          />
+          <RangeInput
+            label={t('library.forms.specimens.forms-range-input.budget')}
+            prefix="€"
+            defaultValue={{ min: 1200, max: 800 }}
+          />
+        </FormLayout>
+      );
+    },
   },
+
   {
     id: 'forms-error-summary',
     span: 6,
@@ -85,27 +121,7 @@ export const formSpecimens: readonly Specimen<SpecimenIdOf<typeof formsEn>>[] = 
   {
     id: 'forms-validation',
     span: 6,
-    render: () => (
-      <FormLayout as="div">
-        <Input
-          label="Work email"
-          type="email"
-          placeholder="name@company.com"
-          hint="Checked when you leave the field."
-          validate={emailProblem}
-        />
-        <Input
-          label="Postal code"
-          placeholder="00-000"
-          hint="Re-checked on every change once touched."
-          validate={postalCodeProblem}
-        />
-        <Input label="Nickname" optional reserveHint />
-        <Text variant="caption" tone="secondary">
-          Fields that validate or reserve a hint keep a fixed message lane, so errors never shift the form.
-        </Text>
-      </FormLayout>
-    ),
+    render: () => <ValidationDemo />,
   },
   {
     id: 'forms-wizard',

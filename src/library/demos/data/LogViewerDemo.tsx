@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, LogViewer } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
@@ -7,6 +8,7 @@ import styles from './LogViewerDemo.module.css';
 const INITIAL_LINE_COUNT = 48;
 
 export const LogViewerDemo = () => {
+  const { ts } = useI18n();
   const [lines, setLines] = createSignal(makeLogLines(INITIAL_LINE_COUNT));
   let nextLineIndex = INITIAL_LINE_COUNT;
 
@@ -19,7 +21,7 @@ export const LogViewerDemo = () => {
   return (
     <div class={styles.root}>
       <Button size="sm" variant="secondary" iconLeft="plus" onClick={appendLine}>
-        Append line
+        {ts('library.data.log.appendLine')}
       </Button>
       <LogViewer title="api-gateway.log" height={320} lines={lines()} />
     </div>

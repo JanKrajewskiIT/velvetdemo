@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, ColumnResize, Stack, Text, VisuallyHidden } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
@@ -6,16 +7,17 @@ import styles from './ColumnResizeDemo.module.css';
 const INITIAL_WIDTH = 160;
 
 export const ColumnResizeDemo = () => {
+  const { ts } = useI18n();
   const [width, setWidth] = createSignal(INITIAL_WIDTH);
   const reset = () => setWidth(INITIAL_WIDTH);
 
   return (
     <Stack gap={3}>
       <Text variant="body-sm" tone="secondary">
-        Drag the name column edge, use the left and right arrow keys, or double-click to reset.
+        {ts('library.atoms.columnResize.lead')}
       </Text>
       <table class={styles.table}>
-        <VisuallyHidden as="caption">Project ownership with a resizable name column</VisuallyHidden>
+        <VisuallyHidden as="caption">{ts('library.atoms.columnResize.caption')}</VisuallyHidden>
         <colgroup>
           <col style={{ width: `${width()}px` }} />
           <col />
@@ -23,9 +25,9 @@ export const ColumnResizeDemo = () => {
         <thead>
           <tr>
             <th class={styles.heading} scope="col">
-              Name
+              {ts('library.atoms.columnResize.name')}
               <ColumnResize
-                label="Resize name column"
+                label={ts('library.atoms.columnResize.resizeName')}
                 width={width()}
                 min={80}
                 max={240}
@@ -34,7 +36,7 @@ export const ColumnResizeDemo = () => {
               />
             </th>
             <th class={styles.cell} scope="col">
-              Owner
+              {ts('library.atoms.columnResize.owner')}
             </th>
           </tr>
         </thead>
@@ -51,10 +53,10 @@ export const ColumnResizeDemo = () => {
       </table>
       <Stack direction="row" gap={3} align="center" wrap>
         <Text variant="caption" tabular>
-          Name width: {Math.round(width())} px
+          {ts('library.atoms.columnResize.nameWidth', { width: Math.round(width()) })}
         </Text>
         <Button variant="secondary" size="sm" onClick={reset}>
-          Reset width
+          {ts('library.atoms.columnResize.resetWidth')}
         </Button>
       </Stack>
     </Stack>

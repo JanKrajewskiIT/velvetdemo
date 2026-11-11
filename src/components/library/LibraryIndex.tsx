@@ -4,7 +4,7 @@ import { For, Show } from 'solid-js';
 
 import type { LibraryGroup } from '../../library/types';
 import { useLibraryText } from '../../library/useLibraryText';
-import { groupAnchor, specimenIdsMatching } from './filterGroups';
+import { groupAnchor, specimenIdsMatching, tabOf } from './filterGroups';
 import styles from './LibraryIndex.module.css';
 
 export interface LibraryIndexProps {
@@ -14,8 +14,11 @@ export interface LibraryIndexProps {
   onPick: (id: string) => void;
 }
 
-const startsComponents = (groups: readonly LibraryGroup[], index: number) =>
-  index > 0 && groups[index]?.kind === 'component' && groups[index - 1]?.kind === 'foundation';
+const startsTab = (groups: readonly LibraryGroup[], index: number) => {
+  const previous = groups[index - 1];
+  const current = groups[index];
+  return index > 0 && !!previous && !!current && tabOf(previous) !== tabOf(current);
+};
 
 export const LibraryIndex = (props: LibraryIndexProps) => {
   const { ts } = useI18n();
@@ -26,7 +29,7 @@ export const LibraryIndex = (props: LibraryIndexProps) => {
       <For each={props.groups}>
         {(group, index) => (
           <>
-            <Show when={startsComponents(props.groups, index())}>
+            <Show when={startsTab(props.groups, index())}>
               <hr />
             </Show>
             <a

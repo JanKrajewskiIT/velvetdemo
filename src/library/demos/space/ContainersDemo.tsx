@@ -1,3 +1,4 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Text } from '@jankrajewskiit/ui';
 
 import styles from './ContainersDemo.module.css';
@@ -12,11 +13,15 @@ const CONTAINER_TOKENS = [
   '--container-2xl',
 ] as const;
 
-export const ContainersDemo = () => (
-  <div class={styles.root}>
-    <TokenBarList tokens={CONTAINER_TOKENS} />
-    <Text variant="caption" tone="tertiary">
-      Prose is measured in characters, so it tracks the body font. Page padding comes from --gutter.
-    </Text>
-  </div>
-);
+export const ContainersDemo = () => {
+  const { ts } = useI18n();
+
+  return (
+    <div class={styles.root}>
+      <TokenBarList tokens={CONTAINER_TOKENS} />
+      <Text variant="caption" tone="tertiary">
+        {ts('library.spaceLayout.containers.note')}
+      </Text>
+    </div>
+  );
+};
