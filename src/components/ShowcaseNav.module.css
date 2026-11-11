@@ -28,7 +28,7 @@
   width: 28px;
   height: 28px;
   border-radius: var(--radius-md);
-  background: var(--bg-brand);
+  background: var(--velvet-700);
   display: grid;
   place-items: center;
   color: var(--on-color-fg);

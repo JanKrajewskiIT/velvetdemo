@@ -1,6 +1,7 @@
 import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 
 import { actionsEn, actionsPl } from './actions';
+import { arrangeCatalogue } from './arrangeCatalogue';
 import { atomsEn, atomsPl } from './atoms';
 import { brandEn, brandPl } from './brand';
 import { cardsEn, cardsPl } from './cards';
@@ -17,6 +18,7 @@ import { inputsEn, inputsPl } from './inputs';
 import { layoutEn, layoutPl } from './layout';
 import { mediaEn, mediaPl } from './media';
 import { menusEn, menusPl } from './menus';
+import { metricsEn, metricsPl } from './metrics';
 import { motionEn, motionPl } from './motion';
 import { navigationEn, navigationPl } from './navigation';
 import { overlaysEn, overlaysPl } from './overlays';
@@ -32,7 +34,7 @@ import { tradingEn, tradingPl } from './trading';
 import { typeEn, typePl } from './type';
 
 export const libraryEn = defineDictionary({
-  library: {
+  library: arrangeCatalogue({
     overview: overviewEn,
     brand: brandEn,
     color: colorEn,
@@ -63,11 +65,20 @@ export const libraryEn = defineDictionary({
     patterns: patternsEn,
     trading: tradingEn,
     finance: financeEn,
-  },
+    progress: {
+      title: 'Progress',
+      blurb: 'Progress bars and rings, loaders, checklists and gates.',
+    },
+    wayfinding: {
+      title: 'Wayfinding',
+      blurb: 'Tabs, breadcrumbs, steppers, pagination, trees and links.',
+    },
+    metrics: metricsEn,
+  }),
 });
 
 export const libraryPl: TranslationOf<typeof libraryEn> = {
-  library: {
+  library: arrangeCatalogue({
     overview: overviewPl,
     brand: brandPl,
     color: colorPl,
@@ -98,7 +109,16 @@ export const libraryPl: TranslationOf<typeof libraryEn> = {
     patterns: patternsPl,
     trading: tradingPl,
     finance: financePl,
-  },
+    progress: {
+      title: 'Postęp',
+      blurb: 'Paski i pierścienie postępu, loadery, listy kontrolne i warunki.',
+    },
+    wayfinding: {
+      title: 'Orientacja',
+      blurb: 'Karty, ścieżki nawigacji, kroki, paginacja, drzewa i linki.',
+    },
+    metrics: metricsPl,
+  }),
 };
 
 export type GroupSlug = keyof (typeof libraryEn)['library'];

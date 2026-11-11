@@ -1,0 +1,12 @@
+.list {
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.preview {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

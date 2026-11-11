@@ -1,6 +1,8 @@
 import { Button, Footer, IconButton, PageHeader, Stack } from '@jankrajewskiit/ui';
 
 import type { layoutEn } from '../../i18n/library/layout';
+import { ColumnsDemo } from '../demos/layout/ColumnsDemo';
+import { DividerDemo } from '../demos/layout/DividerDemo';
 import { ScrollAreaDemo } from '../demos/layout/ScrollAreaDemo';
 import { SidebarDemo } from '../demos/layout/SidebarDemo';
 import { SplitPaneDemo } from '../demos/layout/SplitPaneDemo';
@@ -10,6 +12,16 @@ import type { Specimen, SpecimenIdOf } from '../types';
 const noop = () => undefined;
 
 export const layoutSpecimens: readonly Specimen<SpecimenIdOf<typeof layoutEn>>[] = [
+  {
+    id: 'layout-columns',
+    span: 12,
+    render: () => <ColumnsDemo />,
+  },
+  {
+    id: 'layout-divider',
+    span: 6,
+    render: () => <DividerDemo />,
+  },
   {
     id: 'layout-stack-grid',
     span: 6,

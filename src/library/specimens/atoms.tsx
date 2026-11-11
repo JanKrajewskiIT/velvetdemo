@@ -4,6 +4,7 @@ import { DisclosureDismissDemo } from '../demos/atoms/DisclosureDismissDemo';
 import { FieldHintDemo } from '../demos/atoms/FieldHintDemo';
 import { FieldShellDemo } from '../demos/atoms/FieldShellDemo';
 import { IndicatorDemo } from '../demos/atoms/IndicatorDemo';
+import { ListboxDemo } from '../demos/atoms/ListboxDemo';
 import { RowsDemo } from '../demos/atoms/RowsDemo';
 import { StatusMarksDemo } from '../demos/atoms/StatusMarksDemo';
 import { StepsDemo } from '../demos/atoms/StepsDemo';
@@ -11,6 +12,7 @@ import { SurfaceVariantsDemo } from '../demos/atoms/SurfaceVariantsDemo';
 import { TextEmphasisDemo } from '../demos/atoms/TextEmphasisDemo';
 import { TextRolesDemo } from '../demos/atoms/TextRolesDemo';
 import { TracksDemo } from '../demos/atoms/TracksDemo';
+import { VisuallyHiddenDemo } from '../demos/atoms/VisuallyHiddenDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './atoms.module.css';
 
@@ -29,6 +31,11 @@ export const atomSpecimens: readonly Specimen<SpecimenIdOf<typeof atomsEn>>[] = 
     id: 'atoms-status-marks',
     span: 6,
     render: () => <StatusMarksDemo />,
+  },
+  {
+    id: 'atoms-listbox',
+    span: 12,
+    render: () => <ListboxDemo />,
   },
   {
     id: 'atoms-rows',
@@ -64,6 +71,11 @@ export const atomSpecimens: readonly Specimen<SpecimenIdOf<typeof atomsEn>>[] = 
     id: 'atoms-field-hint',
     span: 6,
     render: () => <FieldHintDemo />,
+  },
+  {
+    id: 'atoms-visually-hidden',
+    span: 6,
+    render: () => <VisuallyHiddenDemo />,
   },
   {
     id: 'atoms-steps-tracks',

@@ -1,17 +1,17 @@
-import type { Flashcard, FlashcardConfig, FlashDeck, FlashResult } from '@jankrajewskiit/ui';
-import { FlashcardSession, FlashcardSetup, FlashcardSummary } from '@jankrajewskiit/ui';
+import type { PracticeCard, PracticeCollection, PracticeConfig, PracticeResult } from '@jankrajewskiit/ui';
+import { PracticeSession, PracticeSetup, PracticeSummary } from '@jankrajewskiit/ui';
 import { createSignal, Match, Switch } from 'solid-js';
 
 type Stage = 'setup' | 'session' | 'summary';
 
-interface StudyDeck {
+interface StudyCollection {
   id: string;
   name: string;
   due: number;
-  cards: Flashcard[];
+  cards: PracticeCard[];
 }
 
-const STUDY_DECKS: readonly StudyDeck[] = [
+const STUDY_COLLECTIONS: readonly StudyCollection[] = [
   {
     id: 'es4',
     name: 'Spanish, around the home',
@@ -50,19 +50,19 @@ const STUDY_DECKS: readonly StudyDeck[] = [
   },
 ];
 
-const DECKS: FlashDeck[] = STUDY_DECKS.map((deck) => ({
-  id: deck.id,
-  name: deck.name,
-  total: deck.cards.length,
-  due: deck.due,
+const COLLECTIONS: PracticeCollection[] = STUDY_COLLECTIONS.map((collection) => ({
+  id: collection.id,
+  name: collection.name,
+  total: collection.cards.length,
+  due: collection.due,
 }));
-const MAX_CARDS = Math.max(...DECKS.map((deck) => deck.total));
+const MAX_CARDS = Math.max(...COLLECTIONS.map((collection) => collection.total));
 
-const sessionCards = (config: FlashcardConfig): Flashcard[] => {
-  const deck = STUDY_DECKS.find((candidate) => candidate.id === config.deck);
-  if (!deck) return [];
-  let cards = [...deck.cards];
-  if (config.order === 'due') cards = cards.slice(0, deck.due);
+const sessionCards = (config: PracticeConfig): PracticeCard[] => {
+  const collection = STUDY_COLLECTIONS.find((candidate) => candidate.id === config.collection);
+  if (!collection) throw new Error(`Unknown practice collection "${config.collection}".`);
+  let cards = [...collection.cards];
+  if (config.order === 'due') cards = cards.slice(0, collection.due);
   else if (config.order === 'new') cards.reverse();
   else {
     for (let index = cards.length - 1; index > 0; index -= 1) {
@@ -78,14 +78,14 @@ const sessionCards = (config: FlashcardConfig): Flashcard[] => {
   return cards.slice(0, config.count);
 };
 
-export const FlashcardFlowDemo = () => {
+export const PracticeFlowDemo = () => {
   const [stage, setStage] = createSignal<Stage>('setup');
-  const [results, setResults] = createSignal<FlashResult[]>([]);
-  const [cards, setCards] = createSignal<Flashcard[]>([]);
-  const [initialCards, setInitialCards] = createSignal<Flashcard[]>([]);
+  const [results, setResults] = createSignal<PracticeResult[]>([]);
+  const [cards, setCards] = createSignal<PracticeCard[]>([]);
+  const [initialCards, setInitialCards] = createSignal<PracticeCard[]>([]);
   const [reverse, setReverse] = createSignal(false);
 
-  const start = (config: FlashcardConfig) => {
+  const start = (config: PracticeConfig) => {
     const next = sessionCards(config);
     if (next.length === 0) return;
     setCards(next);
@@ -107,7 +107,7 @@ export const FlashcardFlowDemo = () => {
     setStage('session');
   };
 
-  const finish = (finished: FlashResult[]) => {
+  const finish = (finished: PracticeResult[]) => {
     setResults(finished);
     setStage('summary');
   };
@@ -115,13 +115,13 @@ export const FlashcardFlowDemo = () => {
   return (
     <Switch>
       <Match when={stage() === 'setup'}>
-        <FlashcardSetup decks={DECKS} onStart={start} maxCards={MAX_CARDS} />
+        <PracticeSetup collections={COLLECTIONS} onStart={start} maxCards={MAX_CARDS} />
       </Match>
       <Match when={stage() === 'session'}>
-        <FlashcardSession cards={cards()} reverse={reverse()} onExit={() => setStage('setup')} onFinish={finish} />
+        <PracticeSession cards={cards()} reverse={reverse()} onExit={() => setStage('setup')} onFinish={finish} />
       </Match>
       <Match when={stage() === 'summary'}>
-        <FlashcardSummary
+        <PracticeSummary
           results={results()}
           onRestart={restart}
           onReviewMissed={reviewMissed}

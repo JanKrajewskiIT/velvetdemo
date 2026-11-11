@@ -2,7 +2,7 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 
 export const feedbackEn = defineDictionary({
   title: 'Feedback',
-  blurb: 'Alerts, toasts, progress, skeletons and loaders.',
+  blurb: 'Alerts, banners, toasts, notifications, data states, status pages and the environment strip.',
   gates: {
     ordered: 'Ordered gates · stop at first failure',
     unordered: 'All statuses · unordered · small · no blocking',
@@ -36,8 +36,12 @@ export const feedbackEn = defineDictionary({
     },
     'feedback-progress': { name: 'Progress', subtitle: 'Bars, sizes, indeterminate and rings' },
     'feedback-loading': {
-      name: 'Spinner, robot indicator and Skeleton',
-      subtitle: 'Inline processing, overlays and known content shapes',
+      name: 'RobotProcessingIndicator and LoadingOverlay',
+      subtitle: 'Inline processing and a contained loading overlay',
+    },
+    'feedback-skeleton': {
+      name: 'Skeleton and Spinner',
+      subtitle: 'Known content shapes and inline waiting indicators',
     },
     'feedback-loaders': { name: 'Loader and PageLoader', subtitle: 'Decorative brand loaders, every variant' },
     'feedback-empty-error': { name: 'EmptyState and ErrorState', subtitle: 'No data yet, and a section that failed' },
@@ -50,7 +54,7 @@ export const feedbackEn = defineDictionary({
 
 export const feedbackPl: TranslationOf<typeof feedbackEn> = {
   title: 'Informacje zwrotne',
-  blurb: 'Alerty, toasty, postęp, szkielety i loadery.',
+  blurb: 'Alerty, banery, toasty, powiadomienia, stany danych, strony statusu i pasek środowiska.',
   gates: {
     ordered: 'Uporządkowane warunki · zatrzymanie przy błędzie',
     unordered: 'Wszystkie statusy · bez kolejności · mały rozmiar · bez blokowania',
@@ -87,8 +91,12 @@ export const feedbackPl: TranslationOf<typeof feedbackEn> = {
     },
     'feedback-progress': { name: 'Progress', subtitle: 'Paski, rozmiary, stan nieokreślony i pierścienie' },
     'feedback-loading': {
-      name: 'Spinner, wskaźnik robota i Skeleton',
-      subtitle: 'Oczekiwanie w linii, nakładki i znane kształty treści',
+      name: 'RobotProcessingIndicator i LoadingOverlay',
+      subtitle: 'Przetwarzanie w linii i nakładka ładowania w ramce',
+    },
+    'feedback-skeleton': {
+      name: 'Skeleton i Spinner',
+      subtitle: 'Znane kształty treści i wskaźniki oczekiwania w linii',
     },
     'feedback-loaders': { name: 'Loader i PageLoader', subtitle: 'Dekoracyjne loadery marki, każdy wariant' },
     'feedback-empty-error': { name: 'EmptyState i ErrorState', subtitle: 'Brak danych oraz sekcja, która zawiodła' },

@@ -17,8 +17,21 @@
   min-width: 0;
 }
 
+.number {
+  font-size: 64px;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+}
+
+.count {
+  white-space: nowrap;
+}
+
 .title {
   margin: 0 0 6px;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .blurb {
@@ -29,10 +42,19 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-flow: dense;
   gap: 28px 24px;
 }
 
 .loading {
   margin: 0;
+}
+
+@media (width <= 720px) {
+  .header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .count {
+    grid-column: 2;
+  }
 }

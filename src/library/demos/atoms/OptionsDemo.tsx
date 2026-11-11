@@ -1,33 +1,35 @@
+import { useI18n } from '@jankrajewskiit/i18n';
 import { Grid, Kbd, Option, Stack, Surface, Text } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
 import styles from './OptionsDemo.module.css';
 
 export const OptionsDemo = () => {
-  const [sort, setSort] = createSignal('Recently updated');
+  const { ts } = useI18n();
+  const [sort, setSort] = createSignal<'recent' | 'name'>('recent');
   const [active, setActive] = createSignal<string>();
   const [hovered, setHovered] = createSignal<string>();
-  const [action, setAction] = createSignal('No action selected');
+  const [action, setAction] = createSignal<'none' | 'duplicated' | 'deleted'>('none');
   const isActive = (label: string) => active() === label || hovered() === label;
 
   return (
     <Stack gap={3}>
       <Grid min={200} gap={3}>
-        <Surface variant="raised" padding="sm" role="group" aria-label="Sort preview">
+        <Surface variant="raised" padding="sm" role="group" aria-label={ts('library.atoms.options.sortLabel')}>
           <div class={styles.row}>
             <Option
-              label="Recently updated"
+              label={ts('library.atoms.options.recent')}
               showCheck
-              selected={sort() === 'Recently updated'}
+              selected={sort() === 'recent'}
               active={isActive('Recently updated')}
               aria-hidden="true"
             />
             <button
               class={styles.button}
               type="button"
-              aria-label="Sort by recently updated"
-              aria-pressed={sort() === 'Recently updated'}
-              onClick={() => setSort('Recently updated')}
+              aria-label={ts('library.atoms.options.sortRecent')}
+              aria-pressed={sort() === 'recent'}
+              onClick={() => setSort('recent')}
               onFocus={() => setActive('Recently updated')}
               onBlur={() => setActive(undefined)}
               onPointerEnter={() => setHovered('Recently updated')}
@@ -36,19 +38,19 @@ export const OptionsDemo = () => {
           </div>
           <div class={styles.row}>
             <Option
-              label="Name"
-              description="A to Z"
+              label={ts('library.atoms.options.name')}
+              description={ts('library.atoms.options.alphabetical')}
               showCheck
-              selected={sort() === 'Name'}
+              selected={sort() === 'name'}
               active={isActive('Name')}
               aria-hidden="true"
             />
             <button
               class={styles.button}
               type="button"
-              aria-label="Sort by name"
-              aria-pressed={sort() === 'Name'}
-              onClick={() => setSort('Name')}
+              aria-label={ts('library.atoms.options.sortName')}
+              aria-pressed={sort() === 'name'}
+              onClick={() => setSort('name')}
               onFocus={() => setActive('Name')}
               onBlur={() => setActive(undefined)}
               onPointerEnter={() => setHovered('Name')}
@@ -56,16 +58,16 @@ export const OptionsDemo = () => {
             />
           </div>
           <div class={styles.row}>
-            <Option label="Owner" showCheck disabled aria-hidden="true" />
-            <button class={styles.button} type="button" aria-label="Sort by owner" disabled />
+            <Option label={ts('library.atoms.options.owner')} showCheck disabled aria-hidden="true" />
+            <button class={styles.button} type="button" aria-label={ts('library.atoms.options.sortOwner')} disabled />
           </div>
         </Surface>
-        <Surface variant="raised" padding="sm" role="group" aria-label="Action preview">
+        <Surface variant="raised" padding="sm" role="group" aria-label={ts('library.atoms.options.actionsLabel')}>
           <div class={styles.row}>
             <Option
               role="menuitem"
               icon="copy"
-              label="Duplicate"
+              label={ts('library.atoms.options.duplicate')}
               shortcut={<Kbd plain keys="mod+d" />}
               active={isActive('Duplicate')}
               aria-hidden="true"
@@ -73,8 +75,8 @@ export const OptionsDemo = () => {
             <button
               class={styles.button}
               type="button"
-              aria-label="Preview duplicate action"
-              onClick={() => setAction('Duplicate selected')}
+              aria-label={ts('library.atoms.options.duplicate')}
+              onClick={() => setAction('duplicated')}
               onFocus={() => setActive('Duplicate')}
               onBlur={() => setActive(undefined)}
               onPointerEnter={() => setHovered('Duplicate')}
@@ -85,7 +87,7 @@ export const OptionsDemo = () => {
             <Option
               role="menuitem"
               icon="trash-2"
-              label="Delete"
+              label={ts('library.atoms.options.delete')}
               danger
               active={isActive('Delete')}
               aria-hidden="true"
@@ -93,8 +95,8 @@ export const OptionsDemo = () => {
             <button
               class={styles.button}
               type="button"
-              aria-label="Preview delete action"
-              onClick={() => setAction('Delete selected')}
+              aria-label={ts('library.atoms.options.delete')}
+              onClick={() => setAction('deleted')}
               onFocus={() => setActive('Delete')}
               onBlur={() => setActive(undefined)}
               onPointerEnter={() => setHovered('Delete')}
@@ -104,7 +106,10 @@ export const OptionsDemo = () => {
         </Surface>
       </Grid>
       <Text variant="caption" tone="secondary">
-        Sort: {sort()}. {action()}.
+        {ts('library.atoms.options.status', {
+          sort: ts(`library.atoms.options.${sort()}`),
+          action: ts(`library.atoms.options.${action()}`),
+        })}
       </Text>
     </Stack>
   );

@@ -2,6 +2,8 @@ import { DonutChart, FunnelChart, Gauge, type GaugeThreshold, LineChart, RadarCh
 
 import type { dataVizEn } from '../../i18n/library/data-viz';
 import { BarChartDemo } from '../demos/data-viz/BarChartDemo';
+import { ChartLegendDemo } from '../demos/data-viz/ChartLegendDemo';
+import { ChartTooltipDemo } from '../demos/data-viz/ChartTooltipDemo';
 import { ComparisonDemo } from '../demos/data-viz/ComparisonDemo';
 import {
   ACCOUNTS_BY_PLAN,
@@ -26,6 +28,16 @@ const UTILISATION_THRESHOLDS: GaugeThreshold[] = [
 ];
 
 export const dataVizSpecimens: readonly Specimen<SpecimenIdOf<typeof dataVizEn>>[] = [
+  {
+    id: 'data-viz-legend',
+    span: 6,
+    render: () => <ChartLegendDemo />,
+  },
+  {
+    id: 'data-viz-tooltip',
+    span: 6,
+    render: () => <ChartTooltipDemo />,
+  },
   {
     id: 'data-viz-bar-chart',
     span: 6,

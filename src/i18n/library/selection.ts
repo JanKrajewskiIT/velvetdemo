@@ -21,7 +21,7 @@ export const selectionEn = defineDictionary({
     'selection-editable': { name: 'EditableCollection', subtitle: 'Reorderable rows with level and weight' },
     'selection-slider-rating': {
       name: 'Slider and rating',
-      subtitle: 'Single, range and snapped sliders; stars and reviews',
+      subtitle: 'Single, range and snapped sliders; interactive and read-only stars',
     },
     'selection-transfer': { name: 'TransferList', subtitle: 'Grouped, searchable and orderable assignment' },
   },
@@ -54,7 +54,7 @@ export const selectionPl: TranslationOf<typeof selectionEn> = {
     },
     'selection-slider-rating': {
       name: 'Slider i ocena',
-      subtitle: 'Suwaki pojedyncze, zakresowe i z przyciąganiem; gwiazdki i recenzje',
+      subtitle: 'Suwaki pojedyncze, zakresowe i z przyciąganiem; gwiazdki interaktywne i tylko do odczytu',
     },
     'selection-transfer': {
       name: 'TransferList',

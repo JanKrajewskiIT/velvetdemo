@@ -2,7 +2,15 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 
 export const navigationEn = defineDictionary({
   title: 'Navigation',
-  blurb: 'Navbar, sidebar, tabs, breadcrumbs, steppers and pagination.',
+  blurb: 'App chrome — navbar, sidebar, bottom bar, page header and footer.',
+  period: {
+    previous: 'Previous month',
+    next: 'Next month',
+    today: 'Today',
+    attached: 'Attached buttons',
+    ghost: 'Separate ghost buttons',
+    arrows: 'Arrows only',
+  },
   tabs: {
     applications: 'Applications',
     underline: 'Underline with counts',
@@ -64,6 +72,7 @@ export const navigationEn = defineDictionary({
     legacyLabel: 'Move project files into folders',
   },
   specimens: {
+    'navigation-period': { name: 'PeriodNav', subtitle: 'Live month navigation, Today, attached and ghost buttons' },
     'navigation-tabs': { name: 'Tabs', subtitle: 'Underline, segmented and vertical peer views' },
     'navigation-breadcrumb-link': {
       name: 'Breadcrumb and Link',
@@ -94,7 +103,15 @@ export const navigationEn = defineDictionary({
 
 export const navigationPl: TranslationOf<typeof navigationEn> = {
   title: 'Nawigacja',
-  blurb: 'Navbar, panel boczny, zakładki, ścieżki okruszków, kreatory krokowe i paginacja.',
+  blurb: 'Szkielet aplikacji — pasek nawigacji, panel boczny, pasek dolny, nagłówek i stopka.',
+  period: {
+    previous: 'Poprzedni miesiąc',
+    next: 'Następny miesiąc',
+    today: 'Dzisiaj',
+    attached: 'Połączone przyciski',
+    ghost: 'Oddzielne przyciski bez tła',
+    arrows: 'Tylko strzałki',
+  },
   tabs: {
     applications: 'Aplikacje',
     underline: 'Podkreślenie i liczniki',
@@ -156,6 +173,7 @@ export const navigationPl: TranslationOf<typeof navigationEn> = {
     legacyLabel: 'Przenoszenie plików projektu do folderów',
   },
   specimens: {
+    'navigation-period': { name: 'PeriodNav', subtitle: 'Zmiana miesiąca, dzisiaj, przyciski połączone i bez tła' },
     'navigation-tabs': {
       name: 'Zakładki',
       subtitle: 'Widoki równorzędne: podkreślone, segmentowe i pionowe',

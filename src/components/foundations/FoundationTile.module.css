@@ -1,7 +1,7 @@
 .tile {
   background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-2xl);
+  border-radius: 20px;
   padding: 32px;
   display: flex;
   flex-direction: column;

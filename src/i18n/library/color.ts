@@ -3,7 +3,21 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const colorEn = defineDictionary({
   title: 'Color',
   blurb: 'OKLCH ramps, semantic roles and contrast — every pairing checked.',
+  contrast: { tinted: 'On tone background', raised: 'On raised background' },
+  roles: {
+    foreground: 'Foreground on --bg-raised',
+    border: 'Border',
+    exempt: 'Exempt (disabled)',
+    report: 'Quarterly report',
+    prepared: 'Prepared by finance',
+    updated: 'Updated 3 minutes ago',
+    workspace: 'Open in workspace',
+    invoices: 'View all invoices',
+    unavailable: 'Unavailable',
+  },
   specimens: {
+    'color-text-backgrounds': { name: 'Text on backgrounds', subtitle: 'Text-role contrast across neutral surfaces' },
+    'color-tone-contrast': { name: 'Tone contrast', subtitle: 'Live contrast on tone and raised backgrounds' },
     'color-ramps': { name: 'Ramps', subtitle: 'Velvet brand and warm neutral in OKLCH' },
     'color-backgrounds': { name: 'Backgrounds', subtitle: 'Surface roles with live contrast' },
     'color-foreground-border': { name: 'Foreground and border', subtitle: 'Text roles and hairline strengths' },
@@ -18,7 +32,24 @@ export const colorEn = defineDictionary({
 export const colorPl: TranslationOf<typeof colorEn> = {
   title: 'Kolor',
   blurb: 'Skale OKLCH, role semantyczne i kontrast — każda para sprawdzona.',
+  contrast: { tinted: 'Na tle tonu', raised: 'Na podniesionym tle' },
+  roles: {
+    foreground: 'Pierwszy plan na --bg-raised',
+    border: 'Obramowanie',
+    exempt: 'Zwolnione z wymogu (niedostępne)',
+    report: 'Raport kwartalny',
+    prepared: 'Przygotowany przez finanse',
+    updated: 'Zaktualizowano 3 minuty temu',
+    workspace: 'Otwórz w obszarze roboczym',
+    invoices: 'Zobacz wszystkie faktury',
+    unavailable: 'Niedostępne',
+  },
   specimens: {
+    'color-text-backgrounds': { name: 'Tekst na tłach', subtitle: 'Kontrast ról tekstu na neutralnych powierzchniach' },
+    'color-tone-contrast': {
+      name: 'Kontrast tonów',
+      subtitle: 'Kontrast na żywo na tle tonu i podniesionej powierzchni',
+    },
     'color-ramps': { name: 'Skale', subtitle: 'Marka Velvet i ciepła neutralna w OKLCH' },
     'color-backgrounds': { name: 'Tła', subtitle: 'Role powierzchni z kontrastem na żywo' },
     'color-foreground-border': { name: 'Pierwszy plan i obramowanie', subtitle: 'Role tekstu i grubości linii' },

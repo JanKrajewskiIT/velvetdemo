@@ -5,6 +5,7 @@ import { cx } from '../../styles/cx';
 import { CommandPaletteDemo } from '../demos/menus/CommandPaletteDemo';
 import { ContextMenuDemo } from '../demos/menus/ContextMenuDemo';
 import { DropdownButtonDemo } from '../demos/menus/DropdownButtonDemo';
+import { LocaleSwitcherDemo } from '../demos/menus/LocaleSwitcherDemo';
 import { MenuDemo } from '../demos/menus/MenuDemo';
 import { MenuPanelDemo } from '../demos/menus/MenuPanelDemo';
 import { ToolbarDemo } from '../demos/menus/ToolbarDemo';
@@ -12,6 +13,11 @@ import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './menus.module.css';
 
 export const menuSpecimens: readonly Specimen<SpecimenIdOf<typeof menusEn>>[] = [
+  {
+    id: 'menus-locale',
+    span: 6,
+    render: () => <LocaleSwitcherDemo />,
+  },
   {
     id: 'menus-menu',
     span: 6,

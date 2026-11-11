@@ -18,7 +18,6 @@ import type { selectionEn } from '../../i18n/library/selection';
 import { cx } from '../../styles/cx';
 import { AutocompleteDemo } from '../demos/selection/AutocompleteDemo';
 import { IndeterminateGroupDemo } from '../demos/selection/IndeterminateGroupDemo';
-import { RatingReviewsDemo } from '../demos/selection/RatingReviewsDemo';
 import {
   BILLING_CYCLES,
   COUNTRIES,
@@ -179,7 +178,6 @@ export const selectionSpecimens: readonly Specimen<SpecimenIdOf<typeof selection
         <div class={styles.group}>
           <Rating label="Your rating" defaultValue={3} showValue />
           <Rating label="Average rating" defaultValue={4} readOnly size="sm" />
-          <RatingReviewsDemo />
         </div>
       </div>
     ),

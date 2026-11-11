@@ -28,10 +28,8 @@ const CATEGORY_COUNTS = [
   { value: 'research', count: 8 },
 ] as const;
 
-const formatBudget = (value: number) => `$${value}k`;
-
 export const HeroStage = () => {
-  const { ts } = useI18n();
+  const { ts, formatNumber } = useI18n();
   const [inviteOpen, setInviteOpen] = createSignal(true);
   const today = startOfDay(new Date());
   const categories = () =>
@@ -41,6 +39,8 @@ export const HeroStage = () => {
       label: ts(`showcase.hero.stage.categories.${value}`),
     }));
   const formatSteps = (done: number, total: number) => ts('showcase.hero.stage.steps', { done, total });
+  const formatBudget = (value: number) =>
+    formatNumber(value * 1000, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 0 });
 
   return (
     <div class={styles.stage}>
@@ -49,8 +49,8 @@ export const HeroStage = () => {
           <div class={styles.panel}>
             <Stat
               label={ts('showcase.hero.stage.revenue')}
-              value="€48,290"
-              delta="+12.4%"
+              value={formatNumber(48290, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}
+              delta={formatNumber(0.124, { style: 'percent', signDisplay: 'always', maximumFractionDigits: 1 })}
               hint={ts('showcase.hero.stage.revenueHint')}
               variant="flat"
             />
@@ -65,7 +65,7 @@ export const HeroStage = () => {
                 {ts('showcase.hero.stage.autosaved')}
               </Text>
             </div>
-            <Switch label={ts('showcase.hero.stage.emailNotifications')} checked />
+            <Switch label={ts('showcase.hero.stage.emailNotifications')} defaultChecked />
             <Switch label={ts('showcase.hero.stage.compactDensity')} />
             <Slider
               label={ts('showcase.hero.stage.monthlyBudget')}

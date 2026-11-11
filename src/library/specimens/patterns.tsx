@@ -10,9 +10,9 @@ import { CommentThreadDemo } from '../demos/patterns/CommentThreadDemo';
 import { DualFilterBarDemo } from '../demos/patterns/DualFilterBarDemo';
 import { FileUrlImportDemo } from '../demos/patterns/FileUrlImportDemo';
 import { FilterBarDemo } from '../demos/patterns/FilterBarDemo';
-import { FlashcardFlowDemo } from '../demos/patterns/FlashcardFlowDemo';
 import { ImportSourcesDemo } from '../demos/patterns/ImportSourcesDemo';
 import { AI_SECTIONS, AI_SOURCES } from '../demos/patterns/patternSamples';
+import { PracticeFlowDemo } from '../demos/patterns/PracticeFlowDemo';
 import { PricingDemo } from '../demos/patterns/PricingDemo';
 import { PromptInputDemo } from '../demos/patterns/PromptInputDemo';
 import { QueryBuilderDemo } from '../demos/patterns/QueryBuilderDemo';
@@ -65,7 +65,7 @@ export const patternSpecimens: readonly Specimen<SpecimenIdOf<typeof patternsEn>
   {
     id: 'patterns-flashcards',
     span: 6,
-    render: () => <FlashcardFlowDemo />,
+    render: () => <PracticeFlowDemo />,
   },
   {
     id: 'patterns-calendar-organizer',

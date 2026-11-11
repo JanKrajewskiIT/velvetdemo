@@ -1,6 +1,6 @@
 import { useI18n } from '@jankrajewskiit/i18n';
 import { Button, Input, Select, Text } from '@jankrajewskiit/ui';
-import { createMemo, createSignal, For, onCleanup, onMount, Show } from 'solid-js';
+import { createMemo, createSignal, For, onCleanup, onMount, Show, untrack } from 'solid-js';
 
 import { countSpecimens } from '../../library/countSpecimens';
 import type { LibraryGroup } from '../../library/types';
@@ -15,15 +15,15 @@ export interface LibrarySectionProps {
   groups: readonly LibraryGroup[];
 }
 
-const DEFAULT_GROUP_NUMBER = '11';
-
 export const LibrarySection = (props: LibrarySectionProps) => {
   const { ts } = useI18n();
   const text = useLibraryText();
   const [query, setQuery] = createSignal('');
   const [scope, setScope] = createSignal<Scope>('all');
   const hashGroup = () => groupFromHash(props.groups, location.hash);
-  const [selectedId, setSelectedId] = createSignal(`g${hashGroup()?.number ?? DEFAULT_GROUP_NUMBER}`);
+  const defaultGroup = () => props.groups.find((group) => group.slug === 'atoms') ?? props.groups[0];
+  const initialGroup = untrack(() => hashGroup() ?? defaultGroup());
+  const [selectedId, setSelectedId] = createSignal(initialGroup ? groupAnchor(initialGroup) : undefined);
   let tools: HTMLDivElement | undefined;
 
   const selectFromHash = () => {
@@ -40,6 +40,9 @@ export const LibrarySection = (props: LibrarySectionProps) => {
   const groups = createMemo(() => visibleGroups(text, props.groups, query(), scope()));
   const searching = () => query().trim().length > 0;
   const current = createMemo(() => groups().find((group) => groupAnchor(group) === selectedId()) ?? groups()[0]);
+  const currentIndex = () => groups().findIndex((group) => group === current());
+  const previousGroup = () => groups()[currentIndex() - 1];
+  const nextGroup = () => groups()[currentIndex() + 1];
   const shown = () => {
     if (searching()) return groups();
     const group = current();
@@ -117,6 +120,32 @@ export const LibrarySection = (props: LibrarySectionProps) => {
               }
             >
               <For each={shown()}>{(group) => <LibraryGroupView group={group} query={query()} />}</For>
+              <Show when={!searching()}>
+                <nav class={styles.pager} aria-label={ts('showcase.library.groupNavigation')}>
+                  <Button
+                    variant="secondary"
+                    iconLeft="arrow-left"
+                    disabled={!previousGroup()}
+                    onClick={() => {
+                      const group = previousGroup();
+                      if (group) pick(groupAnchor(group));
+                    }}
+                  >
+                    {ts('showcase.library.previousGroup')}
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    iconRight="arrow-right"
+                    disabled={!nextGroup()}
+                    onClick={() => {
+                      const group = nextGroup();
+                      if (group) pick(groupAnchor(group));
+                    }}
+                  >
+                    {ts('showcase.library.nextGroup')}
+                  </Button>
+                </nav>
+              </Show>
             </Show>
           </div>
         </div>

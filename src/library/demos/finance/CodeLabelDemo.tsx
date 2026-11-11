@@ -1,26 +1,26 @@
 import { useI18n } from '@jankrajewskiit/i18n';
-import { InstrumentLabel, Stack, Text } from '@jankrajewskiit/ui';
+import { CodeLabel, Stack, Text } from '@jankrajewskiit/ui';
 import { createSignal } from 'solid-js';
 
-export const InstrumentLabelDemo = () => {
+export const CodeLabelDemo = () => {
   const { ts } = useI18n();
   const [selected, setSelected] = createSignal('GLBX');
   return (
     <Stack>
       <Stack direction="row" wrap role="group" aria-label={ts('library.finance.controls.selectInstrument')}>
-        <InstrumentLabel
-          symbol="GLBX"
+        <CodeLabel
+          code="GLBX"
           name={ts('library.finance.controls.fund')}
-          exchange="XETRA"
+          tag="XETRA"
           meta="EUR"
           showMark
           selected={selected() === 'GLBX'}
           onClick={() => setSelected('GLBX')}
         />
-        <InstrumentLabel
-          symbol="TBND"
+        <CodeLabel
+          code="TBND"
           name={ts('library.finance.controls.treasury')}
-          exchange="LSE"
+          tag="LSE"
           showMark
           size="sm"
           selected={selected() === 'TBND'}

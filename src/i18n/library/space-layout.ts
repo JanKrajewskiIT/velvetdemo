@@ -3,7 +3,23 @@ import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 export const spaceLayoutEn = defineDictionary({
   title: 'Space & Layout',
   blurb: 'A 4px grid, containers, breakpoints and the app shell.',
+  sizes: {
+    icons: 'Icons',
+    avatars: 'Avatars and icon tiles',
+    targets: 'Marks and hit targets',
+    nested: 'Nested controls and rows',
+    overlays: 'Overlay widths and maximum heights',
+    halos: 'Halo sizes',
+  },
   specimens: {
+    'space-fixed': {
+      name: 'Fixed sizes',
+      subtitle: 'Icon, avatar, icon tile, checkmark, swatch and hit-target tokens',
+    },
+    'space-nested-overlays': {
+      name: 'Nested controls and overlays',
+      subtitle: 'Inner controls, rows, overlay limits and halos',
+    },
     'space-scale': { name: 'Spacing scale', subtitle: 'The 4 px grid, measured live' },
     'space-density': { name: 'Control and row heights', subtitle: 'Comfortable beside compact density' },
     'space-breakpoints': { name: 'Breakpoints', subtitle: 'Five minimum widths and the active one' },
@@ -16,7 +32,23 @@ export const spaceLayoutEn = defineDictionary({
 export const spaceLayoutPl: TranslationOf<typeof spaceLayoutEn> = {
   title: 'Odstępy i układ',
   blurb: 'Siatka 4 px, kontenery, punkty graniczne i powłoka aplikacji.',
+  sizes: {
+    icons: 'Ikony',
+    avatars: 'Awatary i kafelki z ikoną',
+    targets: 'Znaczniki i obszary trafienia',
+    nested: 'Zagnieżdżone kontrolki i wiersze',
+    overlays: 'Szerokości i maksymalne wysokości nakładek',
+    halos: 'Rozmiary poświaty',
+  },
   specimens: {
+    'space-fixed': {
+      name: 'Stałe rozmiary',
+      subtitle: 'Tokeny ikon, awatarów, kafelków, znaczników i obszarów trafienia',
+    },
+    'space-nested-overlays': {
+      name: 'Zagnieżdżone kontrolki i nakładki',
+      subtitle: 'Wewnętrzne kontrolki, wiersze, limity nakładek i poświaty',
+    },
     'space-scale': { name: 'Skala odstępów', subtitle: 'Siatka 4 px, mierzona na żywo' },
     'space-density': { name: 'Wysokości kontrolek i wierszy', subtitle: 'Gęstość komfortowa obok kompaktowej' },
     'space-breakpoints': { name: 'Punkty graniczne', subtitle: 'Pięć minimalnych szerokości i aktywna z nich' },

@@ -16,6 +16,7 @@ export const inputsEn = defineDictionary({
     plainValue: 'Release checklist\nReview component examples\nCheck light and dark themes',
   },
   specimens: {
+    'inputs-copy-field': { name: 'CopyField', subtitle: 'Read-only content with a clipboard action' },
     'inputs-input': { name: 'Input', subtitle: 'Affixes, icons, validation, counter and states' },
     'inputs-textarea': { name: 'Textarea', subtitle: 'Auto-grow with a row cap and counter' },
     'inputs-identity': { name: 'PasswordInput, PhoneInput and OtpInput', subtitle: 'Credential and contact fields' },
@@ -51,6 +52,7 @@ export const inputsPl: TranslationOf<typeof inputsEn> = {
     plainValue: 'Lista przed wydaniem\nPrzejrzyj przykłady komponentów\nSprawdź jasny i ciemny motyw',
   },
   specimens: {
+    'inputs-copy-field': { name: 'CopyField', subtitle: 'Treść tylko do odczytu z akcją kopiowania do schowka' },
     'inputs-input': { name: 'Input', subtitle: 'Przedrostki i przyrostki, ikony, walidacja, licznik i stany' },
     'inputs-textarea': { name: 'Textarea', subtitle: 'Automatyczne powiększanie z limitem wierszy i licznikiem' },
     'inputs-identity': {

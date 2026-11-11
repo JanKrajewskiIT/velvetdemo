@@ -5,7 +5,9 @@ import { DataVizDemo } from '../demos/color/DataVizDemo';
 import { OnColorDemo } from '../demos/color/OnColorDemo';
 import { StatusRolesDemo } from '../demos/color/StatusRolesDemo';
 import { TextBorderRolesDemo } from '../demos/color/TextBorderRolesDemo';
+import { TextOnBackgroundsDemo } from '../demos/color/TextOnBackgroundsDemo';
 import { RAMP_STEPS, TokenRamp } from '../demos/color/TokenRamp';
+import { ToneContrastDemo } from '../demos/color/ToneContrastDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './color.module.css';
 
@@ -29,6 +31,16 @@ const NEUTRAL_STEPS = [
 ] as const;
 
 export const colorSpecimens: readonly Specimen<SpecimenIdOf<typeof colorEn>>[] = [
+  {
+    id: 'color-text-backgrounds',
+    span: 12,
+    render: () => <TextOnBackgroundsDemo />,
+  },
+  {
+    id: 'color-tone-contrast',
+    span: 12,
+    render: () => <ToneContrastDemo />,
+  },
   {
     id: 'color-ramps',
     span: 12,

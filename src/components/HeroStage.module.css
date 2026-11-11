@@ -1,7 +1,7 @@
 .stage {
   position: relative;
   padding: 28px;
-  border-radius: var(--radius-2xl);
+  border-radius: 28px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
 }
@@ -10,7 +10,7 @@
   content: '';
   position: absolute;
   inset: -1px;
-  border-radius: var(--radius-2xl);
+  border-radius: inherit;
   background: radial-gradient(
     120% 80% at 100% 0%,
     color-mix(in oklab, var(--velvet-500) 14%, transparent),
@@ -36,7 +36,7 @@
 .panel {
   background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   box-shadow: var(--elevation-card);
   padding: 20px;
   display: flex;

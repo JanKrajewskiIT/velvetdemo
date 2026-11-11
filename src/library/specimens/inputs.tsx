@@ -1,4 +1,5 @@
 import {
+  CopyField,
   InlineEdit,
   Input,
   NumberInput,
@@ -32,6 +33,11 @@ const RELEASE_NOTES =
   '<h2>Release notes</h2><p>Try <strong>bold</strong>, <em>italic</em> or <code>code</code>, or type <code>- </code> to start a list.</p><ul><li>Markdown shortcuts</li><li>Undo and redo</li></ul>';
 
 export const inputSpecimens: readonly Specimen<SpecimenIdOf<typeof inputsEn>>[] = [
+  {
+    id: 'inputs-copy-field',
+    span: 6,
+    render: () => <CopyField label="Invite link" value="https://velvet.example/invite/8f3k2q" />,
+  },
   {
     id: 'inputs-input',
     span: 8,

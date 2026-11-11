@@ -1,0 +1,16 @@
+.tinted,
+.raised {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--tone-fg);
+}
+
+.tinted {
+  background: var(--tone-bg);
+}
+
+.raised {
+  background: var(--bg-raised);
+}

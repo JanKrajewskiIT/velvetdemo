@@ -1,0 +1,6 @@
+.vertical {
+  display: flex;
+  align-items: stretch;
+  height: 64px;
+  gap: var(--space-3);
+}

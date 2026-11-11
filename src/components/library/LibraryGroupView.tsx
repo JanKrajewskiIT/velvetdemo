@@ -29,7 +29,7 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
   return (
     <section class={styles.group} id={anchor()} aria-labelledby={`${anchor()}-title`}>
       <header class={styles.header}>
-        <Text as="span" variant="display-lg" tone="brand" aria-hidden="true">
+        <Text as="span" variant="display-lg" tone="brand" class={styles.number} aria-hidden="true">
           {props.group.number}
         </Text>
         <div class={styles.heading}>
@@ -40,7 +40,7 @@ export const LibraryGroupView = (props: LibraryGroupViewProps) => {
             {text.groupBlurb(props.group)}
           </Text>
         </div>
-        <Text variant="caption" mono tone="tertiary">
+        <Text variant="caption" mono tone="tertiary" class={styles.count}>
           {ts('showcase.library.specimenCount', { count: ids().size })}
         </Text>
       </header>

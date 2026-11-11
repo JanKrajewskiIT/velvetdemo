@@ -12,7 +12,7 @@ export const actionsEn = defineDictionary({
   },
   specimens: {
     'actions-button': { name: 'Button', subtitle: 'Seven variants, four sizes, icons and states' },
-    'actions-copy': { name: 'CopyButton and CopyField', subtitle: 'Clipboard copy with announced feedback' },
+    'actions-copy': { name: 'CopyButton', subtitle: 'Clipboard copy with announced feedback' },
     'actions-icon-buttons': {
       name: 'IconButton and ButtonGroup',
       subtitle: 'Seven icon variants, labelled actions and segmented groups',
@@ -23,7 +23,7 @@ export const actionsEn = defineDictionary({
       name: 'AuthButton, AuthActionButton and CalendarEventButton',
       subtitle: 'Offline session initialization, sign-in failure and add-to-calendar',
     },
-    'actions-preferences': { name: 'ThemeToggle and LocaleSwitcher', subtitle: 'Appearance and language switches' },
+    'actions-preferences': { name: 'ThemeToggle', subtitle: 'Appearance switches across sizes and surfaces' },
   },
 });
 
@@ -39,7 +39,7 @@ export const actionsPl: TranslationOf<typeof actionsEn> = {
   },
   specimens: {
     'actions-button': { name: 'Button', subtitle: 'Siedem wariantów, cztery rozmiary, ikony i stany' },
-    'actions-copy': { name: 'CopyButton i CopyField', subtitle: 'Kopiowanie do schowka z komunikatem zwrotnym' },
+    'actions-copy': { name: 'CopyButton', subtitle: 'Kopiowanie do schowka z komunikatem zwrotnym' },
     'actions-icon-buttons': {
       name: 'IconButton i ButtonGroup',
       subtitle: 'Siedem wariantów ikon, opisane akcje i grupy segmentowe',
@@ -53,6 +53,9 @@ export const actionsPl: TranslationOf<typeof actionsEn> = {
       name: 'AuthButton, AuthActionButton i CalendarEventButton',
       subtitle: 'Inicjalizacja lokalnej sesji, błąd logowania i dodawanie do kalendarza',
     },
-    'actions-preferences': { name: 'ThemeToggle i LocaleSwitcher', subtitle: 'Przełączniki wyglądu i języka' },
+    'actions-preferences': {
+      name: 'ThemeToggle',
+      subtitle: 'Przełączniki wyglądu w różnych rozmiarach i na różnych tłach',
+    },
   },
 };

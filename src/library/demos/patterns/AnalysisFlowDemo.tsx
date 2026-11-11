@@ -1,10 +1,10 @@
-import type { AtsResult } from '@jankrajewskiit/ui';
-import { AnalysisRequest, AtsAnalysisPanel } from '@jankrajewskiit/ui';
+import type { ReportResult } from '@jankrajewskiit/ui';
+import { AnalysisReport, AnalysisRequest } from '@jankrajewskiit/ui';
 import { createSignal, onCleanup } from 'solid-js';
 
 import { reportAsyncError } from '../../../browserDiagnostics';
 import styles from './AnalysisFlowDemo.module.css';
-import { ANALYSIS_SOURCES, ANALYSIS_STEPS, ANALYSIS_TYPES, ATS_RESULT } from './analysisSamples';
+import { ANALYSIS_SOURCES, ANALYSIS_STEPS, ANALYSIS_TYPES, REPORT_RESULT } from './analysisSamples';
 import { createSimulatedDelay } from './createSimulatedDelay';
 
 const STEP_DELAY_MS = 800;
@@ -13,7 +13,7 @@ export const AnalysisFlowDemo = () => {
   const delay = createSimulatedDelay(STEP_DELAY_MS);
   const [status, setStatus] = createSignal<'idle' | 'running'>('idle');
   const [step, setStep] = createSignal(0);
-  const [result, setResult] = createSignal<AtsResult | null>(null);
+  const [result, setResult] = createSignal<ReportResult | null>(null);
   let runId = 0;
   onCleanup(() => {
     runId += 1;
@@ -34,7 +34,7 @@ export const AnalysisFlowDemo = () => {
       }
       if (current !== runId) return;
     }
-    setResult(ATS_RESULT);
+    setResult(REPORT_RESULT);
     setStatus('idle');
   };
 
@@ -63,7 +63,7 @@ export const AnalysisFlowDemo = () => {
         onRun={run}
         onCancel={cancel}
       />
-      <AtsAnalysisPanel
+      <AnalysisReport
         status={panelStatus()}
         result={result()}
         subject="Anna Kowalska"

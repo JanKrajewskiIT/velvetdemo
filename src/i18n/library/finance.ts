@@ -18,6 +18,7 @@ export const financeEn = defineDictionary({
     session: 'Session',
     account: 'Account',
     connected: 'Offline simulation ready',
+    simulation: 'Offline simulation',
     stopped: 'Simulation paused',
     stop: 'Pause simulation',
     resume: 'Resume simulation',
@@ -58,14 +59,14 @@ export const financeEn = defineDictionary({
       name: 'MoneyPrivacy and useMoneyHidden',
       subtitle: 'Shared reactive privacy with an explicit public amount',
     },
-    'price-change': { name: 'PriceChange', subtitle: 'Signed changes, basis points and a flat threshold' },
+    'price-change': { name: 'Delta', subtitle: 'Signed changes, custom units and a flat threshold' },
     'direction-badge': {
       name: 'DirectionBadge',
-      subtitle: 'Market directions with icons and three visual variants',
+      subtitle: 'Up, down, flat and muted directions with icons and three visual variants',
     },
     'instrument-label': {
-      name: 'InstrumentLabel',
-      subtitle: 'Selectable symbols with exchange and descriptive metadata',
+      name: 'CodeLabel',
+      subtitle: 'Selectable codes with a tag and descriptive metadata',
     },
     'contribution-bar': {
       name: 'ContributionBar',
@@ -79,7 +80,7 @@ export const financeEn = defineDictionary({
       name: 'EnvironmentBar',
       subtitle: 'A local paper session with connection state and pause controls',
     },
-    'news-item': { name: 'NewsItem', subtitle: 'An offline headline, summary and interactive ticker tags' },
+    'news-item': { name: 'NewsItem', subtitle: 'An offline headline, summary and interactive tags' },
     'range-band-chart': {
       name: 'RangeBandChart',
       subtitle: 'Expected range, median and observed values with keyboard inspection',
@@ -109,6 +110,7 @@ export const financePl: TranslationOf<typeof financeEn> = {
     session: 'Sesja',
     account: 'Rachunek',
     connected: 'Symulacja offline jest gotowa',
+    simulation: 'Symulacja offline',
     stopped: 'Symulacja wstrzymana',
     stop: 'Wstrzymaj symulację',
     resume: 'Wznów symulację',
@@ -149,14 +151,14 @@ export const financePl: TranslationOf<typeof financeEn> = {
       name: 'MoneyPrivacy i useMoneyHidden',
       subtitle: 'Wspólna reaktywna prywatność i jawnie publiczna kwota',
     },
-    'price-change': { name: 'PriceChange', subtitle: 'Zmiany ze znakiem, punkty bazowe i próg neutralności' },
+    'price-change': { name: 'Delta', subtitle: 'Zmiany ze znakiem, własne jednostki i próg neutralności' },
     'direction-badge': {
       name: 'DirectionBadge',
-      subtitle: 'Kierunki rynkowe z ikonami i trzema wariantami wyglądu',
+      subtitle: 'Kierunki wzrostu, spadku, neutralny i wyciszony z ikonami i trzema wariantami wyglądu',
     },
     'instrument-label': {
-      name: 'InstrumentLabel',
-      subtitle: 'Wybór symbolu z giełdą i opisowymi metadanymi',
+      name: 'CodeLabel',
+      subtitle: 'Wybór kodu z tagiem i opisowymi metadanymi',
     },
     'contribution-bar': {
       name: 'ContributionBar',

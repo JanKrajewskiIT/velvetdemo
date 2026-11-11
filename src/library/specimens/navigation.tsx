@@ -10,6 +10,7 @@ import { NavbarChipDemo } from '../demos/navigation/NavbarChipDemo';
 import { NavbarDemo } from '../demos/navigation/NavbarDemo';
 import { BOTTOM_ITEMS, PERMISSIONS, TAXONOMY } from '../demos/navigation/navigationData';
 import { PaginationDemo } from '../demos/navigation/PaginationDemo';
+import { PeriodNavDemo } from '../demos/navigation/PeriodNavDemo';
 import { StepperDemo } from '../demos/navigation/StepperDemo';
 import { TabsDemo } from '../demos/navigation/TabsDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
@@ -18,6 +19,11 @@ import styles from './navigation.module.css';
 const DEMO_HREF = '#library-navigation-demo';
 
 export const navigationSpecimens: readonly Specimen<SpecimenIdOf<typeof navigationEn>>[] = [
+  {
+    id: 'navigation-period',
+    span: 6,
+    render: () => <PeriodNavDemo />,
+  },
   {
     id: 'navigation-tabs',
     span: 12,

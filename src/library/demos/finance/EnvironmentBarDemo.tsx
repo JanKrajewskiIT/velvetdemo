@@ -8,7 +8,8 @@ export const EnvironmentBarDemo = () => {
   return (
     <Stack>
       <EnvironmentBar
-        environment="paper"
+        tone="info"
+        label={ts('library.finance.controls.simulation')}
         items={[
           { label: ts('library.finance.controls.session'), value: 'DEMO-042' },
           { label: ts('library.finance.controls.account'), value: <Money amount={100000} currency="PLN" /> },
@@ -17,9 +18,9 @@ export const EnvironmentBarDemo = () => {
           state: paused() ? 'offline' : 'live',
           label: ts(paused() ? 'library.finance.controls.stopped' : 'library.finance.controls.connected'),
         }}
-        onKill={() => setPaused(true)}
-        killLabel={ts('library.finance.controls.stop')}
-        killDisabled={paused()}
+        onStop={() => setPaused(true)}
+        stopLabel={ts('library.finance.controls.stop')}
+        stopDisabled={paused()}
         actions={
           <Show when={paused()}>
             <Button size="sm" variant="secondary" onClick={() => setPaused(false)}>

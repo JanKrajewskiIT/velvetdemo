@@ -1,8 +1,28 @@
 import { defineDictionary, type TranslationOf } from '@jankrajewskiit/i18n';
 
 export const dataVizEn = defineDictionary({
-  title: 'Data viz',
+  title: 'Charts',
   blurb: 'Charts coloured from one categorical palette, keyboard-readable.',
+  parts: {
+    revenue: 'Revenue',
+    costs: 'Costs',
+    margin: 'Margin',
+    inline: 'Inline legend · toggle series',
+    list: 'List legend · values and shares',
+    band: 'Expected range',
+    median: 'Median',
+    outside: 'Outside range',
+    focus: 'Focused series: {value}',
+    none: 'None',
+    value: 'Value',
+    period: 'Observation',
+    first: 'First observation',
+    second: 'Second observation',
+    third: 'Third observation',
+    tooltipHelp: 'Choose an observation to update the read-out. The band row and series colours use chart tokens.',
+    placement: 'Placement',
+    leftEdge: 'Near the left edge: x is clamped by edge',
+  },
   lineScale: {
     scenario: 'Line chart scenario',
     price: 'Price with gaps',
@@ -15,6 +35,11 @@ export const dataVizEn = defineDictionary({
     hint: 'Missing observations leave gaps. Compare the fitted axis with a zero baseline, then inspect the same data in table view.',
   },
   specimens: {
+    'data-viz-legend': {
+      name: 'ChartLegend',
+      subtitle: 'Inline and list layouts, toggling, values, shares and band swatches',
+    },
+    'data-viz-tooltip': { name: 'ChartTooltip', subtitle: 'Keyboard-controlled read-out with series and band rows' },
     'data-viz-bar-chart': { name: 'BarChart', subtitle: 'Grouped or stacked bars by series' },
     'data-viz-donut-chart': { name: 'DonutChart', subtitle: 'Part-to-whole with a toggling legend' },
     'data-viz-line-chart': { name: 'LineChart', subtitle: 'Crosshair, area fill and table view' },
@@ -37,8 +62,28 @@ export const dataVizEn = defineDictionary({
 });
 
 export const dataVizPl: TranslationOf<typeof dataVizEn> = {
-  title: 'Wizualizacja danych',
+  title: 'Wykresy',
   blurb: 'Wykresy kolorowane z jednej palety kategorii, czytelne z klawiatury.',
+  parts: {
+    revenue: 'Przychód',
+    costs: 'Koszty',
+    margin: 'Marża',
+    inline: 'Legenda w wierszu · przełączanie serii',
+    list: 'Legenda w liście · wartości i udziały',
+    band: 'Oczekiwany przedział',
+    median: 'Mediana',
+    outside: 'Poza przedziałem',
+    focus: 'Wyróżniona seria: {value}',
+    none: 'Brak',
+    value: 'Wartość',
+    period: 'Obserwacja',
+    first: 'Pierwsza obserwacja',
+    second: 'Druga obserwacja',
+    third: 'Trzecia obserwacja',
+    tooltipHelp: 'Wybierz obserwację, aby zmienić odczyt. Wiersz przedziału i kolory serii używają tokenów wykresów.',
+    placement: 'Pozycjonowanie',
+    leftEdge: 'Blisko lewej krawędzi: x jest ograniczane przez edge',
+  },
   lineScale: {
     scenario: 'Scenariusz wykresu liniowego',
     price: 'Cena z lukami',
@@ -51,6 +96,11 @@ export const dataVizPl: TranslationOf<typeof dataVizEn> = {
     hint: 'Brakujące pomiary pozostawiają luki. Porównaj dopasowaną oś z osią obejmującą zero, a potem sprawdź te same dane w tabeli.',
   },
   specimens: {
+    'data-viz-legend': {
+      name: 'ChartLegend',
+      subtitle: 'Układ wiersza i listy, przełączanie, wartości, udziały i przedziały',
+    },
+    'data-viz-tooltip': { name: 'ChartTooltip', subtitle: 'Odczyt sterowany klawiaturą z seriami i przedziałem' },
     'data-viz-bar-chart': { name: 'BarChart', subtitle: 'Słupki grupowane lub skumulowane według serii' },
     'data-viz-donut-chart': { name: 'DonutChart', subtitle: 'Część do całości z przełączaną legendą' },
     'data-viz-line-chart': { name: 'LineChart', subtitle: 'Celownik, wypełnienie obszaru i widok tabeli' },

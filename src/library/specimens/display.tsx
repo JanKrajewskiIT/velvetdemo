@@ -4,11 +4,13 @@ import { For } from 'solid-js';
 
 import type { displayEn } from '../../i18n/library/display';
 import { CaptionedRow } from '../demos/display/CaptionedRow';
+import { ListItemDemo } from '../demos/display/ListItemDemo';
 import { MarkdownDemo } from '../demos/display/MarkdownDemo';
 import { MarkdownEditorDemo } from '../demos/display/MarkdownEditorDemo';
 import { QrCodeDemo } from '../demos/display/QrCodeDemo';
 import { TagInteractionDemo } from '../demos/display/TagInteractionDemo';
 import { WatermarkDemo } from '../demos/display/WatermarkDemo';
+import { RatingReviewsDemo } from '../demos/selection/RatingReviewsDemo';
 import type { Specimen, SpecimenIdOf } from '../types';
 import styles from './display.module.css';
 
@@ -30,6 +32,16 @@ const SHORTCUTS = [
 ] as const;
 
 export const displaySpecimens: readonly Specimen<SpecimenIdOf<typeof displayEn>>[] = [
+  {
+    id: 'display-list-item',
+    span: 6,
+    render: () => <ListItemDemo />,
+  },
+  {
+    id: 'display-rating-summary',
+    span: 6,
+    render: () => <RatingReviewsDemo />,
+  },
   {
     id: 'display-badge',
     span: 6,

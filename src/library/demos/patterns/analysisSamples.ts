@@ -1,10 +1,10 @@
-import type { AnalysisSource, AnalysisType, AtsResult } from '@jankrajewskiit/ui';
+import type { AnalysisSource, AnalysisType, ReportResult } from '@jankrajewskiit/ui';
 
 export const ANALYSIS_STEPS: string[] = ['Reading CV', 'Matching requirements', 'Scoring'];
 
 export const ANALYSIS_SOURCES: AnalysisSource[] = [
-  { id: 'cv', label: 'CV', kind: 'cv', detail: 'Anna_Kowalska_CV.pdf, 2 pages' },
-  { id: 'job', label: 'Job offer', kind: 'job', detail: 'Senior Frontend Engineer, 1 page' },
+  { id: 'cv', label: 'CV', kind: 'document', detail: 'Anna_Kowalska_CV.pdf, 2 pages' },
+  { id: 'job', label: 'Job offer', kind: 'document', detail: 'Senior Frontend Engineer, 1 page' },
   { id: 'notes', label: 'Recruiter notes', kind: 'notes', detail: '3 notes' },
   {
     id: 'call',
@@ -32,7 +32,7 @@ export const ANALYSIS_TYPES: AnalysisType[] = [
   },
 ];
 
-export const ATS_RESULT: AtsResult = {
+export const REPORT_RESULT: ReportResult = {
   score: 78,
   verdict: 'Strong on systems work, light on people leadership',
   summary: 'The CV covers most hard requirements. Management scope is implied rather than stated.',

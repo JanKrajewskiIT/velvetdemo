@@ -26,12 +26,6 @@
   gap: var(--space-3);
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-24) * 2.75), 1fr));
-  gap: var(--space-6);
-}
-
 .overlay {
   width: 100%;
   border: var(--border-width) solid var(--border-subtle);

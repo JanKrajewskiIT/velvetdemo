@@ -4,11 +4,9 @@ import {
   type ButtonSize,
   type ButtonVariant,
   CopyButton,
-  CopyField,
   Fab,
   IconButton,
   type IconButtonVariant,
-  LocaleSwitcher,
   ThemeToggle,
   ToggleButton,
   ToggleGroup,
@@ -90,7 +88,6 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
             <CopyButton value="npm install @jankrajewskiit/ui" iconOnly variant="ghost" />
           </div>
         </div>
-        <CopyField label="Invite link" value="https://velvet.example/invite/8f3k2q" />
       </div>
     ),
   },
@@ -241,21 +238,6 @@ export const actionSpecimens: readonly Specimen<SpecimenIdOf<typeof actionsEn>>[
             <div class={styles.onMedia}>
               <ThemeToggle variant="dark" />
             </div>
-          </div>
-        </div>
-        <div class={styles.group}>
-          <p class={styles.caption}>Locale switcher keeps its own selection</p>
-          <div class={styles.row}>
-            <LocaleSwitcher defaultValue="en" />
-            <LocaleSwitcher defaultValue="pl" size="md" />
-            <LocaleSwitcher
-              defaultValue="de"
-              locales={[
-                { value: 'pl', label: 'PL', name: 'Polski' },
-                { value: 'en', label: 'EN', name: 'English' },
-                { value: 'de', label: 'DE', name: 'Deutsch' },
-              ]}
-            />
           </div>
         </div>
       </div>

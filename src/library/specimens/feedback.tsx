@@ -184,43 +184,45 @@ export const feedbackSpecimens: readonly Specimen<SpecimenIdOf<typeof feedbackEn
   },
   {
     id: 'feedback-loading',
-    span: 12,
+    span: 6,
     render: () => (
-      <div class={styles.columns}>
-        <div class={styles.stack}>
-          <CaptionedRow caption="Spinner variants">
-            <For each={SPINNER_VARIANTS}>{(variant) => <Spinner variant={variant} label={variant} />}</For>
-          </CaptionedRow>
-          <CaptionedRow caption="Sizes">
-            <For each={SPINNER_SIZES}>{(size) => <Spinner size={size} label={size} />}</For>
-          </CaptionedRow>
-          <CaptionedRow caption="Robot processing indicator">
-            <div class={styles.list}>
-              <RobotProcessingIndicator label="Reading the job listing from its link" />
-              <RobotProcessingIndicator label="Drafting a cover letter" />
-            </div>
-          </CaptionedRow>
-          <CaptionedRow caption="Loading overlay">
-            <LoadingOverlay class={styles.overlay}>
-              <p class={styles.overlayBody}>Quarterly figures are being refreshed from the ledger.</p>
-            </LoadingOverlay>
-          </CaptionedRow>
-        </div>
-        <div class={styles.stack}>
-          <CaptionedRow caption="Skeleton">
-            <div class={styles.skeletonCard} aria-busy="true">
-              <div class={styles.identity}>
-                <Skeleton circle height={40} />
-                <div class={styles.identityText}>
-                  <Skeleton width={160} height={14} />
-                  <Skeleton width={104} height={12} />
-                </div>
+      <div class={styles.stack}>
+        <CaptionedRow caption="RobotProcessingIndicator">
+          <div class={styles.list}>
+            <RobotProcessingIndicator label="Reading the job listing from its link" />
+            <RobotProcessingIndicator label="Drafting a cover letter" />
+          </div>
+        </CaptionedRow>
+        <CaptionedRow caption="LoadingOverlay">
+          <LoadingOverlay class={styles.overlay}>
+            <p class={styles.overlayBody}>Quarterly figures are being refreshed from the ledger.</p>
+          </LoadingOverlay>
+        </CaptionedRow>
+      </div>
+    ),
+  },
+  {
+    id: 'feedback-skeleton',
+    span: 6,
+    render: () => (
+      <div class={styles.stack}>
+        <CaptionedRow caption="Spinner">
+          <For each={SPINNER_VARIANTS}>{(variant) => <Spinner variant={variant} label={variant} />}</For>
+          <For each={SPINNER_SIZES}>{(size) => <Spinner size={size} label={size} />}</For>
+        </CaptionedRow>
+        <CaptionedRow caption="Skeleton">
+          <div class={styles.skeletonCard} aria-busy="true">
+            <div class={styles.identity}>
+              <Skeleton circle height={40} />
+              <div class={styles.identityText}>
+                <Skeleton width={160} height={14} />
+                <Skeleton width={104} height={12} />
               </div>
-              <SkeletonText lines={3} />
-              <Skeleton width={96} height={32} radius={8} />
             </div>
-          </CaptionedRow>
-        </div>
+            <SkeletonText lines={3} />
+            <Skeleton width={96} height={32} radius={8} />
+          </div>
+        </CaptionedRow>
       </div>
     ),
   },

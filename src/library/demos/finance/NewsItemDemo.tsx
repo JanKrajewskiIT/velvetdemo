@@ -15,8 +15,8 @@ export const NewsItemDemo = () => {
         impact="medium"
         aiLabel={ts('library.finance.controls.newsSummary')}
         bullets={[ts('library.finance.controls.newsBulletOne'), ts('library.finance.controls.newsBulletTwo')]}
-        tickers={['GLBX', 'TBND']}
-        onTickerClick={setSelected}
+        tags={['GLBX', 'TBND']}
+        onTagClick={setSelected}
       />
       <Text role="status" tone="secondary">
         {ts('library.finance.controls.selected', { symbol: selected() })}
